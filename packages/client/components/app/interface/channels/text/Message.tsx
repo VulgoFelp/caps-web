@@ -14,7 +14,7 @@ import {
 
 import { useLingui } from "@lingui/solid/macro";
 import { Message as MessageInterface } from "stoat.js";
-import { cva } from "styled-system/css";
+import { css, cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 import { decodeTime } from "ulid";
 
@@ -33,6 +33,7 @@ import {
   MessageContainer,
   MessageReply,
   Reactions,
+  StaffBadge,
   SystemMessage,
   SystemMessageIcon,
   Tooltip,
@@ -164,7 +165,14 @@ export function Message(props: Props) {
         ref={msgRef}
         onHover={setIsHovering}
         username={
-          <div use:floating={floatingUserMenusFromMessage(props.message)}>
+          <div
+            class={css({
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "4px",
+            })}
+            use:floating={floatingUserMenusFromMessage(props.message)}
+          >
             <Username
               username={
                 props.message.masquerade?.name ??
@@ -175,6 +183,9 @@ export function Message(props: Props) {
               }
               colour={props.message.roleColour!}
             />
+            <Show when={!props.message.masquerade}>
+              <StaffBadge badges={props.message.author?.badges} />
+            </Show>
           </div>
         }
         avatar={

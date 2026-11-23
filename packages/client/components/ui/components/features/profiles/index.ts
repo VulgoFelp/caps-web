@@ -21,3 +21,10 @@ export const Profile = {
   Status: ProfileStatus,
   Owner: ProfileOwner,
 };
+
+export {
+  CAPS_BADGE_ADMIN,
+  CAPS_BADGE_MOD,
+  StaffBadge,
+  staffRole,
+} from "./StaffBadge";

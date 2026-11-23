@@ -7,73 +7,42 @@ import { styled } from "styled-system/jsx";
 
 import badgeJoke1 from "../../../../../public/assets/badges/amog.svg";
 import badgeJoke2 from "../../../../../public/assets/badges/amorbus.svg";
-import badgeDeveloper from "../../../../../public/assets/badges/developer.svg";
 import badgeEarlyAdopter from "../../../../../public/assets/badges/early_adopter.svg";
-import badgeFounder from "../../../../../public/assets/badges/founder.svg";
-import badgeModeration from "../../../../../public/assets/badges/moderation.svg";
 import badgePaw from "../../../../../public/assets/badges/paw.svg";
 import badgeRaccoon from "../../../../../public/assets/badges/raccoon.svg";
-import badgeSupporter from "../../../../../public/assets/badges/supporter.svg";
-import badgeTranslator from "../../../../../public/assets/badges/translator.svg";
 import { Text } from "../../design";
 
 import { ProfileCard } from "./ProfileCard";
+import { StaffBadge, staffRole } from "./StaffBadge";
+
+/**
+ * Badges still shown on CAPS (upstream Stoat staff/supporter badges are hidden,
+ * CAPS staff badges are rendered by <StaffBadge />)
+ */
+const VISIBLE_UPSTREAM_BADGES =
+  UserBadges.EarlyAdopter |
+  UserBadges.ResponsibleDisclosure |
+  UserBadges.ReservedRelevantJokeBadge1 |
+  UserBadges.ReservedRelevantJokeBadge2 |
+  UserBadges.Paw;
 
 export function ProfileBadges(props: { user: User }) {
   const { t } = useLingui();
 
   return (
-    <Show when={props.user.badges}>
+    <Show
+      when={
+        staffRole(props.user.badges) ||
+        props.user.badges & VISIBLE_UPSTREAM_BADGES
+      }
+    >
       <ProfileCard>
         <Text class="title" size="large">
           <Trans>Badges</Trans>
         </Text>
 
         <BadgeRow>
-          <Show when={props.user.badges & UserBadges.Founder}>
-            <img
-              use:floating={{
-                tooltip: {
-                  placement: "top",
-                  content: t`Stoat Founder`,
-                },
-              }}
-              src={badgeFounder}
-            />
-          </Show>
-          <Show when={props.user.badges & UserBadges.Developer}>
-            <img
-              use:floating={{
-                tooltip: {
-                  placement: "top",
-                  content: t`Stoat Developer`,
-                },
-              }}
-              src={badgeDeveloper}
-            />
-          </Show>
-          <Show when={props.user.badges & UserBadges.Supporter}>
-            <img
-              use:floating={{
-                tooltip: {
-                  placement: "top",
-                  content: t`Donated to Stoat`,
-                },
-              }}
-              src={badgeSupporter}
-            />
-          </Show>
-          <Show when={props.user.badges & UserBadges.Translator}>
-            <img
-              use:floating={{
-                tooltip: {
-                  placement: "top",
-                  content: t`Helped translate Stoat`,
-                },
-              }}
-              src={badgeTranslator}
-            />
-          </Show>
+          <StaffBadge badges={props.user.badges} size="lg" />
           <Show when={props.user.badges & UserBadges.EarlyAdopter}>
             <img
               use:floating={{
@@ -84,18 +53,6 @@ export function ProfileBadges(props: { user: User }) {
               }}
               src={badgeEarlyAdopter}
             />
-          </Show>
-          <Show when={props.user.badges & UserBadges.PlatformModeration}>
-            <span
-              use:floating={{
-                tooltip: {
-                  placement: "top",
-                  content: t`Platform Moderator`,
-                },
-              }}
-            >
-              <img src={badgeModeration} />
-            </span>
           </Show>
           <Show when={props.user.badges & UserBadges.ResponsibleDisclosure}>
             <span
@@ -165,11 +122,12 @@ export function ProfileBadges(props: { user: User }) {
 
 const BadgeRow = styled("div", {
   base: {
-    gap: "var(--gap-md)",
+    gap: "var(--caps-space-4)",
     display: "flex",
     flexWrap: "wrap",
+    alignItems: "center",
 
-    "& img, & svg": {
+    "& > img, & > span > img, & > span > svg": {
       width: "24px",
       height: "24px",
       aspectRatio: "1/1",

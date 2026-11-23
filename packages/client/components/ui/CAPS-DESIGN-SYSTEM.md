@@ -75,6 +75,7 @@ O ripple do Material foi reduzido a uma camada de estado discreta
 | Switch (permissões) | `components/design/Switch.tsx` | segmentado: verde permite, vermelho nega |
 | Tooltip | `components/floating/Tooltip.tsx` | chip invertido compacto |
 | ContextMenu | `app/menus/ContextMenu.tsx` | itens de 30px, capitalização normal |
+| StaffBadge | `features/profiles/StaffBadge.tsx` | badges de equipe da plataforma (bits 2048 Administrador, 4096 Moderador): escudo ao lado do nome (`sm`) e pílula no perfil (`lg`) |
 | Campos MDUI | `caps-components.css` | text-field, menus, checkbox, slider, snackbar, FAB |
 
 ## Tema

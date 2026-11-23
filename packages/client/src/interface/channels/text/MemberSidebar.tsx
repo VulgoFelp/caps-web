@@ -17,6 +17,7 @@ import {
   MenuButton,
   OverflowingText,
   Row,
+  StaffBadge,
   Symbol,
   Tooltip,
   typography,
@@ -422,6 +423,7 @@ function Member(props: {
           <OverflowingText>
             <Row align gap="xs">
               <Username username={user().username} colour={user().colour!} />
+              <StaffBadge badges={(props.user ?? props.member?.user)?.badges} />
               <Show when={timedOut() && moderationPerms}>
                 <Tooltip
                   content={t`Timed out until ${props.member!.timeout!.toLocaleString()}`}
