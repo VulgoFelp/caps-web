@@ -146,9 +146,12 @@ function Floating(props: FloatingElement & { mouseX: number; mouseY: number }) {
 
   const position = useFloating(element, floating, {
     placement: placement(),
-    middleware: [offset(5), flip(), shift()],
+    middleware: [offset(8), flip(), shift({ padding: 8 })],
     whileElementsMounted:
-      props.show()?.tooltip || props.show()?.autoComplete
+      props.show()?.tooltip ||
+      props.show()?.autoComplete ||
+      // the profile card grows as its data loads, keep it inside the viewport
+      props.show()?.userCard
         ? autoUpdate
         : undefined,
   });

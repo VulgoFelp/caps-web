@@ -25,6 +25,13 @@ export function ProfileActions(props: {
   user: User;
   member?: ServerMember;
   onClose: () => void;
+
+  /**
+   * Render only part of the actions (used by the compact profile card):
+   * - primary: relationship / bot buttons
+   * - secondary: edit and more options icons
+   */
+  slot?: "primary" | "secondary";
 }) {
   const navigate = useNavigate();
   const client = useClient();
@@ -59,73 +66,82 @@ export function ProfileActions(props: {
     if (!props.member) props.onClose();
   }
 
+  const showPrimary = () => props.slot !== "secondary";
+  const showSecondary = () => props.slot !== "primary";
+
   return (
-    <Actions width={props.width}>
-      <Show when={props.user.relationship === "None" && !props.user.bot}>
-        <Button onPress={() => props.user.addFriend()}>Add Friend</Button>
+    <Actions width={props.width} slot={props.slot}>
+      <Show when={showPrimary()}>
+        <Show when={props.user.relationship === "None" && !props.user.bot}>
+          <Button onPress={() => props.user.addFriend()}>
+            <Trans>Add Friend</Trans>
+          </Button>
+        </Show>
+        <Show when={props.user.relationship === "Incoming"}>
+          <Button onPress={() => props.user.addFriend()}>
+            <Trans>Accept friend request</Trans>
+          </Button>
+          <IconButton onPress={() => props.user.removeFriend()}>
+            <MdCancel />
+          </IconButton>
+        </Show>
+        <Show when={props.user.relationship === "Outgoing"}>
+          <Button variant="tonal" onPress={() => props.user.removeFriend()}>
+            <Trans>Cancel friend request</Trans>
+          </Button>
+        </Show>
+        <Show when={props.user.relationship === "Friend"}>
+          <Button onPress={openDm}>
+            <Trans>Message</Trans>
+          </Button>
+        </Show>
+        <Show when={publicBot()}>
+          <Button
+            onPress={() =>
+              openModal({
+                type: "add_bot",
+                invite: publicBot()!,
+              })
+            }
+          >
+            <Trans>Add Bot</Trans>
+          </Button>
+        </Show>
       </Show>
-      <Show when={props.user.relationship === "Incoming"}>
-        <Button onPress={() => props.user.addFriend()}>
-          Accept friend request
-        </Button>
-        <IconButton onPress={() => props.user.removeFriend()}>
-          <MdCancel />
-        </IconButton>
-      </Show>
-      <Show when={props.user.relationship === "Outgoing"}>
-        <Button onPress={() => props.user.removeFriend()}>
-          Cancel friend request
-        </Button>
-      </Show>
-      <Show when={props.user.relationship === "Friend"}>
-        <Button onPress={openDm}>
-          <Trans>Message</Trans>
-        </Button>
-      </Show>
-      <Show when={publicBot()}>
-        <Button
-          onPress={() =>
-            openModal({
-              type: "add_bot",
-              invite: publicBot()!,
-            })
+
+      <Show when={showSecondary()}>
+        <Show
+          when={
+            props.member
+              ? props.user.self
+                ? props.member.server!.havePermission("ChangeNickname") ||
+                  props.member.server!.havePermission("ChangeAvatar")
+                : (props.member.server!.havePermission("ManageNicknames") ||
+                    props.member.server!.havePermission("RemoveAvatars")) &&
+                  props.member.inferiorTo(props.member!.server!.member!)
+              : props.user.self
           }
         >
-          <Trans>Add Bot</Trans>
-        </Button>
-      </Show>
+          <IconButton onPress={openEdit}>
+            <MdEdit {...iconSize(16)} />
+          </IconButton>
+        </Show>
 
-      <Show
-        when={
-          props.member
-            ? props.user.self
-              ? props.member.server!.havePermission("ChangeNickname") ||
-                props.member.server!.havePermission("ChangeAvatar")
-              : (props.member.server!.havePermission("ManageNicknames") ||
-                  props.member.server!.havePermission("RemoveAvatars")) &&
-                props.member.inferiorTo(props.member!.server!.member!)
-            : props.user.self
-        }
-      >
-        <IconButton onPress={openEdit}>
-          <MdEdit {...iconSize(16)} />
+        <IconButton
+          use:floating={{
+            contextMenu: () => (
+              <UserContextMenu
+                user={props.user}
+                member={props.member}
+                onClose={props.onClose}
+              />
+            ),
+            contextMenuHandler: "click",
+          }}
+        >
+          <MdMoreVert />
         </IconButton>
       </Show>
-
-      <IconButton
-        use:floating={{
-          contextMenu: () => (
-            <UserContextMenu
-              user={props.user}
-              member={props.member}
-              onClose={props.onClose}
-            />
-          ),
-          contextMenuHandler: "click",
-        }}
-      >
-        <MdMoreVert />
-      </IconButton>
     </Actions>
   );
 }
@@ -143,6 +159,18 @@ const Actions = styled("div", {
       },
       2: {
         gridColumn: "1 / 3",
+      },
+    },
+    slot: {
+      // primary actions fill the row in the compact card
+      primary: {
+        gap: "var(--caps-space-3)",
+        "& > button": {
+          flexGrow: 1,
+        },
+      },
+      secondary: {
+        gap: "2px",
       },
     },
   },

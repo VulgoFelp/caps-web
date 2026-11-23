@@ -26,8 +26,81 @@ const VISIBLE_UPSTREAM_BADGES =
   UserBadges.ReservedRelevantJokeBadge2 |
   UserBadges.Paw;
 
-export function ProfileBadges(props: { user: User }) {
+export function ProfileBadges(props: { user: User; bare?: boolean }) {
   const { t } = useLingui();
+
+  const row = () => (
+    <BadgeRow>
+      <StaffBadge badges={props.user.badges} size="lg" />
+      <Show when={props.user.badges & UserBadges.EarlyAdopter}>
+        <img
+          use:floating={{
+            tooltip: {
+              placement: "top",
+              content: t`One of the first 1000 users!`,
+            },
+          }}
+          src={badgeEarlyAdopter}
+        />
+      </Show>
+      <Show when={props.user.badges & UserBadges.ResponsibleDisclosure}>
+        <span
+          use:floating={{
+            tooltip: {
+              placement: "top",
+              content: t`Responsibly disclosed security issues`,
+            },
+          }}
+        >
+          <BiSolidShield />
+        </span>
+      </Show>
+      <Show when={props.user.badges & UserBadges.ReservedRelevantJokeBadge1}>
+        <img
+          use:floating={{
+            tooltip: {
+              placement: "top",
+              content: t`irrelevant joke badge 1`,
+            },
+          }}
+          src={badgeJoke1}
+        />
+      </Show>
+      <Show when={props.user.badges & UserBadges.ReservedRelevantJokeBadge1}>
+        <img
+          use:floating={{
+            tooltip: {
+              placement: "top",
+              content: t`irrelevant joke badge 2`,
+            },
+          }}
+          src={badgeJoke2}
+        />
+      </Show>
+      <Show when={props.user.badges & UserBadges.Paw}>
+        <img
+          use:floating={{
+            tooltip: {
+              placement: "top",
+              content: "🦊",
+            },
+          }}
+          src={badgePaw}
+        />
+      </Show>
+      <Show when={props.user.id === "01EX2NCWQ0CHS3QJF0FEQS1GR4"}>
+        <img
+          use:floating={{
+            tooltip: {
+              placement: "top",
+              content: "🦝",
+            },
+          }}
+          src={badgeRaccoon}
+        />
+      </Show>
+    </BadgeRow>
+  );
 
   return (
     <Show
@@ -36,86 +109,15 @@ export function ProfileBadges(props: { user: User }) {
         props.user.badges & VISIBLE_UPSTREAM_BADGES
       }
     >
-      <ProfileCard>
-        <Text class="title" size="large">
-          <Trans>Badges</Trans>
-        </Text>
+      <Show when={!props.bare} fallback={row()}>
+        <ProfileCard>
+          <Text class="title" size="large">
+            <Trans>Badges</Trans>
+          </Text>
 
-        <BadgeRow>
-          <StaffBadge badges={props.user.badges} size="lg" />
-          <Show when={props.user.badges & UserBadges.EarlyAdopter}>
-            <img
-              use:floating={{
-                tooltip: {
-                  placement: "top",
-                  content: t`One of the first 1000 users!`,
-                },
-              }}
-              src={badgeEarlyAdopter}
-            />
-          </Show>
-          <Show when={props.user.badges & UserBadges.ResponsibleDisclosure}>
-            <span
-              use:floating={{
-                tooltip: {
-                  placement: "top",
-                  content: t`Responsibly disclosed security issues`,
-                },
-              }}
-            >
-              <BiSolidShield />
-            </span>
-          </Show>
-          <Show
-            when={props.user.badges & UserBadges.ReservedRelevantJokeBadge1}
-          >
-            <img
-              use:floating={{
-                tooltip: {
-                  placement: "top",
-                  content: t`irrelevant joke badge 1`,
-                },
-              }}
-              src={badgeJoke1}
-            />
-          </Show>
-          <Show
-            when={props.user.badges & UserBadges.ReservedRelevantJokeBadge1}
-          >
-            <img
-              use:floating={{
-                tooltip: {
-                  placement: "top",
-                  content: t`irrelevant joke badge 2`,
-                },
-              }}
-              src={badgeJoke2}
-            />
-          </Show>
-          <Show when={props.user.badges & UserBadges.Paw}>
-            <img
-              use:floating={{
-                tooltip: {
-                  placement: "top",
-                  content: "🦊",
-                },
-              }}
-              src={badgePaw}
-            />
-          </Show>
-          <Show when={props.user.id === "01EX2NCWQ0CHS3QJF0FEQS1GR4"}>
-            <img
-              use:floating={{
-                tooltip: {
-                  placement: "top",
-                  content: "🦝",
-                },
-              }}
-              src={badgeRaccoon}
-            />
-          </Show>
-        </BadgeRow>
-      </ProfileCard>
+          {row()}
+        </ProfileCard>
+      </Show>
     </Show>
   );
 }

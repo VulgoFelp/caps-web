@@ -73,6 +73,16 @@ export default defineConfig({
             backgroundPosition: "-200% 0",
           },
         },
+        capsPopIn: {
+          "0%": {
+            opacity: 0,
+            transform: "translateY(4px) scale(0.98)",
+          },
+          "100%": {
+            opacity: 1,
+            transform: "translateY(0) scale(1)",
+          },
+        },
         authHintIn: {
           "0%": {
             opacity: 0,

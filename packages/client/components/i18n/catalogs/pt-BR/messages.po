@@ -356,8 +356,9 @@ msgid "Accept"
 msgstr "Aceitar"
 
 #: components/app/menus/UserContextMenu.tsx
+#: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Accept friend request"
-msgstr "Aceitar solicitação de amizade"
+msgstr "Aceitar pedido de amizade"
 
 #: components/modal/modals/PolicyChange.tsx
 msgid "Acknowledge"
@@ -387,6 +388,10 @@ msgstr "Adicionar bot"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Add friend"
+msgstr "Adicionar amigo"
+
+#: components/ui/components/features/profiles/ProfileActions.tsx
+msgid "Add Friend"
 msgstr "Adicionar amigo"
 
 #: components/modal/modals/AddMembersToGroup.tsx
@@ -602,6 +607,10 @@ msgstr "Banner"
 msgid "Bans"
 msgstr "Banimentos"
 
+#: components/ui/components/floating/UserCard.tsx
+msgid "Bio"
+msgstr "Bio"
+
 #: components/app/menus/UserContextMenu.tsx
 msgid "Block user"
 msgstr "Bloquear usuário"
@@ -634,6 +643,7 @@ msgid "Bug Tracker"
 msgstr "Rastreador de Bugs"
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
+#: components/ui/components/floating/UserCard.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Busy"
@@ -711,6 +721,7 @@ msgid "Cancel discover request"
 msgstr "Cancelar solicitação do Descobrir"
 
 #: components/app/menus/UserContextMenu.tsx
+#: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Cancel friend request"
 msgstr "Cancelar pedido de amizade"
 
@@ -868,6 +879,7 @@ msgid "Click on the items below to learn more about different changes!"
 msgstr "Clique nos itens abaixo para saber mais sobre diferentes mudanças!"
 
 #: components/ui/components/features/profiles/ProfileBanner.tsx
+#: components/ui/components/floating/UserCard.tsx
 msgid "Click to copy username"
 msgstr "Clique para copiar o nome de usuário"
 
@@ -1003,6 +1015,7 @@ msgid "Copied file to clipboard"
 msgstr "Arquivo copiado para a área de transferência"
 
 #: components/ui/components/features/profiles/ProfileBanner.tsx
+#: components/ui/components/floating/UserCard.tsx
 msgid "Copied!"
 msgstr "Copiado!"
 
@@ -1494,8 +1507,8 @@ msgstr "Doar"
 #~ msgstr "Doar para o Stoat"
 
 #: components/ui/components/features/profiles/ProfileBadges.tsx
-msgid "Donated to Stoat"
-msgstr "Doou ao Stoat"
+#~ msgid "Donated to Stoat"
+#~ msgstr "Doou ao Stoat"
 
 #: components/modal/modals/MFARecovery.tsx
 msgid "Done"
@@ -1743,6 +1756,7 @@ msgstr "Encontrar novos servidores"
 #~ msgstr "Encontre sua comunidade,<1/>conecte-se com o mundo."
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
+#: components/ui/components/floating/UserCard.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
@@ -1922,8 +1936,8 @@ msgid "Help contribute to an existing or new language"
 msgstr "Ajude a contribuir a um idioma existente ou novo"
 
 #: components/ui/components/features/profiles/ProfileBadges.tsx
-msgid "Helped translate Stoat"
-msgstr "Ajudou a traduzir o Stoat"
+#~ msgid "Helped translate Stoat"
+#~ msgstr "Ajudou a traduzir o Stoat"
 
 #. placeholder {0}: link()
 #: components/modal/modals/CreateInvite.tsx
@@ -1961,6 +1975,7 @@ msgid "ID copied to clipboard"
 msgstr "ID copiado para a área de transferência"
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
+#: components/ui/components/floating/UserCard.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
@@ -2068,8 +2083,9 @@ msgstr "Entrar no canal de voz"
 
 #: components/ui/components/features/messaging/elements/Invite.tsx
 #: components/ui/components/features/profiles/ProfileJoined.tsx
+#: components/ui/components/floating/UserCard.tsx
 msgid "Joined"
-msgstr "Juntou-se"
+msgstr "Membro desde"
 
 #: components/ui/components/features/messaging/bars/JumpToBottom.tsx
 msgid "Jump to present"
@@ -2550,6 +2566,7 @@ msgid "Official Server"
 msgstr "Servidor oficial"
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
+#: components/ui/components/floating/UserCard.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Offline"
@@ -2586,6 +2603,7 @@ msgid "Ongoing Maintenance"
 msgstr "Manutenção em Andamento"
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
+#: components/ui/components/floating/UserCard.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/Friends.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
@@ -2644,6 +2662,7 @@ msgid "Overview"
 msgstr "Visão geral"
 
 #: components/ui/components/features/profiles/ProfileOwner.tsx
+#: components/ui/components/floating/UserCard.tsx
 msgid "Owner"
 msgstr "Proprietário"
 
@@ -2703,8 +2722,8 @@ msgid "Pinned Messages"
 msgstr "Mensagens fixadas"
 
 #: components/ui/components/features/profiles/ProfileBadges.tsx
-msgid "Platform Moderator"
-msgstr "Moderador da Plataforma"
+#~ msgid "Platform Moderator"
+#~ msgstr "Moderador da Plataforma"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Play sound"
@@ -3051,6 +3070,7 @@ msgstr "Substituições de Cargo"
 
 #: components/app/interface/settings/ServerSettings.tsx
 #: components/ui/components/features/profiles/ProfileRoles.tsx
+#: components/ui/components/floating/UserCard.tsx
 msgid "Roles"
 msgstr "Cargos"
 
@@ -3408,16 +3428,16 @@ msgid "Status"
 msgstr "Status"
 
 #: components/ui/components/features/profiles/ProfileBadges.tsx
-msgid "Stoat Developer"
-msgstr "Desenvolvedor Stoat"
+#~ msgid "Stoat Developer"
+#~ msgstr "Desenvolvedor Stoat"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Stoat for Desktop"
 msgstr "Stoat para desktop"
 
 #: components/ui/components/features/profiles/ProfileBadges.tsx
-msgid "Stoat Founder"
-msgstr "Fundador do Stoat"
+#~ msgid "Stoat Founder"
+#~ msgstr "Fundador do Stoat"
 
 #~ msgid "Stoat is one of the best ways to stay connected with your friends and community, anywhere, anytime."
 #~ msgstr "Stoat é uma das melhores maneiras de se manter conectado com seus amigos e comunidade, em qualquer lugar, a qualquer hora."
@@ -3949,6 +3969,10 @@ msgstr "Ver canal"
 #: components/app/interface/settings/user/Feedback.tsx
 msgid "View currently active bug reports here."
 msgstr "Veja aqui os relatórios de bugs atualmente ativos."
+
+#: components/ui/components/floating/UserCard.tsx
+msgid "View full profile"
+msgstr "Ver perfil completo"
 
 #: src/interface/channels/ChannelHeader.tsx
 msgid "View members"
