@@ -1,3 +1,11 @@
+> [!NOTE]
+> **CAPS** — this repository is a fork of [stoatchat/for-web](https://github.com/stoatchat/for-web)
+> used by the CAPS community instance. Branch `caps-ui` contains the "Grafite e lima" redesign:
+> a custom design system (palette, type scale, tokens), reworked chat, navigation, settings,
+> dialogs and menus, CAPS branding and pt-BR translation fixes. See
+> [`packages/client/components/ui/CAPS-DESIGN-SYSTEM.md`](packages/client/components/ui/CAPS-DESIGN-SYSTEM.md).
+> Licensed under AGPL-3.0, like the upstream project.
+
 <div align="center">
 <h1>
   Stoat Frontend

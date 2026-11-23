@@ -60,16 +60,17 @@ export default defineConfig({
         type: "module",
       },
       manifest: {
-        name: "Stoat",
-        short_name: "Stoat",
-        description: "User-first open source chat platform.",
+        name: "CAPS",
+        short_name: "CAPS",
+        description: "CAPS: coisa de doido. Chat, voz, vídeo e tela da galera.",
+        lang: "pt-BR",
         categories: ["communication", "chat", "messaging"],
         start_url: base,
         scope: pwaScope,
         display_override: ["window-controls-overlay"],
         display: "standalone",
-        background_color: "#101823",
-        theme_color: "#101823",
+        background_color: "#0c0c0b",
+        theme_color: "#0c0c0b",
         icons: [
           {
             src: `${base}assets/web/android-chrome-192x192.png`,

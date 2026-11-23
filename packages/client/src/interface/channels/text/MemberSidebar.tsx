@@ -3,6 +3,7 @@ import { createMemo, Match, Show, Switch } from "solid-js";
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { VirtualContainer } from "@minht11/solid-virtual-container";
 import { Channel, ServerMember, User } from "stoat.js";
+import { css } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
 import { floatingUserMenus } from "@revolt/app/menus/UserContextMenu";
@@ -266,8 +267,8 @@ export function GroupMemberSidebar(props: Props) {
  */
 const Container = styled("div", {
   base: {
-    paddingRight: "var(--gap-md)",
-    width: "var(--layout-width-channel-sidebar)",
+    width: "var(--caps-members-width)",
+    paddingBottom: "var(--caps-space-6)",
   },
 });
 
@@ -276,13 +277,16 @@ const Container = styled("div", {
  */
 const CategoryTitle = styled("div", {
   base: {
-    padding: "28px 14px 0",
-    color: "var(--md-sys-color-on-surface)",
+    padding: "var(--caps-space-6) var(--caps-space-6) var(--caps-space-2)",
+    color: "var(--caps-text-3)",
     display: "flex",
     alignItems: "center",
-    gap: "6px",
+    gap: "var(--caps-space-3)",
 
-    ...typography.raw({ class: "label", size: "small" }),
+    fontSize: "var(--caps-text-xs)",
+    fontWeight: 600,
+    letterSpacing: "0.06em",
+    textTransform: "uppercase",
   },
 });
 
@@ -300,18 +304,20 @@ const RoleIcon = styled("img", {
  */
 const MemberTitle = styled("div", {
   base: {
-    marginTop: "12px",
-    marginLeft: "14px",
-    color: "var(--md-sys-color-on-surface)",
-
-    ...typography.raw({ class: "label", size: "small" }),
+    display: "flex",
+    alignItems: "center",
+    gap: "var(--caps-space-3)",
+    height: "var(--caps-header-height)",
+    paddingInline: "var(--caps-space-6)",
+    borderBottom: "1px solid var(--caps-line-soft)",
+    color: "var(--caps-text-2)",
+    fontSize: "var(--caps-text-sm)",
+    fontWeight: 500,
   },
   variants: {
     bottomMargin: {
       no: {},
-      yes: {
-        marginBottom: "-12px",
-      },
+      yes: {},
     },
   },
 });
@@ -325,7 +331,21 @@ const NameStatusStack = styled("div", {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
+    gap: "1px",
+    lineHeight: 1.25,
+
+    "& > :nth-child(2)": {
+      color: "var(--caps-text-3)",
+      fontWeight: 400,
+    },
   },
+});
+
+/**
+ * Taller member rows to fit name + status
+ */
+const memberRow = css({
+  height: "42px !important",
 });
 
 function Member(props: {
@@ -375,6 +395,7 @@ function Member(props: {
     >
       <MenuButton
         size="normal"
+        class={memberRow}
         attention={
           (props.user ?? props.member?.user)?.online ? "active" : "muted"
         }
@@ -386,7 +407,7 @@ function Member(props: {
           >
             <Avatar
               src={user().avatar}
-              size={32}
+              size={30}
               holepunch="bottom-right"
               overlay={
                 <UserStatus.Graphic

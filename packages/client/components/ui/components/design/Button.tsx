@@ -154,6 +154,14 @@ export function Button(props: Props) {
   );
 }
 
+/**
+ * CAPS button
+ *
+ * Compact, crisp corners (no pills), one accent-filled primary per view and
+ * neutral variants for everything else. Connected groups render as a
+ * segmented control (segments share a field background, selection is a
+ * raised neutral segment rather than a colour fill).
+ */
 const button = cva({
   base: {
     ...typography.raw(),
@@ -162,21 +170,35 @@ const button = cva({
     position: "relative",
 
     paddingInline: "var(--padding-inline)",
+    gap: "var(--caps-space-3)",
 
     flexShrink: 0,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    whiteSpace: "nowrap",
 
-    fontWeight: 500,
+    fontWeight: 600,
+    fontSize: "var(--caps-text-md)",
+    letterSpacing: "0",
+    lineHeight: 1,
     fontFamily: "inherit",
 
     cursor: "pointer",
     border: "none",
-    transition: "var(--transitions-medium) all",
+    borderRadius: "var(--caps-radius-md)",
+    transition:
+      "background-color var(--caps-dur-fast) var(--caps-ease), box-shadow var(--caps-dur-fast) var(--caps-ease), color var(--caps-dur-fast) var(--caps-ease), transform var(--caps-dur-fast) var(--caps-ease)",
+
+    "--md-ripple-hover-opacity": "0",
+    "--md-ripple-pressed-opacity": "0.08",
 
     color: "var(--color)",
     fill: "var(--color)",
+
+    "&:active": {
+      transform: "translateY(0.5px)",
+    },
   },
   variants: {
     /**
@@ -184,28 +206,54 @@ const button = cva({
      */
     variant: {
       elevated: {
-        boxShadow: "0 0.5px 1.5px #0004",
-        background: "var(--md-sys-color-surface-container-low)",
-        "--color": "var(--md-sys-color-primary)",
+        background: "var(--caps-bg-overlay)",
+        boxShadow: "inset 0 0 0 1px var(--caps-line)",
+        "--color": "var(--caps-text)",
+        "&:hover": {
+          background: "var(--caps-active)",
+        },
       },
       filled: {
-        background: "var(--md-sys-color-primary)",
-        "--color": "var(--md-sys-color-on-primary)",
+        background: "var(--caps-accent)",
+        "--color": "var(--caps-on-accent)",
+        "&:hover": {
+          background: "var(--caps-accent-hover)",
+        },
+        "&:active": {
+          background: "var(--caps-accent-pressed)",
+        },
       },
       tonal: {
-        background: "var(--md-sys-color-secondary-container)",
-        "--color": "var(--md-sys-color-on-secondary-container)",
+        background: "var(--caps-bg-overlay)",
+        boxShadow: "inset 0 0 0 1px var(--caps-line)",
+        "--color": "var(--caps-text)",
+        "&:hover": {
+          background: "var(--caps-active)",
+          boxShadow: "inset 0 0 0 1px var(--caps-line-strong)",
+        },
       },
       outlined: {
-        border: "1px solid var(--md-sys-color-outline-variant)",
-        "--color": "var(--md-sys-color-on-surface-variant)",
+        boxShadow: "inset 0 0 0 1px var(--caps-line-strong)",
+        background: "transparent",
+        "--color": "var(--caps-text-2)",
+        "&:hover": {
+          background: "var(--caps-hover)",
+          "--color": "var(--caps-text)",
+        },
       },
       text: {
-        "--color": "var(--md-sys-color-primary)",
+        background: "transparent",
+        "--color": "var(--caps-accent-text)",
+        "&:hover": {
+          background: "var(--caps-hover)",
+        },
       },
       _error: {
-        background: "var(--md-sys-color-error)",
-        "--color": "var(--md-sys-color-on-error)",
+        background: "var(--caps-danger)",
+        "--color": "#ffffff",
+        "&:hover": {
+          filter: "brightness(1.08)",
+        },
       },
 
       // Old entries:
@@ -260,16 +308,14 @@ const button = cva({
       },
     },
     /**
-     * Expressive shapes
+     * Shapes (kept for API compatibility; CAPS uses one corner radius)
      */
     shape: {
-      round: {
-        borderRadius: "var(--borderRadius-full)",
-      },
+      round: {},
       square: {},
     },
     /**
-     * Expressive button groups
+     * Button groups
      */
     group: {
       "connected-start": {},
@@ -278,88 +324,89 @@ const button = cva({
       standard: {},
     },
     /**
-     * Internal helper for expressive button animation
+     * Internal helper (kept for API compatibility)
      */
     _permitAnimation: {
       true: {},
       false: {},
     },
     /**
-     * Expressive sizes
+     * Sizes
      */
     size: {
       xs: {
-        height: "32px",
-        "--max-radius": "16px",
-        "--padding-inline": "12px",
+        height: "var(--caps-h-sm)",
+        "--padding-inline": "10px",
+        fontSize: "var(--caps-text-sm)",
       },
       sm: {
-        height: "40px",
-        "--max-radius": "20px",
-        "--padding-inline": "16px",
+        height: "var(--caps-h-md)",
+        "--padding-inline": "14px",
       },
       md: {
-        height: "56px",
-        "--max-radius": "28px",
-        "--padding-inline": "24px",
+        height: "var(--caps-h-lg)",
+        "--padding-inline": "16px",
+        fontSize: "var(--caps-text-base)",
       },
       lg: {
-        height: "96px",
-        "--max-radius": "48px",
-        "--padding-inline": "48px",
+        height: "44px",
+        "--padding-inline": "22px",
+        fontSize: "var(--caps-text-lg)",
+        borderRadius: "var(--caps-radius-lg)",
       },
       xl: {
-        height: "136px",
-        "--max-radius": "68px",
-        "--padding-inline": "64px",
+        height: "52px",
+        "--padding-inline": "28px",
+        fontSize: "var(--caps-text-xl)",
+        borderRadius: "var(--caps-radius-lg)",
       },
 
       // Old code:
       icon: {
-        width: "36px",
-        height: "36px",
-        "--max-radius": "18px",
+        width: "var(--caps-h-md)",
+        height: "var(--caps-h-md)",
       },
       /**
        * @deprecated
        */
       small: {
-        height: "40px",
-        paddingInline: "16px",
-        borderRadius: "12px",
+        height: "var(--caps-h-md)",
+        paddingInline: "14px",
 
         ...typography.raw(),
+        fontWeight: 600,
+        fontSize: "var(--caps-text-md)",
       },
       /**
        * @deprecated
        */
       normal: {
-        height: "38px",
-        minWidth: "96px",
-        padding: "2px 16px",
-        fontSize: "0.8125rem",
+        height: "var(--caps-h-lg)",
+        minWidth: "88px",
+        padding: "0 16px",
+        fontSize: "var(--caps-text-md)",
       },
       /**
        * @deprecated
        */
       fab: {
-        width: "42px",
-        height: "42px",
-        borderRadius: "var(--borderRadius-lg)",
+        width: "40px",
+        height: "40px",
+        borderRadius: "var(--caps-radius-lg)",
       },
       /**
        * @deprecated
        */
       fluid: {
-        borderRadius: "var(--borderRadius-md)",
+        borderRadius: "var(--caps-radius-md)",
       },
       /**
        * @deprecated
        */
       inline: {
-        padding: "var(--gap-xs) var(--gap-md)",
-        fontSize: "0.8125rem",
-        borderRadius: "var(--borderRadius-md)",
+        padding: "2px 8px",
+        fontSize: "var(--caps-text-sm)",
+        borderRadius: "var(--caps-radius-sm)",
       },
       /**
        * @deprecated
@@ -374,6 +421,9 @@ const button = cva({
     disabled: {
       true: {
         cursor: "not-allowed",
+        "&:active": {
+          transform: "none",
+        },
       },
       false: {},
     },
@@ -387,184 +437,55 @@ const button = cva({
   compoundVariants: [
     // disabled styles
     {
-      variant: ["elevated", "filled", "tonal", "outlined"],
+      variant: ["elevated", "filled", "tonal", "outlined", "_error"],
       disabled: true,
       css: {
-        "--color":
-          "color-mix(in srgb, 38% var(--md-sys-color-on-surface), transparent)",
-        background:
-          "color-mix(in srgb, 10% var(--md-sys-color-on-surface), transparent)",
+        "--color": "var(--caps-text-disabled)",
+        background: "var(--caps-hover)",
+        boxShadow: "none",
+        filter: "none",
+        "&:hover": {
+          background: "var(--caps-hover)",
+        },
       },
     },
     {
       variant: "text",
       disabled: true,
       css: {
-        "--color":
-          "color-mix(in srgb, 38% var(--md-sys-color-on-surface), transparent)",
+        "--color": "var(--caps-text-disabled)",
         background: "transparent",
       },
     },
 
-    // border radius for different squared sizes
+    // segmented control: groups share one track
     {
-      shape: "square",
-      size: "xs",
+      group: ["connected-start", "connected", "connected-end", "standard"],
       css: {
-        borderRadius: "var(--borderRadius-xs)",
+        flexGrow: 1,
+        flexBasis: 0,
+        borderRadius: "var(--caps-radius-sm)",
+        boxShadow: "inset 0 0 0 1px var(--caps-line)",
+        background: "var(--caps-bg-field)",
+        "--color": "var(--caps-text-2)",
+        fontWeight: 500,
+        "&:hover": {
+          background: "var(--caps-hover)",
+          "--color": "var(--caps-text)",
+        },
       },
     },
     {
-      shape: "square",
-      size: "sm",
+      group: ["connected-start", "connected", "connected-end", "standard"],
+      variant: "filled",
       css: {
-        borderRadius: "var(--borderRadius-sm)",
-      },
-    },
-    {
-      shape: "square",
-      size: "md",
-      css: {
-        borderRadius: "var(--borderRadius-md)",
-      },
-    },
-    {
-      shape: "square",
-      size: "lg",
-      css: {
-        borderRadius: "var(--borderRadius-lg)",
-      },
-    },
-    {
-      shape: "square",
-      size: "xl",
-      css: {
-        borderRadius: "var(--borderRadius-xl)",
-      },
-    },
-
-    // hard-code values for rounded connected group shapes
-    {
-      shape: "round",
-      css: {
-        borderRadius: "var(--max-radius)",
-      },
-    },
-
-    // left-side connected group
-    {
-      shape: "square",
-      size: "xs",
-      group: "connected-start",
-      css: {
-        borderRadius:
-          "var(--max-radius) var(--borderRadius-xs) var(--borderRadius-xs) var(--max-radius)",
-      },
-    },
-    {
-      shape: "square",
-      size: "sm",
-      group: "connected-start",
-      css: {
-        borderRadius:
-          "var(--max-radius) var(--borderRadius-sm) var(--borderRadius-sm) var(--max-radius)",
-      },
-    },
-    {
-      shape: "square",
-      size: "md",
-      group: "connected-start",
-      css: {
-        borderRadius:
-          "var(--max-radius) var(--borderRadius-md) var(--borderRadius-md) var(--max-radius)",
-      },
-    },
-    {
-      shape: "square",
-      size: "lg",
-      group: "connected-start",
-      css: {
-        borderRadius:
-          "var(--max-radius) var(--borderRadius-lg) var(--borderRadius-lg) var(--max-radius)",
-      },
-    },
-    {
-      shape: "square",
-      size: "xl",
-      group: "connected-start",
-      css: {
-        borderRadius:
-          "var(--max-radius) var(--borderRadius-xl) var(--borderRadius-xl) var(--max-radius)",
-      },
-    },
-
-    // right-side connected group
-    {
-      shape: "square",
-      size: "xs",
-      group: "connected-end",
-      css: {
-        borderRadius:
-          "var(--borderRadius-xs) var(--max-radius) var(--max-radius) var(--borderRadius-xs)",
-      },
-    },
-    {
-      shape: "square",
-      size: "sm",
-      group: "connected-end",
-      css: {
-        borderRadius:
-          "var(--borderRadius-sm) var(--max-radius) var(--max-radius) var(--borderRadius-sm)",
-      },
-    },
-    {
-      shape: "square",
-      size: "md",
-      group: "connected-end",
-      css: {
-        borderRadius:
-          "var(--borderRadius-md) var(--max-radius) var(--max-radius) var(--borderRadius-md)",
-      },
-    },
-    {
-      shape: "square",
-      size: "lg",
-      group: "connected-end",
-      css: {
-        borderRadius:
-          "var(--borderRadius-lg) var(--max-radius) var(--max-radius) var(--borderRadius-lg)",
-      },
-    },
-    {
-      shape: "square",
-      size: "xl",
-      group: "connected-end",
-      css: {
-        borderRadius:
-          "var(--borderRadius-xl) var(--max-radius) var(--max-radius) var(--borderRadius-xl)",
-      },
-    },
-
-    // run animation when group activates
-    // connected doesn't actually animate:
-    // {
-    //   shape: "round",
-    //   group: ["connected-start", "connected-end", "connected"],
-    //   _permitAnimation: true,
-    //   css: {
-    //     animationName: "materialPhysicsButtonSelect",
-    //     animationDuration: "0.3s",
-    //     animationFillMode: "forwards",
-    //   },
-    // },
-    {
-      shape: "square",
-      group: ["standard"],
-      _permitAnimation: true,
-      css: {
-        animationName: "materialPhysicsButtonSelect",
-        animationDuration: "0.3s",
-        animationFillMode: "forwards",
+        background: "var(--caps-selected)",
+        boxShadow: "inset 0 0 0 1px var(--caps-line-strong)",
+        "--color": "var(--caps-text)",
+        fontWeight: 600,
+        "&:hover": {
+          background: "var(--caps-selected)",
+        },
       },
     },
   ],

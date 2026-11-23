@@ -28,16 +28,16 @@ export const FlowBase = styled("div", {
     },
 
     "& form > div": {
-      gap: "18px",
+      gap: "var(--caps-space-5)",
     },
 
     '& form button[type="submit"]': {
       width: "100%",
-      height: "54px",
-      marginTop: "6px",
-      borderRadius: "999px",
-      fontSize: "0.95rem",
-      fontWeight: 700,
+      height: "44px",
+      marginTop: "var(--caps-space-2)",
+      borderRadius: "var(--caps-radius-lg)",
+      fontSize: "var(--caps-text-base)",
+      fontWeight: 600,
     },
 
     "& .auth-help-links": {
@@ -50,7 +50,7 @@ export const FlowBase = styled("div", {
     },
 
     "& > a, & form a": {
-      color: "var(--md-sys-color-primary)",
+      color: "var(--caps-accent-text)",
       textDecoration: "none",
     },
 
@@ -66,18 +66,18 @@ const Heading = styled("div", {
 
     "& h1": {
       margin: 0,
-      color: "var(--md-sys-color-on-surface)",
-      fontSize: "clamp(2rem, 3vw, 2.7rem)",
-      fontWeight: 720,
-      letterSpacing: "-0.045em",
-      lineHeight: 1.08,
+      color: "var(--caps-text)",
+      fontSize: "clamp(1.75rem, 2.4vw, 2.125rem)",
+      fontWeight: 600,
+      letterSpacing: "-0.025em",
+      lineHeight: 1.12,
     },
 
     "& p": {
       maxWidth: "390px",
-      margin: "12px 0 0",
-      color: "var(--md-sys-color-on-surface-variant)",
-      fontSize: "1rem",
+      margin: "10px 0 0",
+      color: "var(--caps-text-2)",
+      fontSize: "var(--caps-text-lg)",
       lineHeight: 1.55,
     },
 
@@ -96,11 +96,11 @@ const Bubble = styled("div", {
     alignItems: "center",
     justifyContent: "center",
     gap: "5px",
-    width: "62px",
-    height: "50px",
-    marginBottom: "24px",
-    background: "var(--md-sys-color-secondary-container)",
-    borderRadius: "16px 16px 16px 5px",
+    width: "56px",
+    height: "44px",
+    marginBottom: "var(--caps-space-8)",
+    background: "var(--caps-accent)",
+    borderRadius: "14px 14px 14px 4px",
     transition: "background 240ms ease",
     // rapid clicks on the bubble shouldn't select text around it
     userSelect: "none",
@@ -108,7 +108,7 @@ const Bubble = styled("div", {
     "& span": {
       width: "6px",
       height: "6px",
-      background: "var(--md-sys-color-on-secondary-container)",
+      background: "var(--caps-on-accent)",
       borderRadius: "50%",
       transition: "background 240ms ease",
       // looping motion for each mood is driven from FlowBubble

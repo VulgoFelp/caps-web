@@ -394,7 +394,7 @@ export function MessageComposition(props: Props) {
                 error={messageLength() > maxMessageLength()}
               >
                 {wayTooLong()
-                  ? "Too Long"
+                  ? t`Too long`
                   : maxMessageLength() - messageLength()}
               </MessageBox.FloatingAction>
             </Show>

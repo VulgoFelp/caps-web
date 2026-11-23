@@ -140,30 +140,61 @@ export function MenuButton(
 
 /**
  * Top-level container
+ *
+ * CAPS sidebar row: compact, quiet by default, with a lime notch marking the
+ * current location.
  */
 const base = cva({
   base: {
     flexShrink: 0,
 
     fontWeight: 500,
-    fontSize: "15px",
+    fontSize: "var(--caps-text-base)",
+    letterSpacing: "-0.003em",
     userSelect: "none",
     cursor: "pointer",
 
-    // for <Ripple />:
+    // for <Ripple /> and the selection notch:
     position: "relative",
 
     display: "flex",
     alignItems: "center",
-    margin: "0 var(--gap-md)",
-    padding: "0 var(--gap-md)",
-    borderRadius: "var(--borderRadius-xl)",
+    margin: "0 var(--caps-space-4)",
+    padding: "0 var(--caps-space-4)",
+    borderRadius: "var(--caps-radius-sm)",
 
     color: "var(--color)",
     fill: "var(--color)",
+    transition:
+      "background-color var(--caps-dur-fast) var(--caps-ease), color var(--caps-dur-fast) var(--caps-ease)",
+
+    "--md-ripple-hover-opacity": "0",
+    "--md-ripple-pressed-opacity": "0.06",
 
     "& > svg": {
       alignSelf: "center",
+    },
+
+    "&::before": {
+      content: '""',
+      position: "absolute",
+      left: "calc(-1 * var(--caps-space-4))",
+      top: "50%",
+      width: "3px",
+      height: "0px",
+      borderRadius: "0 3px 3px 0",
+      background: "var(--caps-accent)",
+      transform: "translateY(-50%)",
+      transition: "height var(--caps-dur) var(--caps-ease-out)",
+    },
+
+    "&:hover": {
+      background: "var(--caps-hover)",
+      "--color": "var(--caps-text)",
+    },
+
+    "&:active": {
+      background: "var(--caps-active)",
     },
 
     // swap `.hover-hide` elements w/  `.hover-show` elements on hover
@@ -174,12 +205,12 @@ const base = cva({
   variants: {
     size: {
       normal: {
-        height: "42px",
-        gap: "var(--gap-md)",
+        height: "var(--caps-h-md)",
+        gap: "var(--caps-space-4)",
       },
       thin: {
-        height: "32px",
-        gap: "var(--gap-sm)",
+        height: "var(--caps-h-sm)",
+        gap: "var(--caps-space-3)",
 
         // implicitly align center since we won't stack anything
         alignItems: "center",
@@ -187,24 +218,39 @@ const base = cva({
     },
     attention: {
       normal: {
-        "--color": "var(--md-sys-color-outline)",
+        "--color": "var(--caps-text-3)",
         background: "transparent",
       },
       muted: {
-        "--color": "var(--md-sys-color-outline-variant)",
+        "--color": "var(--caps-text-disabled)",
         background: "transparent",
 
         "& img": {
-          opacity: "0.3",
+          opacity: "0.4",
         },
       },
       active: {
-        "--color": "var(--md-sys-color-on-surface)",
+        "--color": "var(--caps-text)",
         background: "transparent",
+        fontWeight: 600,
+
+        // unread channels: short notch in the text colour
+        "&[data-unread]::before": {
+          height: "8px",
+          background: "var(--caps-text)",
+        },
       },
       selected: {
-        "--color": "var(--md-sys-color-on-primary-container)",
-        background: "var(--md-sys-color-primary-container)",
+        "--color": "var(--caps-text)",
+        background: "var(--caps-selected)",
+
+        "&::before": {
+          height: "18px",
+        },
+
+        "&:hover": {
+          background: "var(--caps-selected)",
+        },
       },
     },
   },
@@ -234,6 +280,23 @@ const Actions = styled("div", {
     display: "flex",
     alignItems: "center",
     flexDirection: "row",
-    gap: "var(--gap-sm)",
+    gap: "var(--caps-space-1)",
+
+    "& > a": {
+      display: "grid",
+      placeItems: "center",
+      width: "22px",
+      height: "22px",
+      borderRadius: "var(--caps-radius-xs)",
+      color: "var(--caps-text-3)",
+      fill: "var(--caps-text-3)",
+      transition: "color var(--caps-dur-fast) var(--caps-ease)",
+    },
+
+    "& > a:hover": {
+      color: "var(--caps-text)",
+      fill: "var(--caps-text)",
+      background: "var(--caps-hover)",
+    },
   },
 });

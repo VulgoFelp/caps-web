@@ -25,8 +25,8 @@ const UnreadCounter = styled("div", {
     fontSize: "8px",
     fontWeight: 600,
 
-    color: "var(--md-sys-color-on-error)",
-    fill: "var(--md-sys-color-on-error)",
+    color: "#ffffff",
+    fill: "#ffffff",
   },
 });
 
@@ -37,7 +37,7 @@ function UnreadsGraphic(props: Props) {
   return (
     <Switch>
       <Match when={props.count > 0}>
-        <circle cx="27" cy="5" r="5" fill="var(--md-sys-color-error)" />
+        <circle cx="27" cy="5" r="5" fill="var(--caps-danger)" />
         <foreignObject x="22" y="0" width="10" height="10">
           <UnreadCounter>
             {props.count < 10 ? props.count : <MdAdd {...iconSize(10)} />}
@@ -45,7 +45,7 @@ function UnreadsGraphic(props: Props) {
         </foreignObject>
       </Match>
       <Match when={props.unread}>
-        <circle cx="27" cy="5" r="5" fill="var(--md-sys-color-on-surface)" />
+        <circle cx="27" cy="5" r="5" fill="var(--caps-text)" />
       </Match>
     </Switch>
   );

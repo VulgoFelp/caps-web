@@ -347,11 +347,12 @@ const Card = styled("div", {
     pointerEvents: "all",
 
     maxWidth: "100%",
-    transition: "var(--transitions-fast) all",
-    transitionTimingFunction: "ease-in-out",
+    transition:
+      "width var(--caps-dur) var(--caps-ease), height var(--caps-dur) var(--caps-ease), box-shadow var(--caps-dur) var(--caps-ease)",
 
-    borderRadius: "var(--borderRadius-lg)",
-    background: "var(--md-sys-color-secondary-container)",
+    borderRadius: "var(--caps-radius-lg)",
+    background: "var(--caps-bg-raised)",
+    boxShadow: "inset 0 0 0 1px var(--caps-line), var(--caps-shadow-pop)",
   },
   variants: {
     active: {
@@ -360,9 +361,14 @@ const Card = styled("div", {
         height: "100%",
       },
       false: {
-        width: "360px",
-        height: "120px",
+        width: "340px",
+        height: "104px",
         cursor: "pointer",
+
+        "&:hover": {
+          boxShadow:
+            "inset 0 0 0 1px rgba(from var(--caps-accent) r g b / 0.5), var(--caps-shadow-pop)",
+        },
       },
     },
     layout: {
@@ -370,7 +376,7 @@ const Card = styled("div", {
         borderRadius: 0,
       },
       expanded: {
-        borderRadius: "var(--borderRadius-xl)",
+        borderRadius: "var(--caps-radius-lg)",
       },
       collapsed: {
         background: "none",

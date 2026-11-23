@@ -27,8 +27,77 @@ body {
 
 body {
   margin: 0;
-  background: #191919;
+  background: var(--caps-bg-rail, #0c0c0b);
+  color: var(--caps-text, #ecebe4);
   font-family: var(--fonts-primary);
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "ss02", "cv01";
+}
+
+/* ------------------------------------------------------------------
+   CAPS design system: global interaction primitives
+   ------------------------------------------------------------------ */
+
+::selection {
+  background: var(--caps-accent-soft);
+  color: var(--caps-text);
+}
+
+/* One consistent, accessible focus indicator for keyboard users */
+:where(
+  button,
+  a,
+  [role="button"],
+  [role="menuitem"],
+  [role="tab"],
+  [role="option"],
+  [tabindex]
+):focus-visible {
+  outline: none;
+  box-shadow: var(--caps-focus-ring);
+  border-radius: var(--caps-radius-sm);
+}
+
+:where(input, textarea, select):focus-visible {
+  outline: none;
+}
+
+/* Thin, quiet scrollbars that only show on interaction */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--caps-line-strong) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--caps-line);
+  border: 3px solid transparent;
+  border-radius: 10px;
+  background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--caps-line-strong);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    transition-duration: 1ms !important;
+  }
 }
 
 #root {
@@ -37,7 +106,7 @@ body {
   left: var(--inset-left);
   right: var(--inset-right);
   bottom: var(--inset-bottom);
-  background: #191919;
+  background: var(--caps-bg-rail, #0c0c0b);
 }
 
 /* HighlightJs */

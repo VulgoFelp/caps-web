@@ -99,19 +99,23 @@ export function MessageToolbar() {
 
 const Base = styled("div", {
   base: {
-    top: "-18px",
-    right: "16px",
+    top: "-16px",
+    right: "20px",
     position: "absolute",
+    zIndex: 2,
 
     alignItems: "center",
+    gap: "1px",
+    padding: "2px",
 
     display: "none",
     overflow: "hidden",
-    borderRadius: "var(--borderRadius-xs)",
-    boxShadow: "var(--md-sys-elevation-2)",
+    borderRadius: "var(--caps-radius-md)",
+    boxShadow: "var(--caps-shadow-pop)",
 
-    fill: "var(--md-sys-color-on-secondary-container)",
-    background: "var(--md-sys-color-secondary-container)",
+    color: "var(--caps-text-2)",
+    fill: "var(--caps-text-2)",
+    background: "var(--caps-bg-overlay)",
   },
 });
 
@@ -119,6 +123,26 @@ const tool = cva({
   base: {
     cursor: "pointer",
     position: "relative",
-    padding: "var(--gap-sm)",
+    display: "grid",
+    placeItems: "center",
+    width: "28px",
+    height: "28px",
+    borderRadius: "var(--caps-radius-sm)",
+    transition:
+      "background-color var(--caps-dur-fast) var(--caps-ease), color var(--caps-dur-fast) var(--caps-ease)",
+
+    "--md-ripple-hover-opacity": "0",
+    "--md-ripple-pressed-opacity": "0.08",
+
+    "& svg": {
+      width: "18px",
+      height: "18px",
+    },
+
+    "&:hover": {
+      background: "var(--caps-hover)",
+      color: "var(--caps-text)",
+      fill: "var(--caps-text)",
+    },
   },
 });

@@ -3,7 +3,7 @@ import { cva } from "styled-system/css";
 /**
  * Styles for the main content of a page
  *
- * This creates a surface on the lowest level with appropriate padding and separation.
+ * Content sits flush on the app surface; separation comes from hairlines.
  */
 export const main = cva({
   base: {
@@ -15,20 +15,8 @@ export const main = cva({
     overflow: "hidden",
     flexDirection: "column",
 
-    paddingInline: "var(--gap-md)",
-    margin: "0 var(--gap-md) var(--gap-md) 0",
-    borderRadius: "var(--borderRadius-xl)",
-    background: "var(--md-sys-color-surface-container-lowest)",
+    // CAPS: content sits flush on the app surface, no floating card
+    background: "var(--caps-bg-app)",
     paddingBottom: "env(keyboard-inset-height)",
-
-    _tablet: {
-      margin: 0,
-      borderRadius: "var(--borderRadius-xl) 0 0 0",
-    },
-
-    _phone: {
-      margin: 0,
-      borderRadius: 0,
-    },
   },
 });

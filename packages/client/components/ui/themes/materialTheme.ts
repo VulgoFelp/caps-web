@@ -15,6 +15,8 @@ import {
 
 import { SelectedTheme, TypeTheme } from "@revolt/state/stores/Theme";
 
+import { createCapsMaterialScheme } from "./capsTheme";
+
 /**
  * Generate the Material variables from the given properties
  *
@@ -25,6 +27,14 @@ export function createMaterialColourVariables<P extends string>(
   prefix: P,
 ): addPrefixToObject<MaterialColours, P> {
   switch (theme.preset) {
+    case "caps":
+      return Object.entries(createCapsMaterialScheme(theme.darkMode)).reduce(
+        (d, [key, value]) => ({
+          ...d,
+          [`${prefix}${key}`]: value,
+        }),
+        {} as addPrefixToObject<MaterialColours, P>,
+      );
     case "you":
       return Object.entries(
         generateMaterialYouScheme(

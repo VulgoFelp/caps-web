@@ -156,10 +156,10 @@ export function FloatingSelect(props: FloatingSelectProps) {
                 left: `${position.x ?? 0}px`,
                 "z-index": "1000",
               }}
-              initial={{ opacity: 0, y: -8 }}
+              initial={{ opacity: 0, y: -4 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.2, easing: [0.87, 0, 0.13, 1] }}
+              exit={{ opacity: 0, y: -4 }}
+              transition={{ duration: 0.14, easing: [0.16, 1, 0.3, 1] }}
             >
               <DropdownMenu onClick={handleItemClick}>
                 {local.children}
@@ -177,42 +177,48 @@ const SelectTrigger = styled("button", {
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
+    gap: "var(--caps-space-4)",
     width: "100%",
-    minHeight: "56px",
-    padding: "8px 16px",
-    borderRadius: "4px 4px 0 0",
+    minHeight: "var(--caps-h-lg)",
+    padding: "0 10px 0 12px",
+    borderRadius: "var(--caps-radius-md)",
     border: "none",
-    borderBottom: "1px solid var(--md-sys-color-outline)",
-    background: "var(--md-sys-color-surface-container-highest)",
-    color: "var(--md-sys-color-on-surface)",
+    background: "var(--caps-bg-field)",
+    boxShadow: "inset 0 0 0 1px var(--caps-line)",
+    color: "var(--caps-text)",
     cursor: "pointer",
     position: "relative",
     textAlign: "left",
-    fontSize: "16px",
+    fontSize: "var(--caps-text-base)",
     fontFamily: "inherit",
-    transition: "border-color 0.2s",
+    transition:
+      "box-shadow var(--caps-dur) var(--caps-ease), background-color var(--caps-dur) var(--caps-ease)",
 
     "&:hover": {
-      borderBottomColor: "var(--md-sys-color-on-surface)",
+      boxShadow: "inset 0 0 0 1px var(--caps-line-strong)",
     },
 
-    "&:focus": {
+    "&:focus-visible": {
       outline: "none",
-      borderBottomColor: "var(--md-sys-color-primary)",
-      borderBottomWidth: "2px",
+      boxShadow:
+        "inset 0 0 0 1px var(--caps-accent), 0 0 0 3px var(--caps-accent-soft)",
     },
   },
   variants: {
     open: {
       true: {
-        borderBottomColor: "var(--md-sys-color-primary)",
-        borderBottomWidth: "2px",
+        boxShadow:
+          "inset 0 0 0 1px var(--caps-accent), 0 0 0 3px var(--caps-accent-soft)",
+        "&:hover": {
+          boxShadow:
+            "inset 0 0 0 1px var(--caps-accent), 0 0 0 3px var(--caps-accent-soft)",
+        },
       },
     },
     disabled: {
       true: {
         cursor: "not-allowed",
-        opacity: 0.38,
+        opacity: 0.45,
       },
     },
   },
@@ -221,22 +227,24 @@ const SelectTrigger = styled("button", {
 const SelectLabel = styled("label", {
   base: {
     position: "absolute",
-    transition: "ease-in-out 0.2s",
-    left: "16px",
-    color: "var(--md-sys-color-on-surface-variant)",
+    transition:
+      "top var(--caps-dur) var(--caps-ease), font-size var(--caps-dur) var(--caps-ease), transform var(--caps-dur) var(--caps-ease)",
+    left: "12px",
+    color: "var(--caps-text-3)",
     pointerEvents: "none",
     transformOrigin: "left top",
   },
   variants: {
     floating: {
       true: {
-        top: "8px",
-        fontSize: "12px",
+        top: "6px",
+        fontSize: "var(--caps-text-xs)",
+        fontWeight: 500,
         transform: "translateY(0)",
       },
       false: {
         top: "50%",
-        fontSize: "16px",
+        fontSize: "var(--caps-text-base)",
         transform: "translateY(-50%)",
       },
     },
@@ -254,7 +262,8 @@ const SelectValue = styled("span", {
   variants: {
     labeled: {
       true: {
-        paddingTop: "16px",
+        paddingTop: "18px",
+        paddingBottom: "6px",
       },
     },
   },
@@ -264,24 +273,30 @@ const DropdownMenu = styled("div", {
   base: {
     display: "flex",
     flexDirection: "column",
+    gap: "1px",
     maxHeight: "40vh",
     overflowY: "auto",
-    scrollbarWidth: "none",
-    borderRadius: "4px",
-    background: "var(--md-sys-color-surface-container)",
-    color: "var(--md-sys-color-on-surface)",
-    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.2)",
-    padding: "8px 0",
+    scrollbarWidth: "thin",
+    borderRadius: "var(--caps-radius-lg)",
+    background: "var(--caps-bg-overlay)",
+    color: "var(--caps-text)",
+    boxShadow: "var(--caps-shadow-pop)",
+    padding: "4px",
 
     "& mdui-menu-item": {
       cursor: "pointer",
-      padding: "0px 1.5rem",
-      transition: "background 0.2s",
-      height: "3rem",
+      padding: "0 10px",
+      borderRadius: "var(--caps-radius-sm)",
+      transition: "background-color var(--caps-dur-fast) var(--caps-ease)",
+      height: "var(--caps-h-md)",
+      fontSize: "var(--caps-text-md)",
 
       "&:hover": {
-        background:
-          "color-mix(in srgb, var(--md-sys-color-on-surface) 8%, transparent)",
+        background: "var(--caps-hover)",
+      },
+
+      "&[selected]": {
+        background: "var(--caps-selected)",
       },
     },
   },
@@ -289,10 +304,11 @@ const DropdownMenu = styled("div", {
 
 const ArrowIcon = styled("svg", {
   base: {
-    width: "24px",
-    height: "24px",
-    fill: "var(--md-sys-color-on-surface-variant)",
-    transition: "transform 0.2s",
+    flexShrink: 0,
+    width: "20px",
+    height: "20px",
+    fill: "var(--caps-text-3)",
+    transition: "transform var(--caps-dur) var(--caps-ease)",
   },
   variants: {
     open: {

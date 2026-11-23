@@ -11,7 +11,7 @@ import {
   useContext,
 } from "solid-js";
 
-import { Trans } from "@lingui/solid/macro";
+import { Trans, useLingui } from "@lingui/solid/macro";
 import { useQuery } from "@tanstack/solid-query";
 import { styled } from "styled-system/jsx";
 
@@ -56,6 +56,7 @@ type GifResult = {
 const FilterContext = createContext<(value: string) => void>();
 
 export function GifPicker() {
+  const { t } = useLingui();
   const { isMobile } = useDevice();
   const [filter, setFilter] = createSignal("");
   const [debouncedFilter, setDebouncedFilter] = createSignal("");
@@ -95,7 +96,7 @@ export function GifPicker() {
         <TextField
           autoFocus={!isMobile}
           variant="outlined"
-          placeholder="Search for GIFs..."
+          placeholder={t`Search for GIFs...`}
           value={filter()}
           onInput={(e) => setFilter(e.currentTarget.value)}
         />

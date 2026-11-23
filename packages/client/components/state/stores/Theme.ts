@@ -14,8 +14,11 @@ import { AbstractStore } from ".";
 export type TypeTheme = {
   /**
    * Base theme preset
+   *
+   * caps: CAPS design system palette (default)
+   * you: Material You palette generated from an accent
    */
-  preset: "you";
+  preset: "caps" | "you";
 
   /**
    * Light/dark mode
@@ -83,7 +86,7 @@ export type SelectedTheme = Pick<
   | "messageSize"
   | "messageGroupSpacing"
 > & {
-  preset: "you";
+  preset: "caps" | "you";
   darkMode: boolean;
 
   accent: string;
@@ -131,15 +134,15 @@ export class Theme extends AbstractStore<"theme", TypeTheme> {
    */
   default(): TypeTheme {
     return {
-      preset: "you",
-      mode: "system",
+      preset: "caps",
+      mode: "dark",
 
-      m3Accent: "#5470ec",
+      m3Accent: "#d4f24a",
       m3Contrast: 0.0,
       m3Variant: "tonal_spot",
 
-      interfaceFont: "Inter",
-      monospaceFont: "Fira Code",
+      interfaceFont: "IBM Plex Sans Variable",
+      monospaceFont: "IBM Plex Mono",
 
       blur: true,
       messageSize: 14,
@@ -157,8 +160,18 @@ export class Theme extends AbstractStore<"theme", TypeTheme> {
       data.mode = input.mode!;
     }
 
-    if (["you", "neutral"].includes(input.preset!)) {
+    if (["caps", "you"].includes(input.preset!)) {
       data.preset = input.preset!;
+    }
+
+    // migration: users still on a previous default accent (Stoat blue or the
+    // first CAPS purple) move to the CAPS palette; custom accents are kept
+    if (
+      data.preset === "you" &&
+      (!input.m3Accent ||
+        ["#5470ec", "#b02cff"].includes(input.m3Accent.toLowerCase()))
+    ) {
+      data.preset = "caps";
     }
 
     if (typeof input.m3Contrast === "number") {
@@ -224,6 +237,7 @@ export class Theme extends AbstractStore<"theme", TypeTheme> {
     const opts = this.get();
 
     switch (opts.preset) {
+      case "caps":
       case "you":
         return {
           blur: opts.blur,
@@ -231,7 +245,7 @@ export class Theme extends AbstractStore<"theme", TypeTheme> {
           monospaceFont: opts.monospaceFont,
           messageSize: opts.messageSize,
           messageGroupSpacing: opts.messageGroupSpacing,
-          preset: "you",
+          preset: opts.preset,
           darkMode:
             opts.mode === "dark" ||
             (opts.mode === "system" && this.prefersDark()),
@@ -286,6 +300,8 @@ export class Theme extends AbstractStore<"theme", TypeTheme> {
    */
   setM3Accent(accent: string) {
     this.set("m3Accent", accent);
+    // choosing a custom accent switches from the CAPS palette to Material You
+    this.set("preset", "you");
   }
 
   /**

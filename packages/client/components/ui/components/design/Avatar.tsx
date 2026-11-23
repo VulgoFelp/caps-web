@@ -95,22 +95,37 @@ const FallbackBase = styled("div", {
     justifyContent: "center",
 
     fontWeight: 600,
-    fontSize: "0.75rem",
+    fontSize: "0.6875rem",
+    letterSpacing: "0.01em",
+    transition:
+      "background-color var(--caps-dur) var(--caps-ease), color var(--caps-dur) var(--caps-ease)",
   },
   variants: {
     contrast: {
       true: {
-        color: "var(--md-sys-color-on-primary)",
-        background: "var(--md-sys-color-primary)",
+        color: "var(--caps-on-accent)",
+        background: "var(--caps-accent)",
       },
       false: {
-        fill: "var(--md-sys-color-on-surface)",
-        color: "var(--md-sys-color-on-surface)",
-        background: "var(--md-sys-color-surface-container-low)",
+        fill: "var(--caps-text-2)",
+        color: "var(--caps-text-2)",
+        background: "var(--caps-bg-raised)",
+        boxShadow: "inset 0 0 0 1px var(--caps-line-soft)",
+
+        "*:hover > svg > g > foreignObject > div > &, a:hover &": {
+          color: "var(--caps-text)",
+          fill: "var(--caps-text)",
+          background: "var(--caps-bg-overlay)",
+        },
       },
       bare: {
-        fill: "var(--md-sys-color-on-surface)",
-        color: "var(--md-sys-color-on-surface)",
+        fill: "var(--caps-text-3)",
+        color: "var(--caps-text-3)",
+
+        "a:hover &": {
+          color: "var(--caps-text)",
+          fill: "var(--caps-text)",
+        },
       },
     },
   },
@@ -220,8 +235,9 @@ const Shape = styled("div", {
         borderRadius: "var(--borderRadius-circle)",
       },
       square: {},
+      // radius in the 32-unit avatar space: 9/32 ≈ 28% (soft square)
       "rounded-square": {
-        borderRadius: "var(--borderRadius-md)",
+        borderRadius: "9px",
       },
     },
   },

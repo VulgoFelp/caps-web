@@ -124,11 +124,11 @@ const Base = styled("div", {
  */
 const Content = styled("div", {
   base: {
-    minWidth: "230px",
-    maxWidth: "300px",
-    padding: "74px 0 8px",
+    minWidth: "220px",
+    maxWidth: "260px",
+    padding: "56px 0 16px",
     display: "flex",
-    gap: "2px",
+    gap: "1px",
 
     flexDirection: "column",
 
@@ -156,11 +156,12 @@ const CategoryTitle = styled("span", {
     textOverflow: "ellipsis",
 
     textTransform: "uppercase",
-    fontSize: "0.75rem",
-    fontWeight: 700,
-    margin: "0 8px",
+    fontSize: "var(--caps-text-xs)",
+    fontWeight: 600,
+    letterSpacing: "0.06em",
+    margin: "var(--caps-space-5) 10px var(--caps-space-2)",
     marginInlineEnd: "20px",
 
-    color: "var(--md-sys-color-outline)",
+    color: "var(--caps-text-3)",
   },
 });

@@ -1,0 +1,274 @@
+/*
+ * CAPS design system — third-party component layer
+ *
+ * The app renders some controls through MDUI and Material Web components.
+ * Their shadow DOM is styled here through CSS custom properties and ::part()
+ * so they follow the same tokens as the native CAPS components. Rules from
+ * the outer document win over the components' internal styles, so no
+ * !important is needed.
+ */
+
+:root {
+  /* shape scale used by MDUI internals */
+  --mdui-shape-corner-extra-small: 3px;
+  --mdui-shape-corner-small: 5px;
+  --mdui-shape-corner-medium: 7px;
+  --mdui-shape-corner-large: 10px;
+  --mdui-shape-corner-extra-large: 12px;
+
+  /* denser type scale for MDUI internals */
+  --mdui-typescale-body-large-size: 0.875rem;
+  --mdui-typescale-body-large-line-height: 1.25rem;
+  --mdui-typescale-body-large-tracking: 0;
+  --mdui-typescale-body-medium-size: 0.8125rem;
+  --mdui-typescale-body-medium-tracking: 0;
+  --mdui-typescale-body-small-size: 0.75rem;
+  --mdui-typescale-body-small-tracking: 0;
+  --mdui-typescale-label-large-size: 0.8125rem;
+  --mdui-typescale-label-large-tracking: 0;
+  --mdui-typescale-label-large-weight: 600;
+  --mdui-typescale-label-medium-tracking: 0;
+  --mdui-typescale-title-medium-size: 0.9375rem;
+  --mdui-typescale-title-medium-tracking: 0;
+
+  /* faster, calmer motion */
+  --mdui-motion-duration-short4: 150ms;
+  --mdui-motion-duration-medium2: 200ms;
+  --mdui-motion-duration-medium4: 240ms;
+  --mdui-motion-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* ------------------------------------------------------------------ */
+/* Ripple: a quiet state layer instead of an ink splash                */
+/* ------------------------------------------------------------------ */
+
+md-ripple {
+  --md-ripple-hover-color: currentColor;
+  --md-ripple-pressed-color: currentColor;
+}
+
+/* ------------------------------------------------------------------ */
+/* Text field                                                          */
+/* ------------------------------------------------------------------ */
+
+mdui-text-field {
+  --caps-field-border: var(--caps-line);
+}
+
+mdui-text-field::part(container) {
+  background-color: var(--caps-bg-field);
+  border-radius: var(--caps-radius-md);
+  box-shadow: inset 0 0 0 1px var(--caps-field-border);
+  padding-left: 12px;
+  transition:
+    box-shadow var(--caps-dur) var(--caps-ease),
+    background-color var(--caps-dur) var(--caps-ease);
+}
+
+mdui-text-field:hover {
+  --caps-field-border: var(--caps-line-strong);
+}
+
+mdui-text-field[focused]::part(container),
+mdui-text-field[focused-style]::part(container) {
+  box-shadow:
+    inset 0 0 0 1px var(--caps-accent),
+    0 0 0 3px var(--caps-accent-soft);
+}
+
+mdui-text-field[invalid]::part(container),
+mdui-text-field[invalid-style]::part(container) {
+  box-shadow:
+    inset 0 0 0 1px var(--caps-danger),
+    0 0 0 3px var(--caps-danger-soft);
+}
+
+mdui-text-field[disabled]:not([disabled="false" i])::part(container) {
+  box-shadow: inset 0 0 0 1px var(--caps-line-soft);
+  background-color: var(--caps-hover);
+}
+
+mdui-text-field::part(label) {
+  color: var(--caps-text-3);
+}
+
+mdui-text-field[focused]::part(label) {
+  color: var(--caps-accent-text);
+}
+
+mdui-text-field::part(input) {
+  color: var(--caps-text);
+  padding-top: 0.5625rem;
+  padding-bottom: 0.5625rem;
+}
+
+mdui-text-field[label]::part(input) {
+  padding-top: 1.25rem;
+  padding-bottom: 0.375rem;
+}
+
+mdui-text-field::part(helper),
+mdui-text-field::part(counter) {
+  color: var(--caps-text-3);
+  font-size: var(--caps-text-sm);
+}
+
+mdui-text-field::part(error) {
+  color: var(--caps-danger);
+  font-size: var(--caps-text-sm);
+}
+
+mdui-text-field::part(icon),
+mdui-text-field::part(end-icon) {
+  color: var(--caps-text-3);
+}
+
+/* ------------------------------------------------------------------ */
+/* Select (renders a text field + menu)                                */
+/* ------------------------------------------------------------------ */
+
+mdui-select::part(menu) {
+  background: var(--caps-bg-overlay);
+  border-radius: var(--caps-radius-lg);
+  box-shadow: var(--caps-shadow-pop);
+  padding: 4px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Menus                                                               */
+/* ------------------------------------------------------------------ */
+
+mdui-menu {
+  --shape-corner: var(--caps-radius-lg);
+  background: var(--caps-bg-overlay);
+  box-shadow: var(--caps-shadow-pop);
+  padding: 4px;
+  min-width: 180px;
+}
+
+mdui-menu-item {
+  --shape-corner: var(--caps-radius-sm);
+  border-radius: var(--caps-radius-sm);
+  color: var(--caps-text);
+  font-size: var(--caps-text-md);
+}
+
+/* ------------------------------------------------------------------ */
+/* Checkbox and radio                                                  */
+/* ------------------------------------------------------------------ */
+
+mdui-checkbox {
+  color: var(--caps-text);
+}
+
+mdui-checkbox::part(control) {
+  border-radius: var(--caps-radius-xs);
+}
+
+mdui-checkbox::part(label) {
+  font-size: var(--caps-text-base);
+  color: var(--caps-text);
+}
+
+mdui-radio {
+  color: var(--caps-text);
+}
+
+/* ------------------------------------------------------------------ */
+/* Slider                                                              */
+/* ------------------------------------------------------------------ */
+
+mdui-slider::part(track-inactive) {
+  background-color: var(--caps-line-strong);
+  height: 4px;
+}
+
+mdui-slider::part(track-active) {
+  background-color: var(--caps-accent);
+  height: 4px;
+}
+
+mdui-slider {
+  --mdui-shape-corner-full: 999px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Segmented buttons                                                   */
+/* ------------------------------------------------------------------ */
+
+mdui-segmented-button-group {
+  --shape-corner: var(--caps-radius-md);
+  height: var(--caps-h-md);
+  background: var(--caps-bg-field);
+  box-shadow: inset 0 0 0 1px var(--caps-line);
+}
+
+mdui-segmented-button {
+  font-size: var(--caps-text-md);
+  font-weight: 500;
+  color: var(--caps-text-2);
+  border-color: var(--caps-line) !important;
+}
+
+mdui-segmented-button[selected] {
+  background: var(--caps-selected);
+  color: var(--caps-text);
+}
+
+/* ------------------------------------------------------------------ */
+/* Lists                                                               */
+/* ------------------------------------------------------------------ */
+
+mdui-list {
+  padding: 0;
+}
+
+mdui-list-subheader {
+  font-size: var(--caps-text-xs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--caps-text-3);
+}
+
+mdui-list-item {
+  --shape-corner: var(--caps-radius-sm);
+  border-radius: var(--caps-radius-sm);
+  color: var(--caps-text);
+}
+
+/* ------------------------------------------------------------------ */
+/* Snackbar                                                            */
+/* ------------------------------------------------------------------ */
+
+mdui-snackbar {
+  --shape-corner: var(--caps-radius-lg);
+  background: var(--caps-bg-overlay);
+  color: var(--caps-text);
+  box-shadow: var(--caps-shadow-pop);
+  font-size: var(--caps-text-md);
+}
+
+mdui-snackbar::part(action) {
+  color: var(--caps-accent-text);
+}
+
+/* ------------------------------------------------------------------ */
+/* Progress, badges, FAB                                               */
+/* ------------------------------------------------------------------ */
+
+mdui-circular-progress {
+  --mdui-color-primary: 212, 242, 74;
+}
+
+mdui-badge {
+  font-weight: 700;
+  font-size: 10px;
+}
+
+mdui-fab {
+  --shape-corner: var(--caps-radius-lg);
+  --mdui-color-primary-container: 212, 242, 74;
+  --mdui-color-on-primary-container: 26, 31, 5;
+  box-shadow: var(--caps-shadow-pop);
+}

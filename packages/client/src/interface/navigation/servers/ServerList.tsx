@@ -283,8 +283,9 @@ export const ServerList = (props: Props) => {
           }}
         >
           <Avatar
-            size={42}
-            fallback={<Symbol fill>home</Symbol>}
+            size={40}
+            shape="rounded-square"
+            fallback={<CapsMark />}
             holepunch={homeNotifications() ? "top-right" : undefined}
             overlay={
               <Show when={homeNotifications()}>
@@ -310,7 +311,7 @@ export const ServerList = (props: Props) => {
         >
           <a ref={setMenuButton} class={entryContainer()}>
             <Avatar
-              size={42}
+              size={40}
               src={props.user.avatarURL}
               holepunch={"bottom-right"}
               overlay={<UserStatus.Graphic status={props.user.presence} />}
@@ -328,7 +329,7 @@ export const ServerList = (props: Props) => {
                 href={`/channel/${conversation.id}`}
               >
                 <Avatar
-                  size={42}
+                  size={40}
                   // TODO: fix this
                   src={conversation.iconURL}
                   holepunch={conversation.unread ? "top-right" : "none"}
@@ -354,7 +355,7 @@ export const ServerList = (props: Props) => {
         <Show when={props.unreadConversations.length > 9}>
           <a class={entryContainer()} href={`/`}>
             <Avatar
-              size={42}
+              size={40}
               fallback={<>+{props.unreadConversations.length - 9}</>}
             />
           </a>
@@ -400,15 +401,16 @@ export const ServerList = (props: Props) => {
               <div
                 class={railGhost}
                 style={{
-                  left: `${(drag.pointer()?.x ?? 0) - 21}px`,
-                  top: `${(drag.pointer()?.y ?? 0) - 21}px`,
+                  left: `${(drag.pointer()?.x ?? 0) - 20}px`,
+                  top: `${(drag.pointer()?.y ?? 0) - 20}px`,
                 }}
               >
                 <Switch>
                   <Match when={held().type === "server" && held()}>
                     {(item) => (
                       <Avatar
-                        size={42}
+                        size={40}
+                        shape="rounded-square"
                         src={(item() as { server: Server }).server.iconURL}
                         fallback={(item() as { server: Server }).server.name}
                       />
@@ -417,7 +419,7 @@ export const ServerList = (props: Props) => {
                   <Match when={held().type === "folder" && held()}>
                     {(item) => (
                       <Avatar
-                        size={42}
+                        size={40}
                         fallback={
                           <FolderPreview
                             servers={(item() as { servers: Server[] }).servers}
@@ -435,21 +437,29 @@ export const ServerList = (props: Props) => {
             </Portal>
           )}
         </Show>
-        <Tooltip placement="right" content={"Create or join a server"}>
+        <Tooltip placement="right" content={t`Create or join a server`}>
           <a
             class={entryContainer()}
             onClick={() => props.onCreateOrJoinServer()}
           >
-            <Avatar size={42} fallback={<Symbol>add</Symbol>} />
+            <Avatar
+              size={40}
+              shape="rounded-square"
+              fallback={<Symbol>add</Symbol>}
+            />
           </a>
         </Tooltip>
         <Show when={instance.isStoat}>
-          <Tooltip placement="right" content={"Find new servers to join"}>
+          <Tooltip placement="right" content={t`Find new servers to join`}>
             <a
               href={state.layout.getLastActiveDiscoverPath()}
               class={entryContainer()}
             >
-              <Avatar size={42} fallback={<Symbol fill>explore</Symbol>} />
+              <Avatar
+                size={40}
+                shape="rounded-square"
+                fallback={<Symbol fill>explore</Symbol>}
+              />
             </a>
           </Tooltip>
         </Show>
@@ -457,14 +467,16 @@ export const ServerList = (props: Props) => {
       <Shadow>
         <div />
       </Shadow>
-      <Tooltip placement="right" content="Settings">
+      <Tooltip placement="right" content={t`Settings`}>
         <a
           class={entryContainer()}
           onClick={() => openModal({ type: "settings", config: "user" })}
         >
           <Avatar
-            size={42}
-            fallback={<Symbol fill>settings</Symbol>}
+            size={40}
+            shape="rounded-square"
+            fallback={<Symbol>settings</Symbol>}
+            fallbackBackground={false}
             interactive
           />
         </a>
@@ -555,7 +567,8 @@ function ServerEntry(props: {
           href={state.layout.getLastActiveServerPath(props.server.id)}
         >
           <Avatar
-            size={42}
+            size={40}
+            shape="rounded-square"
             src={props.server.iconURL}
             holepunch={
               mentions()
@@ -677,7 +690,8 @@ function FolderEntry(props: {
             }}
           >
             <Avatar
-              size={42}
+              size={40}
+              shape="rounded-square"
               holepunch={collapsed() && mentions() ? "top-right" : "none"}
               overlay={
                 <Show when={collapsed() && mentions()}>
@@ -761,12 +775,12 @@ const railFolding = css({
   "&:after": {
     content: "' '",
     position: "absolute",
-    top: "3px",
-    left: "3px",
-    width: "50px",
-    height: "50px",
-    borderRadius: "var(--borderRadius-circle)",
-    outline: "2px solid var(--md-sys-color-primary)",
+    top: "2px",
+    left: "10px",
+    width: "44px",
+    height: "44px",
+    borderRadius: "12px",
+    outline: "2px solid var(--caps-accent)",
   },
 });
 
@@ -785,9 +799,9 @@ const railInsertion = css({
   top: "-2px",
   left: "6px",
   right: "6px",
-  height: "4px",
+  height: "3px",
   borderRadius: "2px",
-  background: "var(--md-sys-color-primary)",
+  background: "var(--caps-accent)",
 });
 
 /**
@@ -814,7 +828,12 @@ function FolderPreview(props: { servers: Server[]; colour?: string }) {
     >
       <For each={props.servers.slice(0, 4)}>
         {(server) => (
-          <Avatar size={size()} src={server.iconURL} fallback={server.name} />
+          <Avatar
+            size={size()}
+            shape="rounded-square"
+            src={server.iconURL}
+            fallback={server.name}
+          />
         )}
       </For>
     </FolderPreviewBase>
@@ -842,8 +861,11 @@ const ServerListBase = styled("div", {
   base: {
     display: "flex",
     flexDirection: "column",
+    width: "var(--caps-rail-width)",
+    paddingBlock: "var(--caps-space-4)",
 
-    fill: "var(--md-sys-color-on-surface)",
+    fill: "var(--caps-text-2)",
+    color: "var(--caps-text-2)",
   },
 });
 
@@ -858,36 +880,53 @@ const listBase = cva({
 
 /**
  * Server entries
+ *
+ * 48px rows with a 40px soft-square icon. A notch on the rail edge shows
+ * state: lime and tall for the current server, short and neutral for unread.
  */
 const entryContainer = cva({
   base: {
-    width: "56px",
-    height: "56px",
+    width: "var(--caps-rail-width)",
+    height: "48px",
     position: "relative",
     display: "grid",
     flexShrink: 0,
     placeItems: "center",
 
+    "& svg": {
+      transition: "transform var(--caps-dur) var(--caps-ease-out)",
+    },
+
+    "&:hover svg": {
+      transform: "translateY(-1px)",
+    },
+
+    "&:active svg": {
+      transform: "scale(0.96)",
+    },
+
     "&:before": {
       content: "' '",
       position: "absolute",
-      width: "12px",
+      width: "4px",
       height: "0px",
-      transition: "var(--transitions-fast) all",
-      left: "-8px",
-      borderRadius: "4px",
-      background: "var(--md-sys-color-on-surface)",
+      transition:
+        "height var(--caps-dur) var(--caps-ease-out), background-color var(--caps-dur) var(--caps-ease)",
+      left: "-1px",
+      borderRadius: "0 4px 4px 0",
+      background: "var(--caps-text)",
     },
 
     "&:hover:before": {
-      height: "16px",
+      height: "14px",
     },
   },
   variants: {
     indicator: {
       selected: {
         "&:before": {
-          height: "32px !important",
+          height: "28px !important",
+          background: "var(--caps-accent)",
         },
       },
       alert: {
@@ -912,10 +951,11 @@ const FolderGroup = styled("div", {
   variants: {
     expanded: {
       true: {
-        paddingBlock: "6px",
-        borderRadius: "var(--borderRadius-lg)",
-        background:
-          "color-mix(in srgb, var(--md-sys-color-on-surface) 10%, transparent)",
+        paddingBlock: "4px",
+        marginInline: "8px",
+        borderRadius: "14px",
+        background: "var(--caps-bg-sidebar)",
+        boxShadow: "inset 0 0 0 1px var(--caps-line-soft)",
       },
       false: {},
     },
@@ -931,8 +971,8 @@ const LineDivider = styled("div", {
     height: "1px",
     flexShrink: 0,
     margin: "6px auto",
-    width: "calc(100% - 24px)",
-    background: "var(--md-sys-color-outline-variant)",
+    width: "24px",
+    background: "var(--caps-line)",
   },
 });
 
@@ -946,11 +986,32 @@ const Shadow = styled("div", {
     position: "relative",
 
     "& div": {
-      height: "12px",
-      marginTop: "-12px",
+      width: "100%",
+      height: "16px",
+      marginTop: "-16px",
       position: "absolute",
       background:
-        "linear-gradient(to bottom, transparent, var(--md-sys-color-surface-container-highest))",
+        "linear-gradient(to bottom, transparent, var(--caps-bg-rail))",
     },
   },
 });
+
+/**
+ * CAPS mark: the spiral used for the home entry
+ */
+function CapsMark() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width="20"
+      height="20"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.2"
+      stroke-linecap="round"
+      aria-hidden="true"
+    >
+      <path d="M12.6 12.2c.5-.6.1-1.6-.8-1.6-1.2 0-1.9 1.3-1.4 2.4.7 1.5 2.8 1.8 4 .7 1.6-1.5 1.2-4.2-.6-5.3-2.3-1.4-5.4-.4-6.5 2-1.4 3 .3 6.5 3.4 7.4 3.7 1.1 7.4-1.4 8-5.1" />
+    </svg>
+  );
+}

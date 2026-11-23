@@ -1,5 +1,6 @@
 import {
   Accessor,
+  For,
   JSX,
   Match,
   Show,
@@ -19,15 +20,12 @@ import { useClient } from "@revolt/client";
 import { useModals } from "@revolt/modal";
 import {
   Avatar,
-  Badge,
+  Button,
   Deferred,
   Header,
-  IconButton,
   List,
   ListItem,
   ListSubheader,
-  NavigationRail,
-  NavigationRailItem,
   OverflowingText,
   UserStatus,
   main,
@@ -46,9 +44,74 @@ const Base = styled("div", {
     flexDirection: "column",
 
     "& .FriendsList": {
-      height: "100%",
-      paddingInline: "var(--gap-lg)",
+      flexGrow: 1,
+      minHeight: 0,
+      paddingInline: "var(--caps-space-4)",
     },
+  },
+});
+
+/**
+ * Horizontal tab bar for friend lists
+ */
+const Tabs = styled("div", {
+  base: {
+    display: "flex",
+    alignItems: "center",
+    gap: "var(--caps-space-1)",
+    flexShrink: 0,
+    height: "48px",
+    paddingInline: "var(--caps-space-5)",
+    borderBottom: "1px solid var(--caps-line-soft)",
+  },
+});
+
+const Tab = styled("button", {
+  base: {
+    display: "flex",
+    alignItems: "center",
+    gap: "var(--caps-space-3)",
+    height: "var(--caps-h-sm)",
+    padding: "0 10px",
+    border: "none",
+    borderRadius: "var(--caps-radius-sm)",
+    background: "transparent",
+    color: "var(--caps-text-3)",
+    fontFamily: "inherit",
+    fontSize: "var(--caps-text-md)",
+    fontWeight: 500,
+    cursor: "pointer",
+    transition:
+      "background-color var(--caps-dur-fast) var(--caps-ease), color var(--caps-dur-fast) var(--caps-ease)",
+
+    "&:hover": {
+      color: "var(--caps-text)",
+      background: "var(--caps-hover)",
+    },
+  },
+  variants: {
+    selected: {
+      true: {
+        color: "var(--caps-text)",
+        background: "var(--caps-selected)",
+        fontWeight: 600,
+      },
+    },
+  },
+});
+
+const TabCount = styled("span", {
+  base: {
+    minWidth: "18px",
+    height: "18px",
+    padding: "0 5px",
+    display: "grid",
+    placeItems: "center",
+    borderRadius: "999px",
+    fontSize: "11px",
+    fontWeight: 700,
+    color: "#ffffff",
+    background: "var(--caps-danger)",
   },
 });
 
@@ -116,54 +179,48 @@ export function Friends() {
           style={{
             position: "relative",
             "min-height": 0,
+            display: "flex",
+            "flex-direction": "column",
+            height: "100%",
           }}
         >
-          <NavigationRail contained value={page} onValue={setPage}>
-            <div style={{ "margin-top": "6px", "margin-bottom": "12px" }}>
-              <IconButton
-                variant="filled"
-                shape="square"
-                onPress={() =>
-                  openModal({
-                    type: "add_friend",
-                    client: client(),
-                  })
-                }
-                use:floating={{
-                  tooltip: {
-                    placement: "right",
-                    content: t`Add a new friend`,
-                  },
-                }}
-              >
-                <Symbol>add</Symbol>
-              </IconButton>
-            </div>
-
-            <NavigationRailItem
-              icon={<Symbol>waving_hand</Symbol>}
-              value="online"
+          <Tabs role="tablist">
+            <For
+              each={[
+                { id: "online", label: t`Online` },
+                { id: "all", label: t`All` },
+                { id: "pending", label: t`Pending` },
+                { id: "blocked", label: t`Blocked` },
+              ]}
             >
-              <Trans>Online</Trans>
-            </NavigationRailItem>
-            <NavigationRailItem icon={<Symbol>all_inbox</Symbol>} value="all">
-              <Trans>All</Trans>
-            </NavigationRailItem>
-            <NavigationRailItem
-              icon={<Symbol>notifications</Symbol>}
-              value="pending"
+              {(tab) => (
+                <Tab
+                  role="tab"
+                  aria-selected={page() === tab.id}
+                  selected={page() === tab.id}
+                  onClick={() => setPage(tab.id)}
+                >
+                  {tab.label}
+                  <Show when={tab.id === "pending" && pending()}>
+                    <TabCount>{pending()}</TabCount>
+                  </Show>
+                </Tab>
+              )}
+            </For>
+            <div style={{ "flex-grow": 1 }} />
+            <Button
+              size="xs"
+              onPress={() =>
+                openModal({
+                  type: "add_friend",
+                  client: client(),
+                })
+              }
             >
-              <Trans>Pending</Trans>
-              <Show when={pending()}>
-                <Badge slot="badge" variant="large">
-                  {pending()}
-                </Badge>
-              </Show>
-            </NavigationRailItem>
-            <NavigationRailItem icon={<Symbol>block</Symbol>} value="blocked">
-              <Trans>Blocked</Trans>
-            </NavigationRailItem>
-          </NavigationRail>
+              <Symbol size={16}>person_add</Symbol>
+              <Trans>Add a new friend</Trans>
+            </Button>
+          </Tabs>
 
           <Deferred>
             <div class="FriendsList" ref={scrollTargetElement} use:scrollable>

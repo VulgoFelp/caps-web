@@ -44,7 +44,7 @@ export function Dialog(props: Props) {
         show={props.show}
         onClick={props.onClose}
         style={{
-          "--scrim": "rgba(from var(--md-sys-color-scrim) r g b / 0.32)",
+          "--scrim": "var(--caps-scrim)",
           "--background": props.scrimBackground
             ? `url('${props.scrimBackground}'), var(--scrim)`
             : "var(--scrim)",
@@ -53,10 +53,10 @@ export function Dialog(props: Props) {
         <Presence>
           <Show when={props.show}>
             <Motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3, easing: [0.05, 0.7, 0.1, 1.0] }}
+              initial={{ opacity: 0, y: 8, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 4, scale: 0.98 }}
+              transition={{ duration: 0.18, easing: [0.16, 1, 0.3, 1] }}
               class="dialog"
             >
               <Container
@@ -80,9 +80,14 @@ export function Dialog(props: Props) {
                 <Show when={props.actions}>
                   <Actions>
                     <For each={props.actions}>
-                      {(action) => (
+                      {(action, index) => (
                         <Button
-                          variant="text"
+                          // the last action is the primary one
+                          variant={
+                            index() === props.actions!.length - 1
+                              ? "filled"
+                              : "tonal"
+                          }
                           size="sm"
                           onPress={() => {
                             if (action.isDisabled) return;
@@ -150,7 +155,7 @@ const Scrim = styled("div", {
     paddingBottom: "max(var(--inset-bottom), env(keyboard-inset-height, 0px))",
 
     animationName: "scrimFadeIn",
-    animationDuration: "0.1s",
+    animationDuration: "0.15s",
     animationFillMode: "forwards",
     transition: "var(--transitions-medium) all",
   },
@@ -164,10 +169,10 @@ const Scrim = styled("div", {
     },
     dark: {
       true: {
-        "--background": "rgba(from var(--md-sys-color-scrim) r g b / 0.9)",
+        "--background": "rgba(6, 6, 5, 0.92)",
       },
       false: {
-        "--background": "rgba(from var(--md-sys-color-scrim) r g b / 0.32)",
+        "--background": "var(--caps-scrim)",
       },
     },
   },
@@ -189,8 +194,8 @@ const ScrimSurface = styled("div", {
   variants: {
     padding: {
       true: {
-        padding: "80px",
-        _phone: { padding: "30px" },
+        padding: "64px",
+        _phone: { padding: "16px" },
       },
     },
     overflow: {
@@ -207,37 +212,51 @@ const ScrimSurface = styled("div", {
 
 const Container = styled("div", {
   base: {
-    padding: "24px",
-    minWidth: "280px",
-    maxWidth: "560px",
-    borderRadius: "28px",
+    padding: "var(--caps-space-7)",
+    minWidth: "320px",
+    maxWidth: "480px",
+    borderRadius: "var(--caps-radius-server)",
 
     display: "flex",
     flexDirection: "column",
 
-    color: "var(--md-sys-color-on-surface)",
-    background: "var(--md-sys-color-surface-container-high)",
+    color: "var(--caps-text)",
+    background: "var(--caps-bg-overlay)",
+    boxShadow: "var(--caps-shadow-modal)",
+
+    _phone: {
+      minWidth: "unset",
+      width: "100%",
+    },
   },
 });
 
 const Icon = styled("div", {
   base: {
-    alignSelf: "center",
-    marginBottom: "16px",
-    fill: "var(--md-sys-color-on-surface)",
+    alignSelf: "flex-start",
+    display: "grid",
+    placeItems: "center",
+    width: "40px",
+    height: "40px",
+    marginBottom: "var(--caps-space-5)",
+    borderRadius: "var(--caps-radius-lg)",
+    color: "var(--caps-accent)",
+    fill: "var(--caps-accent)",
+    background: "var(--caps-accent-soft)",
   },
 });
 
 const Title = styled("span", {
   base: {
-    ...typography.raw({ class: "headline", size: "small" }),
-    marginBlockEnd: "16px",
+    fontSize: "var(--caps-text-xl)",
+    fontWeight: 600,
+    letterSpacing: "-0.01em",
+    lineHeight: 1.3,
+    marginBlockEnd: "var(--caps-space-3)",
   },
   variants: {
     withIcon: {
-      true: {
-        textAlign: "center",
-      },
+      true: {},
     },
   },
   defaultVariants: {
@@ -247,15 +266,17 @@ const Title = styled("span", {
 
 const Content = styled("div", {
   base: {
-    color: "var(--md-sys-color-on-surface-variant)",
+    color: "var(--caps-text-2)",
+    fontSize: "var(--caps-text-base)",
+    lineHeight: 1.5,
   },
 });
 
 const Actions = styled("div", {
   base: {
-    gap: "8px",
+    gap: "var(--caps-space-4)",
     display: "flex",
     justifyContent: "end",
-    marginBlockStart: "24px",
+    marginBlockStart: "var(--caps-space-7)",
   },
 });

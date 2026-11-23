@@ -27,18 +27,17 @@ import { useState } from "@revolt/state";
 import { IconButton, Symbol } from "@revolt/ui";
 
 import Wordmark from "../../../public/assets/web/wordmark.svg?component-solid";
-import { AppUpsell } from "./AppUpsell";
+import heroArt from "./caps-hero.svg?url";
 import { BubbleMood, BubbleProvider, FlowBase, FlowBubble } from "./flows/Flow";
 
-import Bluesky from "./flows/bluesky.svg?component-solid";
 import GitHub from "./flows/github.svg?component-solid";
 
 const root = css({
   width: "100%",
   height: "100%",
   minHeight: 0,
-  color: "var(--md-sys-color-on-surface)",
-  background: "var(--md-sys-color-surface)",
+  color: "var(--caps-text)",
+  background: "var(--caps-bg-app)",
 });
 
 const Page = styled("main", {
@@ -75,11 +74,12 @@ const Hero = styled("section", {
     flexDirection: "column",
     minHeight: 0,
     overflow: "hidden",
-    padding: "clamp(32px, 4vw, 62px)",
-    color: "#fff",
-    background:
-      "linear-gradient(145deg, #33294b 0%, #262038 62%, #211b31 100%)",
-    borderRadius: "clamp(28px, 3vw, 48px)",
+    padding: "40px",
+    color: "#ecebe4",
+    // CAPS hero: graphite with the lime spiral, anchored bottom-left
+    background: "#0c0c0b var(--hero) left bottom / cover no-repeat",
+    borderRadius: "var(--caps-radius-xl, 16px)",
+    boxShadow: "inset 0 0 0 1px rgba(255, 255, 255, 0.05)",
 
     "@media (max-width: 980px)": {
       padding: "38px",
@@ -95,11 +95,12 @@ const Brand = styled("div", {
   base: {
     position: "relative",
     zIndex: 1,
-    width: "132px",
+    width: "112px",
     height: "auto",
 
     display: "flex",
-    gap: "14px",
+    alignItems: "center",
+    gap: "var(--caps-space-4)",
 
     "& svg": {
       width: "100%",
@@ -117,8 +118,8 @@ const Brand = styled("div", {
 
           "@media (max-width: 900px)": {
             display: "block",
-            width: "104px",
-            color: "var(--md-sys-color-on-surface)",
+            width: "96px",
+            color: "var(--caps-text)",
           },
 
           "@media (max-width: 460px)": {
@@ -166,43 +167,36 @@ const AccountSwitch = styled("div", {
   base: {
     display: "flex",
     alignItems: "center",
-    fontSize: "0.875rem",
+    gap: "var(--caps-space-4)",
+    fontSize: "var(--caps-text-md)",
     whiteSpace: "nowrap",
 
     "& > span": {
-      color: "var(--md-sys-color-on-surface-variant)",
-      marginRight: "12px",
+      color: "var(--caps-text-3)",
     },
 
     "& a": {
       display: "flex",
       alignItems: "center",
-      padding: "0 16px",
-      height: "40px",
-      color: "var(--md-sys-color-primary)",
-      border: "1px solid var(--md-sys-color-outline-variant)",
-      borderRadius: "999px",
-      fontWeight: 650,
+      padding: "0 12px",
+      height: "var(--caps-h-md)",
+      color: "var(--caps-text)",
+      background: "var(--caps-bg-raised)",
+      boxShadow: "inset 0 0 0 1px var(--caps-line)",
+      borderRadius: "var(--caps-radius-md)",
+      fontWeight: 600,
       textDecoration: "none",
-      transition: "background 150ms ease, border-color 150ms ease",
+      transition:
+        "background-color var(--caps-dur-fast) var(--caps-ease), box-shadow var(--caps-dur-fast) var(--caps-ease)",
     },
 
     "& a:hover": {
-      background: "var(--md-sys-color-surface-container)",
-      borderColor: "var(--md-sys-color-primary)",
-    },
-
-    "& button": {
-      marginLeft: "14px",
+      background: "var(--caps-bg-overlay)",
+      boxShadow: "inset 0 0 0 1px var(--caps-line-strong)",
     },
 
     "@media (max-width: 900px)": {
       "& > span": { display: "none" },
-      "& a": { padding: "0 12px" },
-    },
-
-    "@media (max-width: 460px)": {
-      "& button": { marginLeft: "8px" },
     },
   },
 });
@@ -237,8 +231,8 @@ const Footer = styled("footer", {
     alignItems: "center",
     justifyContent: "space-between",
     minHeight: "42px",
-    color: "var(--md-sys-color-on-surface-variant)",
-    fontSize: "0.78rem",
+    color: "var(--caps-text-3)",
+    fontSize: "var(--caps-text-sm)",
 
     "& nav": {
       display: "flex",
@@ -252,7 +246,7 @@ const Footer = styled("footer", {
     },
 
     "& a:hover": {
-      color: "var(--md-sys-color-primary)",
+      color: "var(--caps-text)",
     },
 
     "@media (max-width: 460px)": {
@@ -504,11 +498,10 @@ export function AuthPage(props: { children: JSX.Element }) {
     <div use:scrollable={{ class: root }}>
       <Titlebar />
       <Page>
-        <Hero>
+        <Hero style={{ "--hero": `url("${heroArt}")` }}>
           <Brand aria-hidden="true">
             <Wordmark />
           </Brand>
-          <AppUpsell />
         </Hero>
 
         <Content>
@@ -632,31 +625,21 @@ export function AuthPage(props: { children: JSX.Element }) {
           </div>
 
           <Footer>
-            <nav aria-label="Legal">
-              <a href="https://stoat.chat/terms" target="_blank">
-                <Trans>Terms</Trans>
-              </a>
-              <a href="https://stoat.chat/privacy" target="_blank">
-                <Trans>Privacy</Trans>
-              </a>
-              <a href="https://support.stoat.chat/" target="_blank">
-                <Trans>Help</Trans>
-              </a>
-            </nav>
-            <Socials aria-label="Social links">
+            <span>CAPS · coisa de doido</span>
+            <Socials aria-label="Código-fonte">
               <a
-                href="https://github.com/stoatchat"
+                href="https://github.com/VulgoFelp/caps-web"
                 target="_blank"
-                aria-label="GitHub"
+                rel="noreferrer"
+                use:floating={{
+                  tooltip: {
+                    placement: "top",
+                    content:
+                      "Código-fonte do CAPS (baseado no Stoat, AGPL-3.0)",
+                  },
+                }}
               >
-                <GitHub width={20} height={20} />
-              </a>
-              <a
-                href="https://bsky.app/profile/stoat.chat"
-                target="_blank"
-                aria-label="Bluesky"
-              >
-                <Bluesky width={20} height={20} />
+                <GitHub width={18} height={18} />
               </a>
             </Socials>
           </Footer>

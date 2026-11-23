@@ -69,6 +69,12 @@ export function IconButton(props: Props) {
   );
 }
 
+/**
+ * CAPS icon button
+ *
+ * Soft-square hit areas (never Material circles), quiet by default, with a
+ * neutral hover wash and accent only for the filled variant.
+ */
 const iconButton2 = cva({
   base: {
     ...typography.raw(),
@@ -89,54 +95,98 @@ const iconButton2 = cva({
 
     cursor: "pointer",
     border: "none",
-    transition: "var(--transitions-fast) all",
+    background: "transparent",
+    borderRadius: "var(--caps-radius-md)",
+    transition:
+      "background-color var(--caps-dur-fast) var(--caps-ease), color var(--caps-dur-fast) var(--caps-ease), transform var(--caps-dur-fast) var(--caps-ease)",
+
+    "--md-ripple-hover-opacity": "0",
+    "--md-ripple-pressed-opacity": "0.08",
 
     color: "var(--colour)",
     fill: "var(--colour)",
+
+    "&:active": {
+      transform: "scale(0.96)",
+    },
   },
   variants: {
     variant: {
       filled: {
-        background: "var(--md-sys-color-primary)",
-        "--colour": "var(--md-sys-color-on-primary)",
+        background: "var(--caps-accent)",
+        "--colour": "var(--caps-on-accent)",
+        "&:hover": {
+          background: "var(--caps-accent-hover)",
+        },
       },
       tonal: {
-        background: "var(--md-sys-color-secondary-container)",
-        "--colour": "var(--md-sys-color-on-secondary-container)",
+        background: "var(--caps-bg-overlay)",
+        boxShadow: "inset 0 0 0 1px var(--caps-line)",
+        "--colour": "var(--caps-text)",
+        "&:hover": {
+          background: "var(--caps-active)",
+        },
       },
       outlined: {
-        border: "1px solid var(--md-sys-color-outline-variant)",
-        "--colour": "var(--md-sys-color-on-surface-variant)",
+        boxShadow: "inset 0 0 0 1px var(--caps-line-strong)",
+        "--colour": "var(--caps-text-2)",
+        "&:hover": {
+          background: "var(--caps-hover)",
+          "--colour": "var(--caps-text)",
+        },
       },
       standard: {
-        "--colour": "var(--md-sys-color-on-surface-variant)",
+        "--colour": "var(--caps-text-3)",
+        "&:hover": {
+          background: "var(--caps-hover)",
+          "--colour": "var(--caps-text)",
+        },
+        "&[aria-selected=true]": {
+          "--colour": "var(--caps-text)",
+          background: "var(--caps-selected)",
+        },
+      },
+
+      // CAPS: an input that is switched off (muted mic, deafened)
+      _muted: {
+        background: "var(--caps-danger-soft)",
+        boxShadow: "inset 0 0 0 1px rgba(from var(--caps-danger) r g b / 0.35)",
+        "--colour": "var(--caps-danger)",
+        "&:hover": {
+          background: "rgba(from var(--caps-danger) r g b / 0.2)",
+        },
       },
 
       _header: {
         "--colour": "white",
+        "&:hover": {
+          background: "rgba(255, 255, 255, 0.14)",
+        },
       },
     },
     size: {
       xs: {
-        height: "32px",
+        height: "var(--caps-h-sm)",
+        "& > svg": { width: "18px", height: "18px" },
+        "& > .material-symbols-outlined": { fontSize: "18px !important" },
       },
       sm: {
-        height: "40px",
+        height: "var(--caps-h-md)",
+        "& > svg": { width: "20px", height: "20px" },
+        "& > .material-symbols-outlined": { fontSize: "20px !important" },
       },
       md: {
-        height: "56px",
+        height: "40px",
       },
       lg: {
-        height: "96px",
+        height: "56px",
       },
       xl: {
-        height: "136px",
+        height: "72px",
       },
     },
     shape: {
-      round: {
-        borderRadius: "var(--borderRadius-full)",
-      },
+      round: {},
       square: {},
     },
     width: {
@@ -150,15 +200,18 @@ const iconButton2 = cva({
     disabled: {
       true: {
         cursor: "not-allowed",
+        opacity: 0.4,
+        "&:active": {
+          transform: "none",
+        },
       },
       false: {},
     },
     _compositionSendMessage: {
       true: {
-        width: "48px",
-        aspectRatio: "unset",
-        height: "100% !important",
-        borderEndRadius: "var(--borderRadius-xl)",
+        width: "var(--caps-h-md)",
+        height: "var(--caps-h-md) !important",
+        alignSelf: "flex-end",
       },
     },
   },
@@ -171,147 +224,44 @@ const iconButton2 = cva({
     _compositionSendMessage: false,
   },
   compoundVariants: [
-    // disabled styles
-    {
-      variant: ["filled", "tonal", "outlined"],
-      disabled: true,
-      css: {
-        // todo: check these are correct
-        "--color":
-          "color-mix(in srgb, 38% var(--md-sys-color-on-surface), transparent)",
-        background:
-          "color-mix(in srgb, 10% var(--md-sys-color-on-surface), transparent)",
-      },
-    },
-    {
-      variant: "standard",
-      disabled: true,
-      css: {
-        // todo: check these are correct
-        "--color":
-          "color-mix(in srgb, 38% var(--md-sys-color-on-surface), transparent)",
-        background:
-          "color-mix(in srgb, 10% var(--md-sys-color-on-surface), transparent)",
-      },
-    },
-
     {
       size: ["xs", "sm"],
       width: "narrow",
+      css: {
+        paddingInline: "2px",
+      },
+    },
+    {
+      size: ["xs", "sm"],
+      width: "default",
       css: {
         paddingInline: "4px",
       },
     },
     {
-      size: "xs",
-      width: "default",
-      css: {
-        paddingInline: "6px",
-      },
-    },
-    {
-      size: "xs",
+      size: ["xs", "sm"],
       width: "wide",
       css: {
+        aspectRatio: "unset",
         paddingInline: "10px",
       },
     },
     {
-      size: "sm",
-      width: "default",
+      size: "md",
       css: {
         paddingInline: "8px",
       },
     },
     {
-      size: "sm",
-      width: "wide",
+      size: ["md", "lg", "xl"],
       css: {
-        paddingInline: "14px",
-      },
-    },
-    {
-      size: "md",
-      width: "narrow",
-      css: {
-        paddingInline: "12px",
-      },
-    },
-    {
-      size: "md",
-      width: "default",
-      css: {
-        paddingInline: "16px",
-      },
-    },
-    {
-      size: "md",
-      width: "wide",
-      css: {
-        paddingInline: "24px",
-      },
-    },
-    {
-      size: "lg",
-      width: "narrow",
-      css: {
-        paddingInline: "16px",
-      },
-    },
-    {
-      size: "lg",
-      width: "default",
-      css: {
-        paddingInline: "32px",
-      },
-    },
-    {
-      size: "lg",
-      width: "wide",
-      css: {
-        paddingInline: "48px",
-      },
-    },
-    {
-      size: "xl",
-      width: "narrow",
-      css: {
-        paddingInline: "32px",
-      },
-    },
-    {
-      size: "xl",
-      width: "default",
-      css: {
-        paddingInline: "48px",
-      },
-    },
-    {
-      size: "xl",
-      width: "wide",
-      css: {
-        paddingInline: "72px",
-      },
-    },
-    {
-      size: ["xs", "sm"],
-      shape: "square",
-      css: {
-        borderRadius: "var(--borderRadius-md)",
-      },
-    },
-    {
-      size: "md",
-      shape: "square",
-      css: {
-        borderRadius: "var(--borderRadius-lg)",
+        borderRadius: "var(--caps-radius-lg)",
       },
     },
     {
       size: ["lg", "xl"],
-      shape: "square",
       css: {
-        borderRadius: "var(--borderRadius-xl)",
+        paddingInline: "16px",
       },
     },
   ],

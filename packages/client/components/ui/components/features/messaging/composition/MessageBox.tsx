@@ -101,22 +101,23 @@ const Base = styled("div", {
   base: {
     flexGrow: 1,
     minWidth: 0,
-
-    padding: "var(--gap-sm) var(--gap-md)",
-    borderStartRadius: "var(--borderRadius-xl)",
+    minHeight: "var(--caps-h-md)",
 
     display: "flex",
-    background: "var(--md-sys-color-surface-container-high)",
-    color: "var(--md-sys-color-on-surface)",
+    alignItems: "flex-start",
+    gap: "var(--caps-space-1)",
+    color: "var(--caps-text)",
+    fontSize: "var(--caps-text-base)",
+
+    // the editor text sits on the same baseline as the 32px actions
+    "& > :not(div:first-child):not(:last-child)": {
+      alignSelf: "center",
+    },
   },
   variants: {
     hasActionsAppend: {
-      true: {
-        borderEndRadius: "var(--borderRadius-md)",
-      },
-      false: {
-        borderEndRadius: "var(--borderRadius-xl)",
-      },
+      true: {},
+      false: {},
     },
   },
   defaultVariants: {
@@ -124,15 +125,37 @@ const Base = styled("div", {
   },
 });
 
+/**
+ * Composer surface: one raised field holding the editor and all actions
+ */
 const Parent = styled("div", {
   base: {
-    flexGrow: 1,
     flexShrink: 0,
 
     display: "flex",
-    gap: "var(--gap-md)",
-    margin: "0 0 var(--gap-md) 0",
+    alignItems: "flex-end",
+    gap: "var(--caps-space-2)",
+    margin: "0 var(--caps-space-6) var(--caps-space-6)",
+    padding: "var(--caps-space-2)",
     maxHeight: "var(--layout-height-message-box)",
+
+    background: "var(--caps-bg-raised)",
+    borderRadius: "var(--caps-radius-lg)",
+    boxShadow: "inset 0 0 0 1px var(--caps-line)",
+    transition: "box-shadow var(--caps-dur) var(--caps-ease)",
+
+    "&:hover": {
+      boxShadow: "inset 0 0 0 1px var(--caps-line-strong)",
+    },
+
+    "&:focus-within": {
+      boxShadow:
+        "inset 0 0 0 1px var(--caps-line-strong), 0 0 0 3px rgba(from var(--caps-text) r g b / 0.04)",
+    },
+
+    _phone: {
+      margin: "0 var(--caps-space-4) var(--caps-space-4)",
+    },
   },
 });
 
@@ -142,9 +165,10 @@ const Parent = styled("div", {
 const Blocked = styled(Row, {
   base: {
     flexGrow: 1,
-    fontSize: "14px",
+    fontSize: "var(--caps-text-md)",
+    color: "var(--caps-text-3)",
     userSelect: "none",
-    padding: "var(--gap-md)",
+    padding: "var(--caps-space-3) var(--caps-space-4)",
   },
   variants: {
     noPad: { true: { padding: 0 } },
@@ -163,8 +187,8 @@ export const InlineIcon = styled("div", {
   },
   variants: {
     size: {
-      short: { width: "14px" },
-      normal: { width: "42px" },
+      short: { width: "8px" },
+      normal: { width: "32px" },
     },
   },
   defaultVariants: {
@@ -194,7 +218,7 @@ const FloatingAction = styled("div", {
     },
     error: {
       true: {
-        color: "var(--md-sys-color-error)",
+        color: "var(--caps-danger)",
       },
     },
   },
@@ -238,7 +262,7 @@ export function MessageBox(props: Props) {
           <Match when={props.timeoutActive || !props.sendingAllowed}>
             <InlineIcon>
               <Blocked>
-                <BiRegularBlock size={24} />
+                <BiRegularBlock size={18} />
               </Blocked>
             </InlineIcon>
           </Match>

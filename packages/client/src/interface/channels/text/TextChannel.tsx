@@ -8,6 +8,7 @@ import {
   onCleanup,
 } from "solid-js";
 
+import { Trans } from "@lingui/solid/macro";
 import { cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 import { decodeTime, ulid } from "ulid";
@@ -273,7 +274,7 @@ export function TextChannel(props: ChannelPageProps) {
                 <WideSidebarContainer>
                   <SidebarTitle>
                     <Text class="label" size="large">
-                      Search Results
+                      <Trans>Search Results</Trans>
                     </Text>
                   </SidebarTitle>
                   <TextSearchSidebar
@@ -288,7 +289,7 @@ export function TextChannel(props: ChannelPageProps) {
                 <WideSidebarContainer>
                   <SidebarTitle>
                     <Text class="label" size="large">
-                      Pinned Messages
+                      <Trans>Pinned Messages</Trans>
                     </Text>
                   </SidebarTitle>
                   <TextSearchSidebar
@@ -331,11 +332,9 @@ const Content = styled("div", {
 const sidebar = cva({
   base: {
     flexShrink: 0,
-    width: "var(--layout-width-channel-sidebar)",
-    // margin: "var(--gap-md)",
-    borderRadius: "var(--borderRadius-lg)",
-    // color: "var(--colours-sidebar-channels-foreground)",
-    // background: "var(--colours-sidebar-channels-background)",
+    width: "var(--caps-members-width)",
+    background: "var(--caps-bg-sidebar)",
+    borderLeft: "1px solid var(--caps-line-soft)",
   },
 });
 
@@ -344,8 +343,8 @@ const sidebar = cva({
  */
 const WideSidebarContainer = styled("div", {
   base: {
-    paddingRight: "var(--gap-md)",
     width: "360px",
+    paddingInline: "var(--caps-space-4)",
   },
 });
 
@@ -354,7 +353,8 @@ const WideSidebarContainer = styled("div", {
  */
 const SidebarTitle = styled("div", {
   base: {
-    padding: "var(--gap-md)",
-    color: "var(--md-sys-color-on-surface)",
+    padding: "var(--caps-space-6) var(--caps-space-4) var(--caps-space-4)",
+    color: "var(--caps-text)",
+    fontWeight: 600,
   },
 });

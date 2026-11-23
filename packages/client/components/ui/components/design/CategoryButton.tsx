@@ -24,7 +24,6 @@ import { OverflowingText, iconSize } from "../utils";
 
 import { Radio2 } from "./Radio";
 import { Ripple } from "./Ripple";
-import { typography } from "./Text";
 
 /**
  * Permissible actions
@@ -134,13 +133,14 @@ const Base = styled("a", {
     // for <Ripple />:
     position: "relative",
 
-    gap: "16px",
-    padding: "13px",
-    borderRadius: "var(--borderRadius-md)",
+    gap: "var(--caps-space-5)",
+    minHeight: "52px",
+    padding: "var(--caps-space-4) var(--caps-space-5)",
+    borderRadius: "var(--caps-radius-md)",
 
     userSelect: "none",
     cursor: "pointer",
-    transition: "background-color 0.1s ease-in-out",
+    transition: "background-color var(--caps-dur-fast) var(--caps-ease)",
 
     display: "flex",
     alignItems: "center",
@@ -148,31 +148,39 @@ const Base = styled("a", {
 
     color: "var(--color)",
     fill: "var(--color)",
+
+    "--md-ripple-hover-opacity": "0",
+    "--md-ripple-pressed-opacity": "0.05",
   },
   variants: {
     variant: {
       filled: {
-        background: "var(--md-sys-color-primary)",
-        "--color": "var(--md-sys-color-on-primary)",
+        background: "var(--caps-accent)",
+        "--color": "var(--caps-on-accent)",
       },
       tonal: {
-        background: "var(--md-sys-color-secondary-container)",
-        "--color": "var(--md-sys-color-on-secondary-container)",
+        background: "var(--caps-bg-raised)",
+        boxShadow: "inset 0 0 0 1px var(--caps-line-soft)",
+        "--color": "var(--caps-text)",
       },
       tertiary: {
-        background: "var(--md-sys-color-tertiary-container)",
-        "--color": "var(--md-sys-color-on-tertiary-container)",
-        "--mdui-color-primary": "var(--color)",
+        background: "var(--caps-mention-soft)",
+        boxShadow: "inset 0 0 0 1px rgba(240, 180, 90, 0.25)",
+        "--color": "var(--caps-text)",
+        "--mdui-color-primary": "240, 180, 90",
       },
       tertiaryAlt: {
-        background: "var(--md-sys-color-tertiary)",
-        "--color": "var(--md-sys-color-on-tertiary)",
-        "--mdui-color-primary": "var(--color)",
+        background: "var(--caps-mention)",
+        "--color": "#2e1d02",
+        "--mdui-color-primary": "46, 29, 2",
       },
     },
     isLink: {
       true: {
         cursor: "pointer",
+        "&:hover": {
+          backgroundColor: "var(--caps-bg-overlay)",
+        },
       },
       false: {
         cursor: "initial",
@@ -181,6 +189,7 @@ const Base = styled("a", {
     disabled: {
       true: {
         cursor: "not-allowed",
+        opacity: 0.5,
       },
     },
   },
@@ -199,7 +208,8 @@ const Content = styled("div", {
     flexDirection: "column",
 
     fontWeight: 500,
-    fontSize: "14px",
+    fontSize: "var(--caps-text-base)",
+    lineHeight: 1.35,
     gap: "2px",
     whiteSpace: "nowrap",
     overflow: "hidden",
@@ -212,28 +222,36 @@ const Content = styled("div", {
  */
 const IconWrapper = styled("div", {
   base: {
-    fill: "var(--md-sys-color-on-surface)",
-    background: "var(--md-sys-color-surface-dim)",
+    color: "var(--caps-text-2)",
+    fill: "var(--caps-text-2)",
+    background: "var(--caps-bg-inset)",
+    boxShadow: "inset 0 0 0 1px var(--caps-line-soft)",
 
-    width: "36px",
-    height: "36px",
+    width: "32px",
+    height: "32px",
     display: "flex",
     flexShrink: 0,
     alignItems: "center",
     justifyContent: "center",
+
+    "& svg": {
+      width: "18px",
+      height: "18px",
+    },
   },
   variants: {
     rounded: {
       true: {
-        borderRadius: "var(--borderRadius-full)",
+        borderRadius: "var(--caps-radius-md)",
       },
       false: {
-        borderRadius: "var(--borderRadius-md)",
+        borderRadius: "var(--caps-radius-md)",
       },
     },
     transparent: {
       true: {
         background: "transparent",
+        boxShadow: "none",
       },
     },
   },
@@ -248,6 +266,7 @@ const IconWrapper = styled("div", {
 const BlankIconWrapper = styled(IconWrapper, {
   base: {
     background: "transparent",
+    boxShadow: "none",
   },
 });
 
@@ -256,9 +275,16 @@ const BlankIconWrapper = styled(IconWrapper, {
  */
 const Description = styled("span", {
   base: {
-    ...typography.raw({ class: "label" }),
+    fontSize: "var(--caps-text-sm)",
+    fontWeight: 400,
+    lineHeight: 1.4,
+    color: "var(--caps-text-3)",
 
     textWrap: "wrap",
+
+    "& a": {
+      color: "var(--caps-accent-text)",
+    },
 
     "& a:hover": {
       textDecoration: "underline",
@@ -271,9 +297,11 @@ const Description = styled("span", {
  */
 const Action = styled("div", {
   base: {
-    width: "24px",
-    height: "24px",
+    width: "20px",
+    height: "20px",
     flexShrink: 0,
+    color: "var(--caps-text-3)",
+    fill: "var(--caps-text-3)",
 
     display: "grid",
     placeItems: "center",
@@ -282,15 +310,28 @@ const Action = styled("div", {
 
 /**
  * Group a set of category buttons
+ *
+ * Rendered as one bordered list with hairline dividers instead of a stack of
+ * separate cards.
  */
 CategoryButton.Group = styled("div", {
   base: {
     display: "flex",
     flexDirection: "column",
-    gap: "var(--gap-xs)",
 
-    borderRadius: "var(--borderRadius-xl)",
+    borderRadius: "var(--caps-radius-lg)",
+    background: "var(--caps-bg-raised)",
+    boxShadow: "inset 0 0 0 1px var(--caps-line-soft)",
     overflow: "hidden",
+
+    "& > *, & > * > a, & > details > summary > a": {
+      borderRadius: "0 !important",
+      boxShadow: "none !important",
+    },
+
+    "& > * + *": {
+      borderTop: "1px solid var(--caps-line-soft)",
+    },
   },
 });
 
@@ -483,10 +524,10 @@ const innerColumn = cva({
   base: {
     display: "flex",
     flexDirection: "column",
-    gap: "var(--gap-xs)",
+    gap: "1px",
 
-    borderRadius: "var(--borderRadius-md)",
-    transition: "0.3s",
+    borderRadius: "var(--caps-radius-md)",
+    transition: "var(--caps-dur-slow) var(--caps-ease)",
 
     scrollbarWidth: "none",
     "&::-webkit-scrollbar": {
@@ -514,7 +555,7 @@ const Details = styled("div", {
 
     /* add transition to the icon */
     "& summary div:last-child svg": {
-      transition: "0.3s",
+      transition: "transform var(--caps-dur) var(--caps-ease)",
     },
 
     /* rotate chevron when it is open */
@@ -529,7 +570,7 @@ const Details = styled("div", {
 
     /* hide the default details component marker */
     "& summary": {
-      transition: "0.3s",
+      transition: "var(--caps-dur) var(--caps-ease)",
       listStyle: "none",
     },
 

@@ -204,6 +204,7 @@ export function ChannelHeader(props: Props) {
 
       <Show when={props.sidebarState}>
         <IconButton
+          aria-selected={props.sidebarState!().state === "pins"}
           use:floating={{
             tooltip: {
               placement: "bottom",
@@ -226,6 +227,10 @@ export function ChannelHeader(props: Props) {
 
       <Show when={props.sidebarState && canIHasSidebar(props.channel)}>
         <IconButton
+          aria-selected={
+            props.sidebarState!().state === "default" &&
+            state.layout.getSectionState(LAYOUT_SECTIONS.MEMBER_SIDEBAR, true)
+          }
           onPress={() => {
             if (props.sidebarState!().state === "default") {
               state.layout.toggleSectionState(
@@ -277,7 +282,8 @@ export function ChannelHeader(props: Props) {
           }
         >
           <SearchBox
-            placeholder="Search messages..."
+            type="search"
+            placeholder={t`Search`}
             value={searchValue()!}
             onChange={(e) =>
               e.currentTarget.value
@@ -298,11 +304,39 @@ export function ChannelHeader(props: Props) {
 
 const SearchBox = styled("input", {
   base: {
-    height: "40px",
-    width: "240px",
-    paddingInline: "16px",
-    borderRadius: "var(--borderRadius-full)",
-    background: "var(--md-sys-color-surface-container-high)",
+    height: "var(--caps-h-sm)",
+    width: "200px",
+    marginLeft: "var(--caps-space-2)",
+    paddingInline: "28px 10px",
+    border: "none",
+    outline: "none",
+    borderRadius: "var(--caps-radius-md)",
+    color: "var(--caps-text)",
+    fontFamily: "inherit",
+    fontSize: "var(--caps-text-md)",
+    background:
+      "var(--caps-bg-field) no-repeat 9px 50% / 14px url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237d7b73' stroke-width='2.4' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E\")",
+    boxShadow: "inset 0 0 0 1px var(--caps-line)",
+    transition:
+      "width var(--caps-dur-slow) var(--caps-ease-out), box-shadow var(--caps-dur) var(--caps-ease)",
+
+    "&::placeholder": {
+      color: "var(--caps-text-3)",
+    },
+
+    "&:hover": {
+      boxShadow: "inset 0 0 0 1px var(--caps-line-strong)",
+    },
+
+    "&:focus": {
+      width: "260px",
+      boxShadow:
+        "inset 0 0 0 1px var(--caps-accent), 0 0 0 3px var(--caps-accent-soft)",
+    },
+
+    "&::-webkit-search-cancel-button": {
+      filter: "grayscale(1)",
+    },
   },
 });
 
@@ -311,10 +345,11 @@ const SearchBox = styled("input", {
  */
 const Divider = styled("div", {
   base: {
-    height: "20px",
-    margin: "0px 5px",
-    paddingLeft: "1px",
-    backgroundColor: "var(--md-sys-color-outline-variant)",
+    flexShrink: 0,
+    width: "1px",
+    height: "16px",
+    margin: "0 var(--caps-space-2)",
+    backgroundColor: "var(--caps-line-strong)",
   },
 });
 
@@ -323,6 +358,18 @@ const Divider = styled("div", {
  */
 const descriptionLink = css({
   minWidth: 0,
+  cursor: "pointer",
+  color: "var(--caps-text-3)",
+  fontWeight: 400,
+  transition: "color var(--caps-dur-fast) var(--caps-ease)",
+
+  "& *": {
+    fontWeight: "400 !important",
+  },
+
+  "&:hover": {
+    color: "var(--caps-text-2)",
+  },
 });
 
 const mobileOverflow = css({

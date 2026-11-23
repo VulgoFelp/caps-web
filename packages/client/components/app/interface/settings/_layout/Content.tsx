@@ -34,7 +34,7 @@ export function SettingsContent(props: {
         <InnerContent class="settings_cont">
           <InnerColumn>
             <Show when={props.page() !== "account"}>
-              <Text class="title" size="large">
+              <Text class="headline" size="medium">
                 <Breadcrumbs
                   elements={props.page()!.split("/")}
                   renderElement={(key) =>
@@ -97,16 +97,15 @@ const base = css({
   flex: "1 1 800px",
   flexDirection: "row",
   display: "flex",
-  background: "var(--md-sys-color-surface-container-low)",
-  borderStartStartRadius: "30px",
-  borderEndStartRadius: "30px",
+  background: "var(--caps-bg-app)",
+  borderInlineStart: "1px solid var(--caps-line-soft)",
 
   "& > a": {
     textDecoration: "none",
   },
 
   _phone: {
-    borderRadius: 0,
+    borderInlineStart: "none",
   },
 
   _tablet: {
@@ -115,46 +114,43 @@ const base = css({
   },
 });
 
-/**
- * Settings pane
- */
 const InnerContent = styled("div", {
   base: {
-    gap: "13px",
     minWidth: 0,
     width: "100%",
     display: "flex",
-    maxWidth: "740px",
-    padding: "80px 32px",
+    maxWidth: "720px",
+    padding: "56px 40px",
     justifyContent: "stretch",
     zIndex: 1,
 
-    _tablet: { padding: "12px" },
+    _tablet: { padding: "16px" },
     _phone: { height: "100%" },
   },
 });
 
-/**
- * Pane content column
- */
 const InnerColumn = styled("div", {
   base: {
     width: "100%",
-    gap: "var(--gap-md)",
+    gap: "var(--caps-space-5)",
     display: "flex",
     flexDirection: "column",
     marginBlockEnd: "80px",
+
+    // page title
+    "& > span:first-child": {
+      paddingBottom: "var(--caps-space-5)",
+      marginBottom: "var(--caps-space-2)",
+      borderBottom: "1px solid var(--caps-line-soft)",
+    },
   },
 });
 
-/**
- * Viewport-height rail for settings controls
- */
 const ActionRail = styled("div", {
   base: {
     height: "100%",
     minWidth: "56px",
-    padding: "80px 8px var(--gap-xl)",
+    padding: "56px 12px var(--caps-space-9)",
 
     zIndex: 2,
     flexGrow: 1,
@@ -186,31 +182,26 @@ const ActionRail = styled("div", {
   },
 });
 
-/**
- * Bottom-end anchor for actions belonging to the current settings page
- */
 const FloatingActions = styled("div", {
   base: {
     height: "fit-content",
   },
 });
 
-/**
- * Positioning for close button
- */
 const CloseAction = styled("div", {
   base: {
     visibility: "visible",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "var(--caps-space-2)",
 
     "&:after": {
       content: '"ESC"',
-      marginTop: "4px",
-      display: "flex",
-      justifyContent: "center",
-      width: "40px",
       fontWeight: 600,
-      color: "var(--md-sys-color-on-surface)",
-      fontSize: "0.75rem",
+      letterSpacing: "0.06em",
+      color: "var(--caps-text-3)",
+      fontSize: "10px",
     },
 
     _tablet: {

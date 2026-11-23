@@ -182,7 +182,7 @@ export function EmojiPicker(props: { channel?: Channel }) {
       <TextField
         autoFocus={!isMobile}
         variant="outlined"
-        placeholder="Search for emojis..."
+        placeholder={t`Search for emojis...`}
         value={filter()}
         onInput={(e) => setFilter(e.currentTarget.value)}
         class={searchBar}

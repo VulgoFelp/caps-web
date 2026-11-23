@@ -132,10 +132,9 @@ const base = cva({
 
     padding: "2px 0",
     background: "transparent",
-    borderRadius: "var(--borderRadius-md)",
     minHeight: "1em",
 
-    transition: "background-color var(--transitions-fast)",
+    transition: "background-color var(--caps-dur-fast) var(--caps-ease)",
 
     "& a:hover": {
       textDecoration: "underline",
@@ -153,7 +152,8 @@ const base = cva({
     },
     mentioned: {
       true: {
-        background: "var(--md-sys-color-primary-container)",
+        background: "var(--caps-mention-soft)",
+        boxShadow: "inset 2px 0 0 var(--caps-mention)",
       },
     },
     highlight: {
@@ -163,13 +163,13 @@ const base = cva({
     },
     sendStatus: {
       failed: {
-        color: "var(--md-sys-color-error)",
+        color: "var(--caps-danger)",
       },
       sending: {
-        color: "var(--md-sys-color-outline)",
+        color: "var(--caps-text-3)",
       },
       sent: {
-        color: "var(--md-sys-color-on-surface)",
+        color: "var(--caps-text)",
       },
     },
     isLink: {
@@ -177,6 +177,7 @@ const base = cva({
         cursor: "pointer",
         userSelect: "none",
         position: "relative",
+        borderRadius: "var(--caps-radius-md)",
 
         "& *": {
           pointerEvents: "none",
@@ -185,8 +186,9 @@ const base = cva({
       false: {
         marginTop: "var(--message-group-spacing) !important",
 
+        // flush hover band across the whole timeline
         "&:hover": {
-          background: "var(--md-sys-color-surface-container)",
+          background: "var(--caps-hover)",
         },
       },
       hide: {},
@@ -199,6 +201,17 @@ const base = cva({
       },
     },
   },
+  compoundVariants: [
+    {
+      mentioned: true,
+      isLink: false,
+      css: {
+        "&:hover": {
+          background: "var(--caps-mention-soft)",
+        },
+      },
+    },
+  ],
   defaultVariants: {
     isLink: false,
     sendStatus: "sent",
@@ -213,18 +226,18 @@ const Info = styled("div", {
     display: "flex",
     flexShrink: 0,
     justifyContent: "end",
-    padding: "2px var(--gap-sm)",
+    padding: "2px 14px 0 16px",
   },
   variants: {
     tail: {
       true: {
-        padding: 0,
+        paddingTop: 0,
       },
     },
     compact: {
       true: {},
       false: {
-        width: "54px",
+        width: "66px",
       },
     },
   },
@@ -241,10 +254,11 @@ const Body = styled("div", {
     flexGrow: 1,
     display: "flex",
     flexDirection: "column",
+    gap: "1px",
 
     minWidth: 0,
     overflow: "hidden",
-    paddingInlineEnd: "var(--gap-lg)",
+    paddingInlineEnd: "var(--caps-space-8)",
   },
   variants: {
     editing: {
@@ -260,8 +274,10 @@ const Content = styled("div", {
   base: {
     minWidth: 0,
     display: "flex",
-    gap: "var(--gap-sm)",
+    gap: "var(--caps-space-2)",
     flexDirection: "column",
+    lineHeight: 1.45,
+    color: "var(--caps-text)",
 
     ...typography.raw({ class: "_messages" }),
   },
@@ -274,30 +290,33 @@ const infoText = cva({
   base: {
     display: "flex",
     alignItems: "center",
-    gap: "var(--gap-sm)",
+    gap: "var(--caps-space-2)",
 
-    color: "var(--md-sys-color-outline)",
-
-    ...typography.raw({ class: "body", size: "small" }),
+    color: "var(--caps-text-3)",
+    fontSize: "var(--caps-text-xs)",
+    fontWeight: 400,
+    letterSpacing: "0.01em",
+    fontVariantNumeric: "tabular-nums",
   },
   variants: {
     prefix: {
       true: {
-        width: "calc(7ch * var(--gap-sm))",
-        fontSize: "0.7em",
+        width: "100%",
+        fontSize: "10px",
 
         overflow: "hidden",
         overflowWrap: "none",
+        whiteSpace: "nowrap",
 
         display: "block",
         textAlign: "right",
-        marginTop: "0.15em",
+        lineHeight: "calc(var(--message-size) * 1.45)",
       },
     },
     hidden: {
       true: {
         opacity: 0,
-        transition: "var(--transitions-fast) opacity",
+        transition: "opacity var(--caps-dur-fast) var(--caps-ease)",
 
         _groupHover: {
           opacity: 1,
@@ -322,7 +341,7 @@ const CompactInfo = styled(Row, {
     flexShrink: 0,
     marginTop: "-2px",
     height: "fit-content",
-    paddingInline: "var(--gap-lg) 0",
+    paddingInline: "var(--caps-space-6) 0",
   },
 });
 
@@ -469,7 +488,7 @@ export function MessageContainer(props: Props) {
         </Info>
         <Body editing={props.editing}>
           <Show when={!props.tail && !props.compact}>
-            <Row gap="sm" align>
+            <Row gap="sm" align style={{ "line-height": "1.3" }}>
               <OverflowingText>{props.username}</OverflowingText>
               <NonBreakingText class={infoText()}>{props.info}</NonBreakingText>
               <Show when={props.pronouns}>

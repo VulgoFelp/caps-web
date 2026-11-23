@@ -54,7 +54,7 @@ export function VoiceCallCardActions(props: { size: "xs" | "sm" }) {
       </Show>
       <IconButton
         size={props.size}
-        variant={voice.microphone() ? "filled" : "tonal"}
+        variant={voice.microphone() ? "tonal" : "_muted"}
         onPress={() => voice.toggleMute()}
         use:floating={{
           tooltip: {
@@ -74,7 +74,7 @@ export function VoiceCallCardActions(props: { size: "xs" | "sm" }) {
       </IconButton>
       <IconButton
         size={props.size}
-        variant={voice.deafen() || !voice.listenPermission ? "tonal" : "filled"}
+        variant={voice.deafen() || !voice.listenPermission ? "_muted" : "tonal"}
         onPress={() => voice.toggleDeafen()}
         use:floating={{
           tooltip: {

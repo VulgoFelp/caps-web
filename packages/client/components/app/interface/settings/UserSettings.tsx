@@ -223,7 +223,7 @@ const Config: SettingsConfiguration<{ server: Server }> = {
           ],
         },
         {
-          title: "Stoat",
+          title: "CAPS",
           entries: [
             {
               id: "bots",
@@ -231,7 +231,9 @@ const Config: SettingsConfiguration<{ server: Server }> = {
               title: <Trans>My Bots</Trans>,
             },
             {
+              // CAPS: feedback goes to the upstream Stoat team, not this instance
               id: "feedback",
+              hidden: true,
               icon: <MdRateReview {...iconSize(20)} />,
               title: <Trans>Feedback</Trans>,
             },
@@ -324,11 +326,13 @@ const Config: SettingsConfiguration<{ server: Server }> = {
                 if (!changelog) return;
                 openModal({ type: "changelog", changelog });
               },
+              // CAPS: upstream changelog, not relevant for this instance
+              hidden: true,
               icon: <MdCampaign {...iconSize(20)} />,
               title: <Trans>What's New</Trans>,
             },
             {
-              href: "https://github.com/stoatchat",
+              href: "https://github.com/VulgoFelp/caps-web",
               icon: <MdMemory {...iconSize(20)} />,
               title: <Trans>Source Code</Trans>,
             },
@@ -339,6 +343,7 @@ const Config: SettingsConfiguration<{ server: Server }> = {
             },
             {
               href: "https://ko-fi.com/stoatchat",
+              hidden: true,
               icon: <MdCoffee {...iconSize(20)} />,
               title: <Trans>Donate</Trans>,
             },

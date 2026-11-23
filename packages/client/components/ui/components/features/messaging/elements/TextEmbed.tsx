@@ -22,12 +22,15 @@ const Base = styled("div", {
     display: "flex",
     maxWidth: "calc(min(100%, 420px))",
     flexDirection: "row",
-    gap: "var(--gap-md)",
-    padding: "var(--gap-md)",
-    borderRadius: "var(--borderRadius-md)",
-    color: "var(--md-sys-color-on-primary-container)",
-    background: "var(--md-sys-color-primary-container)",
-    borderInlineStart: "var(--gap-sm) solid var(--md-sys-color-primary)",
+    gap: "var(--caps-space-5)",
+    padding:
+      "var(--caps-space-5) var(--caps-space-5) var(--caps-space-5) var(--caps-space-6)",
+    borderRadius: "var(--caps-radius-md)",
+    color: "var(--caps-text-2)",
+    background: "var(--caps-bg-raised)",
+    boxShadow: "inset 0 0 0 1px var(--caps-line-soft)",
+    // embeds may set a colour; the default edge stays neutral
+    borderInlineStart: "3px solid var(--caps-line-strong)",
   },
 });
 
@@ -51,9 +54,9 @@ const Favicon = styled("img", {
 
 const PreviewImage = styled("img", {
   base: {
-    maxWidth: "120px",
-    maxHeight: "120px",
-    borderRadius: "var(--borderRadius-md)",
+    maxWidth: "96px",
+    maxHeight: "96px",
+    borderRadius: "var(--caps-radius-sm)",
   },
 });
 
@@ -62,8 +65,10 @@ const Title = styled("span", {
     minWidth: 0,
     flexShrink: 1,
 
-    fontSize: "16px",
-    color: "var(--md-sys-color-primary) !important",
+    fontSize: "var(--caps-text-base)",
+    fontWeight: 600,
+    lineHeight: 1.35,
+    color: "var(--caps-text) !important",
   },
 });
 
@@ -75,7 +80,9 @@ const Content = styled(Column, {
 
 const Description = styled("div", {
   base: {
-    fontSize: "12px",
+    fontSize: "var(--caps-text-md)",
+    lineHeight: 1.45,
+    color: "var(--caps-text-2)",
     overflow: "hidden",
     wordWrap: "break-word",
   },

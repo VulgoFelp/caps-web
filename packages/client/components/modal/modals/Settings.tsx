@@ -86,6 +86,6 @@ const settingsOverlay =
     padding:
       "var(--inset-top) var(--inset-right) var(--inset-bottom) var(--inset-left)",
     pointerEvents: "all",
-    color: "var(--md-sys-color-on-surface)",
-    background: "var(--md-sys-color-surface-container-highest)",
+    color: "var(--caps-text)",
+    background: "var(--caps-bg-sidebar)",
   });

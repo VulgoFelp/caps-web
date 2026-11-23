@@ -21,13 +21,15 @@ const Base = styled("div", {
   base: {
     display: "flex",
     flexDirection: "column",
-    padding: "var(--gap-md) 0",
+    gap: "1px",
+    minWidth: "208px",
+    padding: "var(--caps-space-2)",
     overflow: "hidden",
-    borderRadius: "var(--borderRadius-xs)",
-    background: "var(--md-sys-color-surface-container)",
-    color: "var(--md-sys-color-on-surface)",
-    fill: "var(--md-sys-color-on-surface)",
-    boxShadow: "var(--md-sys-elevation-2)",
+    borderRadius: "var(--caps-radius-lg)",
+    background: "var(--caps-bg-overlay)",
+    color: "var(--caps-text)",
+    fill: "var(--caps-text)",
+    boxShadow: "var(--caps-shadow-pop)",
 
     userSelect: "none",
   },
@@ -46,27 +48,41 @@ export function ContextMenu(props: ComponentProps<typeof Base>) {
 export const ContextMenuDivider = styled("div", {
   base: {
     height: "1px",
-    margin: "var(--gap-sm) 0",
-    background: "var(--md-sys-color-outline-variant)",
+    margin: "var(--caps-space-2) var(--caps-space-3)",
+    background: "var(--caps-line-soft)",
   },
 });
 
 export const ContextMenuItem = styled("a", {
   base: {
     display: "flex",
-    gap: "var(--gap-md)",
+    gap: "10px",
     alignItems: "center",
-    padding: "var(--gap-md) var(--gap-lg)",
+    minHeight: "30px",
+    padding: "0 var(--caps-space-4)",
+    borderRadius: "var(--caps-radius-sm)",
+    fontSize: "var(--caps-text-md)",
+    fontWeight: 500,
+    transition: "background-color var(--caps-dur-fast) var(--caps-ease)",
+
+    "& > svg, & > span[aria-hidden='true']": {
+      color: "var(--caps-text-3)",
+      fill: "var(--caps-text-3)",
+      transition: "color var(--caps-dur-fast) var(--caps-ease)",
+    },
 
     "&:hover": {
-      background:
-        "color-mix(in srgb, var(--md-sys-color-on-surface) 8%, transparent)",
+      background: "var(--caps-hover)",
+    },
+
+    "&:hover > svg, &:hover > span[aria-hidden='true']": {
+      color: "var(--caps-text)",
+      fill: "var(--caps-text)",
     },
 
     // Touch devices have no hover, so provide feedback while pressing
     "&:active": {
-      background:
-        "color-mix(in srgb, var(--md-sys-color-on-surface) 12%, transparent)",
+      background: "var(--caps-active)",
     },
 
     // let the label fill the row, but not <Symbol> icons (also spans)
@@ -77,8 +93,7 @@ export const ContextMenuItem = styled("a", {
   variants: {
     selected: {
       true: {
-        background:
-          "color-mix(in srgb, var(--md-sys-color-on-surface) 8%, transparent)",
+        background: "var(--caps-selected)",
       },
       false: {},
     },
@@ -92,10 +107,7 @@ export const ContextMenuItem = styled("a", {
         cursor: "pointer",
         display: "flex",
         alignItems: "center",
-        gap: "var(--gap-md)",
-        "& span": {
-          marginTop: "1px",
-        },
+        gap: "10px",
       },
     },
     _titleCase: {
@@ -104,13 +116,28 @@ export const ContextMenuItem = styled("a", {
     },
     destructive: {
       true: {
-        fill: "var(--md-sys-color-error)",
-        color: "var(--md-sys-color-error)",
+        fill: "var(--caps-danger)",
+        color: "var(--caps-danger)",
+
+        "& > svg, & > span[aria-hidden='true']": {
+          color: "var(--caps-danger)",
+          fill: "var(--caps-danger)",
+        },
+
+        "&:hover": {
+          background: "var(--caps-danger-soft)",
+        },
+
+        "&:hover > svg, &:hover > span[aria-hidden='true']": {
+          color: "var(--caps-danger)",
+          fill: "var(--caps-danger)",
+        },
       },
     },
   },
   defaultVariants: {
-    _titleCase: true,
+    // CAPS: sentence case reads naturally in Portuguese
+    _titleCase: false,
     selected: false,
   },
   compoundVariants: [
@@ -149,12 +176,14 @@ export function ContextMenuButton(props: ButtonProps) {
       {typeof local.symbol === "function"
         ? local.symbol(symbolSize(16))
         : local.symbol}
-      <Text>{local.children}</Text>
+      <Text class="label" size="large">
+        {local.children}
+      </Text>
       {typeof local.actionIcon === "function"
-        ? local.actionIcon?.(iconSize(20))
+        ? local.actionIcon?.(iconSize(16))
         : local.actionIcon}
       {typeof local.actionSymbol === "function"
-        ? local.actionSymbol(symbolSize(20))
+        ? local.actionSymbol(symbolSize(16))
         : local.actionSymbol}
     </ContextMenuItem>
   );

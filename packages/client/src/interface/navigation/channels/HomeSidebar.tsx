@@ -144,7 +144,7 @@ export const HomeSidebar = (props: Props) => {
           </Switch>
 
           <Category>
-            Direct Messages
+            Mensagens diretas
             <a
               class={css({ cursor: "pointer" })}
               onClick={() =>
@@ -200,18 +200,19 @@ export const HomeSidebar = (props: Props) => {
 
 export const Header = styled("div", {
   base: {
+    display: "flex",
     alignItems: "center",
     fontWeight: 600,
+    fontSize: "var(--caps-text-lg)",
+    letterSpacing: "-0.01em",
     userSelect: "none",
     overflow: "hidden",
     textOverflow: "ellipsis",
-    height: "48px",
-    lineHeight: "48px",
-    verticalAlign: "middle",
-    margin: "var(--gap-md)",
-    marginLeft: "var(--gap-lg)",
-    color: "var(--md-sys-color-on-surface)",
-    backgroundColor: "var(--md-sys-color-surface-variant)",
+    height: "var(--caps-header-height)",
+    paddingInline: "var(--caps-space-6)",
+    marginBottom: "var(--caps-space-4)",
+    borderBottom: "1px solid var(--caps-line-soft)",
+    color: "var(--caps-text)",
   },
 });
 
@@ -230,24 +231,47 @@ const ButtonTitle = styled("div", {
 const PendingBadge = styled("div", {
   base: {
     ...typography.raw({ class: "label", size: "small" }),
-    padding: "var(--gap-sm) var(--gap-md)",
-    color: "var(--md-sys-color-on-error)",
-    background: "var(--md-sys-color-error)",
-    borderRadius: "var(--borderRadius-md)",
+    minWidth: "18px",
+    height: "18px",
+    padding: "0 5px",
+    display: "grid",
+    placeItems: "center",
+    fontWeight: 700,
+    color: "#ffffff",
+    background: "var(--caps-danger)",
+    borderRadius: "999px",
   },
 });
 
 const Category = styled("div", {
   base: {
     display: "flex",
-    paddingInline: "var(--gap-lg)",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingTop: "calc(var(--gap-xl) - 5px)",
-    paddingBottom: "var(--gap-md)",
+    margin: "0 var(--caps-space-4)",
+    padding: "var(--caps-space-6) var(--caps-space-2) var(--caps-space-2)",
 
-    ...typography.raw({ class: "label", size: "small" }),
-    fontSize: "13px",
+    color: "var(--caps-text-3)",
+    fill: "var(--caps-text-3)",
+    fontSize: "var(--caps-text-xs)",
+    fontWeight: 600,
+    letterSpacing: "0.06em",
+    textTransform: "uppercase",
+
+    "& a": {
+      display: "grid",
+      placeItems: "center",
+      width: "20px",
+      height: "20px",
+      borderRadius: "var(--caps-radius-xs)",
+      transition: "background-color var(--caps-dur-fast) var(--caps-ease)",
+    },
+
+    "& a:hover": {
+      color: "var(--caps-text)",
+      fill: "var(--caps-text)",
+      background: "var(--caps-hover)",
+    },
   },
 });
 
@@ -393,6 +417,10 @@ function Entry(
  */
 const List = styled("div", {
   base: {
-    width: "var(--layout-width-channel-sidebar)",
+    width: "var(--caps-sidebar-width)",
+    display: "flex",
+    flexDirection: "column",
+    gap: "1px",
+    paddingBottom: "var(--caps-space-4)",
   },
 });

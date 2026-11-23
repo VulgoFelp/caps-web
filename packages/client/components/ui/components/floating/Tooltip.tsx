@@ -9,15 +9,19 @@ import { typography } from "../design";
  */
 export const TooltipBase = styled("div", {
   base: {
-    color: "white",
-    background: "black",
-    padding: "var(--gap-md)",
-    borderRadius: "var(--borderRadius-md)",
-
     ...typography.raw({
       class: "label",
-      size: "small",
+      size: "medium",
     }),
+
+    // CAPS: inverted, compact chip so it reads instantly over any surface
+    color: "var(--caps-bg-app)",
+    background: "var(--caps-text)",
+    padding: "5px 8px",
+    borderRadius: "var(--caps-radius-sm)",
+    fontWeight: 600,
+    maxWidth: "280px",
+    boxShadow: "0 4px 12px -2px rgba(0, 0, 0, 0.4)",
   },
 });
 

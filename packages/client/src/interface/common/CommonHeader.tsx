@@ -41,7 +41,7 @@ export function HeaderIcon(props: { children: JSX.Element }) {
       <Switch
         fallback={
           <>
-            <BiRegularChevronRight size={20} />
+            <BiRegularChevronRight size={14} class="caps-chevron" />
             {props.children}
           </>
         }
@@ -55,7 +55,7 @@ export function HeaderIcon(props: { children: JSX.Element }) {
             true,
           )}
         >
-          <BiRegularChevronLeft size={20} />
+          <BiRegularChevronLeft size={14} class="caps-chevron" />
           {props.children}
         </Match>
       </Switch>
@@ -67,4 +67,33 @@ const container = css({
   display: "flex",
   cursor: "pointer",
   alignItems: "center",
+  gap: "2px",
+  height: "var(--caps-h-sm)",
+  marginLeft: "calc(-1 * var(--caps-space-2))",
+  paddingInline: "var(--caps-space-2) var(--caps-space-3)",
+  borderRadius: "var(--caps-radius-sm)",
+  color: "var(--caps-text-3)",
+  fill: "var(--caps-text-3)",
+  transition:
+    "background-color var(--caps-dur-fast) var(--caps-ease), color var(--caps-dur-fast) var(--caps-ease)",
+
+  "& svg, & .material-symbols-outlined": {
+    fontSize: "20px",
+  },
+
+  "& .caps-chevron": {
+    opacity: 0,
+    marginRight: "-4px",
+    transition: "opacity var(--caps-dur-fast) var(--caps-ease)",
+  },
+
+  "&:hover": {
+    color: "var(--caps-text)",
+    fill: "var(--caps-text)",
+    background: "var(--caps-hover)",
+  },
+
+  "&:hover .caps-chevron": {
+    opacity: 1,
+  },
 });

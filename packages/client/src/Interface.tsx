@@ -162,8 +162,8 @@ const Layout = styled("div", {
         background: "var(--md-sys-color-primary-container)",
       },
       false: {
-        color: "var(--md-sys-color-outline)",
-        background: "var(--md-sys-color-surface-container-high)",
+        color: "var(--caps-text-3)",
+        background: "var(--caps-bg-rail)",
       },
     },
   },
@@ -174,7 +174,7 @@ const Layout = styled("div", {
  */
 const Content = styled("div", {
   base: {
-    background: "var(--md-sys-color-surface-container-low)",
+    background: "var(--caps-bg-app)",
     display: "flex",
     width: "100%",
     minWidth: 0,
@@ -182,13 +182,13 @@ const Content = styled("div", {
   variants: {
     sidebar: {
       false: {
-        paddingLeft: "var(--gap-md)",
-        borderTopLeftRadius: "var(--borderRadius-lg)",
-        borderBottomLeftRadius: "var(--borderRadius-lg)",
+        borderTopLeftRadius: "var(--caps-radius-lg)",
         overflow: "hidden",
+        boxShadow: "inset 1px 1px 0 var(--caps-line-soft)",
 
         _tablet: {
-          paddingLeft: 0,
+          borderTopLeftRadius: 0,
+          boxShadow: "none",
         },
       },
     },

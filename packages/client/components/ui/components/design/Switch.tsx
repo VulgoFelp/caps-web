@@ -61,17 +61,15 @@ const SwitchContainer = styled("div", {
   base: {
     flexShrink: 0,
     display: "inline-flex",
-    margin: "4px 0",
+    gap: "2px",
+    padding: "2px",
+    margin: "2px 0",
     overflow: "hidden",
-    borderRadius: "var(--borderRadius-md)",
+    borderRadius: "var(--caps-radius-md)",
+    background: "var(--caps-bg-field)",
+    boxShadow: "inset 0 0 0 1px var(--caps-line)",
 
-    // "&[aria-disabled]": {
-    //   pointerEvents: "none",
-    //   opacity: 0.6,
-    // },
-
-    transition: "var(--transitions-fast) all",
-    background: "var(--md-sys-color-primary-container)",
+    transition: "opacity var(--caps-dur-fast) var(--caps-ease)",
   },
 });
 
@@ -80,22 +78,30 @@ const Override = styled("div", {
     // for <Ripple />:
     position: "relative",
 
-    width: "36px",
-    height: "36px",
-    flex: "0 0 36px",
+    width: "28px",
+    height: "24px",
+    flex: "0 0 28px",
     display: "flex",
     cursor: "pointer",
     alignItems: "center",
     justifyContent: "center",
-    transition: "var(--transitions-fast) all",
-    background: "var(--md-sys-color-surface-container-high)",
+    borderRadius: "var(--caps-radius-sm)",
+    color: "var(--caps-text-3)",
+    fill: "var(--caps-text-3)",
+    transition:
+      "background-color var(--caps-dur-fast) var(--caps-ease), color var(--caps-dur-fast) var(--caps-ease)",
+
+    "--md-ripple-hover-opacity": "0",
+    "--md-ripple-pressed-opacity": "0.08",
 
     "&:hover": {
-      // filter: "brightness(0.8)",
+      color: "var(--caps-text)",
+      background: "var(--caps-hover)",
     },
 
     "& > span": {
       lineHeight: 1,
+      fontSize: "16px !important",
     },
   },
   variants: {
@@ -115,24 +121,35 @@ const Override = styled("div", {
       type: "allow",
       selected: "allow",
       css: {
-        color: "var(--md-sys-color-primary-container)",
-        background: "var(--md-sys-color-on-primary-container)",
+        color: "var(--caps-success)",
+        background: "rgba(58, 191, 126, 0.16)",
+        "&:hover": {
+          color: "var(--caps-success)",
+          background: "rgba(58, 191, 126, 0.16)",
+        },
       },
     },
     {
       type: "neutral",
       selected: "neutral",
       css: {
-        fill: "var(--md-sys-color-secondary)",
-        background: "var(--md-sys-color-on-secondary)",
+        color: "var(--caps-text)",
+        background: "var(--caps-selected)",
+        "&:hover": {
+          background: "var(--caps-selected)",
+        },
       },
     },
     {
       type: "deny",
       selected: "deny",
       css: {
-        color: "var(--md-sys-color-error-container)",
-        background: "var(--md-sys-color-on-error-container)",
+        color: "var(--caps-danger)",
+        background: "var(--caps-danger-soft)",
+        "&:hover": {
+          color: "var(--caps-danger)",
+          background: "var(--caps-danger-soft)",
+        },
       },
     },
   ],

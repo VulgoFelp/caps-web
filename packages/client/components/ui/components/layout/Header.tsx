@@ -12,19 +12,21 @@ export interface Props {
  */
 export const Header = styled("div", {
   base: {
-    gap: "10px",
+    gap: "var(--caps-space-4)",
     flex: "0 auto",
     display: "flex",
     flexShrink: 0,
     alignItems: "center",
     fontWeight: 600,
+    fontSize: "var(--caps-text-base)",
     userSelect: "none",
     overflow: "hidden",
-    height: "48px",
-    borderRadius: "var(--borderRadius-lg)",
+    height: "var(--caps-header-height)",
+    paddingInline: "var(--caps-space-6)",
+    borderBottom: "1px solid var(--caps-line-soft)",
 
-    color: "var(--md-sys-color-on-surface)",
-    fill: "var(--md-sys-color-on-surface)",
+    color: "var(--caps-text)",
+    fill: "var(--caps-text)",
 
     backgroundSize: "cover !important",
     backgroundPosition: "center !important",
@@ -35,47 +37,43 @@ export const Header = styled("div", {
   variants: {
     placement: {
       primary: {
-        margin: "var(--gap-md) var(--gap-md) var(--gap-md) 0",
-        _phone: { marginLeft: "var(--gap-lg)" },
+        background: "var(--caps-bg-app)",
+        paddingInline: "var(--caps-space-5) var(--caps-space-4)",
       },
       secondary: {
-        margin: "var(--gap-md)",
-        backgroundColor: "var(--md-sys-color-surface-variant)",
+        background: "var(--caps-bg-sidebar)",
+        paddingInline: "var(--caps-space-6) var(--caps-space-4)",
       },
     },
     image: {
       true: {
         color: "white",
         fill: "white",
+        padding: 0,
+        borderBottom: "none",
 
         alignItems: "flex-end",
         justifyContent: "stretch",
-        textShadow: "0px 0px 1px var(--md-sys-color-shadow)",
-        height: "120px",
+        textShadow: "0 1px 2px rgba(0, 0, 0, 0.6)",
+        height: "112px",
 
         "& > div": {
           flexGrow: 1,
-          padding: "6px 14px",
-          background: "linear-gradient(0deg, black, transparent)",
+          height: "var(--caps-header-height)",
+          padding: "0 var(--caps-space-4) 0 var(--caps-space-6)",
+          background:
+            "linear-gradient(0deg, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0))",
         },
       },
     },
     transparent: {
       true: {
-        width: "calc(100% - var(--gap-md))",
+        width: "100%",
         zIndex: "10",
+        borderBottom: "none",
       },
     },
   },
-  compoundVariants: [
-    {
-      placement: "secondary",
-      image: false,
-      css: {
-        marginLeft: "var(--gap-lg)",
-      },
-    },
-  ],
   defaultVariants: {
     placement: "primary",
     image: false,
@@ -97,7 +95,7 @@ export const BelowFloatingHeader = styled("div", {
     "& > div > div": {
       width: "100%",
       position: "absolute",
-      top: "var(--gap-md)",
+      top: "var(--caps-space-4)",
     },
   },
 });

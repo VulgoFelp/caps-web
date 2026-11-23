@@ -56,10 +56,10 @@ export default defineConfig({
             background: "transparent",
           },
           "5%": {
-            background: "var(--md-sys-color-primary-container)",
+            background: "var(--caps-accent-soft)",
           },
           "95%": {
-            background: "var(--md-sys-color-primary-container)",
+            background: "var(--caps-accent-soft)",
           },
           "100%": {
             background: "transparent",

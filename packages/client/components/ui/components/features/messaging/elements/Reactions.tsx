@@ -216,16 +216,23 @@ const ReactionBase = styled("div", {
     display: "flex",
     overflow: "hidden",
     flexDirection: "row",
-    gap: "var(--gap-md)",
+    alignItems: "center",
+    gap: "var(--caps-space-3)",
+    height: "26px",
     cursor: "pointer",
     userSelect: "none",
     verticalAlign: "middle",
-    padding: "var(--gap-md)",
-    borderRadius: "var(--borderRadius-md)",
+    padding: "0 8px",
+    borderRadius: "var(--caps-radius-sm)",
 
-    transition: "var(--transitions-fast) all",
+    transition:
+      "background-color var(--caps-dur-fast) var(--caps-ease), box-shadow var(--caps-dur-fast) var(--caps-ease)",
+    fontSize: "var(--caps-text-sm)",
     fontWeight: 600,
     fontFeatureSettings: "'tnum' 1",
+
+    "--md-ripple-hover-opacity": "0",
+    "--md-ripple-pressed-opacity": "0.08",
 
     "& img": {
       width: "1.2em",
@@ -236,12 +243,18 @@ const ReactionBase = styled("div", {
   variants: {
     active: {
       true: {
-        color: "var(--md-sys-color-on-secondary-container)",
-        background: "var(--md-sys-color-secondary-container)",
+        color: "var(--caps-accent-text)",
+        background: "var(--caps-accent-soft)",
+        boxShadow: "inset 0 0 0 1px rgba(from var(--caps-accent) r g b / 0.45)",
       },
       false: {
-        color: "var(--md-sys-color-on-surface)",
-        background: "var(--md-sys-color-surface-container-low)",
+        color: "var(--caps-text-2)",
+        background: "var(--caps-bg-raised)",
+        boxShadow: "inset 0 0 0 1px var(--caps-line-soft)",
+
+        "&:hover": {
+          boxShadow: "inset 0 0 0 1px var(--caps-line-strong)",
+        },
       },
     },
   },
@@ -260,11 +273,12 @@ const AddReaction = styled(ReactionBase, {
 
     opacity: 0,
     justifyContent: "center",
-    fontSize: "var(--emoji-size)",
-    background: "var(--md-sys-color-surface-bright)",
-    height: "33px",
+    fontSize: "16px",
+    color: "var(--caps-text-3)",
+    background: "var(--caps-bg-raised)",
+    height: "26px",
     aspectRatio: "1/1",
-    padding: "var(--gap-sm)",
+    padding: 0,
   },
 });
 
@@ -275,7 +289,7 @@ const Divider = styled("div", {
   base: {
     width: "1px",
     height: "14px",
-    background: "var(--md-sys-color-outline-variant)",
+    background: "var(--caps-line)",
   },
 });
 

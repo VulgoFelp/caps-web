@@ -31,7 +31,6 @@ import {
   Tooltip,
   iconSize,
   symbolSize,
-  typography,
 } from "@revolt/ui";
 import { UnreadCallout } from "@revolt/ui/components/features/navigation/UnreadCallout";
 import { VoiceChannelPreview } from "@revolt/ui/components/features/voice/VoiceChannelPreview";
@@ -310,7 +309,8 @@ const ChannelList = styled("div", {
     position: "relative",
     flexGrow: 1,
     minHeight: 0,
-    marginBottom: "var(--gap-md)",
+    paddingTop: "var(--caps-space-4)",
+    paddingBottom: "var(--caps-space-4)",
   },
 });
 
@@ -335,7 +335,7 @@ function ServerInfo(
           variant={props.server.banner ? "_header" : "standard"}
           onPress={props.openServerSettings}
         >
-          <MdSettings {...symbolSize(24)} />
+          <MdSettings {...symbolSize(18)} />
         </IconButton>
       </Show>
     </Row>
@@ -349,10 +349,20 @@ const ServerName = styled("a", {
   base: {
     flexGrow: 1,
     minWidth: 0,
+    cursor: "pointer",
+
+    fontSize: "var(--caps-text-lg)",
+    fontWeight: 600,
+    letterSpacing: "-0.01em",
 
     overflow: "hidden",
     whiteSpace: "nowrap",
     textOverflow: "ellipsis",
+
+    transition: "opacity var(--caps-dur-fast) var(--caps-ease)",
+    "&:hover": {
+      opacity: 0.8,
+    },
   },
 });
 
@@ -459,11 +469,9 @@ function Category(
 const CategorySection = styled("div", {
   base: {
     display: "flex",
-    gap: "var(--gap-sm)",
+    gap: "1px",
     flexDirection: "column",
-    paddingBlock: "var(--gap-sm)",
-    borderRadius: "var(--borderRadius-sm)",
-    background: "var(--md-sys-color-surface-container-low)",
+    paddingBottom: "var(--caps-space-4)",
 
     "&:first-child": {
       paddingTop: 0,
@@ -473,34 +481,41 @@ const CategorySection = styled("div", {
 
 /**
  * Category title styling
+ *
+ * Small uppercase label; the chevron sits on the left so titles stay aligned
+ * with channel names.
  */
 const CategoryBase = styled("div", {
   base: {
     display: "flex",
     alignItems: "center",
-    gap: "var(--gap-sm)",
+    gap: "var(--caps-space-2)",
 
-    padding: "0 var(--gap-sm)",
-    paddingLeft: "calc(var(--gap-lg) + 5px)",
-    paddingBlock: "var(--gap-sm)",
+    margin: "0 var(--caps-space-4)",
+    padding: "var(--caps-space-4) var(--caps-space-2) var(--caps-space-2)",
+    paddingLeft: "var(--caps-space-2)",
 
     cursor: "pointer",
     userSelect: "none",
-    transition: "var(--transitions-fast) all",
+    transition: "color var(--caps-dur-fast) var(--caps-ease)",
 
-    "--color": "var(--md-sys-color-on-surface)",
+    "--color": "var(--caps-text-3)",
     color: "var(--color)",
     fill: "var(--color)",
 
-    ...typography.raw({ class: "label", size: "small" }),
-    fontSize: "13px",
+    fontSize: "var(--caps-text-xs)",
+    fontWeight: 600,
+    letterSpacing: "0.06em",
+    textTransform: "uppercase",
 
     "&:hover": {
-      "--color": "var(--md-sys-color-on-surface-variant)",
+      "--color": "var(--caps-text-2)",
     },
 
     "& svg": {
-      transition: "var(--transitions-fast) transform",
+      order: -1,
+      opacity: 0.8,
+      transition: "transform var(--caps-dur) var(--caps-ease)",
     },
   },
   variants: {
@@ -520,6 +535,7 @@ const CategoryBase = styled("div", {
 function Entry(
   props: { channel: Channel; active: boolean } & Pick<Props, "menuGenerator">,
 ) {
+  const { t } = useLingui();
   const state = useState();
   const voice = useVoice();
   const { openModal } = useModals();
@@ -590,7 +606,7 @@ function Entry(
             <Show when={canInvite()}>
               <a
                 use:floating={{
-                  tooltip: { placement: "top", content: "Create Invite" },
+                  tooltip: { placement: "top", content: t`Create Invite` },
                 }}
                 onClick={(e) => {
                   e.preventDefault();
@@ -608,7 +624,7 @@ function Entry(
             <Show when={canEditChannel()}>
               <a
                 use:floating={{
-                  tooltip: { placement: "top", content: "Edit Channel" },
+                  tooltip: { placement: "top", content: t`Edit Channel` },
                 }}
                 onClick={(e) => {
                   e.preventDefault();

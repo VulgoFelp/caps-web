@@ -78,7 +78,9 @@ export function ProfileActions(props: {
         </Button>
       </Show>
       <Show when={props.user.relationship === "Friend"}>
-        <Button onPress={openDm}>Message</Button>
+        <Button onPress={openDm}>
+          <Trans>Message</Trans>
+        </Button>
       </Show>
       <Show when={publicBot()}>
         <Button

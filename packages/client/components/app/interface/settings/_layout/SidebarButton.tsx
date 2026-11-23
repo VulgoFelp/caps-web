@@ -46,30 +46,67 @@ export function SidebarButton(
 
 const SidebarButtonBase = styled("a", {
   base: {
-    // for <Ripple />:
+    // for <Ripple /> and the selection notch:
     position: "relative",
     minWidth: 0,
     display: "flex",
     alignItems: "center",
-    padding: "6px 8px",
-    borderRadius: "8px",
+    height: "var(--caps-h-md)",
+    padding: "0 10px",
+    borderRadius: "var(--caps-radius-sm)",
     fontWeight: 500,
     marginInlineEnd: "12px",
-    fontSize: "15px",
+    fontSize: "var(--caps-text-base)",
     userSelect: "none",
-    transition: "background-color 0.1s ease-in-out",
-    color: "var(--md-sys-color-on-surface)",
-    fill: "var(--md-sys-color-on-surface)",
+    cursor: "pointer",
+    transition:
+      "background-color var(--caps-dur-fast) var(--caps-ease), color var(--caps-dur-fast) var(--caps-ease)",
+    color: "var(--caps-text-2)",
+    fill: "var(--caps-text-2)",
     background: "unset",
+
+    "--md-ripple-hover-opacity": "0",
+    "--md-ripple-pressed-opacity": "0.06",
 
     "& svg": {
       flexShrink: 0,
+      width: "18px",
+      height: "18px",
+    },
+
+    "&::before": {
+      content: '""',
+      position: "absolute",
+      left: "-8px",
+      top: "50%",
+      width: "3px",
+      height: "0px",
+      borderRadius: "0 3px 3px 0",
+      background: "var(--caps-accent)",
+      transform: "translateY(-50%)",
+      transition: "height var(--caps-dur) var(--caps-ease-out)",
+    },
+
+    "&:hover": {
+      background: "var(--caps-hover)",
+      color: "var(--caps-text)",
+      fill: "var(--caps-text)",
     },
   },
   variants: {
     "aria-selected": {
       true: {
-        background: "var(--md-sys-color-primary-container)",
+        background: "var(--caps-selected)",
+        color: "var(--caps-text)",
+        fill: "var(--caps-text)",
+
+        "&::before": {
+          height: "16px",
+        },
+
+        "&:hover": {
+          background: "var(--caps-selected)",
+        },
       },
     },
   },
@@ -79,7 +116,7 @@ export const SidebarButtonTitle = styled("div", {
   base: {
     display: "flex",
     alignItems: "center",
-    gap: "8px",
+    gap: "10px",
     flexGrow: 1,
     minWidth: 0,
     paddingInlineEnd: "8px",

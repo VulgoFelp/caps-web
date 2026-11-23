@@ -269,16 +269,28 @@ const editor = css({
   flexGrow: 1,
   alignSelf: "center",
 
-  color: "var(--md-sys-color-on-surface)",
+  color: "var(--caps-text)",
+  minHeight: "var(--caps-h-md)",
+  paddingInline: "var(--caps-space-2)",
 
   fontWeight: 400,
   fontSize: "var(--message-size)",
   fontFamily: "var(--fonts-primary)",
+  lineHeight: 1.45,
 
   "& .cm-editor": {
     width: "100%",
     alignSelf: "center",
     maxHeight: "100%",
+  },
+
+  "& .cm-placeholder": {
+    color: "var(--caps-text-3) !important",
+  },
+
+  "& .cm-cursor": {
+    borderLeftColor: "var(--caps-accent) !important",
+    borderLeftWidth: "2px !important",
   },
 
   "& .cm-editor.cm-focused": {

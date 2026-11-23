@@ -38,7 +38,24 @@ export function VoiceCallCardPreview(props: { channel: Channel }) {
     <Preview onClick={() => voice.connect(props.channel)}>
       <Ripple />
       <Avatars>
-        <For each={users()} fallback={<Symbol size={24}>voice_chat</Symbol>}>
+        <For
+          each={users()}
+          fallback={
+            <span
+              class={css({
+                display: "grid",
+                placeItems: "center",
+                width: "28px",
+                height: "28px",
+                borderRadius: "var(--caps-radius-md)",
+                color: "var(--caps-on-accent)",
+                background: "var(--caps-accent)",
+              })}
+            >
+              <Symbol size={18}>call</Symbol>
+            </span>
+          }
+        >
           {(user) => (
             <Avatar size={24} src={user?.avatar} fallback={user?.username} />
           )}
@@ -62,17 +79,23 @@ export function VoiceCallCardPreview(props: { channel: Channel }) {
 const Preview = styled("div", {
   base: {
     position: "relative", // <Ripple />
-    borderRadius: "var(--borderRadius-lg)",
+    borderRadius: "var(--caps-radius-lg)",
 
     height: "100%",
     justifyContent: "center",
 
     display: "flex",
     flexDirection: "column",
-    gap: "var(--gap-sm)",
-    padding: "var(--gap-lg)",
+    gap: "var(--caps-space-2)",
+    padding: "var(--caps-space-5) var(--caps-space-6)",
 
-    color: "var(--md-sys-color-on-surface)",
+    color: "var(--caps-text)",
+
+    "& p": {
+      margin: 0,
+      color: "var(--caps-text-3)",
+      fontSize: "var(--caps-text-md)",
+    },
   },
 });
 

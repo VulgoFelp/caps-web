@@ -1,5 +1,7 @@
 import { SelectedTheme } from "@revolt/state/stores/Theme";
 
+import { CAPS_SCALE, createCapsTokens } from "./capsTheme";
+
 /**
  * Generate Stoat for Web variables
  * @param theme Theme
@@ -26,8 +28,8 @@ export function createStoatWebVariables(theme: SelectedTheme) {
     "--effects-invert-light": theme.darkMode ? "invert(0%)" : "invert(1000%)",
 
     // transitions
-    "--transitions-fast": ".1s ease-in-out",
-    "--transitions-medium": ".2s ease",
+    "--transitions-fast": "90ms cubic-bezier(0.2, 0, 0, 1)",
+    "--transitions-medium": "150ms cubic-bezier(0.2, 0, 0, 1)",
 
     // brand
     "--brand-presence-online": "#3ABF7E",
@@ -45,6 +47,10 @@ export function createStoatWebVariables(theme: SelectedTheme) {
     ...reduceWithPrefix(themeConstants.gap, "--gap-"),
     ...reduceWithPrefix(themeConstants.layout, "--layout-"),
     ...reduceWithPrefix(themeConstants.elevation, "--md-sys-elevation-"),
+
+    // CAPS design system tokens
+    ...CAPS_SCALE,
+    ...createCapsTokens(theme.darkMode),
   };
 }
 
@@ -63,17 +69,17 @@ function reduceWithPrefix(object: Record<string, string>, prefix: string) {
 
 const themeConstants = {
   borderRadius: {
-    // Material 3 Expressive ten-level shape scale
-    // https://m3.material.io/styles/shape/corner-radius-scale
+    // CAPS: a compressed shape scale. Containers stay crisp; only avatars,
+    // status dots and toggles are fully round.
     none: "0px",
-    xs: "4px",
-    sm: "8px",
-    md: "12px",
-    lg: "16px",
-    li: "20px",
-    xl: "28px",
-    xli: "32px",
-    xxl: "48px",
+    xs: "3px",
+    sm: "5px",
+    md: "7px",
+    lg: "8px",
+    li: "10px",
+    xl: "12px",
+    xli: "14px",
+    xxl: "16px",
     full: "calc(infinity * 1px)",
     circle: "100%",
   },
@@ -99,15 +105,17 @@ const themeConstants = {
    * {@link https://m3.material.io/styles/elevation/applying-elevation}
    */
   elevation: {
+    // CAPS: depth is expressed with surface steps and hairlines; shadows are
+    // reserved for floating layers.
     0: "unset",
-    1: "rgba(from var(--md-sys-color-shadow) r g b / 0.2) 0px 2px 1px -1px, rgba(from var(--md-sys-color-shadow) r g b / 0.14) 0px 1px 1px 0px, rgba(from var(--md-sys-color-shadow) r g b / 0.12) 0px 1px 3px 0px",
-    2: "rgba(from var(--md-sys-color-shadow) r g b / 0.2) 0px 3px 3px -2px, rgba(from var(--md-sys-color-shadow) r g b / 0.14) 0px 3px 4px 0px, rgba(from var(--md-sys-color-shadow) r g b / 0.12) 0px 1px 8px 0px",
-    3: "rgba(from var(--md-sys-color-shadow) r g b / 0.2) 0px 3px 5px -1px, rgba(from var(--md-sys-color-shadow) r g b / 0.14) 0px 6px 10px 0px, rgba(from var(--md-sys-color-shadow) r g b / 0.12) 0px 1px 18px 0px",
-    4: "rgba(from var(--md-sys-color-shadow) r g b / 0.2) 0px 5px 5px -3px, rgba(from var(--md-sys-color-shadow) r g b / 0.14) 0px 8px 10px 1px, rgba(from var(--md-sys-color-shadow) r g b / 0.12) 0px 3px 14px 2px",
-    5: "rgba(from var(--md-sys-color-shadow) r g b / 0.2) 0px 7px 8px -4px, rgba(from var(--md-sys-color-shadow) r g b / 0.14) 0px 12px 17px 2px, rgba(from var(--md-sys-color-shadow) r g b / 0.12) 0px 5px 22px 4px",
+    1: "0 0 0 1px rgba(from var(--md-sys-color-shadow) r g b / 0.12)",
+    2: "0 1px 2px rgba(from var(--md-sys-color-shadow) r g b / 0.25)",
+    3: "var(--caps-shadow-pop)",
+    4: "var(--caps-shadow-pop)",
+    5: "var(--caps-shadow-modal)",
   },
   layout: {
-    "width-channel-sidebar": "248px",
+    "width-channel-sidebar": "240px",
     "width-user-context-menu-truncate": "300px",
     "height-message-box": "32vh",
   },
