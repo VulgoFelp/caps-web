@@ -27,9 +27,7 @@ export function VoiceStatefulUserIcons(props: {
       <Show when={isMuted()}>
         <Symbol
           size={16}
-          color={
-            isMuted() === "by-user" ? "var(--md-sys-color-error)" : undefined
-          }
+          color={isMuted() === "by-user" ? "var(--caps-danger)" : undefined}
           use:floating={{
             tooltip:
               isMuted() === "by-user"

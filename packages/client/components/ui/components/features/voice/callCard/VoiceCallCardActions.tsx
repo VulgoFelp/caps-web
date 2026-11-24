@@ -134,10 +134,10 @@ export function VoiceCallCardActions(props: { size: "xs" | "sm" }) {
         isDisabled={!limits().video}
       >
         <Show
-          when={!limits().video || voice.screenshare()}
-          fallback={<Symbol>stop_screen_share</Symbol>}
+          when={limits().video && voice.screenshare()}
+          fallback={<Symbol>screen_share</Symbol>}
         >
-          <Symbol>screen_share</Symbol>
+          <Symbol>stop_screen_share</Symbol>
         </Show>
       </IconButton>
       <Button
@@ -160,8 +160,8 @@ export function VoiceCallCardActions(props: { size: "xs" | "sm" }) {
 const Actions = styled("div", {
   base: {
     flexShrink: 0,
-    gap: "var(--gap-md)",
-    padding: "var(--gap-md)",
+    gap: "var(--caps-space-2)",
+    padding: "var(--caps-space-3)",
     zIndex: 2,
 
     display: "flex",
@@ -169,7 +169,8 @@ const Actions = styled("div", {
     justifyContent: "center",
     alignSelf: "center",
 
-    borderRadius: "var(--borderRadius-full)",
-    background: "var(--md-sys-color-surface-container)",
+    borderRadius: "var(--caps-radius-lg)",
+    background: "var(--caps-bg-overlay)",
+    boxShadow: "var(--caps-shadow-pop)",
   },
 });

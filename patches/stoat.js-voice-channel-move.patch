@@ -1,0 +1,22 @@
+diff --git a/src/events/v1.ts b/src/events/v1.ts
+index c52441cc..046a8a69 100644
+--- a/src/events/v1.ts
++++ b/src/events/v1.ts
+@@ -1085,7 +1085,16 @@ export async function handleEvent(
+       break;
+     }
+     case "VoiceChannelMove": {
+-      // todo
++      // someone switched voice channels: move them between participant maps
++      const from = client.channels.getOrPartial(event.from);
++      const to = client.channels.getOrPartial(event.to);
++      batch(() => {
++        from?.voiceParticipants.delete(event.user);
++        to?.voiceParticipants.set(
++          event.user,
++          new VoiceParticipant(client, event.state),
++        );
++      });
+       break;
+     }
+     case "UserVoiceStateUpdate": {

@@ -168,7 +168,7 @@ const Base = styled("div", {
     marginInlineStart: "var(--gap-xl)",
     marginInlineEnd: "var(--gap-md)",
 
-    color: "var(--md-sys-color-outline)",
+    color: "var(--caps-text-3)",
 
     borderRadius: "var(--borderRadius-md)",
   },
@@ -186,11 +186,11 @@ const previewUser = cva({
   variants: {
     speaking: {
       true: {
-        color: "var(--md-sys-color-on-surface)",
+        color: "var(--caps-text)",
 
         "& svg": {
           outlineOffset: "1px",
-          outline: "2px solid var(--md-sys-color-primary)",
+          outline: "2px solid var(--caps-success)",
           borderRadius: "var(--borderRadius-circle)",
         },
       },

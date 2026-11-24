@@ -83,16 +83,16 @@ const Status = styled("div", {
     status: {
       READY: {},
       CONNECTED: {
-        color: "var(--md-sys-color-primary)",
+        color: "var(--caps-success)",
       },
       CONNECTING: {
-        color: "var(--md-sys-color-outline)",
+        color: "var(--caps-text-3)",
       },
       DISCONNECTED: {
-        color: "var(--md-sys-color-outline)",
+        color: "var(--caps-text-3)",
       },
       RECONNECTING: {
-        color: "var(--md-sys-color-outline)",
+        color: "var(--caps-text-3)",
       },
     },
     pip: {

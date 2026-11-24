@@ -154,7 +154,7 @@ export function ParticipantTile(props: TileProps) {
                     size={18}
                     color={
                       isScreenShareAudioUserMuted() === "by-user"
-                        ? "var(--md-sys-color-error)"
+                        ? "var(--caps-danger)"
                         : undefined
                     }
                   >
@@ -181,24 +181,25 @@ export const tile = cva({
     display: "grid",
     aspectRatio: "16/9",
     transition: "all .3s ease, width 0s, height 0s",
-    borderRadius: "var(--borderRadius-lg)",
+    borderRadius: "var(--caps-radius-lg)",
     width: "var(--vc-tile-width)",
     maxWidth: "calc(var(--vc-h) * 16 / 9)",
     cursor: "pointer",
 
-    color: "var(--md-sys-color-on-surface)",
-    background: "#0002",
+    color: "var(--caps-text)",
+    background: "var(--caps-bg-canvas)",
+    boxShadow: "inset 0 0 0 1px var(--caps-line-soft)",
 
     overflow: "hidden",
-    outlineWidth: "3px",
+    outlineWidth: "2px",
     outlineStyle: "solid",
-    outlineOffset: "-3px",
+    outlineOffset: "-2px",
     outlineColor: "transparent",
   },
   variants: {
     speaking: {
       true: {
-        outlineColor: "var(--md-sys-color-primary)",
+        outlineColor: "var(--caps-success)",
       },
     },
     focus: {
@@ -256,7 +257,7 @@ const Overlay = styled("div", {
     minWidth: 0,
     gridArea: "1/1",
 
-    padding: "var(--gap-md) var(--gap-lg)",
+    padding: "var(--caps-space-4)",
 
     opacity: 1,
     display: "flex",

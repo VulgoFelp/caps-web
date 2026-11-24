@@ -28,6 +28,7 @@ import IconSettings from "lucide-solid/icons/settings";
 import IconUserPlus from "lucide-solid/icons/user-plus";
 import IconX from "lucide-solid/icons/x";
 
+import { plainText } from "./plainText";
 import { notificationsOpen, setNotificationsOpen } from "./shellState";
 
 /**
@@ -318,7 +319,9 @@ function MentionItem(props: {
         </span>
         <span class={itemSub}>
           <IconAt size={12} />
-          <span class={clamp}>{message()?.content || "…"}</span>
+          <span class={clamp}>
+            {message() ? plainText(message()!.content, client()) || "…" : "…"}
+          </span>
         </span>
       </ItemText>
       <span class={itemTime}>

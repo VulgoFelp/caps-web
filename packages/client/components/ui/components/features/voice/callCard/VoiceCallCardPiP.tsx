@@ -129,7 +129,7 @@ const UserIcon = styled("div", {
     speaking: {
       true: {
         outlineOffset: "1px",
-        outline: "2px solid var(--md-sys-color-primary)",
+        outline: "2px solid var(--caps-success)",
       },
     },
   },
@@ -152,6 +152,6 @@ const MiniCard = styled("div", {
     padding: "var(--gap-md)",
 
     borderRadius: "var(--borderRadius-lg)",
-    background: "var(--md-sys-color-secondary-container)",
+    background: "var(--caps-bg-overlay)",
   },
 });

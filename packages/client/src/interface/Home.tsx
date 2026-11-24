@@ -1,73 +1,229 @@
-import { Show } from "solid-js";
+import { For, Show, createMemo } from "solid-js";
 
-import { Trans } from "@lingui/solid/macro";
-import { cva } from "styled-system/css";
+import { Plural, Trans, useLingui } from "@lingui/solid/macro";
+import { css } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
 import { IS_DEV, useClient } from "@revolt/client";
 import { useModals } from "@revolt/modal";
 import { useNavigate } from "@revolt/routing";
-import {
-  Button,
-  CapsMark,
-  CategoryButton,
-  Header,
-  iconSize,
-  main,
-} from "@revolt/ui";
+import { Avatar, Button, Header, iconSize } from "@revolt/ui";
 
-import MdAddCircle from "lucide-solid/icons/circle-plus";
-import MdHome from "lucide-solid/icons/house";
-import MdDesktopWindows from "lucide-solid/icons/monitor";
-import MdSettings from "lucide-solid/icons/settings";
-import MdPeople from "lucide-solid/icons/users";
-import MdGroups3 from "lucide-solid/icons/users-round";
+import IconHouse from "lucide-solid/icons/house";
+import IconLink from "lucide-solid/icons/link";
+import IconPlus from "lucide-solid/icons/plus";
+import IconUserPlus from "lucide-solid/icons/user-plus";
+import IconUsers from "lucide-solid/icons/users";
 
 import { HeaderIcon } from "./common/CommonHeader";
+import { ActiveCommunities } from "./home/ActiveCommunities";
+import { OnlineFriends } from "./home/OnlineFriends";
+import { RecentConversations } from "./home/RecentConversations";
+import { Section, Surface } from "./home/Section";
+import { VoiceRooms } from "./home/VoiceRooms";
+import { useNotificationCount } from "./shell/NotificationCenter";
 
 /**
- * Windows installer for CAPS Desktop, served by the CAPS server
+ * Social home: what's happening with your friends and communities right now
  */
-const WINDOWS_DOWNLOAD_URL = "/download/CAPS-Setup.exe";
+export function HomePage() {
+  const { t } = useLingui();
+  const { openModal } = useModals();
+  const navigate = useNavigate();
+  const client = useClient();
+  const notifications = useNotificationCount();
 
-/**
- * Offer the desktop app only in a browser on Windows
- */
-const showWindowsDownload =
-  !window.native && /Windows/i.test(navigator.userAgent);
+  const greeting = () => {
+    const hour = new Date().getHours();
+    return hour < 5
+      ? t`Good evening`
+      : hour < 12
+        ? t`Good morning`
+        : hour < 18
+          ? t`Good afternoon`
+          : t`Good evening`;
+  };
 
-/**
- * Base layout of the home page (i.e. the header/background)
- */
+  const onlineFriends = createMemo(
+    () =>
+      client().users.filter((u) => u.relationship === "Friend" && u.online)
+        .length,
+  );
+  const liveRooms = createMemo(
+    () =>
+      [...client().channels.values()].filter(
+        (c) => c.isVoice && c.voiceParticipants.size > 0,
+      ).length,
+  );
+  const requests = createMemo(() =>
+    client().users.filter((u) => u.relationship === "Incoming"),
+  );
+
+  return (
+    <Base>
+      <Header placement="primary">
+        <HeaderIcon>
+          <IconHouse {...iconSize(18)} />
+        </HeaderIcon>
+        <Trans>Home</Trans>
+      </Header>
+      <div use:scrollable={{ class: scroller }}>
+        <Page>
+          <Hero>
+            <h1>
+              {greeting()}, {client().user?.displayName}
+            </h1>
+            <Summary>
+              <span>
+                <Plural
+                  value={onlineFriends()}
+                  _0="No friends online"
+                  one="# friend online"
+                  other="# friends online"
+                />
+              </span>
+              <span>
+                <Plural
+                  value={liveRooms()}
+                  _0="No live voice rooms"
+                  one="# live voice room"
+                  other="# live voice rooms"
+                />
+              </span>
+              <Show when={notifications()}>
+                <span class={highlight}>
+                  <Plural
+                    value={notifications()}
+                    one="# new notification"
+                    other="# new notifications"
+                  />
+                </span>
+              </Show>
+            </Summary>
+            <QuickActions>
+              <button
+                type="button"
+                class={quick}
+                onClick={() =>
+                  openModal({ type: "add_friend", client: client() })
+                }
+              >
+                <IconUserPlus size={16} />
+                <Trans>Add friend</Trans>
+              </button>
+              <button
+                type="button"
+                class={quick}
+                onClick={() =>
+                  openModal({ type: "create_group", client: client() })
+                }
+              >
+                <IconUsers size={16} />
+                <Trans>New group</Trans>
+              </button>
+              <button
+                type="button"
+                class={quick}
+                onClick={() =>
+                  openModal({ type: "create_server", client: client() })
+                }
+              >
+                <IconPlus size={16} />
+                <Trans>Create community</Trans>
+              </button>
+              <button
+                type="button"
+                class={quick}
+                onClick={() =>
+                  openModal({ type: "join_server", client: client() })
+                }
+              >
+                <IconLink size={16} />
+                <Trans>Join with invite</Trans>
+              </button>
+            </QuickActions>
+          </Hero>
+
+          <Columns>
+            <Main>
+              <VoiceRooms />
+              <RecentConversations />
+              <ActiveCommunities />
+            </Main>
+            <Aside>
+              <Show when={requests().length}>
+                <Section
+                  title={<Trans>Friend requests</Trans>}
+                  meta={requests().length}
+                >
+                  <Surface>
+                    <For each={requests()}>
+                      {(user) => (
+                        <div class={requestRow}>
+                          <Avatar
+                            size={32}
+                            src={user.avatarURL}
+                            fallback={user.displayName}
+                          />
+                          <span class={requestName}>{user.displayName}</span>
+                          <Button size="xs" onPress={() => user.addFriend()}>
+                            <Trans>Accept</Trans>
+                          </Button>
+                          <Button
+                            size="xs"
+                            variant="text"
+                            onPress={() => user.removeFriend()}
+                          >
+                            <Trans>Ignore</Trans>
+                          </Button>
+                        </div>
+                      )}
+                    </For>
+                  </Surface>
+                </Section>
+              </Show>
+              <OnlineFriends />
+            </Aside>
+          </Columns>
+
+          <Show when={IS_DEV}>
+            <Button variant="text" size="sm" onPress={() => navigate("/dev")}>
+              Open Development Page
+            </Button>
+          </Show>
+        </Page>
+      </div>
+    </Base>
+  );
+}
+
 const Base = styled("div", {
   base: {
-    width: "100%",
     display: "flex",
     flexDirection: "column",
-
-    color: "var(--caps-text)",
+    flex: 1,
+    minWidth: 0,
+    minHeight: 0,
   },
 });
 
-/**
- * Layout of the content as a whole
- */
-const content = cva({
+const scroller = css({
+  flex: 1,
+  minHeight: 0,
+});
+
+const Page = styled("div", {
   base: {
-    ...main.raw(),
-
-    padding: "72px 40px",
+    display: "flex",
+    flexDirection: "column",
     gap: "var(--caps-space-9)",
-    alignItems: "center",
+    width: "100%",
+    maxWidth: "1120px",
+    marginInline: "auto",
+    padding: "var(--caps-space-9) var(--caps-space-9) var(--caps-space-10)",
 
-    "& > *": {
-      width: "100%",
-      maxWidth: "560px",
-    },
-
-    _phone: {
-      padding: "32px 16px",
-    },
+    _tablet: { padding: "var(--caps-space-8) var(--caps-space-6)" },
+    _phone: { padding: "var(--caps-space-7) var(--caps-space-5)" },
   },
 });
 
@@ -75,161 +231,116 @@ const Hero = styled("div", {
   base: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "flex-start",
-    gap: "var(--caps-space-3)",
+    gap: "var(--caps-space-4)",
+    animation: "authHintIn 260ms var(--caps-ease-out)",
+
+    "& h1": {
+      margin: 0,
+      fontSize: "var(--caps-text-3xl)",
+      fontWeight: 650,
+      letterSpacing: "-0.025em",
+      color: "var(--caps-text)",
+      _phone: { fontSize: "var(--caps-text-2xl)" },
+    },
   },
 });
 
-const Mark = styled("div", {
+const Summary = styled("div", {
+  base: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "var(--caps-space-2) var(--caps-space-6)",
+    fontSize: "var(--caps-text-base)",
+    color: "var(--caps-text-3)",
+
+    "& > span:not(:first-child)::before": {
+      content: '"·"',
+      marginInlineEnd: "var(--caps-space-6)",
+      color: "var(--caps-text-disabled)",
+    },
+  },
+});
+
+const highlight = css({ color: "var(--caps-mention)" });
+
+const QuickActions = styled("div", {
+  base: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "var(--caps-space-3)",
+    marginTop: "var(--caps-space-5)",
+  },
+});
+
+const quick = css({
+  all: "unset",
+  boxSizing: "border-box",
+  display: "inline-flex",
+  alignItems: "center",
+  gap: "var(--caps-space-4)",
+  height: "32px",
+  paddingInline: "var(--caps-space-5) var(--caps-space-6)",
+  borderRadius: "var(--caps-radius-md)",
+  background: "var(--caps-bg-component)",
+  fontSize: "var(--caps-text-md)",
+  fontWeight: 500,
+  color: "var(--caps-text-2)",
+  cursor: "pointer",
+  transition:
+    "background var(--caps-dur-fast) var(--caps-ease), color var(--caps-dur-fast) var(--caps-ease)",
+  "&:hover": {
+    background: "var(--caps-bg-component-hover)",
+    color: "var(--caps-text)",
+  },
+  "&:active": { transform: "translateY(0.5px)" },
+  "&:focus-visible": { boxShadow: "var(--caps-focus-ring)" },
+});
+
+const Columns = styled("div", {
   base: {
     display: "grid",
-    placeItems: "center",
-    width: "52px",
-    height: "52px",
-    marginBottom: "var(--caps-space-5)",
-    borderRadius: "var(--caps-radius-server)",
-    color: "var(--caps-on-accent)",
-    background: "var(--caps-accent)",
+    gridTemplateColumns: "minmax(0, 1fr) 300px",
+    gap: "var(--caps-space-9)",
+    alignItems: "start",
+
+    "@media (max-width: 1100px)": {
+      gridTemplateColumns: "minmax(0, 1fr)",
+    },
   },
 });
 
-const Greeting = styled("h1", {
-  base: {
-    margin: 0,
-    fontSize: "var(--caps-text-3xl)",
-    fontWeight: 600,
-    letterSpacing: "-0.02em",
-    lineHeight: 1.15,
-  },
-});
-
-const Tagline = styled("p", {
-  base: {
-    margin: 0,
-    fontSize: "var(--caps-text-lg)",
-    color: "var(--caps-text-2)",
-    lineHeight: 1.5,
-  },
-});
-
-const Section = styled("section", {
+const Main = styled("div", {
   base: {
     display: "flex",
     flexDirection: "column",
-    gap: "var(--caps-space-4)",
+    gap: "var(--caps-space-9)",
+    minWidth: 0,
   },
 });
 
-const SectionTitle = styled("h2", {
+const Aside = styled("aside", {
   base: {
-    margin: 0,
-    fontSize: "var(--caps-text-xs)",
-    fontWeight: 600,
-    letterSpacing: "0.06em",
-    textTransform: "uppercase",
-    color: "var(--caps-text-3)",
+    display: "flex",
+    flexDirection: "column",
+    gap: "var(--caps-space-9)",
+    minWidth: 0,
   },
 });
 
-/**
- * Home page
- */
-export function HomePage() {
-  const { openModal } = useModals();
-  const navigate = useNavigate();
-  const client = useClient();
+const requestRow = css({
+  display: "flex",
+  alignItems: "center",
+  gap: "var(--caps-space-4)",
+  padding: "var(--caps-space-4) var(--caps-space-5)",
+  "&:not(:last-child)": { boxShadow: "inset 0 -1px 0 var(--caps-line-soft)" },
+});
 
-  return (
-    <Base>
-      <Header placement="primary">
-        <HeaderIcon>
-          <MdHome {...iconSize(20)} />
-        </HeaderIcon>
-        <Trans>Home</Trans>
-      </Header>
-      <div use:scrollable={{ class: content() }}>
-        <Hero>
-          <Mark aria-hidden="true">
-            <CapsMark size={28} mono />
-          </Mark>
-          <Greeting>Olá, {client()!.user?.displayName}</Greeting>
-          <Tagline>
-            Suas comunidades, conversas e salas de voz em um só lugar.
-          </Tagline>
-        </Hero>
-
-        <Section>
-          <SectionTitle>Começar</SectionTitle>
-          <CategoryButton.Group>
-            <CategoryButton
-              onClick={() =>
-                openModal({
-                  type: "create_group_or_server",
-                  client: client()!,
-                })
-              }
-              description={
-                <Trans>
-                  Invite all of your friends, some cool bots, and throw a big
-                  party.
-                </Trans>
-              }
-              icon={<MdAddCircle />}
-              action="chevron"
-            >
-              <Trans>Create a group or server</Trans>
-            </CategoryButton>
-            <CategoryButton
-              onClick={() =>
-                openModal({ type: "join_server", client: client()! })
-              }
-              description="Recebeu um convite? Cole o link ou o código."
-              icon={<MdGroups3 />}
-              action="chevron"
-            >
-              Entrar com um convite
-            </CategoryButton>
-            <CategoryButton
-              onClick={() => navigate("/friends")}
-              description="Adicione amigos e veja quem está online."
-              icon={<MdPeople />}
-              action="chevron"
-            >
-              <Trans>Friends</Trans>
-            </CategoryButton>
-          </CategoryButton.Group>
-        </Section>
-
-        <Section>
-          <SectionTitle>Conta</SectionTitle>
-          <CategoryButton.Group>
-            <CategoryButton
-              onClick={() => openModal({ type: "settings", config: "user" })}
-              description="Perfil, aparência, notificações, voz e vídeo."
-              icon={<MdSettings />}
-              action="chevron"
-            >
-              <Trans>Open settings</Trans>
-            </CategoryButton>
-            <Show when={showWindowsDownload}>
-              <CategoryButton
-                onClick={() => window.open(WINDOWS_DOWNLOAD_URL, "_blank")}
-                description="Instale o CAPS no PC: abre com o Windows, fica na bandeja e avisa das mensagens."
-                icon={<MdDesktopWindows />}
-                action="external"
-              >
-                Baixar o app para Windows
-              </CategoryButton>
-            </Show>
-          </CategoryButton.Group>
-        </Section>
-
-        <Show when={IS_DEV}>
-          <Button variant="tonal" onPress={() => navigate("/dev")}>
-            Open Development Page
-          </Button>
-        </Show>
-      </div>
-    </Base>
-  );
-}
+const requestName = css({
+  flex: 1,
+  minWidth: 0,
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
+  fontSize: "var(--caps-text-md)",
+  fontWeight: 500,
+});

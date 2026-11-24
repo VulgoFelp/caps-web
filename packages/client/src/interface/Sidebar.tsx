@@ -16,6 +16,7 @@ import { LAYOUT_SECTIONS, LAYOUT_SIZES } from "@revolt/state/stores/Layout";
 import { ResizeHandle } from "@revolt/ui";
 
 import { HomeSidebar, ServerSidebar } from "./navigation";
+import { CallDock } from "./shell/CallDock";
 
 const MainBar = styled("div", {
   base: {
@@ -69,6 +70,7 @@ export const Sidebar = (props: {
             <Server />
           </Match>
         </Switch>
+        <CallDock />
         <ResizeHandle
           edge="right"
           width={width}

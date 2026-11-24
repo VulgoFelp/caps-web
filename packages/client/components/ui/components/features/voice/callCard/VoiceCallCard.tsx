@@ -16,9 +16,11 @@ import { createResizeObserver } from "@solid-primitives/resize-observer";
 import { Channel } from "stoat.js";
 import { styled } from "styled-system/jsx";
 
+import { useLocation } from "@revolt/routing";
 import { useVoice } from "@revolt/rtc";
 import { VoiceLayout } from "@revolt/rtc/state";
 import { useState } from "@revolt/state";
+import { LAYOUT_SECTIONS } from "@revolt/state/stores/Layout";
 import { SlideState } from "@revolt/ui/components/navigation/SlideDrawer";
 
 import { VoiceCallCardActiveRoom } from "./VoiceCallCardActiveRoom";
@@ -44,6 +46,7 @@ const callCardContext = createContext<(info?: Info) => void>();
 /** Voice call card context */
 export function VoiceCallCardContext(props: { children: JSX.Element }) {
   const voice = useVoice();
+  const state = useState();
   const inCall = () => !!voice.channel();
 
   const [mode, setMode] = createSignal<Mode>();
@@ -138,6 +141,17 @@ export function VoiceCallCardContext(props: { children: JSX.Element }) {
 
   const channel = () => info()?.channel;
 
+  // The sidebar call dock covers audio calls; the floating picture-in-picture
+  // is only needed for video, or when the sidebar (and its dock) is hidden.
+  const location = useLocation();
+  const showPip = () =>
+    voice
+      .vidTracks()
+      .some((t) => !!t.publication?.track && !t.publication.isMuted) ||
+    !!state.appDrawer() ||
+    !state.layout.getSectionState(LAYOUT_SECTIONS.PRIMARY_SIDEBAR, true) ||
+    location.pathname.startsWith("/discover");
+
   function setFloat(float: FloatType) {
     const sty = ref!.style,
       x = float[1] === "l" ? PAD_X : `calc(100vw - var(--flt-w) - ${PAD_X})`,
@@ -189,7 +203,7 @@ export function VoiceCallCardContext(props: { children: JSX.Element }) {
           fullscreen={voice.layout() === "fullscreen"}
         >
           <Switch>
-            <Match when={mode() && inCall()}>
+            <Match when={mode() && inCall() && showPip()}>
               <VoiceCallCardPiP />
             </Match>
             <Match when={channel()}>
