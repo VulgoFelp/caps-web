@@ -1,5 +1,7 @@
+import BiRegularArchive from "lucide-solid/icons/archive";
+import BiSolidKey from "lucide-solid/icons/key-round";
+import BiSolidKeyboard from "lucide-solid/icons/keyboard";
 import { createFormControl, createFormGroup } from "solid-forms";
-import { BiRegularArchive, BiSolidKey, BiSolidKeyboard } from "solid-icons/bi";
 import {
   For,
   Match,

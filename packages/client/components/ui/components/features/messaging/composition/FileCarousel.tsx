@@ -8,8 +8,8 @@ import { ALLOWED_IMAGE_TYPES } from "@revolt/state";
 import { Ripple, typography } from "@revolt/ui/components/design";
 import { iconSize, OverflowingText, Symbol } from "@revolt/ui/components/utils";
 
-import MdAdd from "@material-design-icons/svg/outlined/add.svg?component-solid";
-import MdFile from "@material-design-icons/svg/outlined/description.svg?component-solid";
+import MdFile from "lucide-solid/icons/file-text";
+import MdAdd from "lucide-solid/icons/plus";
 
 interface Props {
   /**

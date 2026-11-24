@@ -1,4 +1,4 @@
-import { BiSolidCloud } from "solid-icons/bi";
+import BiSolidCloud from "lucide-solid/icons/cloud";
 import { For, Match, Show, Switch, createMemo, onMount } from "solid-js";
 
 import { Trans } from "@lingui/solid/macro";

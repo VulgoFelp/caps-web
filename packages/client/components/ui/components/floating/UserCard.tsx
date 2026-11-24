@@ -11,7 +11,7 @@ import { timeLocale, useTime } from "@revolt/i18n";
 import { Markdown } from "@revolt/markdown";
 import { useModals } from "@revolt/modal";
 
-import { Avatar, UserStatus } from "../design";
+import { Avatar, CapsMark, UserStatus } from "../design";
 import { StaffBadge } from "../features";
 import { ProfileActions } from "../features/profiles/ProfileActions";
 import { ProfileBadges } from "../features/profiles/ProfileBadges";
@@ -289,17 +289,7 @@ export function UserCard(
             <Facts>
               <Fact>
                 <FactIcon aria-hidden="true">
-                  <svg
-                    viewBox="0 0 24 24"
-                    width="12"
-                    height="12"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.6"
-                    stroke-linecap="round"
-                  >
-                    <path d="M12.6 12.2c.5-.6.1-1.6-.8-1.6-1.2 0-1.9 1.3-1.4 2.4.7 1.5 2.8 1.8 4 .7 1.6-1.5 1.2-4.2-.6-5.3-2.3-1.4-5.4-.4-6.5 2-1.4 3 .3 6.5 3.4 7.4 3.7 1.1 7.4-1.4 8-5.1" />
-                  </svg>
+                  <CapsMark size={14} mono />
                 </FactIcon>
                 <span>CAPS</span>
                 <FactValue>{formatDate(props.user.createdAt)}</FactValue>

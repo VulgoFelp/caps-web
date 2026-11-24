@@ -141,8 +141,8 @@ export class Theme extends AbstractStore<"theme", TypeTheme> {
       m3Contrast: 0.0,
       m3Variant: "tonal_spot",
 
-      interfaceFont: "IBM Plex Sans Variable",
-      monospaceFont: "IBM Plex Mono",
+      interfaceFont: "Geist Variable",
+      monospaceFont: "Geist Mono Variable",
 
       blur: true,
       messageSize: 14,
@@ -225,6 +225,15 @@ export class Theme extends AbstractStore<"theme", TypeTheme> {
       FONT_KEYS.includes(input.interfaceFont)
     ) {
       data.interfaceFont = input.interfaceFont;
+    }
+
+    // migration: the previous CAPS default fonts move to Geist (CAPS 2.0)
+    if (input.interfaceFont === "IBM Plex Sans Variable") {
+      data.interfaceFont = "Geist Variable";
+    }
+
+    if (input.monospaceFont === "IBM Plex Mono") {
+      data.monospaceFont = "Geist Mono Variable";
     }
 
     return data;

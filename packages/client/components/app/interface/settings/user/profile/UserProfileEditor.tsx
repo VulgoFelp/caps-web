@@ -16,7 +16,7 @@ import {
   Text,
 } from "@revolt/ui";
 
-import MdBadge from "@material-design-icons/svg/filled/badge.svg?component-solid";
+import MdBadge from "lucide-solid/icons/id-card";
 
 import { useModals } from "@revolt/modal";
 import { cropProcess } from "@revolt/modal/modals/CropProcess";

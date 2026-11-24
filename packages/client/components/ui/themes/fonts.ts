@@ -1,7 +1,15 @@
 export const FONTS = {
+  "Geist Variable": {
+    load: async () => {
+      await import("@fontsource-variable/geist/index.css");
+    },
+  },
   Inter: {
     load: async () => {
-      // default
+      await import("@fontsource/inter/400.css");
+      await import("@fontsource/inter/500.css");
+      await import("@fontsource/inter/600.css");
+      await import("@fontsource/inter/700.css");
     },
   },
 
@@ -130,10 +138,11 @@ export const FONTS = {
 };
 
 export const MONOSPACE_FONTS = {
+  "Geist Mono Variable": {
+    load: () => import("@fontsource-variable/geist-mono/index.css"),
+  },
   "JetBrains Mono": {
-    load: () => {
-      /* default */
-    },
+    load: () => import("@fontsource/jetbrains-mono/400.css"),
   },
   "Fira Code": {
     load: () => import("@fontsource/fira-code/400.css"),
@@ -161,5 +170,5 @@ export type MonospaceFonts = keyof typeof MONOSPACE_FONTS;
 export const FONT_KEYS = Object.keys(FONTS).sort();
 export const MONOSPACE_FONT_KEYS = Object.keys(MONOSPACE_FONTS).sort();
 
-export const DEFAULT_FONT = "Open Sans";
-export const DEFAULT_MONO_FONT = "Fira Code";
+export const DEFAULT_FONT: Fonts = "Geist Variable";
+export const DEFAULT_MONO_FONT: MonospaceFonts = "Geist Mono Variable";

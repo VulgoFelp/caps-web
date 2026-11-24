@@ -53,7 +53,7 @@ export default defineConfig({
       strategies: "injectManifest",
       injectManifest: {
         maximumFileSizeToCacheInBytes: 8000000,
-        globPatterns: ["**/*.{js,css,html}", "**/material-symbols-*.woff2"],
+        globPatterns: ["**/*.{js,css,html}"],
       },
       devOptions: {
         enabled: true,
@@ -62,7 +62,7 @@ export default defineConfig({
       manifest: {
         name: "CAPS",
         short_name: "CAPS",
-        description: "CAPS: coisa de doido. Chat, voz, vídeo e tela da galera.",
+        description: "Comunidades, conversas e voz para quem joga junto.",
         lang: "pt-BR",
         categories: ["communication", "chat", "messaging"],
         start_url: base,

@@ -23,9 +23,9 @@ import {
 } from "@revolt/ui";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
-import MdGroup from "@material-design-icons/svg/outlined/group.svg?component-solid";
-import MdPersonAdd from "@material-design-icons/svg/outlined/person_add.svg?component-solid";
-import MdSettings from "@material-design-icons/svg/outlined/settings.svg?component-solid";
+import MdSettings from "lucide-solid/icons/settings";
+import MdPersonAdd from "lucide-solid/icons/user-plus";
+import MdGroup from "lucide-solid/icons/users";
 
 import MdKeep from "../../svg/keep.svg?component-solid";
 import { HeaderIcon } from "../common/CommonHeader";

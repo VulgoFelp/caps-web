@@ -4,8 +4,8 @@ import { styled } from "styled-system/jsx";
 
 import { Column, OverflowingText } from "@revolt/ui";
 
-// import MdError from "@material-design-icons/svg/filled/error.svg?component-solid";
-// import MdOpenInNew from "@material-design-icons/svg/filled/open_in_new.svg?component-solid";
+// import MdError from "lucide-solid/icons/circle-exclamation-point";
+// import MdOpenInNew from "lucide-solid/icons/external-link";
 import { SettingsList } from "..";
 import { useSettingsNavigation } from "../Settings";
 

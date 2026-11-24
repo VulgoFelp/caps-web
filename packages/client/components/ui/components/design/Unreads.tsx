@@ -2,7 +2,7 @@ import { Match, Switch } from "solid-js";
 
 import { styled } from "styled-system/jsx";
 
-import MdAdd from "@material-design-icons/svg/outlined/add.svg?component-solid";
+import MdAdd from "lucide-solid/icons/plus";
 
 import { iconSize } from "../utils";
 

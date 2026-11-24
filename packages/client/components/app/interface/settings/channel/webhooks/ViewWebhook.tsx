@@ -16,8 +16,8 @@ import {
   Row,
 } from "@revolt/ui";
 
-import MdContentCopy from "@material-design-icons/svg/outlined/content_copy.svg?component-solid";
-import MdDelete from "@material-design-icons/svg/outlined/delete.svg?component-solid";
+import MdContentCopy from "lucide-solid/icons/copy";
+import MdDelete from "lucide-solid/icons/trash";
 
 import { useSettingsNavigation } from "../../Settings";
 

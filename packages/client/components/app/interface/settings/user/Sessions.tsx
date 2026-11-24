@@ -1,10 +1,10 @@
+import BiLogosApple from "lucide-solid/icons/apple";
+import BiRegularQuestionMark from "lucide-solid/icons/circle-question-mark";
 import {
-  BiLogosAndroid,
-  BiLogosApple,
-  BiLogosWindows,
-  BiRegularQuestionMark,
-} from "solid-icons/bi";
-import { FaBrandsLinux } from "solid-icons/fa";
+  default as BiLogosWindows,
+  default as FaBrandsLinux,
+} from "lucide-solid/icons/monitor";
+import BiLogosAndroid from "lucide-solid/icons/smartphone";
 import {
   Accessor,
   For,
@@ -29,7 +29,7 @@ import {
   iconSize,
 } from "@revolt/ui";
 
-import MdLogout from "@material-design-icons/svg/outlined/logout.svg?component-solid";
+import MdLogout from "lucide-solid/icons/log-out";
 
 /**
  * Sessions

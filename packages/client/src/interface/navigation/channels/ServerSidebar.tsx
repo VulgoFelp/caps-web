@@ -1,4 +1,7 @@
-import { BiRegularCheckCircle, BiSolidCheckCircle } from "solid-icons/bi";
+import {
+  default as BiRegularCheckCircle,
+  default as BiSolidCheckCircle,
+} from "lucide-solid/icons/circle-check";
 import {
   Accessor,
   JSX,
@@ -37,8 +40,8 @@ import { VoiceChannelPreview } from "@revolt/ui/components/features/voice/VoiceC
 import { createDragHandle } from "@revolt/ui/components/utils/Draggable";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
-import MdChevronRight from "@material-design-icons/svg/filled/chevron_right.svg?component-solid";
-import MdSettings from "@material-symbols/svg-400/outlined/settings-fill.svg?component-solid";
+import MdChevronRight from "lucide-solid/icons/chevron-right";
+import MdSettings from "lucide-solid/icons/settings";
 
 import { SidebarBase } from "./common";
 import {

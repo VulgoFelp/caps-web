@@ -14,9 +14,9 @@ import { Avatar, iconSize } from "@revolt/ui";
 import { Invite } from "@revolt/ui/components/features/messaging/elements/Invite";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
-import MdChat from "@material-design-icons/svg/outlined/chat.svg?component-solid";
-import MdChevronRight from "@material-design-icons/svg/outlined/chevron_right.svg?component-solid";
-import MdPeople from "@material-design-icons/svg/outlined/people.svg?component-solid";
+import MdChevronRight from "lucide-solid/icons/chevron-right";
+import MdChat from "lucide-solid/icons/message-square";
+import MdPeople from "lucide-solid/icons/users";
 
 const link = cva({
   base: {

@@ -1,46 +1,53 @@
-import { createMemo, JSX, splitProps } from "solid-js";
+import { JSX, Show, children as resolveChildren, splitProps } from "solid-js";
+import { Dynamic } from "solid-js/web";
 
-import { css } from "styled-system/css";
 import { splitCssProps, styled } from "styled-system/jsx";
 import { HTMLStyledProps } from "styled-system/types";
 
+import { SYMBOL_ICONS } from "./symbolIcons";
+
 interface Props {
   /**
-   * Whether to use the filled version of this symbol.
-   * Filled symbols should only be used when there is an active state (ex: pages in a nav bar or toggled icon buttons).
+   * Emphasised (active) state: drawn with a heavier stroke
    */
   fill?: boolean;
   /**
-   * Font size for the symbol. This can be a number (in pixels) or any valid CSS size string (ex: "24px", "1.5em", "2rem").
-   * @deprecated passing to css() does nothing
+   * @deprecated kept for compatibility, has no effect
    */
   fontSize?: string | number;
   /**
-   * The grade of the symbol, which adjusts the weight slightly. This can be a number between -25 and 700. To preview use the Google Fonts web app.
+   * @deprecated kept for compatibility, has no effect
    */
   grade?: number;
   /**
-   * The optical size of the symbol, which adjusts the design for different sizes. This should be "auto" unless it causes issues.
+   * @deprecated kept for compatibility, has no effect
    */
   opticalSize?: number | "auto";
   /**
-   * The type of symbol to use. This can be "outlined", "rounded", or "sharp". Defaults to "outlined".
+   * @deprecated kept for compatibility, has no effect
    */
   type?: "outlined" | "rounded" | "sharp";
   /**
-   * The weight of the symbol, which adjusts the thickness of the lines. This can be a number between 100 and 700.
+   * @deprecated kept for compatibility, has no effect
    */
   weight?: number;
   /**
-   * The symbol to display. This should be the exact text name of the symbol as defined by Google. See https://fonts.google.com/icons for a list of available symbols.
+   * Icon name. Material Symbol names are mapped onto the CAPS icon set
+   * (Lucide), see `symbolIcons.ts`.
    */
   children: string | JSX.Element;
   /**
-   * Symbol size
+   * Icon size in pixels (default 20)
    */
   size?: number;
 }
 
+/**
+ * CAPS icon by name
+ *
+ * Historically this rendered the Material Symbols font; it now renders the
+ * matching Lucide icon so the whole app shares one icon language.
+ */
 export function Symbol(rawProps: Props & HTMLStyledProps<"span">) {
   const [local, props] = splitProps(rawProps, [
     "fill",
@@ -50,40 +57,46 @@ export function Symbol(rawProps: Props & HTMLStyledProps<"span">) {
     "weight",
     "type",
     "size",
+    "children",
   ]);
 
   const [cssProps, restProps] = splitCssProps(props);
-  const memoClassName = createMemo(() => {
-    return css(
-      {
-        fontSize: local.fontSize ?? "inherit",
-        fontWeight: `${local.weight} !important`,
-        fontOpticalSizing: local.opticalSize === "auto" ? "auto" : undefined,
-        userSelect: "none",
-      },
-      cssProps,
-    );
-  });
+  const resolved = resolveChildren(() => local.children);
 
-  const memoFontVarSettings = createMemo(() => {
-    return `"FILL" ${local.fill ? 1 : 0}, "wght" 400, "GRAD" ${local.grade ?? 0}${
-      (local.opticalSize ?? "auto") === "auto"
-        ? ""
-        : `, "opsz" ${local.opticalSize}`
-    }`;
-  });
+  const icon = () => {
+    const name = String(resolved() ?? "").trim();
+    const component = SYMBOL_ICONS[name];
+    if (!component && name && import.meta.env.DEV) {
+      console.warn(`[Symbol] no CAPS icon mapped for "${name}"`);
+    }
+    return component;
+  };
 
   return (
-    <styled.span
-      class={`material-symbols-${local.type ?? "outlined"} ${memoClassName()}`}
-      style={{
-        display: "block",
-        "font-variation-settings": memoFontVarSettings(),
-        "font-size": local.size ? `${local.size}px` : undefined,
-      }}
+    <Base
+      {...cssProps}
       aria-hidden="true"
       {...restProps}
       // @codegen directives props=props include=floating
-    />
+    >
+      <Show when={icon()}>
+        <Dynamic
+          component={icon()}
+          size={local.size ?? 20}
+          strokeWidth={local.fill ? 2.25 : undefined}
+        />
+      </Show>
+    </Base>
   );
 }
+
+const Base = styled("span", {
+  base: {
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
+    lineHeight: 0,
+    userSelect: "none",
+  },
+});

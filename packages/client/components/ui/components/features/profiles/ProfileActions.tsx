@@ -9,9 +9,9 @@ import { UserContextMenu } from "@revolt/app";
 import { useClient } from "@revolt/client";
 import { useModals } from "@revolt/modal";
 
-import MdCancel from "@material-design-icons/svg/filled/cancel.svg?component-solid";
-import MdEdit from "@material-design-icons/svg/filled/edit.svg?component-solid";
-import MdMoreVert from "@material-design-icons/svg/filled/more_vert.svg?component-solid";
+import MdCancel from "lucide-solid/icons/circle-x";
+import MdMoreVert from "lucide-solid/icons/ellipsis-vertical";
+import MdEdit from "lucide-solid/icons/pencil";
 
 import { Button, IconButton } from "../../design";
 import { iconSize } from "../../utils";

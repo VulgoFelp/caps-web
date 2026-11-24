@@ -5,7 +5,7 @@ import { Server } from "stoat.js";
 
 import { useModals } from "@revolt/modal";
 
-import MdLibraryAdd from "@material-design-icons/svg/outlined/library_add.svg?component-solid";
+import MdLibraryAdd from "lucide-solid/icons/copy-plus";
 
 import { ContextMenu, ContextMenuButton } from "./ContextMenu";
 

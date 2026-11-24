@@ -1,4 +1,4 @@
-import { BiSolidFile } from "solid-icons/bi";
+import BiSolidFile from "lucide-solid/icons/file";
 import { Match, Show, Switch } from "solid-js";
 
 import { Trans } from "@lingui/solid/macro";

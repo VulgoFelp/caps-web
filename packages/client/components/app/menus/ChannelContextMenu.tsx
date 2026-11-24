@@ -7,15 +7,15 @@ import { useInstance } from "@revolt/instance";
 import { useModals } from "@revolt/modal";
 import { useState } from "@revolt/state";
 
-import MdBadge from "@material-design-icons/svg/outlined/badge.svg?component-solid";
-import MdDelete from "@material-design-icons/svg/outlined/delete.svg?component-solid";
-import MdGroupAdd from "@material-design-icons/svg/outlined/group_add.svg?component-solid";
-import MdLibraryAdd from "@material-design-icons/svg/outlined/library_add.svg?component-solid";
-import MdLogout from "@material-design-icons/svg/outlined/logout.svg?component-solid";
-import MdMarkChatRead from "@material-design-icons/svg/outlined/mark_chat_read.svg?component-solid";
-import MdSettings from "@material-design-icons/svg/outlined/settings.svg?component-solid";
-import MdShare from "@material-design-icons/svg/outlined/share.svg?component-solid";
-import MdShield from "@material-design-icons/svg/outlined/shield.svg?component-solid";
+import MdMarkChatRead from "lucide-solid/icons/check-check";
+import MdLibraryAdd from "lucide-solid/icons/copy-plus";
+import MdBadge from "lucide-solid/icons/id-card";
+import MdLogout from "lucide-solid/icons/log-out";
+import MdSettings from "lucide-solid/icons/settings";
+import MdShare from "lucide-solid/icons/share-2";
+import MdShield from "lucide-solid/icons/shield";
+import MdDelete from "lucide-solid/icons/trash";
+import MdGroupAdd from "lucide-solid/icons/user-plus";
 
 import {
   ContextMenu,

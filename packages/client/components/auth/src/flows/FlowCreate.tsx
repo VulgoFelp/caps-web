@@ -9,7 +9,7 @@ import { A, useNavigate, useParams } from "@revolt/routing";
 import { Button, iconSize } from "@revolt/ui";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
-import MdArrowBack from "@material-design-icons/svg/filled/arrow_back.svg?component-solid";
+import MdArrowBack from "lucide-solid/icons/arrow-left";
 
 import { FlowTitle } from "./Flow";
 import { setFlowCheckEmail } from "./FlowCheck";

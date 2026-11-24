@@ -1,5 +1,6 @@
+import BiSolidPalette from "lucide-solid/icons/palette";
+import BiSolidSpeaker from "lucide-solid/icons/speaker";
 import { createFormControl, createFormGroup } from "solid-forms";
-import { BiSolidPalette, BiSolidSpeaker } from "solid-icons/bi";
 import { For } from "solid-js";
 
 import { PublicBot, PublicChannelInvite } from "stoat.js";
@@ -22,7 +23,7 @@ import {
   iconSize,
 } from "@revolt/ui";
 
-import Face from "@material-design-icons/svg/filled/face.svg?component-solid";
+import Face from "lucide-solid/icons/face-slightly-smiling";
 
 const NewComponent = styled("div", {
   base: {

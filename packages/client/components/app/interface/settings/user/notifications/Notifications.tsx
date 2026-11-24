@@ -5,8 +5,8 @@ import { useNotifications } from "@revolt/client";
 import { useState } from "@revolt/state";
 import { CategoryButton, Checkbox, Column, iconSize } from "@revolt/ui";
 
-import MdMarkUnreadChatAlt from "@material-design-icons/svg/outlined/mark_unread_chat_alt.svg?component-solid";
-import MdNotifications from "@material-design-icons/svg/outlined/notifications.svg?component-solid";
+import MdNotifications from "lucide-solid/icons/bell";
+import MdMarkUnreadChatAlt from "lucide-solid/icons/message-square-dot";
 import Sounds from "./Sounds";
 
 /**

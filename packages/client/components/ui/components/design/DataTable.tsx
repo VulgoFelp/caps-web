@@ -10,10 +10,10 @@ import {
 import { Trans } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
-import MdChevronLeft from "@material-design-icons/svg/outlined/chevron_left.svg?component-solid";
-import MdChevronRight from "@material-design-icons/svg/outlined/chevron_right.svg?component-solid";
-import MdFirstPage from "@material-design-icons/svg/outlined/first_page.svg?component-solid";
-import MdLastPage from "@material-design-icons/svg/outlined/last_page.svg?component-solid";
+import MdChevronLeft from "lucide-solid/icons/chevron-left";
+import MdChevronRight from "lucide-solid/icons/chevron-right";
+import MdFirstPage from "lucide-solid/icons/chevrons-left";
+import MdLastPage from "lucide-solid/icons/chevrons-right";
 
 import { Row } from "../layout";
 

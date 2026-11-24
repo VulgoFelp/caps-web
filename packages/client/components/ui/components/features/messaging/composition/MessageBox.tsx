@@ -1,4 +1,4 @@
-import { BiRegularBlock } from "solid-icons/bi";
+import BiRegularBlock from "lucide-solid/icons/ban";
 import { Accessor, JSX, Match, Show, Switch, onMount } from "solid-js";
 
 import { Trans } from "@lingui/solid/macro";

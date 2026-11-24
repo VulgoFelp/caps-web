@@ -1,7 +1,7 @@
 /**
  * CAPS design system — colour foundation
  *
- * "Grafite e lima": warm graphite neutrals with a single acid-lime accent.
+ * CAPS 2.0 "Grafite e lima": warm graphite neutrals with a single acid-lime accent.
  * The accent is reserved for primary actions, selection and focus; everything
  * else is carried by the neutral ramp so the interface stays calm for long
  * sessions.
@@ -198,28 +198,46 @@ export function createCapsMaterialScheme(darkMode: boolean): Palette {
  */
 export function createCapsTokens(darkMode: boolean): Record<string, string> {
   const d = darkMode;
+
+  // CAPS 2.0 surface model:
+  //   canvas  = app frame (top bar, sidebar, gutters)
+  //   panel   = the content panel that floats on the canvas
+  //   surface = raised blocks inside a panel (composer, cards, popovers)
+  //   component = controls (inputs, tonal buttons, chips)
+  const canvas = d ? graphite[0] : paper[200];
+  const panel = d ? graphite[150] : paper[50];
+  const surface = d ? graphite[200] : paper[0];
+  const component = d ? graphite[300] : paper[250];
+  const overlay = d ? "#1c1c1a" : paper[0];
+
   return {
-    // surfaces: rail < sidebar < app < raised < overlay
-    "--caps-bg-rail": d ? graphite[0] : paper[200],
-    "--caps-bg-sidebar": d ? graphite[100] : paper[100],
-    "--caps-bg-app": d ? graphite[150] : paper[50],
-    "--caps-bg-raised": d ? graphite[200] : paper[0],
-    "--caps-bg-overlay": d ? graphite[250] : paper[0],
-    "--caps-bg-field": d ? graphite[50] : paper[0],
+    "--caps-bg-canvas": canvas,
+    "--caps-bg-panel": panel,
+    "--caps-bg-surface": surface,
+    "--caps-bg-component": component,
+    "--caps-bg-component-hover": d ? graphite[350] : paper[300],
+
+    // legacy aliases (kept so existing components follow the new model)
+    "--caps-bg-rail": canvas,
+    "--caps-bg-sidebar": canvas,
+    "--caps-bg-app": panel,
+    "--caps-bg-raised": surface,
+    "--caps-bg-overlay": overlay,
+    "--caps-bg-field": d ? graphite[100] : paper[0],
     "--caps-bg-inset": d ? graphite[100] : paper[150],
 
     // interaction washes (layered over any surface)
-    "--caps-hover": d ? "rgba(236, 235, 228, 0.055)" : "rgba(26, 26, 24, 0.05)",
+    "--caps-hover": d ? "rgba(236, 235, 228, 0.05)" : "rgba(26, 26, 24, 0.05)",
     "--caps-active": d
-      ? "rgba(236, 235, 228, 0.09)"
+      ? "rgba(236, 235, 228, 0.085)"
       : "rgba(26, 26, 24, 0.085)",
     "--caps-selected": d
-      ? "rgba(236, 235, 228, 0.085)"
-      : "rgba(26, 26, 24, 0.075)",
+      ? "rgba(236, 235, 228, 0.075)"
+      : "rgba(26, 26, 24, 0.07)",
 
     // lines
     "--caps-line": d ? graphite[300] : paper[300],
-    "--caps-line-soft": d ? graphite[250] : paper[250],
+    "--caps-line-soft": d ? "#222220" : paper[250],
     "--caps-line-strong": d ? graphite[400] : paper[400],
 
     // text
@@ -234,8 +252,11 @@ export function createCapsTokens(darkMode: boolean): Record<string, string> {
     "--caps-accent-pressed": d ? CAPS_BRAND.limePressed : "#384500",
     "--caps-on-accent": d ? CAPS_BRAND.onLime : "#ffffff",
     "--caps-accent-soft": d
-      ? "rgba(212, 242, 74, 0.12)"
+      ? "rgba(212, 242, 74, 0.11)"
       : "rgba(79, 97, 0, 0.1)",
+    "--caps-accent-line": d
+      ? "rgba(212, 242, 74, 0.35)"
+      : "rgba(79, 97, 0, 0.35)",
     "--caps-accent-text": d ? "#d7ef6a" : CAPS_BRAND.olive,
 
     // semantic
@@ -248,8 +269,18 @@ export function createCapsTokens(darkMode: boolean): Record<string, string> {
       ? "rgba(242, 104, 91, 0.12)"
       : "rgba(194, 58, 45, 0.09)",
     "--caps-success": CAPS_BRAND.green,
+    "--caps-success-soft": d
+      ? "rgba(58, 191, 126, 0.12)"
+      : "rgba(58, 191, 126, 0.14)",
     "--caps-warning": CAPS_BRAND.amber,
     "--caps-info": CAPS_BRAND.blue,
+
+    // presence
+    "--caps-presence-online": CAPS_BRAND.green,
+    "--caps-presence-idle": CAPS_BRAND.amber,
+    "--caps-presence-focus": CAPS_BRAND.blue,
+    "--caps-presence-busy": CAPS_BRAND.coral,
+    "--caps-presence-offline": d ? graphite[600] : paper[500],
 
     // focus ring: 2px accent, offset from the surface
     "--caps-focus-ring": d
@@ -258,12 +289,12 @@ export function createCapsTokens(darkMode: boolean): Record<string, string> {
 
     // shadows: only for floating layers
     "--caps-shadow-pop": d
-      ? "0 0 0 1px rgba(255, 255, 255, 0.04), 0 8px 24px -6px rgba(0, 0, 0, 0.6), 0 2px 6px rgba(0, 0, 0, 0.35)"
-      : "0 0 0 1px rgba(26, 26, 24, 0.06), 0 8px 24px -6px rgba(26, 26, 24, 0.18), 0 2px 6px rgba(26, 26, 24, 0.08)",
+      ? "0 0 0 1px rgba(255, 255, 255, 0.05), 0 12px 32px -8px rgba(0, 0, 0, 0.65), 0 2px 6px rgba(0, 0, 0, 0.3)"
+      : "0 0 0 1px rgba(26, 26, 24, 0.07), 0 12px 32px -8px rgba(26, 26, 24, 0.18), 0 2px 6px rgba(26, 26, 24, 0.06)",
     "--caps-shadow-modal": d
-      ? "0 0 0 1px rgba(255, 255, 255, 0.05), 0 24px 64px -12px rgba(0, 0, 0, 0.7)"
-      : "0 0 0 1px rgba(26, 26, 24, 0.06), 0 24px 64px -12px rgba(26, 26, 24, 0.28)",
-    "--caps-scrim": d ? "rgba(6, 6, 5, 0.72)" : "rgba(26, 26, 24, 0.42)",
+      ? "0 0 0 1px rgba(255, 255, 255, 0.06), 0 32px 80px -16px rgba(0, 0, 0, 0.75)"
+      : "0 0 0 1px rgba(26, 26, 24, 0.07), 0 32px 80px -16px rgba(26, 26, 24, 0.3)",
+    "--caps-scrim": d ? "rgba(6, 6, 5, 0.7)" : "rgba(26, 26, 24, 0.4)",
   };
 }
 
@@ -284,11 +315,13 @@ export const CAPS_SCALE: Record<string, string> = {
   "--caps-space-10": "48px",
 
   // radii: restrained, never pill-shaped for containers
-  "--caps-radius-xs": "3px",
-  "--caps-radius-sm": "5px",
-  "--caps-radius-md": "7px",
+  "--caps-radius-xs": "4px",
+  "--caps-radius-sm": "6px",
+  "--caps-radius-md": "8px",
   "--caps-radius-lg": "10px",
-  "--caps-radius-server": "12px",
+  "--caps-radius-xl": "14px",
+  "--caps-radius-server": "10px",
+  "--caps-radius-full": "999px",
 
   // control heights (compact)
   "--caps-h-xs": "24px",
@@ -306,6 +339,19 @@ export const CAPS_SCALE: Record<string, string> = {
   "--caps-text-2xl": "22px",
   "--caps-text-3xl": "28px",
 
+  // typography
+  "--caps-font-sans":
+    'var(--fonts-primary, "Geist Variable", system-ui, sans-serif)',
+  "--caps-font-mono":
+    'var(--fonts-monospace, "Geist Mono Variable", ui-monospace, monospace)',
+
+  // layers
+  "--caps-z-topbar": "20",
+  "--caps-z-panel": "30",
+  "--caps-z-popover": "60",
+  "--caps-z-modal": "80",
+  "--caps-z-toast": "90",
+
   // motion
   "--caps-ease": "cubic-bezier(0.2, 0, 0, 1)",
   "--caps-ease-out": "cubic-bezier(0.16, 1, 0.3, 1)",
@@ -314,8 +360,10 @@ export const CAPS_SCALE: Record<string, string> = {
   "--caps-dur-slow": "240ms",
 
   // layout
+  "--caps-topbar-height": "48px",
   "--caps-rail-width": "64px",
-  "--caps-sidebar-width": "240px",
-  "--caps-members-width": "232px",
+  "--caps-sidebar-width": "260px",
+  "--caps-members-width": "260px",
   "--caps-header-height": "48px",
+  "--caps-panel-gap": "8px",
 };

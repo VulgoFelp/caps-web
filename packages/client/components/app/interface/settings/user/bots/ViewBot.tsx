@@ -15,12 +15,12 @@ import {
   useSnackbar,
 } from "@revolt/ui";
 
-import MdContentCopy from "@material-design-icons/svg/outlined/content_copy.svg?component-solid";
-import MdDelete from "@material-design-icons/svg/outlined/delete.svg?component-solid";
-import MdKey from "@material-design-icons/svg/outlined/key.svg?component-solid";
-import MdLink from "@material-design-icons/svg/outlined/link.svg?component-solid";
-import MdPersonAdd from "@material-design-icons/svg/outlined/person_add.svg?component-solid";
-import MdToken from "@material-design-icons/svg/outlined/token.svg?component-solid";
+import MdContentCopy from "lucide-solid/icons/copy";
+import MdKey from "lucide-solid/icons/key-round";
+import MdToken from "lucide-solid/icons/key-square";
+import MdLink from "lucide-solid/icons/link";
+import MdDelete from "lucide-solid/icons/trash";
+import MdPersonAdd from "lucide-solid/icons/user-plus";
 
 import { useSettingsNavigation } from "../../Settings";
 import { Discoverable } from "../../shared/Discoverable";

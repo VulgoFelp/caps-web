@@ -8,7 +8,7 @@ import { useState } from "@revolt/state";
 import { LAYOUT_SECTIONS } from "@revolt/state/stores/Layout";
 import { Button, Checkbox, CircularProgress, Text, iconSize } from "@revolt/ui";
 
-import MdWarning from "@material-design-icons/svg/round/warning.svg?component-solid";
+import MdWarning from "lucide-solid/icons/triangle-exclamation-point";
 
 type GeoBlock = {
   countryCode: string;

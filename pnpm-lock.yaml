@@ -67,6 +67,12 @@ importers:
       '@floating-ui/dom':
         specifier: ^1.7.0
         version: 1.7.0
+      '@fontsource-variable/geist':
+        specifier: 5.3.0
+        version: 5.3.0
+      '@fontsource-variable/geist-mono':
+        specifier: 5.3.0
+        version: 5.3.0
       '@fontsource-variable/google-sans-flex':
         specifier: ^5.3.1
         version: 5.3.1
@@ -259,6 +265,9 @@ importers:
       lowlight:
         specifier: ^3.3.0
         version: 3.3.0
+      lucide-solid:
+        specifier: 1.68.0
+        version: 1.68.0(solid-js@1.9.14)
       material-symbols:
         specifier: ^0.36.0
         version: 0.36.0
@@ -2093,6 +2102,12 @@ packages:
 
   '@floating-ui/utils@0.2.9':
     resolution: {integrity: sha512-MDWhGtE+eHw5JW7lq4qhc5yRLS11ERl1c7Z6Xd0a58DozHES6EnNNwUWbMiG4J9Cgj053Bhk8zvlhFYKVhULwg==}
+
+  '@fontsource-variable/geist-mono@5.3.0':
+    resolution: {integrity: sha512-vBbuwDEo9AkrqADMXOrlAR3DFcJi4/JxeuU43FoiQERnNwsfXNnvxvReZG02cQKmyk4DZkZdBZX3oTDvy2zBAw==}
+
+  '@fontsource-variable/geist@5.3.0':
+    resolution: {integrity: sha512-j0m+vLQuG5XAYoHtGCVu0spvlGreR3EzpECUVzkFmI1mTVnAO38l/NEPDCFgZ177JxzYJCLSmTQibIiYPilGrA==}
 
   '@fontsource-variable/google-sans-flex@5.3.1':
     resolution: {integrity: sha512-ItkWlFvW61+BmwOMJQfPY81KpvvslqbiTyfYKceOx+0kEFBzTcPbbMVcL9BKrmqhhqnq36kNs7YRbxonovOmNg==}
@@ -5205,6 +5220,11 @@ packages:
 
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
+
+  lucide-solid@1.68.0:
+    resolution: {integrity: sha512-XjdWkcNlBaolb/J2AdbTNDR1PDLwrf0a2gTZ5kkD4j8QO817qaBLoWdbBWprn2I8MkRmxpcgNU71baHpg6/t1g==}
+    peerDependencies:
+      solid-js: 1.9.14
 
   lunr@2.3.9:
     resolution: {integrity: sha512-zTU3DaZaF3Rt9rhN3uBMGQD3dD2/vFQqnvZCDv4dl5iOzq2IZQqTxu90r4E5J+nP70J3ilqVCrbho2eWaeW8Ow==}
@@ -8710,6 +8730,10 @@ snapshots:
   '@floating-ui/utils@0.2.12': {}
 
   '@floating-ui/utils@0.2.9': {}
+
+  '@fontsource-variable/geist-mono@5.3.0': {}
+
+  '@fontsource-variable/geist@5.3.0': {}
 
   '@fontsource-variable/google-sans-flex@5.3.1': {}
 
@@ -12528,6 +12552,10 @@ snapshots:
   lru-cache@5.1.1:
     dependencies:
       yallist: 3.1.1
+
+  lucide-solid@1.68.0(solid-js@1.9.14):
+    dependencies:
+      solid-js: 1.9.14
 
   lunr@2.3.9: {}
 

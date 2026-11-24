@@ -3,7 +3,7 @@ import { styled } from "styled-system/jsx";
 
 import { iconSize } from "@revolt/ui/components/utils";
 
-import MdClose from "@material-design-icons/svg/filled/close.svg?component-solid";
+import MdClose from "lucide-solid/icons/x";
 
 import { Ripple } from "../../../design";
 

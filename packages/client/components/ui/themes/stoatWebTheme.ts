@@ -39,8 +39,8 @@ export function createStoatWebVariables(theme: SelectedTheme) {
     "--brand-presence-invisible": "#A5A5A5",
 
     // font
-    "--fonts-primary": `"${theme.interfaceFont}", "Inter", sans-serif`,
-    "--fonts-monospace": `"${theme.monospaceFont}", "Jetbrains Mono", sans-serif`,
+    "--fonts-primary": `"${theme.interfaceFont}", "Geist Variable", system-ui, sans-serif`,
+    "--fonts-monospace": `"${theme.monospaceFont}", "Geist Mono Variable", ui-monospace, monospace`,
 
     // load constants
     ...reduceWithPrefix(themeConstants.borderRadius, "--borderRadius-"),

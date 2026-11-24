@@ -15,7 +15,7 @@ import { styled } from "styled-system/jsx";
 
 import { iconSize, symbolSize, Text, useActionSheet } from "@revolt/ui";
 
-import MdChevronRight from "@material-design-icons/svg/outlined/chevron_right.svg?component-solid";
+import MdChevronRight from "lucide-solid/icons/chevron-right";
 
 const Base = styled("div", {
   base: {

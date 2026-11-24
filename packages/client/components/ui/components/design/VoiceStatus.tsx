@@ -3,9 +3,9 @@ import { styled } from "styled-system/jsx";
 
 import { VoiceStatus as APIVoiceStatus } from "stoat.js";
 
-import MdScreenShare from "@material-design-icons/svg/outlined/screen_share.svg?component-solid";
-import MdVideoChat from "@material-design-icons/svg/outlined/video_call.svg?component-solid";
-import MdVoiceChat from "@material-design-icons/svg/outlined/volume_up.svg?component-solid";
+import MdScreenShare from "lucide-solid/icons/screen-share";
+import MdVideoChat from "lucide-solid/icons/video";
+import MdVoiceChat from "lucide-solid/icons/volume-2";
 
 import { iconSize } from "../utils";
 

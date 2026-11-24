@@ -9,7 +9,7 @@ import { useTime } from "@revolt/i18n";
 import { Ripple } from "@revolt/ui/components/design";
 import { iconSize } from "@revolt/ui/components/utils";
 
-import MdClose from "@material-design-icons/svg/filled/close.svg?component-solid";
+import MdClose from "lucide-solid/icons/x";
 
 import { FloatingIndicator } from "./FloatingIndicator";
 

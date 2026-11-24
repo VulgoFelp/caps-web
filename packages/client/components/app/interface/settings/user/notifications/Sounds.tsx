@@ -13,7 +13,7 @@ import {
   iconSize,
 } from "@revolt/ui";
 
-import MdVolumeUp from "@material-design-icons/svg/outlined/volume_up.svg?component-solid";
+import MdVolumeUp from "lucide-solid/icons/volume-2";
 
 export default function Sounds() {
   const { settings, sounds } = useState();

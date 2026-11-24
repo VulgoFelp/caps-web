@@ -28,6 +28,7 @@
 export { Avatar } from "./Avatar";
 export { Badge } from "./Badge";
 export { Button } from "./Button";
+export { CapsMark } from "./CapsMark";
 export { type CategorySelectOption, CategoryButton } from "./CategoryButton";
 export { Checkbox } from "./Checkbox";
 export { COLOUR_PALETTE, ColourPicker } from "./ColourPicker";

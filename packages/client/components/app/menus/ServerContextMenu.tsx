@@ -1,4 +1,4 @@
-import MdFolder from "@material-design-icons/svg/outlined/folder.svg?component-solid";
+import MdFolder from "lucide-solid/icons/folder";
 import { For, Show } from "solid-js";
 
 import { Trans } from "@lingui/solid/macro";
@@ -11,25 +11,27 @@ import { useModals } from "@revolt/modal";
 import { useState } from "@revolt/state";
 import { Column, Text, Time } from "@revolt/ui";
 
-import MdAlternateEmail from "@material-design-icons/svg/outlined/alternate_email.svg?component-solid";
-import MdBadge from "@material-design-icons/svg/outlined/badge.svg?component-solid";
-import MdCreateNewFolder from "@material-design-icons/svg/outlined/create_new_folder.svg?component-solid";
-import MdFace from "@material-design-icons/svg/outlined/face.svg?component-solid";
-import MdFolderOff from "@material-design-icons/svg/outlined/folder_off.svg?component-solid";
-import MdLogout from "@material-design-icons/svg/outlined/logout.svg?component-solid";
-import MdMarkChatRead from "@material-design-icons/svg/outlined/mark_chat_read.svg?component-solid";
-import MdNotificationsActive from "@material-design-icons/svg/outlined/notifications_active.svg?component-solid";
-import MdNotificationsOff from "@material-design-icons/svg/outlined/notifications_off.svg?component-solid";
-import MdPersonAdd from "@material-design-icons/svg/outlined/person_add.svg?component-solid";
-import MdReport from "@material-design-icons/svg/outlined/report.svg?component-solid";
-import MdSettings from "@material-design-icons/svg/outlined/settings.svg?component-solid";
-import MdShield from "@material-design-icons/svg/outlined/shield.svg?component-solid";
+import MdAlternateEmail from "lucide-solid/icons/at-sign";
+import MdNotificationsOff from "lucide-solid/icons/bell-off";
+import MdNotificationsActive from "lucide-solid/icons/bell-ring";
+import MdMarkChatRead from "lucide-solid/icons/check-check";
+import MdFace from "lucide-solid/icons/face-slightly-smiling";
+import MdReport from "lucide-solid/icons/flag";
+import MdCreateNewFolder from "lucide-solid/icons/folder-plus";
+import MdFolderOff from "lucide-solid/icons/folder-x";
+import MdBadge from "lucide-solid/icons/id-card";
+import MdLogout from "lucide-solid/icons/log-out";
+import MdSettings from "lucide-solid/icons/settings";
+import MdShield from "lucide-solid/icons/shield";
+import MdPersonAdd from "lucide-solid/icons/user-plus";
 
-import MdDoNotDisturbOff from "@material-symbols/svg-400/outlined/do_not_disturb_off.svg?component-solid";
-import MdDoNotDisturbOn from "@material-symbols/svg-400/outlined/do_not_disturb_on.svg?component-solid";
-import MdNotificationSettings from "@material-symbols/svg-400/outlined/notification_settings.svg?component-solid";
-import MdRadioButtonChecked from "@material-symbols/svg-400/outlined/radio_button_checked-fill.svg?component-solid";
-import MdRadioButtonUnchecked from "@material-symbols/svg-400/outlined/radio_button_unchecked.svg?component-solid";
+import {
+  default as MdDoNotDisturbOff,
+  default as MdNotificationSettings,
+} from "lucide-solid/icons/bell";
+import MdRadioButtonUnchecked from "lucide-solid/icons/circle";
+import MdRadioButtonChecked from "lucide-solid/icons/circle-dot";
+import MdDoNotDisturbOn from "lucide-solid/icons/circle-minus";
 
 import {
   ContextMenu,

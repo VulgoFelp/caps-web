@@ -15,10 +15,10 @@ import {
 import { cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
-import MdChevronRight from "@material-design-icons/svg/outlined/chevron_right.svg?component-solid";
-import MdContentCopy from "@material-design-icons/svg/outlined/content_copy.svg?component-solid";
-import MdKeyboardDown from "@material-design-icons/svg/outlined/keyboard_arrow_down.svg?component-solid";
-import MdOpenInNew from "@material-design-icons/svg/outlined/open_in_new.svg?component-solid";
+import MdKeyboardDown from "lucide-solid/icons/chevron-down";
+import MdChevronRight from "lucide-solid/icons/chevron-right";
+import MdContentCopy from "lucide-solid/icons/copy";
+import MdOpenInNew from "lucide-solid/icons/external-link";
 
 import { OverflowingText, iconSize } from "../utils";
 

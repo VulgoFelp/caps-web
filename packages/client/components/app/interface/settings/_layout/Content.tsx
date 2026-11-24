@@ -6,7 +6,7 @@ import { styled } from "styled-system/jsx";
 
 import { Breadcrumbs, IconButton, Text } from "@revolt/ui";
 
-import MdClose from "@material-design-icons/svg/outlined/close.svg?component-solid";
+import MdClose from "lucide-solid/icons/x";
 
 import { SettingsList } from "..";
 import { useSettingsNavigation } from "../Settings";

@@ -1,4 +1,4 @@
-import { BiRegularCheck } from "solid-icons/bi";
+import BiRegularCheck from "lucide-solid/icons/check";
 import { JSX, Show, createSignal, splitProps } from "solid-js";
 
 import { styled } from "styled-system/jsx";

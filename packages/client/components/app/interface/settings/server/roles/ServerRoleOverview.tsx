@@ -18,7 +18,7 @@ import {
 import { createDragHandle } from "@revolt/ui/components/utils/Draggable";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
-import MdDragIndicator from "@material-design-icons/svg/outlined/drag_indicator.svg?component-solid";
+import MdDragIndicator from "lucide-solid/icons/grip-vertical";
 
 import { css } from "styled-system/css";
 import { useSettingsNavigation } from "../../Settings";

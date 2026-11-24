@@ -11,7 +11,7 @@ import { Ripple, Text } from "@revolt/ui/components/design";
 import { Tooltip } from "@revolt/ui/components/floating";
 import { Row } from "@revolt/ui/components/layout";
 
-import MdAdd from "@material-design-icons/svg/outlined/add.svg?component-solid";
+import MdAdd from "lucide-solid/icons/plus";
 
 interface Props {
   /**

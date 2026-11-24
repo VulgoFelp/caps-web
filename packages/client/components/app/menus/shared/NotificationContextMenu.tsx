@@ -7,15 +7,17 @@ import { Channel } from "stoat.js";
 import { useState } from "@revolt/state";
 import { Column, Text, Time } from "@revolt/ui";
 
-import MdAlternateEmail from "@material-design-icons/svg/outlined/alternate_email.svg?component-solid";
-import MdNotificationsActive from "@material-design-icons/svg/outlined/notifications_active.svg?component-solid";
-import MdNotificationsOff from "@material-design-icons/svg/outlined/notifications_off.svg?component-solid";
+import MdAlternateEmail from "lucide-solid/icons/at-sign";
+import MdNotificationsOff from "lucide-solid/icons/bell-off";
+import MdNotificationsActive from "lucide-solid/icons/bell-ring";
 
-import MdDoNotDisturbOff from "@material-symbols/svg-400/outlined/do_not_disturb_off.svg?component-solid";
-import MdDoNotDisturbOn from "@material-symbols/svg-400/outlined/do_not_disturb_on.svg?component-solid";
-import MdNotificationSettings from "@material-symbols/svg-400/outlined/notification_settings.svg?component-solid";
-import MdRadioButtonChecked from "@material-symbols/svg-400/outlined/radio_button_checked-fill.svg?component-solid";
-import MdRadioButtonUnchecked from "@material-symbols/svg-400/outlined/radio_button_unchecked.svg?component-solid";
+import {
+  default as MdDoNotDisturbOff,
+  default as MdNotificationSettings,
+} from "lucide-solid/icons/bell";
+import MdRadioButtonUnchecked from "lucide-solid/icons/circle";
+import MdRadioButtonChecked from "lucide-solid/icons/circle-dot";
+import MdDoNotDisturbOn from "lucide-solid/icons/circle-minus";
 
 import { ContextMenuButton, ContextMenuSubMenu } from "../ContextMenu";
 

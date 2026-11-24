@@ -7,7 +7,7 @@ import { createOwnProfileResource } from "@revolt/client/resources";
 import { useModals } from "@revolt/modal";
 import { Avatar, CategoryButton, Column, Text, iconSize } from "@revolt/ui";
 
-import MdGroups from "@material-design-icons/svg/outlined/groups.svg?component-solid";
+import MdGroups from "lucide-solid/icons/users-round";
 
 import { UserSummary } from "../account/index";
 

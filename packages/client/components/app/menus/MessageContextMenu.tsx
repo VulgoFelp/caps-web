@@ -9,25 +9,27 @@ import { useModals } from "@revolt/modal";
 import { useState } from "@revolt/state";
 import { MediaPickerProps } from "@revolt/ui/components/features/messaging/composition/picker/CompositionMediaPicker";
 
-import MdBadge from "@material-design-icons/svg/outlined/badge.svg?component-solid";
-import MdContentCopy from "@material-design-icons/svg/outlined/content_copy.svg?component-solid";
-import MdDelete from "@material-design-icons/svg/outlined/delete.svg?component-solid";
-import MdDeleteSweep from "@material-design-icons/svg/outlined/delete_sweep.svg?component-solid";
-import MdDownload from "@material-design-icons/svg/outlined/download.svg?component-solid";
-import MdEdit from "@material-design-icons/svg/outlined/edit.svg?component-solid";
-import MdEmojiEmotions from "@material-design-icons/svg/outlined/emoji_emotions.svg?component-solid";
-import MdLink from "@material-design-icons/svg/outlined/link.svg?component-solid";
-import MdMarkChatUnread from "@material-design-icons/svg/outlined/mark_chat_unread.svg?component-solid";
-import MdOpenInNew from "@material-design-icons/svg/outlined/open_in_new.svg?component-solid";
-import MdPin from "@material-design-icons/svg/outlined/pin_invoke.svg?component-solid";
-import MdReply from "@material-design-icons/svg/outlined/reply.svg?component-solid";
-import MdReport from "@material-design-icons/svg/outlined/report.svg?component-solid";
-import MdShare from "@material-design-icons/svg/outlined/share.svg?component-solid";
-import MdShield from "@material-design-icons/svg/outlined/shield.svg?component-solid";
+import MdContentCopy from "lucide-solid/icons/copy";
+import MdDownload from "lucide-solid/icons/download";
+import MdOpenInNew from "lucide-solid/icons/external-link";
+import MdEmojiEmotions from "lucide-solid/icons/face-slightly-smiling";
+import MdReport from "lucide-solid/icons/flag";
+import MdBadge from "lucide-solid/icons/id-card";
+import MdLink from "lucide-solid/icons/link";
+import MdMarkChatUnread from "lucide-solid/icons/message-square-dot";
+import MdEdit from "lucide-solid/icons/pencil";
+import MdPin from "lucide-solid/icons/pin";
+import MdReply from "lucide-solid/icons/reply";
+import MdShare from "lucide-solid/icons/share-2";
+import MdShield from "lucide-solid/icons/shield";
+import {
+  default as MdDelete,
+  default as MdDeleteSweep,
+} from "lucide-solid/icons/trash";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
-import MdSentimentContent from "@material-symbols/svg-400/outlined/sentiment_content.svg?component-solid";
 import { useSnackbar } from "@revolt/ui";
+import MdSentimentContent from "lucide-solid/icons/face-slightly-smiling";
 import {
   ContextMenu,
   ContextMenuButton,

@@ -14,7 +14,7 @@ import {
   TextField,
 } from "@revolt/ui";
 
-import MdDelete from "@material-design-icons/svg/outlined/delete.svg?component-solid";
+import MdDelete from "lucide-solid/icons/trash";
 
 /**
  * List and invalidate server bans

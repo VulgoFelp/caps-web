@@ -5,10 +5,10 @@ import { Trans } from "@lingui/solid/macro";
 import { PublicChannelInvite } from "stoat.js";
 import { styled } from "styled-system/jsx";
 
-import MdGroups3 from "@material-design-icons/svg/filled/groups_3.svg?component-solid";
-import MdBugReport from "@material-design-icons/svg/outlined/bug_report.svg?component-solid";
-import MdFormatListNumbered from "@material-design-icons/svg/outlined/format_list_numbered.svg?component-solid";
-import MdStar from "@material-design-icons/svg/outlined/star_outline.svg?component-solid";
+import MdBugReport from "lucide-solid/icons/bug";
+import MdFormatListNumbered from "lucide-solid/icons/list-ordered";
+import MdStar from "lucide-solid/icons/star";
+import MdGroups3 from "lucide-solid/icons/users-round";
 
 import { useClient } from "@revolt/client";
 import { useInstance } from "@revolt/instance";

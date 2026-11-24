@@ -13,8 +13,8 @@ import {
   iconSize,
 } from "@revolt/ui";
 
-import MdLibraryBooks from "@material-design-icons/svg/outlined/library_books.svg?component-solid";
-import MdSmartToy from "@material-design-icons/svg/outlined/smart_toy.svg?component-solid";
+import MdSmartToy from "lucide-solid/icons/bot";
+import MdLibraryBooks from "lucide-solid/icons/library";
 
 import { useSettingsNavigation } from "../../Settings";
 

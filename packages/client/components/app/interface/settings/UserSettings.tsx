@@ -12,20 +12,20 @@ import { fetchLatestChangelog } from "@revolt/modal/modals/Changelog";
 import { ColouredText, Column, Text, iconSize } from "@revolt/ui";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
-import MdAccountCircle from "@material-design-icons/svg/outlined/account_circle.svg?component-solid";
-import MdCampaign from "@material-design-icons/svg/outlined/campaign.svg?component-solid";
-import MdCoffee from "@material-design-icons/svg/outlined/coffee.svg?component-solid";
-import MdLanguage from "@material-design-icons/svg/outlined/language.svg?component-solid";
-import MdLogout from "@material-design-icons/svg/outlined/logout.svg?component-solid";
-import MdMemory from "@material-design-icons/svg/outlined/memory.svg?component-solid";
-import MdMic from "@material-design-icons/svg/outlined/mic.svg?component-solid";
-import MdNotifications from "@material-design-icons/svg/outlined/notifications.svg?component-solid";
-import MdPalette from "@material-design-icons/svg/outlined/palette.svg?component-solid";
-import MdRateReview from "@material-design-icons/svg/outlined/rate_review.svg?component-solid";
-import MdScience from "@material-design-icons/svg/outlined/science.svg?component-solid";
-import MdSmartToy from "@material-design-icons/svg/outlined/smart_toy.svg?component-solid";
-import MdVerifiedUser from "@material-design-icons/svg/outlined/verified_user.svg?component-solid";
-import MdWorkspacePremium from "@material-design-icons/svg/outlined/workspace_premium.svg?component-solid";
+import MdWorkspacePremium from "lucide-solid/icons/award";
+import MdNotifications from "lucide-solid/icons/bell";
+import MdSmartToy from "lucide-solid/icons/bot";
+import MdAccountCircle from "lucide-solid/icons/circle-user-round";
+import MdCoffee from "lucide-solid/icons/coffee";
+import MdMemory from "lucide-solid/icons/cpu";
+import MdScience from "lucide-solid/icons/flask-conical";
+import MdLanguage from "lucide-solid/icons/globe";
+import MdLogout from "lucide-solid/icons/log-out";
+import MdCampaign from "lucide-solid/icons/megaphone";
+import MdMic from "lucide-solid/icons/mic";
+import MdPalette from "lucide-solid/icons/palette";
+import MdVerifiedUser from "lucide-solid/icons/shield-check";
+import MdRateReview from "lucide-solid/icons/star";
 
 import pkg from "../../../../../../package.json";
 

@@ -1,9 +1,7 @@
-import {
-  BiSolidFile,
-  BiSolidFileImage,
-  BiSolidFileTxt,
-  BiSolidVideoRecording,
-} from "solid-icons/bi";
+import BiSolidFile from "lucide-solid/icons/file";
+import BiSolidFileImage from "lucide-solid/icons/file-image";
+import BiSolidVideoRecording from "lucide-solid/icons/file-play";
+import BiSolidFileTxt from "lucide-solid/icons/file-text";
 import {
   Match,
   Show,

@@ -6,8 +6,8 @@ import { styled } from "styled-system/jsx";
 import { useTime } from "@revolt/i18n";
 import { Avatar, CategoryButton, IconButton, iconSize } from "@revolt/ui";
 
-import MdCakeFill from "@material-design-icons/svg/filled/cake.svg?component-solid";
-import MdEdit from "@material-design-icons/svg/outlined/edit.svg?component-solid";
+import MdCakeFill from "lucide-solid/icons/cake";
+import MdEdit from "lucide-solid/icons/pencil";
 
 export function UserSummary(props: {
   user: User;

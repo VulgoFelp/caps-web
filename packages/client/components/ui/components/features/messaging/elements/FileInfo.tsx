@@ -1,10 +1,8 @@
-import {
-  BiRegularHeadphone,
-  BiSolidFile,
-  BiSolidFileTxt,
-  BiSolidImage,
-  BiSolidVideo,
-} from "solid-icons/bi";
+import BiSolidFile from "lucide-solid/icons/file";
+import BiSolidFileTxt from "lucide-solid/icons/file-text";
+import BiRegularHeadphone from "lucide-solid/icons/headphones";
+import BiSolidImage from "lucide-solid/icons/image";
+import BiSolidVideo from "lucide-solid/icons/video";
 import { Match, Show, Switch } from "solid-js";
 
 import { File, MessageEmbed } from "stoat.js";

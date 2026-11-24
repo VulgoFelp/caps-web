@@ -7,10 +7,10 @@ import { Channel, Server } from "stoat.js";
 import { useModals } from "@revolt/modal";
 import { useState } from "@revolt/state";
 
-import MdBadge from "@material-design-icons/svg/outlined/badge.svg?component-solid";
-import MdDelete from "@material-design-icons/svg/outlined/delete.svg?component-solid";
-import MdLibraryAdd from "@material-design-icons/svg/outlined/library_add.svg?component-solid";
-import MdMarkChatRead from "@material-design-icons/svg/outlined/mark_chat_read.svg?component-solid";
+import MdMarkChatRead from "lucide-solid/icons/check-check";
+import MdLibraryAdd from "lucide-solid/icons/copy-plus";
+import MdBadge from "lucide-solid/icons/id-card";
+import MdDelete from "lucide-solid/icons/trash";
 
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 import {

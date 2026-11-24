@@ -1,4 +1,4 @@
-import { BiSolidShield } from "solid-icons/bi";
+import BiSolidShield from "lucide-solid/icons/shield";
 import { Show } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";

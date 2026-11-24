@@ -1,8 +1,9 @@
-import { BiRegularChevronLeft, BiRegularChevronRight } from "solid-icons/bi";
+import BiRegularChevronLeft from "lucide-solid/icons/chevron-left";
+import BiRegularChevronRight from "lucide-solid/icons/chevron-right";
 
 import { JSX, Match, Switch } from "solid-js";
 
-import MdArrowBack from "@material-design-icons/svg/outlined/arrow_back.svg?component-solid";
+import MdArrowBack from "lucide-solid/icons/arrow-left";
 
 import { useLingui } from "@lingui/solid/macro";
 import { css } from "styled-system/css";

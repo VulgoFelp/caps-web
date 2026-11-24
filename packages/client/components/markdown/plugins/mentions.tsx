@@ -11,7 +11,7 @@ import { useClient } from "@revolt/client";
 import { useSmartParams } from "@revolt/routing";
 import { Avatar, ColouredText, iconSize } from "@revolt/ui";
 
-import MdAt from "@material-design-icons/svg/filled/alternate_email.svg?component-solid";
+import MdAt from "lucide-solid/icons/at-sign";
 
 import { useUser } from "../users";
 

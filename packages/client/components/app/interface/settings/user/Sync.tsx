@@ -2,9 +2,9 @@ import { Trans } from "@lingui/solid/macro";
 
 import { CategoryButton, Checkbox, Column, Time, iconSize } from "@revolt/ui";
 
-import MdBrush from "@material-design-icons/svg/outlined/brush.svg?component-solid";
-import MdLanguage from "@material-design-icons/svg/outlined/language.svg?component-solid";
-import MdPalette from "@material-design-icons/svg/outlined/palette.svg?component-solid";
+import MdBrush from "lucide-solid/icons/brush";
+import MdLanguage from "lucide-solid/icons/globe";
+import MdPalette from "lucide-solid/icons/palette";
 
 /**
  * Sync Configuration Page

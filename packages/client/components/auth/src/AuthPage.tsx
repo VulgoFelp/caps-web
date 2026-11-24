@@ -625,7 +625,7 @@ export function AuthPage(props: { children: JSX.Element }) {
           </div>
 
           <Footer>
-            <span>CAPS · coisa de doido</span>
+            <span>© CAPS</span>
             <Socials aria-label="Código-fonte">
               <a
                 href="https://github.com/VulgoFelp/caps-web"

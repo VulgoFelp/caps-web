@@ -10,11 +10,11 @@ import { useState } from "@revolt/state";
 import { Ripple } from "@revolt/ui/components/design";
 import { iconSize } from "@revolt/ui/components/utils";
 
-import MdDelete from "@material-design-icons/svg/outlined/delete.svg?component-solid";
-import MdEdit from "@material-design-icons/svg/outlined/edit.svg?component-solid";
-import MdEmojiEmotions from "@material-design-icons/svg/outlined/emoji_emotions.svg?component-solid";
-import MdMoreVert from "@material-design-icons/svg/outlined/more_vert.svg?component-solid";
-import MdReply from "@material-design-icons/svg/outlined/reply.svg?component-solid";
+import MdMoreVert from "lucide-solid/icons/ellipsis-vertical";
+import MdEmojiEmotions from "lucide-solid/icons/face-slightly-smiling";
+import MdEdit from "lucide-solid/icons/pencil";
+import MdReply from "lucide-solid/icons/reply";
+import MdDelete from "lucide-solid/icons/trash";
 
 export function MessageToolbar() {
   const user = useUser();

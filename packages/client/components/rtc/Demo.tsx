@@ -28,9 +28,9 @@ import {
   iconSize,
 } from "@revolt/ui";
 
-import MdHeadsetOff from "@material-design-icons/svg/outlined/headset_off.svg?component-solid";
-import MdMicOn from "@material-design-icons/svg/outlined/mic.svg?component-solid";
-import MdMicOff from "@material-design-icons/svg/outlined/mic_off.svg?component-solid";
+import MdHeadsetOff from "lucide-solid/icons/headphone-off";
+import MdMicOn from "lucide-solid/icons/mic";
+import MdMicOff from "lucide-solid/icons/mic-off";
 
 import { InRoom, useVoice } from ".";
 

@@ -10,7 +10,7 @@ import { A, Navigate } from "@revolt/routing";
 import { useState } from "@revolt/state";
 import { Button, Column, Row, Text, iconSize } from "@revolt/ui";
 
-import MdArrowBack from "@material-design-icons/svg/filled/arrow_back.svg?component-solid";
+import MdArrowBack from "lucide-solid/icons/arrow-left";
 
 import { FlowTitle } from "./Flow";
 import { Fields, Form } from "./Form";

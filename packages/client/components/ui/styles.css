@@ -1,10 +1,4 @@
-@import "@fontsource/inter/300";
-@import "@fontsource/inter/400";
-@import "@fontsource/inter/500";
-@import "@fontsource/inter/600";
-@import "@fontsource/inter/700";
-@import "@fontsource/inter/800";
-@import "@fontsource/jetbrains-mono";
+@import "@fontsource-variable/geist";
 
 * {
   box-sizing: border-box;
@@ -34,7 +28,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  font-feature-settings: "ss02", "cv01";
+  font-feature-settings: "ss01";
 }
 
 /* ------------------------------------------------------------------
@@ -220,4 +214,14 @@ body {
 .hljs-punctuation,
 .hljs-tag {
   /* purposely ignored */
+}
+
+/* CAPS 2.0 icon system (Lucide): thin, even strokes; colour follows text */
+.lucide.lucide {
+  fill: none !important;
+  flex-shrink: 0;
+}
+
+.lucide[stroke-width="2"] {
+  stroke-width: 1.75;
 }

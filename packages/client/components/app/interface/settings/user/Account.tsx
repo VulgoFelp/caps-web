@@ -10,14 +10,14 @@ import {
 import { useModals } from "@revolt/modal";
 import { CategoryButton, Column, Row, iconSize, useSnackbar } from "@revolt/ui";
 
-import MdAlternateEmail from "@material-design-icons/svg/outlined/alternate_email.svg?component-solid";
-import MdBlock from "@material-design-icons/svg/outlined/block.svg?component-solid";
-import MdDelete from "@material-design-icons/svg/outlined/delete.svg?component-solid";
-import MdAddUser from "@material-design-icons/svg/outlined/group_add.svg?component-solid";
-import MdLock from "@material-design-icons/svg/outlined/lock.svg?component-solid";
-import MdMail from "@material-design-icons/svg/outlined/mail.svg?component-solid";
-import MdPassword from "@material-design-icons/svg/outlined/password.svg?component-solid";
-import MdVerifiedUser from "@material-design-icons/svg/outlined/verified_user.svg?component-solid";
+import MdAlternateEmail from "lucide-solid/icons/at-sign";
+import MdBlock from "lucide-solid/icons/ban";
+import MdPassword from "lucide-solid/icons/key-round";
+import MdLock from "lucide-solid/icons/lock";
+import MdMail from "lucide-solid/icons/mail";
+import MdVerifiedUser from "lucide-solid/icons/shield-check";
+import MdDelete from "lucide-solid/icons/trash";
+import MdAddUser from "lucide-solid/icons/user-plus";
 
 import { useSettingsNavigation } from "../Settings";
 import { UserSummary } from "./account/index";

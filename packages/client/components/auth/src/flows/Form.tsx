@@ -6,8 +6,8 @@ import { useLingui } from "@lingui/solid/macro";
 import { Checkbox, Column, iconSize, Text, TextField } from "@revolt/ui";
 import { styled } from "styled-system/jsx";
 
-import MdError from "@material-design-icons/svg/filled/error.svg?component-solid";
 import { TranslatedError } from "@revolt/i18n/errors";
+import MdError from "lucide-solid/icons/circle-exclamation-point";
 
 import { useFlowBubble } from "./Flow";
 

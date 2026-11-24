@@ -7,7 +7,7 @@ export function addFontPreload(): Plugin {
   const extractTags = (src: string): HtmlTagDescriptor[] => {
     const tags: HtmlTagDescriptor[] = [];
     const reg =
-      /src:url\(['"]?(.+?\/material-symbols-.+?\.woff2)['"]?\)\s+format\(\s*['"]woff2['"]\s*\)/g;
+      /src:url\(['"]?(.+?\/geist-latin-wght-normal.+?\.woff2)['"]?\)\s+format\(\s*['"]woff2['"]\s*\)/g;
     let match: RegExpExecArray | null;
     while ((match = reg.exec(src))) {
       const href = match[1];

@@ -3,8 +3,8 @@ import { Trans } from "@lingui/solid/macro";
 import { useModals } from "@revolt/modal";
 import { ServerFolder, useState } from "@revolt/state";
 
-import MdDelete from "@material-design-icons/svg/outlined/delete.svg?component-solid";
-import MdDriveFileRenameOutline from "@material-design-icons/svg/outlined/drive_file_rename_outline.svg?component-solid";
+import MdDriveFileRenameOutline from "lucide-solid/icons/pencil-line";
+import MdDelete from "lucide-solid/icons/trash";
 
 import {
   ContextMenu,

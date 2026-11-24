@@ -1,4 +1,4 @@
-import { BiSolidChevronRight } from "solid-icons/bi";
+import BiSolidChevronRight from "lucide-solid/icons/chevron-right";
 import { For, JSX, Match, Show, Switch } from "solid-js";
 
 import { styled } from "styled-system/jsx";

@@ -3,7 +3,7 @@ import { styled } from "styled-system/jsx";
 
 import { Dialog, DialogProps, iconSize } from "@revolt/ui";
 
-import MdError from "@material-design-icons/svg/outlined/error.svg?component-solid";
+import MdError from "lucide-solid/icons/circle-exclamation-point";
 
 import { TranslatedError } from "@revolt/i18n/errors";
 import { Modals } from "../types";

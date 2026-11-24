@@ -1,19 +1,17 @@
-import {
-  BiRegularAlignLeft,
-  BiRegularLeftArrowAlt,
-  BiRegularMinus,
-  BiRegularPhone,
-  BiRegularPin,
-  BiRegularPlus,
-  BiRegularRightArrowAlt,
-  BiRegularX,
-  BiSolidImage,
-  BiSolidInfoCircle,
-  BiSolidKey,
-  BiSolidPurchaseTag,
-  BiSolidShieldX,
-  BiSolidXCircle,
-} from "solid-icons/bi";
+import BiRegularLeftArrowAlt from "lucide-solid/icons/arrow-left";
+import BiRegularRightArrowAlt from "lucide-solid/icons/arrow-right";
+import BiSolidXCircle from "lucide-solid/icons/circle-x";
+import BiSolidImage from "lucide-solid/icons/image";
+import BiSolidInfoCircle from "lucide-solid/icons/info";
+import BiSolidKey from "lucide-solid/icons/key-round";
+import BiRegularMinus from "lucide-solid/icons/minus";
+import BiRegularPhone from "lucide-solid/icons/phone";
+import BiRegularPin from "lucide-solid/icons/pin";
+import BiRegularPlus from "lucide-solid/icons/plus";
+import BiSolidShieldX from "lucide-solid/icons/shield-x";
+import BiSolidPurchaseTag from "lucide-solid/icons/tag";
+import BiRegularAlignLeft from "lucide-solid/icons/text-align-start";
+import BiRegularX from "lucide-solid/icons/x";
 import { Match, Switch } from "solid-js";
 
 import { SystemMessage } from "stoat.js";

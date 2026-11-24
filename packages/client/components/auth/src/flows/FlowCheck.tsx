@@ -5,7 +5,7 @@ import { Trans } from "@lingui/solid/macro";
 import { A, useNavigate } from "@revolt/routing";
 import { Button, Row, iconSize } from "@revolt/ui";
 
-import MdArrowBack from "@material-design-icons/svg/filled/arrow_back.svg?component-solid";
+import MdArrowBack from "lucide-solid/icons/arrow-left";
 
 import { FlowTitle } from "./Flow";
 import { MailProvider } from "./MailProvider";

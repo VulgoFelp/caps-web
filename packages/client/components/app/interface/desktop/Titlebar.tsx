@@ -10,11 +10,11 @@ import { useClientLifecycle } from "@revolt/client";
 import { State, TransitionType } from "@revolt/client/Controller";
 import { Button, symbolSize } from "@revolt/ui";
 
-import MdBuild from "@material-symbols/svg-400/outlined/build.svg?component-solid";
-import MdClose from "@material-symbols/svg-400/outlined/close.svg?component-solid";
-import MdCollapseContent from "@material-symbols/svg-400/outlined/collapse_content.svg?component-solid";
-import MdExpandContent from "@material-symbols/svg-400/outlined/expand_content.svg?component-solid";
-import MdMinimize from "@material-symbols/svg-400/outlined/minimize.svg?component-solid";
+import MdExpandContent from "lucide-solid/icons/maximize-2";
+import MdCollapseContent from "lucide-solid/icons/minimize-2";
+import MdMinimize from "lucide-solid/icons/minus";
+import MdBuild from "lucide-solid/icons/wrench";
+import MdClose from "lucide-solid/icons/x";
 
 import Wordmark from "../../../../public/assets/web/wordmark.svg?component-solid";
 import { pendingUpdate } from "../../../../src/serviceWorkerInterface";

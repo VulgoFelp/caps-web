@@ -25,6 +25,7 @@ import { useNavigate } from "@revolt/routing";
 import { ResolvedEntry, useState } from "@revolt/state";
 import {
   Avatar,
+  CapsMark,
   Column,
   Symbol,
   Text,
@@ -999,19 +1000,3 @@ const Shadow = styled("div", {
 /**
  * CAPS mark: the spiral used for the home entry
  */
-function CapsMark() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      width="20"
-      height="20"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2.2"
-      stroke-linecap="round"
-      aria-hidden="true"
-    >
-      <path d="M12.6 12.2c.5-.6.1-1.6-.8-1.6-1.2 0-1.9 1.3-1.4 2.4.7 1.5 2.8 1.8 4 .7 1.6-1.5 1.2-4.2-.6-5.3-2.3-1.4-5.4-.4-6.5 2-1.4 3 .3 6.5 3.4 7.4 3.7 1.1 7.4-1.4 8-5.1" />
-    </svg>
-  );
-}

@@ -14,12 +14,12 @@ import {
   iconSize,
 } from "@revolt/ui";
 
-import MdErrorFill from "@material-design-icons/svg/filled/error.svg?component-solid";
-import MdVerifiedFill from "@material-design-icons/svg/filled/verified.svg?component-solid";
-import MdCalendarMonth from "@material-design-icons/svg/outlined/calendar_month.svg?component-solid";
-import MdLanguage from "@material-design-icons/svg/outlined/language.svg?component-solid";
-import MdSchedule from "@material-design-icons/svg/outlined/schedule.svg?component-solid";
-import MdTranslate from "@material-design-icons/svg/outlined/translate.svg?component-solid";
+import MdVerifiedFill from "lucide-solid/icons/badge-check";
+import MdCalendarMonth from "lucide-solid/icons/calendar";
+import MdErrorFill from "lucide-solid/icons/circle-exclamation-point";
+import MdSchedule from "lucide-solid/icons/clock";
+import MdLanguage from "lucide-solid/icons/globe";
+import MdTranslate from "lucide-solid/icons/languages";
 
 /**
  * Language

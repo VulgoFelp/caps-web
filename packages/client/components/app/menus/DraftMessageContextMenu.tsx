@@ -6,10 +6,10 @@ import { useClient } from "@revolt/client";
 import { useState } from "@revolt/state";
 import type { UnsentMessage } from "@revolt/state/stores/Draft";
 
-import MdClose from "@material-design-icons/svg/outlined/close.svg?component-solid";
-import MdContentCopy from "@material-design-icons/svg/outlined/content_copy.svg?component-solid";
-import MdDelete from "@material-design-icons/svg/outlined/delete.svg?component-solid";
-import MdRefresh from "@material-design-icons/svg/outlined/refresh.svg?component-solid";
+import MdContentCopy from "lucide-solid/icons/copy";
+import MdRefresh from "lucide-solid/icons/rotate-cw";
+import MdDelete from "lucide-solid/icons/trash";
+import MdClose from "lucide-solid/icons/x";
 
 import {
   ContextMenu,

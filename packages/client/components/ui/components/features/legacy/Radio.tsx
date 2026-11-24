@@ -1,4 +1,4 @@
-import { FaSolidCircle as CircleIcon } from "solid-icons/fa";
+import CircleIcon from "lucide-solid/icons/circle";
 import { JSX, Show, createSignal, splitProps } from "solid-js";
 
 import { styled } from "styled-system/jsx";

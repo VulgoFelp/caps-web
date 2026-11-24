@@ -33,7 +33,7 @@ import {
   MonospaceFonts,
 } from "@revolt/ui/themes/fonts";
 
-import MDPalette from "@material-design-icons/svg/outlined/palette.svg?component-solid";
+import MDPalette from "lucide-solid/icons/palette";
 
 /**
  * All appearance options for the client

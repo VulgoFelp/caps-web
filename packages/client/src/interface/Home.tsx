@@ -7,14 +7,21 @@ import { styled } from "styled-system/jsx";
 import { IS_DEV, useClient } from "@revolt/client";
 import { useModals } from "@revolt/modal";
 import { useNavigate } from "@revolt/routing";
-import { Button, CategoryButton, Header, iconSize, main } from "@revolt/ui";
+import {
+  Button,
+  CapsMark,
+  CategoryButton,
+  Header,
+  iconSize,
+  main,
+} from "@revolt/ui";
 
-import MdAddCircle from "@material-design-icons/svg/filled/add_circle.svg?component-solid";
-import MdGroups3 from "@material-design-icons/svg/filled/groups_3.svg?component-solid";
-import MdHome from "@material-design-icons/svg/filled/home.svg?component-solid";
-import MdSettings from "@material-design-icons/svg/filled/settings.svg?component-solid";
-import MdDesktopWindows from "@material-design-icons/svg/outlined/desktop_windows.svg?component-solid";
-import MdPeople from "@material-design-icons/svg/outlined/people.svg?component-solid";
+import MdAddCircle from "lucide-solid/icons/circle-plus";
+import MdHome from "lucide-solid/icons/house";
+import MdDesktopWindows from "lucide-solid/icons/monitor";
+import MdSettings from "lucide-solid/icons/settings";
+import MdPeople from "lucide-solid/icons/users";
+import MdGroups3 from "lucide-solid/icons/users-round";
 
 import { HeaderIcon } from "./common/CommonHeader";
 
@@ -143,21 +150,11 @@ export function HomePage() {
       <div use:scrollable={{ class: content() }}>
         <Hero>
           <Mark aria-hidden="true">
-            <svg
-              viewBox="0 0 24 24"
-              width="28"
-              height="28"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.2"
-              stroke-linecap="round"
-            >
-              <path d="M12.6 12.2c.5-.6.1-1.6-.8-1.6-1.2 0-1.9 1.3-1.4 2.4.7 1.5 2.8 1.8 4 .7 1.6-1.5 1.2-4.2-.6-5.3-2.3-1.4-5.4-.4-6.5 2-1.4 3 .3 6.5 3.4 7.4 3.7 1.1 7.4-1.4 8-5.1" />
-            </svg>
+            <CapsMark size={28} mono />
           </Mark>
-          <Greeting>E aí, {client()!.user?.displayName ?? "galera"}</Greeting>
+          <Greeting>Olá, {client()!.user?.displayName}</Greeting>
           <Tagline>
-            Coisa de doido. Chat, voz, vídeo e tela da galera, num lugar só.
+            Suas comunidades, conversas e salas de voz em um só lugar.
           </Tagline>
         </Hero>
 
@@ -194,7 +191,7 @@ export function HomePage() {
             </CategoryButton>
             <CategoryButton
               onClick={() => navigate("/friends")}
-              description="Adicione a galera e veja quem está online."
+              description="Adicione amigos e veja quem está online."
               icon={<MdPeople />}
               action="chevron"
             >
