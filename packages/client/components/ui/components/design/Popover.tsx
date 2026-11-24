@@ -12,6 +12,8 @@ import { Portal } from "solid-js/web";
 import { Placement, autoUpdate, flip, offset, shift } from "@floating-ui/dom";
 import { styled } from "styled-system/jsx";
 
+import { Keybind, KeybindAction } from "@revolt/keybinds";
+
 /**
  * Anchored floating panel (switcher, notifications, profile menu)
  *
@@ -69,6 +71,11 @@ export function Popover(props: {
   return (
     <Show when={props.open}>
       <Portal mount={document.getElementById("floating")!}>
+        {/* counts as an open floating layer: blocks type-to-focus-composer */}
+        <Keybind
+          keybind={KeybindAction.CLOSE_FLOATING}
+          onPressed={props.onClose}
+        />
         <Panel
           ref={setRef}
           role="dialog"

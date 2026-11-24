@@ -14,6 +14,7 @@ import { css } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
 import { useClient, useUser } from "@revolt/client";
+import { Keybind, KeybindAction } from "@revolt/keybinds";
 import { useModals } from "@revolt/modal";
 import { useNavigate, useSmartParams } from "@revolt/routing";
 import { useVoice } from "@revolt/rtc";
@@ -467,6 +468,8 @@ export function CommandPalette() {
   return (
     <Show when={paletteOpen()}>
       <Portal mount={document.getElementById("floating")!}>
+        {/* counts as an open floating layer: blocks type-to-focus-composer */}
+        <Keybind keybind={KeybindAction.CLOSE_FLOATING} onPressed={close} />
         <Scrim onPointerDown={(e) => e.target === e.currentTarget && close()}>
           <Panel
             role="dialog"
@@ -476,7 +479,10 @@ export function CommandPalette() {
             <InputRow>
               <IconSearch size={18} />
               <input
-                ref={(el) => setTimeout(() => el.focus(), 0)}
+                ref={(el) => {
+                  queueMicrotask(() => el.focus());
+                  setTimeout(() => el.focus(), 30);
+                }}
                 value={query()}
                 onInput={(e) => {
                   setQuery(e.currentTarget.value);
