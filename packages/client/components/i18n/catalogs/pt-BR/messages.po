@@ -980,6 +980,10 @@ msgstr "Conectado"
 msgid "Connecting"
 msgstr "Conectando"
 
+#: components/app/interface/desktop/Titlebar.tsx
+msgid "Connecting…"
+msgstr "Conectando…"
+
 #. placeholder {0}: props.discoverable instanceof Bot ? "bot" : "server"
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Contact support to remove this {0} from discover"
@@ -1445,13 +1449,14 @@ msgstr "Desativar autenticador da senha de uso único"
 msgid "Disabled"
 msgstr "Desativado"
 
+#: components/app/interface/desktop/Titlebar.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 msgid "Disconnected"
 msgstr "Desconectado"
 
 #: components/app/interface/settings/user/Native.tsx
-msgid "Discord RPC"
-msgstr "RPC do Discord"
+#~ msgid "Discord RPC"
+#~ msgstr "RPC do Discord"
 
 #: components/app/interface/settings/ServerSettings.tsx
 #: components/app/interface/settings/shared/Discoverable.tsx
@@ -2862,9 +2867,17 @@ msgstr "Receba notificações enquanto a aba estiver aberta."
 msgid "Receive push notifications while the app is closed."
 msgstr "Receba notificações push enquanto o aplicativo estiver fechado."
 
+#: components/app/interface/desktop/Titlebar.tsx
+msgid "Reconnect now"
+msgstr "Reconectar agora"
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 msgid "Reconnecting"
 msgstr "Reconectando"
+
+#: components/app/interface/desktop/Titlebar.tsx
+msgid "Reconnecting…"
+msgstr "Reconectando…"
 
 #: components/modal/modals/MFAFlow.tsx
 msgid "Recovery Code"
@@ -2963,8 +2976,8 @@ msgid "Rename Session"
 msgstr "Renomear sessão"
 
 #: components/app/interface/settings/user/Native.tsx
-msgid "Rep Stoat using Discord rich presence."
-msgstr "Representar o Stoat usando o Discord Rich Presence."
+#~ msgid "Rep Stoat using Discord rich presence."
+#~ msgstr "Representar o Stoat usando o Discord Rich Presence."
 
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Reply"
@@ -3846,6 +3859,10 @@ msgstr "Publicidade indesejada ou spam"
 msgid "Until I turn it back on"
 msgstr "Até que eu ligue de volta"
 
+#: components/app/interface/desktop/Titlebar.tsx
+msgid "Update"
+msgstr "Atualizar"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Upload Files"
 msgstr "Enviar arquivos"
@@ -4125,6 +4142,10 @@ msgstr "Você está prestes a expulsar {0}"
 #: components/i18n/errors.tsx
 msgid "You are banned from this server."
 msgstr "Você foi banido deste servidor."
+
+#: components/app/interface/desktop/Titlebar.tsx
+msgid "You are offline"
+msgstr "Você está offline"
 
 #: components/ui/components/features/messaging/composition/MessageBox.tsx
 msgid "You are timed out and can't send messages right now."

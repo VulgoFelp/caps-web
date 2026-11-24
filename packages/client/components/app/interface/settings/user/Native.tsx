@@ -142,12 +142,6 @@ export default function Native() {
 
       <CategoryButton.Group>
         {CheckboxButton(
-          "discordRpc",
-          "groups_2",
-          t`Discord RPC`,
-          t`Rep Stoat using Discord rich presence.`,
-        )}
-        {CheckboxButton(
           "spellchecker",
           "spellcheck",
           t`Spellchecker`,

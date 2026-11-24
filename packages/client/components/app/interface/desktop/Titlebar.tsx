@@ -1,4 +1,6 @@
 import { Match, Show, Switch, createSignal } from "solid-js";
+
+import { Trans } from "@lingui/solid/macro";
 import { Motion, Presence } from "solid-motionone";
 
 import { css } from "styled-system/css";
@@ -6,7 +8,7 @@ import { styled } from "styled-system/jsx";
 
 import { useClientLifecycle } from "@revolt/client";
 import { State, TransitionType } from "@revolt/client/Controller";
-import { Button, Ripple, symbolSize, typography } from "@revolt/ui";
+import { Button, symbolSize } from "@revolt/ui";
 
 import MdBuild from "@material-symbols/svg-400/outlined/build.svg?component-solid";
 import MdClose from "@material-symbols/svg-400/outlined/close.svg?component-solid";
@@ -50,7 +52,7 @@ export function Titlebar() {
       >
         <Motion.div
           initial={{ height: 0 }}
-          animate={{ height: "29px" }}
+          animate={{ height: "32px" }}
           exit={{ height: 0 }}
         >
           <Base disconnected={isDisconnected()}>
@@ -63,8 +65,8 @@ export function Titlebar() {
             >
               <Wordmark
                 class={css({
-                  height: "18px",
-                  marginBlockStart: "1px",
+                  height: "13px",
+                  width: "auto",
                 })}
               />{" "}
               <Show when={import.meta.env.DEV}>
@@ -80,38 +82,35 @@ export function Titlebar() {
             >
               <Switch>
                 <Match when={lifecycle.state() === State.Connecting}>
-                  Connecting
+                  <Trans>Connecting…</Trans>
                 </Match>
                 {/* <Match when={lifecycle.state() === State.Connected}>Connected</Match> */}
                 <Match when={lifecycle.state() === State.Disconnected}>
-                  Disconnected
-                  <a
+                  <Trans>Disconnected</Trans>
+                  <Retry
+                    type="button"
+                    style={{ "-webkit-app-region": "no-drag" }}
                     onClick={() =>
-                      lifecycle.transition({
-                        type: TransitionType.Retry,
-                      })
+                      lifecycle.transition({ type: TransitionType.Retry })
                     }
                   >
-                    <strong> (reconnect now)</strong>
-                  </a>
+                    <Trans>Reconnect now</Trans>
+                  </Retry>
                 </Match>
                 <Match when={lifecycle.state() === State.Reconnecting}>
-                  Reconnecting
+                  <Trans>Reconnecting…</Trans>
                 </Match>
                 <Match when={lifecycle.state() === State.Offline}>
-                  Device is offline
-                  <a
+                  <Trans>You are offline</Trans>
+                  <Retry
+                    type="button"
+                    style={{ "-webkit-app-region": "no-drag" }}
                     onClick={() =>
-                      lifecycle.transition({
-                        type: TransitionType.Retry,
-                      })
+                      lifecycle.transition({ type: TransitionType.Retry })
                     }
-                    style={{
-                      "-webkit-app-region": "no-drag",
-                    }}
                   >
-                    <strong> (reconnect now)</strong>
-                  </a>
+                    <Trans>Reconnect now</Trans>
+                  </Retry>
                 </Match>
               </Switch>
               <Show when={pendingUpdate()}>
@@ -122,28 +121,25 @@ export function Titlebar() {
                   }}
                 >
                   <Button size="sm" onPress={pendingUpdate()}>
-                    Update
+                    <Trans>Update</Trans>
                   </Button>
                 </div>
               </Show>
             </DragHandle>
             <Show when={isNative && !isMacOS}>
               <Action onClick={window.native.minimise}>
-                <Ripple />
-                <MdMinimize {...symbolSize(20)} />
+                <MdMinimize {...symbolSize(18)} />
               </Action>
               <Action onClick={maximise}>
-                <Ripple />
                 <Show
                   when={isMaximised()}
-                  fallback={<MdExpandContent {...symbolSize(20)} />}
+                  fallback={<MdExpandContent {...symbolSize(16)} />}
                 >
-                  <MdCollapseContent {...symbolSize(20)} />
+                  <MdCollapseContent {...symbolSize(16)} />
                 </Show>
               </Action>
-              <Action onClick={window.native.close}>
-                <Ripple />
-                <MdClose {...symbolSize(20)} />
+              <Action close onClick={window.native.close}>
+                <MdClose {...symbolSize(18)} />
               </Action>
             </Show>
           </Base>
@@ -156,23 +152,26 @@ export function Titlebar() {
 const Base = styled("div", {
   base: {
     flexShrink: 0,
-    height: "29px",
+    height: "32px",
     userSelect: "none",
 
     display: "flex",
     alignItems: "center",
 
-    fill: "var(--md-sys-color-on-surface)",
+    fontSize: "var(--caps-text-sm)",
+    fill: "currentColor",
+    transition: "background var(--caps-dur) var(--caps-ease)",
   },
   variants: {
     disconnected: {
       true: {
-        color: "var(--md-sys-color-on-primary-container)",
-        background: "var(--md-sys-color-primary-container)",
+        color: "var(--caps-text)",
+        background: "var(--caps-mention-soft)",
+        boxShadow: "inset 0 -1px 0 var(--caps-line-soft)",
       },
       false: {
-        color: "var(--md-sys-color-outline)",
-        background: "var(--md-sys-color-surface-container-high)",
+        color: "var(--caps-text-3)",
+        background: "var(--caps-bg-rail)",
       },
     },
   },
@@ -181,18 +180,17 @@ const Base = styled("div", {
 const Title = styled("div", {
   base: {
     display: "flex",
-    gap: "var(--gap-md)",
+    gap: "var(--caps-space-3)",
     alignItems: "center",
-    paddingInlineStart: "var(--gap-md)",
+    paddingInlineStart: "var(--caps-space-5)",
 
-    color: "var(--md-sys-color-on-surface)",
-    ...typography.raw({ class: "title", size: "small" }),
+    color: "var(--caps-text)",
   },
   variants: {
     macos: {
       true: {
         order: 1,
-        paddingInlineEnd: "var(--gap-md)",
+        paddingInlineEnd: "var(--caps-space-5)",
       },
     },
   },
@@ -204,17 +202,33 @@ const DragHandle = styled("div", {
     height: "100%",
 
     display: "flex",
-    gap: "var(--gap-md)",
+    gap: "var(--caps-space-4)",
     alignItems: "center",
-    paddingInlineStart: "var(--gap-md)",
+    paddingInlineStart: "var(--caps-space-5)",
 
-    ...typography.raw({ class: "label", size: "large" }),
+    fontWeight: 500,
   },
   variants: {
     macos: {
       true: {
         marginInlineStart: "70px",
       },
+    },
+  },
+});
+
+const Retry = styled("button", {
+  base: {
+    all: "unset",
+    cursor: "pointer",
+    fontWeight: 600,
+    color: "var(--caps-text)",
+    textDecoration: "underline",
+    textUnderlineOffset: "2px",
+    textDecorationColor: "var(--caps-line-strong)",
+
+    "&:hover": {
+      textDecorationColor: "currentColor",
     },
   },
 });
@@ -228,6 +242,31 @@ const Action = styled("a", {
     placeItems: "center",
 
     height: "100%",
-    aspectRatio: "3/2",
+    width: "46px",
+    color: "var(--caps-text-2)",
+    transition:
+      "background var(--caps-dur-fast) var(--caps-ease), color var(--caps-dur-fast) var(--caps-ease)",
+
+    "&:hover": {
+      background: "var(--caps-hover)",
+      color: "var(--caps-text)",
+    },
+    "&:active": {
+      background: "var(--caps-active)",
+    },
+  },
+  variants: {
+    close: {
+      true: {
+        "&:hover": {
+          background: "#c42b1c",
+          color: "#fff",
+        },
+        "&:active": {
+          background: "#a52617",
+          color: "#fff",
+        },
+      },
+    },
   },
 });

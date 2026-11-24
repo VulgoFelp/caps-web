@@ -13,9 +13,21 @@ import MdAddCircle from "@material-design-icons/svg/filled/add_circle.svg?compon
 import MdGroups3 from "@material-design-icons/svg/filled/groups_3.svg?component-solid";
 import MdHome from "@material-design-icons/svg/filled/home.svg?component-solid";
 import MdSettings from "@material-design-icons/svg/filled/settings.svg?component-solid";
+import MdDesktopWindows from "@material-design-icons/svg/outlined/desktop_windows.svg?component-solid";
 import MdPeople from "@material-design-icons/svg/outlined/people.svg?component-solid";
 
 import { HeaderIcon } from "./common/CommonHeader";
+
+/**
+ * Windows installer for CAPS Desktop, served by the CAPS server
+ */
+const WINDOWS_DOWNLOAD_URL = "/download/CAPS-Setup.exe";
+
+/**
+ * Offer the desktop app only in a browser on Windows
+ */
+const showWindowsDownload =
+  !window.native && /Windows/i.test(navigator.userAgent);
 
 /**
  * Base layout of the home page (i.e. the header/background)
@@ -202,6 +214,16 @@ export function HomePage() {
             >
               <Trans>Open settings</Trans>
             </CategoryButton>
+            <Show when={showWindowsDownload}>
+              <CategoryButton
+                onClick={() => window.open(WINDOWS_DOWNLOAD_URL, "_blank")}
+                description="Instale o CAPS no PC: abre com o Windows, fica na bandeja e avisa das mensagens."
+                icon={<MdDesktopWindows />}
+                action="external"
+              >
+                Baixar o app para Windows
+              </CategoryButton>
+            </Show>
           </CategoryButton.Group>
         </Section>
 
