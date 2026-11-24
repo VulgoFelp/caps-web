@@ -2,18 +2,11 @@ import {
   default as BiRegularCheckCircle,
   default as BiSolidCheckCircle,
 } from "lucide-solid/icons/circle-check";
-import {
-  Accessor,
-  JSX,
-  Match,
-  Show,
-  Switch,
-  createMemo,
-  createSignal,
-} from "solid-js";
+import { Accessor, JSX, Show, createMemo, createSignal } from "solid-js";
 
 import { useLingui } from "@lingui/solid/macro";
 import type { Channel, Server, ServerFlags } from "stoat.js";
+import { cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
 import { getChannelIcon, useDevice } from "@revolt/common";
@@ -26,14 +19,10 @@ import { useState } from "@revolt/state";
 import {
   Column,
   Draggable,
-  Header,
-  IconButton,
   MenuButton,
   OverflowingText,
-  Row,
   Tooltip,
   iconSize,
-  symbolSize,
 } from "@revolt/ui";
 import { UnreadCallout } from "@revolt/ui/components/features/navigation/UnreadCallout";
 import { VoiceChannelPreview } from "@revolt/ui/components/features/voice/VoiceChannelPreview";
@@ -41,9 +30,12 @@ import { createDragHandle } from "@revolt/ui/components/utils/Draggable";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
 import MdChevronRight from "lucide-solid/icons/chevron-right";
+import IconMore from "lucide-solid/icons/ellipsis";
 import MdSettings from "lucide-solid/icons/settings";
 
-import { SidebarBase } from "./common";
+import { ServerContextMenu } from "@revolt/app";
+
+import { SidebarBase, SidebarHeader, sidebarIconButton } from "./common";
 import {
   OrderedCategory,
   applyChannelOrdering,
@@ -225,35 +217,20 @@ export const ServerSidebar = (props: Props) => {
       class="channel_bar server"
       use:floating={props.menuGenerator(props.server)}
     >
-      <Switch
-        fallback={
-          <Header placement="secondary">
-            <ServerInfo
-              server={props.server}
-              canManageServer={canManageServer()}
-              openServerInfo={props.openServerInfo}
-              openServerSettings={props.openServerSettings}
-            />
-          </Header>
-        }
-      >
-        <Match when={props.server.banner}>
-          <Header
-            image
-            placement="secondary"
-            style={{
-              background: `url('${props.server.bannerURL}')`,
-            }}
-          >
-            <ServerInfo
-              server={props.server}
-              canManageServer={canManageServer()}
-              openServerInfo={props.openServerInfo}
-              openServerSettings={props.openServerSettings}
-            />
-          </Header>
-        </Match>
-      </Switch>
+      <Show when={props.server.banner}>
+        <Cover
+          style={{ "background-image": `url('${props.server.bannerURL}')` }}
+          aria-hidden="true"
+        />
+      </Show>
+      <SidebarHeader>
+        <ServerInfo
+          server={props.server}
+          canManageServer={canManageServer()}
+          openServerInfo={props.openServerInfo}
+          openServerSettings={props.openServerSettings}
+        />
+      </SidebarHeader>
       <ChannelList>
         <UnreadCallout list={list} />
         <div
@@ -325,46 +302,84 @@ function ServerInfo(
     canManageServer: boolean;
   },
 ) {
+  const { t } = useLingui();
   return (
-    <Row align grow minWidth={0}>
+    <>
       <ServerBadge flags={props.server.flags} />
-      <ServerName onClick={props.openServerInfo}>
+      <a
+        class={serverName()}
+        onClick={props.openServerInfo}
+        use:floating={{
+          tooltip: { placement: "bottom", content: t`Community info` },
+        }}
+      >
         <TextWithEmoji content={props.server.name} />
-      </ServerName>
+      </a>
       <Show when={props.canManageServer}>
-        <IconButton
-          size="xs"
-          width="narrow"
-          variant={props.server.banner ? "_header" : "standard"}
-          onPress={props.openServerSettings}
+        <button
+          class={sidebarIconButton()}
+          type="button"
+          aria-label={t`Community settings`}
+          onClick={props.openServerSettings}
+          use:floating={{
+            tooltip: { placement: "bottom", content: t`Community settings` },
+          }}
         >
-          <MdSettings {...symbolSize(18)} />
-        </IconButton>
+          <MdSettings size={16} />
+        </button>
       </Show>
-    </Row>
+      <button
+        class={sidebarIconButton()}
+        type="button"
+        aria-label={t`Community menu`}
+        use:floating={{
+          tooltip: { placement: "bottom", content: t`Community menu` },
+          contextMenu: () => <ServerContextMenu server={props.server} />,
+          contextMenuHandler: "click",
+        }}
+      >
+        <IconMore size={16} />
+      </button>
+    </>
   );
 }
 
 /**
+ * Community banner, shown above the header when set
+ */
+const Cover = styled("div", {
+  base: {
+    flexShrink: 0,
+    height: "88px",
+    margin: "var(--caps-space-4) var(--caps-space-4) 0",
+    borderRadius: "var(--caps-radius-md)",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    boxShadow: "inset 0 0 0 1px rgba(255, 255, 255, 0.06)",
+  },
+});
+
+/**
  * Server name
  */
-const ServerName = styled("a", {
+const serverName = cva({
   base: {
     flexGrow: 1,
     minWidth: 0,
     cursor: "pointer",
 
-    fontSize: "var(--caps-text-lg)",
+    fontSize: "var(--caps-text-base)",
     fontWeight: 600,
     letterSpacing: "-0.01em",
+    color: "var(--caps-text)",
 
     overflow: "hidden",
     whiteSpace: "nowrap",
     textOverflow: "ellipsis",
 
-    transition: "opacity var(--caps-dur-fast) var(--caps-ease)",
+    transition: "color var(--caps-dur-fast) var(--caps-ease)",
     "&:hover": {
-      opacity: 0.8,
+      color: "var(--caps-accent-text)",
     },
   },
 });

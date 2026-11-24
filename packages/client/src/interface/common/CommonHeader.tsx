@@ -1,100 +1,68 @@
-import BiRegularChevronLeft from "lucide-solid/icons/chevron-left";
-import BiRegularChevronRight from "lucide-solid/icons/chevron-right";
-
-import { JSX, Match, Switch } from "solid-js";
-
-import MdArrowBack from "lucide-solid/icons/arrow-left";
+import { JSX, Show } from "solid-js";
 
 import { useLingui } from "@lingui/solid/macro";
 import { css } from "styled-system/css";
 
 import { useState } from "@revolt/state";
-import { LAYOUT_SECTIONS } from "@revolt/state/stores/Layout";
+
+import MdArrowBack from "lucide-solid/icons/arrow-left";
 
 /**
- * Wrapper for header icons which adds the chevron on the
- * correct side for toggling sidebar (if on desktop) and
- * the hamburger icon to open sidebar (if on mobile).
+ * Leading icon of a page header
+ *
+ * On desktop it is just the page's icon (the sidebar toggle lives in the top
+ * bar). On phones it becomes a back button that reveals the sidebar.
  */
 export function HeaderIcon(props: { children: JSX.Element }) {
   const state = useState();
   const { t } = useLingui();
 
   return (
-    <div
-      class={container}
-      onClick={() => {
-        const ad = state.appDrawer();
-        if (ad) ad.setShown(false);
-        else
-          state.layout.toggleSectionState(
-            LAYOUT_SECTIONS.PRIMARY_SIDEBAR,
-            true,
-          );
-      }}
-      use:floating={{
-        tooltip: {
-          placement: "bottom",
-          content: t`Toggle main sidebar`,
-        },
-      }}
-    >
-      <Switch
-        fallback={
-          <>
-            <BiRegularChevronRight size={14} class="caps-chevron" />
-            {props.children}
-          </>
-        }
-      >
-        <Match when={state.appDrawer()}>
-          <MdArrowBack />
-        </Match>
-        <Match
-          when={state.layout.getSectionState(
-            LAYOUT_SECTIONS.PRIMARY_SIDEBAR,
-            true,
-          )}
-        >
-          <BiRegularChevronLeft size={14} class="caps-chevron" />
+    <Show
+      when={state.appDrawer()}
+      fallback={
+        <span class={container} aria-hidden="true">
           {props.children}
-        </Match>
-      </Switch>
-    </div>
+        </span>
+      }
+    >
+      <button
+        type="button"
+        class={back}
+        aria-label={t`Back`}
+        onClick={() => state.appDrawer()?.setShown(false)}
+      >
+        <MdArrowBack size={20} />
+      </button>
+    </Show>
   );
 }
 
 const container = css({
-  display: "flex",
-  cursor: "pointer",
-  alignItems: "center",
-  gap: "2px",
-  height: "var(--caps-h-sm)",
+  display: "grid",
+  placeItems: "center",
+  flexShrink: 0,
+  width: "28px",
+  height: "28px",
   marginLeft: "calc(-1 * var(--caps-space-2))",
-  paddingInline: "var(--caps-space-2) var(--caps-space-3)",
   borderRadius: "var(--caps-radius-sm)",
   color: "var(--caps-text-3)",
-  fill: "var(--caps-text-3)",
-  transition:
-    "background-color var(--caps-dur-fast) var(--caps-ease), color var(--caps-dur-fast) var(--caps-ease)",
+});
 
-  "& svg, & .material-symbols-outlined": {
-    fontSize: "20px",
-  },
-
-  "& .caps-chevron": {
-    opacity: 0,
-    marginRight: "-4px",
-    transition: "opacity var(--caps-dur-fast) var(--caps-ease)",
-  },
-
+const back = css({
+  all: "unset",
+  display: "grid",
+  placeItems: "center",
+  flexShrink: 0,
+  width: "32px",
+  height: "32px",
+  marginLeft: "calc(-1 * var(--caps-space-3))",
+  borderRadius: "var(--caps-radius-sm)",
+  color: "var(--caps-text-2)",
+  cursor: "pointer",
   "&:hover": {
     color: "var(--caps-text)",
-    fill: "var(--caps-text)",
     background: "var(--caps-hover)",
   },
-
-  "&:hover .caps-chevron": {
-    opacity: 1,
-  },
+  "&:focus-visible": { boxShadow: "var(--caps-focus-ring)" },
 });

@@ -47,6 +47,11 @@ msgstr "(mudanças estão sendo salvas…)"
 msgid "{0, plural, one {# blocked message} other {# blocked messages}}"
 msgstr "{0, plural, one {# mensagem bloqueada} other {# mensagens bloqueadas}}"
 
+#. placeholder {0}: local.channel.recipientIds.size
+#: src/interface/navigation/channels/HomeSidebar.tsx
+msgid "{0, plural, one {# member} other {# members}}"
+msgstr "{0, plural, one {# membro} other {# membros}}"
+
 #. placeholder {0}: mentions()
 #: components/ui/components/features/navigation/UnreadCallout.tsx
 msgid "{0, plural, one {# new mention} other {# new mentions}}"
@@ -352,6 +357,7 @@ msgstr "Pode falar em chamada de voz"
 #~ msgstr "Sobre"
 
 #: components/modal/modals/SignOutSessions.tsx
+#: src/interface/shell/NotificationCenter.tsx
 msgid "Accept"
 msgstr "Aceitar"
 
@@ -363,6 +369,10 @@ msgstr "Aceitar pedido de amizade"
 #: components/modal/modals/PolicyChange.tsx
 msgid "Acknowledge"
 msgstr "Reconhecer"
+
+#: src/interface/shell/CommandPalette.tsx
+msgid "Actions"
+msgstr "Ações"
 
 #: components/modal/modals/AddBot.tsx
 #: components/modal/modals/AddMembersToGroup.tsx
@@ -387,6 +397,8 @@ msgid "Add Bot"
 msgstr "Adicionar bot"
 
 #: components/app/menus/UserContextMenu.tsx
+#: src/interface/Conversations.tsx
+#: src/interface/shell/CommandPalette.tsx
 msgid "Add friend"
 msgstr "Adicionar amigo"
 
@@ -492,6 +504,10 @@ msgstr "Ocorreu um erro."
 msgid "An internal error occurred. ({0})"
 msgstr "Um erro interno ocorreu. ({0})"
 
+#: src/interface/shell/CommandPalette.tsx
+msgid "anywhere"
+msgstr "de qualquer lugar"
+
 #: components/app/interface/settings/user/Sync.tsx
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Appearance"
@@ -558,6 +574,7 @@ msgstr "Avatar"
 #: components/auth/src/flows/FlowCreate.tsx
 #: components/modal/modals/MFAFlow.tsx
 #: src/interface/channels/AgeGate.tsx
+#: src/interface/common/CommonHeader.tsx
 msgid "Back"
 msgstr "Voltar"
 
@@ -835,6 +852,7 @@ msgid "Channel Slowmode"
 msgstr "Modo lento do canal"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: src/interface/shell/CommandPalette.tsx
 msgid "Channels"
 msgstr "Canais"
 
@@ -946,6 +964,27 @@ msgstr "Recolher janela da chamada"
 msgid "Coming soon! 👀"
 msgstr "Em breve! 👀"
 
+#: src/interface/shell/CommandPalette.tsx
+msgid "Command palette"
+msgstr "Paleta de comandos"
+
+#: src/interface/shell/CommandPalette.tsx
+#: src/interface/shell/CommunitySwitcher.tsx
+msgid "Communities"
+msgstr "Comunidades"
+
+#: src/interface/navigation/channels/ServerSidebar.tsx
+msgid "Community info"
+msgstr "Informações da comunidade"
+
+#: src/interface/navigation/channels/ServerSidebar.tsx
+msgid "Community menu"
+msgstr "Menu da comunidade"
+
+#: src/interface/navigation/channels/ServerSidebar.tsx
+msgid "Community settings"
+msgstr "Configurações da comunidade"
+
 #: components/app/interface/settings/user/Account.tsx
 msgid "Configure a way to get back into your account in case your 2FA is lost"
 msgstr "Configure uma maneira de recuperar sua conta no caso da perda da Autenticação de Dois Fatores"
@@ -1010,7 +1049,11 @@ msgstr "Continuar para o aplicativo"
 msgid "Contribute a language"
 msgstr "Contribuir ao idioma"
 
+#: src/interface/Conversations.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
+#: src/interface/shell/BottomTabs.tsx
+#: src/interface/shell/CommandPalette.tsx
+#: src/interface/shell/TopBar.tsx
 msgid "Conversations"
 msgstr "Conversas"
 
@@ -1200,6 +1243,14 @@ msgstr "Criar convite"
 msgid "Create invites for others to use"
 msgstr "Criar convites para outros usarem"
 
+#: src/interface/shell/CommunitySwitcher.tsx
+msgid "Create or join"
+msgstr "Criar ou entrar"
+
+#: src/interface/shell/CommandPalette.tsx
+msgid "Create or join a community"
+msgstr "Criar ou entrar em uma comunidade"
+
 #: components/modal/modals/CreateOrJoinServer.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Create or join a server"
@@ -1312,6 +1363,7 @@ msgstr "Formato de data"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: src/interface/shell/CommandPalette.tsx
 msgid "Deafen"
 msgstr "Ensurdecer"
 
@@ -1436,6 +1488,14 @@ msgstr "Área de trabalho"
 msgid "Developer Documentation"
 msgstr "Documentação para Desenvolvedores"
 
+#: src/interface/shell/CommandPalette.tsx
+msgid "Direct message"
+msgstr "Mensagem direta"
+
+#: src/interface/navigation/channels/HomeSidebar.tsx
+msgid "Direct messages"
+msgstr "Mensagens diretas"
+
 #: components/app/interface/settings/user/Account.tsx
 msgid "Disable Account"
 msgstr "Desativar Conta"
@@ -1480,6 +1540,7 @@ msgid "Display users with this role separately in the member list"
 msgstr "Exibir usuários com este cargo separadamente na lista de membros"
 
 #: src/interface/navigation/servers/UserMenu.tsx
+#: src/interface/shell/CommandPalette.tsx
 msgid "Do Not Disturb"
 msgstr "Não Perturbar"
 
@@ -1707,6 +1768,10 @@ msgstr "Digite seu nome de usuário preferido."
 msgid "Everyone"
 msgstr "Todos"
 
+#: src/interface/shell/CommunitySwitcher.tsx
+msgid "Explore"
+msgstr "Explorar"
+
 #: components/modal/modals/LinkWarning.tsx
 msgid "External links can be dangerous!"
 msgstr "Links externos podem ser perigosos!"
@@ -1749,6 +1814,14 @@ msgstr "Comentários"
 msgid "File must be smaller than {0}"
 msgstr "O arquivo deve ser menor que {0}"
 
+#: src/interface/navigation/channels/HomeSidebar.tsx
+msgid "Filter conversations"
+msgstr "Filtrar conversas"
+
+#: src/interface/shell/CommunitySwitcher.tsx
+msgid "Find a community"
+msgstr "Buscar comunidade"
+
 #: src/interface/Home.tsx
 #~ msgid "Find a community based on your hobbies or interests."
 #~ msgstr "Descubra uma comunidade baseada em seus hobbies ou interesses."
@@ -1765,10 +1838,12 @@ msgstr "Encontrar novos servidores"
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
+#: src/interface/shell/CommandPalette.tsx
 msgid "Focus"
 msgstr "Concentrado"
 
 #: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/shell/CommunitySwitcher.tsx
 msgid "Folder"
 msgstr "Pasta"
 
@@ -1805,9 +1880,15 @@ msgstr "Por 8 horas"
 msgid "Forgot password?"
 msgstr "Esqueceu a senha?"
 
+#: src/interface/shell/NotificationCenter.tsx
+msgid "Friend requests"
+msgstr "Pedidos de amizade"
+
 #: src/interface/Friends.tsx
 #: src/interface/Home.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
+#: src/interface/shell/CommandPalette.tsx
+#: src/interface/shell/TopBar.tsx
 msgid "Friends"
 msgstr "Amigos"
 
@@ -1880,6 +1961,10 @@ msgstr "Ir"
 msgid "Go back to login"
 msgstr "Voltar para o login"
 
+#: src/interface/shell/CommandPalette.tsx
+msgid "Go to"
+msgstr "Ir para"
+
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Go to account settings to edit your username"
 msgstr "Vá para configurações da conta para editar seu nome de usuário"
@@ -1908,6 +1993,10 @@ msgstr "Conseguir"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "Grants {0} permissions and denies {1} permissions"
 msgstr "Concede permissões a {0} e nega permissões a {1}"
+
+#: src/interface/shell/CommandPalette.tsx
+msgid "Group"
+msgstr "Grupo"
 
 #: components/modal/modals/CreateGroup.tsx
 msgid "Group Name"
@@ -1953,6 +2042,10 @@ msgstr "Aqui está seu novo código de convite: <0>{0}</0>"
 msgid "Hide Others"
 msgstr "Ocultar outros"
 
+#: src/interface/shell/TopBar.tsx
+msgid "Hide sidebar"
+msgstr "Ocultar barra lateral"
+
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "High Contrast"
 msgstr "Alto Contraste"
@@ -1962,8 +2055,10 @@ msgid "Hoist Role"
 msgstr "Exibir cargo separadamente"
 
 #: src/interface/Home.tsx
-#: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/shell/BottomTabs.tsx
+#: src/interface/shell/CommandPalette.tsx
+#: src/interface/shell/TopBar.tsx
 msgid "Home"
 msgstr "Início"
 
@@ -1984,8 +2079,13 @@ msgstr "ID copiado para a área de transferência"
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
+#: src/interface/shell/CommandPalette.tsx
 msgid "Idle"
 msgstr "Ausente"
+
+#: src/interface/shell/NotificationCenter.tsx
+msgid "Ignore"
+msgstr "Ignorar"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Illegal hacking or cracking"
@@ -2019,6 +2119,7 @@ msgid "Interface Font"
 msgstr "Fonte da Interface"
 
 #: src/interface/navigation/servers/UserMenu.tsx
+#: src/interface/shell/CommandPalette.tsx
 msgid "Invisible"
 msgstr "Invisível"
 
@@ -2085,6 +2186,10 @@ msgstr "Entre no Espaço Stoat"
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Join the voice channel"
 msgstr "Entrar no canal de voz"
+
+#: src/interface/shell/CommandPalette.tsx
+msgid "Join voice"
+msgstr "Entrar na voz"
 
 #: components/ui/components/features/messaging/elements/Invite.tsx
 #: components/ui/components/features/profiles/ProfileJoined.tsx
@@ -2161,6 +2266,10 @@ msgstr "Sair"
 msgid "Leave {0}?"
 msgstr "Sair de {0}?"
 
+#: src/interface/shell/CommandPalette.tsx
+msgid "Leave call"
+msgstr "Sair da chamada"
+
 #: components/app/menus/ChannelContextMenu.tsx
 msgid "Leave group"
 msgstr "Sair do grupo"
@@ -2235,6 +2344,11 @@ msgstr "Encerra suas sessões exceto neste dispositivo."
 msgid "Lowercase letters, numbers and underscores only."
 msgstr "Apenas letras minúsculas, números e sublinhados."
 
+#: src/interface/shell/BottomTabs.tsx
+#: src/interface/shell/TopBar.tsx
+msgid "Main navigation"
+msgstr "Navegação principal"
+
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Major Outage"
 msgstr "Instabilidade geral"
@@ -2274,6 +2388,10 @@ msgstr "Gerenciar servidor"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Manage Webhooks"
 msgstr "Gerenciar webhooks"
+
+#: src/interface/shell/NotificationCenter.tsx
+msgid "Mark all as read"
+msgstr "Marcar tudo como lido"
 
 #: components/modal/modals/ChannelToggleMature.tsx
 msgid "Mark as mature"
@@ -2336,6 +2454,7 @@ msgid "Mention specific roles"
 msgstr "Mencionar cargos específicos"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: src/interface/shell/NotificationCenter.tsx
 msgid "Mentions"
 msgstr "Menções"
 
@@ -2343,6 +2462,10 @@ msgstr "Menções"
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "Mentions Only"
 msgstr "Apenas menções"
+
+#: src/interface/shell/NotificationCenter.tsx
+msgid "Mentions, friend requests and new messages show up here."
+msgstr "Menções, pedidos de amizade e mensagens novas aparecem aqui."
 
 #: components/app/menus/UserContextMenu.tsx
 #: components/ui/components/features/profiles/ProfileActions.tsx
@@ -2437,6 +2560,10 @@ msgstr "Silenciar membros com cargo inferior na chamada de voz"
 msgid "Mute Members"
 msgstr "Silenciar membros"
 
+#: src/interface/shell/CommandPalette.tsx
+msgid "Mute microphone"
+msgstr "Desativar microfone"
+
 #: components/app/menus/UserContextMenu.tsx
 msgid "Mute Screen Share"
 msgstr "Silenciar compartilhamento de tela"
@@ -2477,6 +2604,10 @@ msgstr "Meus bots"
 msgid "Name"
 msgstr "Nome"
 
+#: src/interface/shell/CommandPalette.tsx
+msgid "navigate"
+msgstr "navegar"
+
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Neutral"
 msgstr "Neutro"
@@ -2488,6 +2619,15 @@ msgstr "NOVO"
 #: components/app/menus/ServerContextMenu.tsx
 msgid "New folder"
 msgstr "Nova pasta"
+
+#: src/interface/Conversations.tsx
+#: src/interface/shell/CommandPalette.tsx
+msgid "New group"
+msgstr "Novo grupo"
+
+#: src/interface/shell/NotificationCenter.tsx
+msgid "New messages"
+msgstr "Mensagens novas"
 
 #. placeholder {0}: dayjs(decodeTime(props.lastId()!)).fromNow()
 #: components/ui/components/features/messaging/bars/NewMessages.tsx
@@ -2523,6 +2663,18 @@ msgstr "Novos não lidos"
 msgid "Nickname"
 msgstr "Apelido"
 
+#: src/interface/shell/CommunitySwitcher.tsx
+msgid "No communities match your search."
+msgstr "Nenhuma comunidade encontrada."
+
+#: src/interface/navigation/channels/HomeSidebar.tsx
+msgid "No conversations match."
+msgstr "Nenhuma conversa encontrada."
+
+#: src/interface/navigation/channels/HomeSidebar.tsx
+msgid "No conversations yet."
+msgstr "Nenhuma conversa ainda."
+
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "No GIFs found"
 msgstr "Nenhum GIF encontrado"
@@ -2552,9 +2704,21 @@ msgstr "Normal"
 msgid "Not of minimum age to use the platform"
 msgstr "Não possui a idade mínima para usar a plataforma"
 
+#. placeholder {0}: query()
+#: src/interface/shell/CommandPalette.tsx
+msgid "Nothing found for \"{0}\""
+msgstr "Nada encontrado para \"{0}\""
+
+#: src/interface/shell/NotificationCenter.tsx
+msgid "Notification settings"
+msgstr "Configurações de notificação"
+
 #: components/app/interface/settings/UserSettings.tsx
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
+#: src/interface/shell/BottomTabs.tsx
+#: src/interface/shell/NotificationCenter.tsx
+#: src/interface/shell/TopBar.tsx
 msgid "Notifications"
 msgstr "Notificações"
 
@@ -2613,6 +2777,7 @@ msgstr "Manutenção em Andamento"
 #: src/interface/Friends.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
+#: src/interface/shell/CommandPalette.tsx
 msgid "Online"
 msgstr "Disponível"
 
@@ -2623,6 +2788,10 @@ msgstr "Apenas menções vão te notificar"
 #: components/instance/index.tsx
 #~ msgid "Oops, something went wrong! {e}"
 #~ msgstr "Ops, algo deu errado! {e}"
+
+#: src/interface/shell/CommandPalette.tsx
+msgid "open"
+msgstr "abrir"
 
 #: components/modal/modals/Invite.tsx
 msgid "Open"
@@ -2641,11 +2810,16 @@ msgstr "Abrir configurações de canal"
 msgid "Open file"
 msgstr "Abrir arquivo"
 
+#: src/interface/shell/CommandPalette.tsx
+msgid "Open notifications"
+msgstr "Abrir notificações"
+
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Open server settings"
 msgstr "Abrir configurações de servidor"
 
 #: src/interface/Home.tsx
+#: src/interface/shell/CommandPalette.tsx
 msgid "Open settings"
 msgstr "Abrir configurações"
 
@@ -2705,6 +2879,10 @@ msgstr "Permissões disponíveis quando nenhuma exceção de cargo se aplica"
 msgid "Permissions available without any role"
 msgstr "Permissões disponíveis sem nenhum cargo"
 
+#: src/interface/Conversations.tsx
+msgid "Pick a conversation"
+msgstr "Escolha uma conversa"
+
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "Pick a Screen to Share"
 msgstr "Escolha uma tela para compartilhar"
@@ -2721,6 +2899,10 @@ msgstr "Fixar"
 #: components/modal/modals/PinMessage.tsx
 msgid "Pin message"
 msgstr "Fixar mensagem"
+
+#: src/interface/shell/CommandPalette.tsx
+msgid "Pinned messages"
+msgstr "Mensagens fixadas"
 
 #: src/interface/channels/text/TextChannel.tsx
 msgid "Pinned Messages"
@@ -2787,6 +2969,7 @@ msgstr "Canal privado"
 
 #: components/app/interface/settings/UserSettings.tsx
 #: components/app/menus/UserContextMenu.tsx
+#: src/interface/shell/TopBar.tsx
 msgid "Profile"
 msgstr "Perfil"
 
@@ -2866,6 +3049,10 @@ msgstr "Receba notificações enquanto a aba estiver aberta."
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Receive push notifications while the app is closed."
 msgstr "Receba notificações push enquanto o aplicativo estiver fechado."
+
+#: src/interface/shell/CommandPalette.tsx
+msgid "Recent"
+msgstr "Recentes"
 
 #: components/app/interface/desktop/Titlebar.tsx
 msgid "Reconnect now"
@@ -3141,8 +3328,14 @@ msgid "Screen Share Volume"
 msgstr "Volume do compartilhamento de tela"
 
 #: src/interface/channels/ChannelHeader.tsx
+#: src/interface/shell/CommandPalette.tsx
+#: src/interface/shell/TopBar.tsx
 msgid "Search"
 msgstr "Buscar"
+
+#: src/interface/shell/CommandPalette.tsx
+msgid "Search communities, channels, people and actions…"
+msgstr "Buscar comunidades, canais, pessoas e ações…"
 
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "Search for emojis..."
@@ -3160,6 +3353,15 @@ msgstr "Buscar grupos..."
 #: components/modal/modals/CreateGroup.tsx
 msgid "Search for users..."
 msgstr "Buscar por usuários..."
+
+#. placeholder {0}: query().trim()
+#: src/interface/shell/CommandPalette.tsx
+msgid "Search messages for \"{0}\""
+msgstr "Buscar mensagens com \"{0}\""
+
+#: src/interface/shell/TopBar.tsx
+msgid "Search or jump to…"
+msgstr "Buscar ou ir para…"
 
 #: src/interface/channels/text/TextChannel.tsx
 msgid "Search Results"
@@ -3291,6 +3493,10 @@ msgstr "Sessões"
 msgid "Set colour to {colour}"
 msgstr "Definir cor para {colour}"
 
+#: src/interface/shell/CommandPalette.tsx
+msgid "Set custom status"
+msgstr "Definir status personalizado"
+
 #: components/modal/modals/EditServerFolder.tsx
 msgid "Set folder colour to {value}"
 msgstr "Definir cor de pasta para {value}"
@@ -3298,6 +3504,10 @@ msgstr "Definir cor de pasta para {value}"
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Set role colour to {colour}"
 msgstr "Definir a cor do cargo como {colour}"
+
+#: src/interface/shell/CommandPalette.tsx
+msgid "Set status: {label}"
+msgstr "Definir status: {label}"
 
 #: components/auth/src/flows/FlowCreate.tsx
 msgid "Set up your account and make yourself at home."
@@ -3309,6 +3519,7 @@ msgstr "Defina seu status"
 
 #: components/modal/modals/ServerInfo.tsx
 #: src/interface/navigation/servers/ServerList.tsx
+#: src/interface/shell/TopBar.tsx
 msgid "Settings"
 msgstr "Configurações"
 
@@ -3348,6 +3559,10 @@ msgstr "Mostrar Outros"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Show send message button"
 msgstr "Mostrar botão de enviar mensagem"
+
+#: src/interface/shell/TopBar.tsx
+msgid "Show sidebar"
+msgstr "Mostrar barra lateral"
 
 #~ msgid "Sign into Stoat"
 #~ msgstr "Entrar no Stoat"
@@ -3437,6 +3652,7 @@ msgid "Start with Computer"
 msgstr "Iniciar com o Computador"
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
+#: src/interface/shell/CommandPalette.tsx
 msgid "Status"
 msgstr "Status"
 
@@ -3514,6 +3730,14 @@ msgstr "Sugerir novas features ao Stoat em discussões do GitHub."
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Switch Accounts"
 msgstr "Trocar de conta"
+
+#: src/interface/shell/CommandPalette.tsx
+msgid "Switch to dark theme"
+msgstr "Mudar para o tema escuro"
+
+#: src/interface/shell/CommandPalette.tsx
+msgid "Switch to light theme"
+msgstr "Mudar para o tema claro"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx
 msgid "Switch to this voice channel"
@@ -3749,8 +3973,12 @@ msgid "Timeout Members"
 msgstr "Castigar membros"
 
 #: src/interface/common/CommonHeader.tsx
-msgid "Toggle main sidebar"
-msgstr "Alternar barra lateral principal"
+#~ msgid "Toggle main sidebar"
+#~ msgstr "Alternar barra lateral principal"
+
+#: src/interface/shell/CommandPalette.tsx
+msgid "Toggle sidebar"
+msgstr "Mostrar/ocultar barra lateral"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Token copied to clipboard"
@@ -3796,6 +4024,7 @@ msgstr "Erro de Stoat Não Capturado: {0}"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: src/interface/shell/CommandPalette.tsx
 msgid "Undeafen"
 msgstr "Reativar Áudio"
 
@@ -3829,6 +4058,10 @@ msgstr "Desmutar"
 msgid "Unmute Channel"
 msgstr "Desmutar Canal"
 
+#: src/interface/shell/CommandPalette.tsx
+msgid "Unmute microphone"
+msgstr "Ativar microfone"
+
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Unmute Server"
 msgstr "Desmutar Servidor"
@@ -3845,6 +4078,14 @@ msgstr "Desafixar"
 #: components/modal/modals/PinMessage.tsx
 msgid "Unpin message"
 msgstr "Desafixar mensagem"
+
+#: src/interface/shell/CommunitySwitcher.tsx
+msgid "Unread"
+msgstr "Não lidas"
+
+#: src/interface/shell/NotificationCenter.tsx
+msgid "Unread conversations"
+msgstr "Conversas não lidas"
 
 #: components/app/interface/channels/text/DraftMessage.tsx
 msgid "Unsent message"
@@ -4016,6 +4257,7 @@ msgstr "Visualizando mensagens antigas"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/UserSettings.tsx
+#: src/interface/shell/CommandPalette.tsx
 msgid "Voice"
 msgstr "Voz"
 
@@ -4038,6 +4280,10 @@ msgstr "Volume"
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Want to change username?"
 msgstr "Alterar o nome de usuário?"
+
+#: src/interface/shell/NotificationCenter.tsx
+msgid "wants to be your friend"
+msgstr "quer ser seu amigo"
 
 #: src/AndroidNag.tsx
 msgid "We are working hard on optimising our web app for mobile."
@@ -4122,6 +4368,10 @@ msgstr "Você gostaria de criar um novo grupo ou servidor?"
 #: components/modal/modals/CreateOrJoinServer.tsx
 msgid "Would you like to create a new server or join an existing one?"
 msgstr "Você gostaria de criar um novo servidor ou entrar em um já existente?"
+
+#: src/interface/shell/BottomTabs.tsx
+msgid "You"
+msgstr "Você"
 
 #: components/app/interface/settings/user/bots/MyBots.tsx
 msgid "You agree that your bot is subject to the Acceptable Usage Policy."
@@ -4239,6 +4489,10 @@ msgstr "Sua conta foi bloqueada por inserir uma senha incorreta várias vezes. P
 msgid "You have this user blocked."
 msgstr "Você bloqueou este usuário."
 
+#: src/interface/shell/CommunitySwitcher.tsx
+msgid "You haven't joined any communities yet."
+msgstr "Você ainda não entrou em nenhuma comunidade."
+
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "You may be experiencing connection issues."
 msgstr "Você pode estar enfrentando problemas de conexão."
@@ -4266,6 +4520,10 @@ msgstr "Você não conseguirá acessar sua conta, a menos que entre em contato c
 #: components/modal/modals/LeaveServer.tsx
 msgid "You won't be able to rejoin unless you are re-invited."
 msgstr "Você não poderá voltar a participar, a menos que seja convidado novamente."
+
+#: src/interface/shell/NotificationCenter.tsx
+msgid "You're all caught up"
+msgstr "Tudo em dia"
 
 #: components/i18n/errors.tsx
 msgid "You're already part of this group."
@@ -4313,6 +4571,10 @@ msgstr "Sua conta e todos os seus dados (incluindo suas mensagens e lista de ami
 #: components/auth/src/flows/FlowVerify.tsx
 msgid "Your account has been verified!"
 msgstr "Sua conta foi verificada!"
+
+#: src/interface/Conversations.tsx
+msgid "Your direct messages and groups are in the sidebar. Start a new one with a friend or create a group for your squad."
+msgstr "Suas mensagens diretas e grupos ficam na barra lateral. Comece uma conversa com um amigo ou crie um grupo para o seu time."
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Your discover request has been denied"

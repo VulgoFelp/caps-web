@@ -4,6 +4,7 @@ import {
   JSX,
   Match,
   onCleanup,
+  Show,
   Switch,
 } from "solid-js";
 
@@ -22,8 +23,14 @@ import { useState } from "@revolt/state";
 import { LAYOUT_SECTIONS } from "@revolt/state/stores/Layout";
 import { LoadingScreen } from "@revolt/ui";
 
+import { useDevice } from "@revolt/common";
+
 import { SlideDrawer } from "../components/ui/components/navigation/SlideDrawer";
 import { Sidebar } from "./interface/Sidebar";
+import { BottomTabs } from "./interface/shell/BottomTabs";
+import { CommandPalette } from "./interface/shell/CommandPalette";
+import { GlobalKeybinds } from "./interface/shell/GlobalKeybinds";
+import { TopBar } from "./interface/shell/TopBar";
 
 /**
  * Application layout
@@ -34,6 +41,7 @@ const Interface = (props: { children: JSX.Element }) => {
   const { openModal } = useModals();
   const { isLoggedIn, isSwapping, lifecycle } = useClientLifecycle();
   const { pathname } = useLocation();
+  const device = useDevice();
 
   useBeforeLeave((e) => {
     if (!e.defaultPrevented) {
@@ -62,7 +70,7 @@ const Interface = (props: { children: JSX.Element }) => {
   }
 
   //Drawer slider for mobile
-  let rootRef, sDrawer: SlideDrawer | undefined;
+  let layoutRef: HTMLDivElement | undefined, sDrawer: SlideDrawer | undefined;
   const [contRef, setContRef] = createSignal<HTMLDivElement>();
   function rstLayout() {
     state.layout.setSectionState(LAYOUT_SECTIONS.PRIMARY_SIDEBAR, false, false);
@@ -71,7 +79,8 @@ const Interface = (props: { children: JSX.Element }) => {
   createEffect(() => {
     //Create drawer
     const cont = contRef();
-    if (cont && !sDrawer) sDrawer = new SlideDrawer(cont, rootRef!);
+    if (cont && layoutRef && !sDrawer)
+      sDrawer = new SlideDrawer(cont, layoutRef);
     //Update on layout change
     if (sDrawer) {
       const en = sDrawer.enabled;
@@ -88,14 +97,20 @@ const Interface = (props: { children: JSX.Element }) => {
 
   return (
     <MessageCache client={client()}>
-      <AppRoot ref={rootRef} class="app_root">
+      <AppRoot class="app_root">
         <Titlebar />
         <Switch fallback={<LoadingScreen />}>
           <Match when={!isLoggedIn()}>
             <Navigate href="/login" />
           </Match>
           <Match when={lifecycle.loadedOnce()}>
+            <Show when={device.layout() !== "phone"}>
+              <TopBar />
+            </Show>
+            <GlobalKeybinds />
+            <CommandPalette />
             <Layout
+              ref={layoutRef}
               disconnected={isDisconnected()}
               style={{ "flex-grow": 1, "min-height": 0 }}
               onDragOver={(e) => {
@@ -129,6 +144,9 @@ const Interface = (props: { children: JSX.Element }) => {
                 {props.children}
               </Content>
             </Layout>
+            <Show when={device.layout() === "phone"}>
+              <BottomTabs />
+            </Show>
           </Match>
         </Switch>
 
@@ -143,54 +161,67 @@ const AppRoot = styled("div", {
     display: "flex",
     flexDirection: "column",
     height: "100%",
+    overflow: "hidden",
+    background: "var(--caps-bg-canvas)",
   },
 });
 
 /**
- * Parent container
+ * Parent container (sidebar + content panel). On phones this is the
+ * swipe drawer root.
  */
 const Layout = styled("div", {
   base: {
     display: "flex",
     height: "100%",
     minWidth: 0,
+    minHeight: 0,
+    paddingInlineEnd: "var(--caps-panel-gap)",
+    paddingBottom: "var(--caps-panel-gap)",
+
+    _phone: {
+      padding: 0,
+    },
   },
   variants: {
     disconnected: {
       true: {
-        color: "var(--md-sys-color-on-primary-container)",
-        background: "var(--md-sys-color-primary-container)",
+        color: "var(--caps-text)",
+        background: "var(--caps-bg-canvas)",
       },
       false: {
         color: "var(--caps-text-3)",
-        background: "var(--caps-bg-rail)",
+        background: "var(--caps-bg-canvas)",
       },
     },
   },
 });
 
 /**
- * Main content container
+ * Main content panel: floats on the canvas with a hairline and soft corners
  */
 const Content = styled("div", {
   base: {
-    background: "var(--caps-bg-app)",
     display: "flex",
     width: "100%",
     minWidth: 0,
+    overflow: "hidden",
+    background: "var(--caps-bg-panel)",
+    borderRadius: "var(--caps-radius-lg)",
+    boxShadow: "0 0 0 1px var(--caps-line-soft)",
+
+    _phone: {
+      borderRadius: 0,
+      boxShadow: "none",
+    },
   },
   variants: {
     sidebar: {
       false: {
-        borderTopLeftRadius: "var(--caps-radius-lg)",
-        overflow: "hidden",
-        boxShadow: "inset 1px 1px 0 var(--caps-line-soft)",
-
-        _tablet: {
-          borderTopLeftRadius: 0,
-          boxShadow: "none",
-        },
+        marginInlineStart: "var(--caps-panel-gap)",
+        _phone: { marginInlineStart: 0 },
       },
+      true: {},
     },
   },
 });

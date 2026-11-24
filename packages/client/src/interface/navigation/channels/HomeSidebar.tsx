@@ -1,6 +1,13 @@
-import { Match, Show, Switch, createMemo, splitProps } from "solid-js";
+import {
+  Match,
+  Show,
+  Switch,
+  createMemo,
+  createSignal,
+  splitProps,
+} from "solid-js";
 
-import { Trans, useLingui } from "@lingui/solid/macro";
+import { Plural, Trans, useLingui } from "@lingui/solid/macro";
 import { VirtualContainer } from "@minht11/solid-virtual-container";
 import { Channel } from "stoat.js";
 import { css } from "styled-system/css";
@@ -24,7 +31,10 @@ import {
 } from "@revolt/ui";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
-import { SidebarBase } from "./common";
+import IconPlus from "lucide-solid/icons/plus";
+import IconSearch from "lucide-solid/icons/search";
+
+import { SidebarBase, SidebarHeader, sidebarIconButton } from "./common";
 
 interface Props {
   /**
@@ -65,51 +75,66 @@ export const HomeSidebar = (props: Props) => {
       .length;
   });
 
+  const [filter, setFilter] = createSignal("");
+  const filtered = createMemo(() => {
+    const q = filter().trim().toLowerCase();
+    if (!q) return props.conversations();
+    return props
+      .conversations()
+      .filter((c) => (c.displayName ?? "").toLowerCase().includes(q));
+  });
+
   return (
     <SidebarBase class="channel_bar home">
+      <SidebarHeader>
+        <span class={css({ flex: 1 })}>
+          <Trans>Conversations</Trans>
+        </span>
+        <button
+          class={sidebarIconButton()}
+          type="button"
+          aria-label={t`Create a new group`}
+          onClick={() => openModal({ type: "create_group", client: client() })}
+          use:floating={{
+            tooltip: { placement: "bottom", content: t`Create a new group` },
+          }}
+        >
+          <IconPlus size={16} />
+        </button>
+      </SidebarHeader>
+
+      <FilterField>
+        <IconSearch size={14} />
+        <input
+          value={filter()}
+          onInput={(e) => setFilter(e.currentTarget.value)}
+          placeholder={t`Filter conversations`}
+          aria-label={t`Filter conversations`}
+        />
+      </FilterField>
+
       <div ref={scrollTargetElement} use:invisibleScrollable>
         <List>
-          <Header>
-            <Trans>Conversations</Trans>
-          </Header>
-
-          <MenuButton
-            href="/app"
-            size="normal"
-            icon={<Symbol>home</Symbol>}
-            attention={
-              Instance.relPath(location.pathname) === "/app"
-                ? "selected"
-                : "normal"
-            }
-          >
-            <ButtonTitle>
-              <Trans>Home</Trans>
-            </ButtonTitle>
-          </MenuButton>
-
-          <div style={{ height: "5px" }} />
-
-          <MenuButton
-            href="/friends"
-            size="normal"
-            icon={<Symbol>group</Symbol>}
-            attention={
-              Instance.relPath(location.pathname) === "/friends"
-                ? "selected"
-                : "normal"
-            }
-          >
-            <ButtonTitle>
-              <Trans>Friends</Trans>
-              <div style={{ flex: "1 1 auto" }} />
-              <Show when={pendingRequests()}>
-                <PendingBadge>{pendingRequests()} requests</PendingBadge>
-              </Show>
-            </ButtonTitle>
-          </MenuButton>
-
-          <div style={{ height: "5px" }} />
+          <PhoneOnly>
+            <MenuButton
+              href="/friends"
+              size="normal"
+              icon={<Symbol>group</Symbol>}
+              attention={
+                Instance.relPath(location.pathname) === "/friends"
+                  ? "selected"
+                  : "normal"
+              }
+            >
+              <ButtonTitle>
+                <Trans>Friends</Trans>
+                <div style={{ flex: "1 1 auto" }} />
+                <Show when={pendingRequests()}>
+                  <PendingBadge>{pendingRequests()}</PendingBadge>
+                </Show>
+              </ButtonTitle>
+            </MenuButton>
+          </PhoneOnly>
 
           <Switch
             fallback={
@@ -144,59 +169,104 @@ export const HomeSidebar = (props: Props) => {
           </Switch>
 
           <Category>
-            Mensagens diretas
-            <a
-              class={css({ cursor: "pointer" })}
-              onClick={() =>
-                openModal({
-                  type: "create_group",
-                  client: client(),
-                })
-              }
-              use:floating={{
-                tooltip: {
-                  placement: "right",
-                  content: t`Create a new group`,
-                },
-              }}
-            >
-              <Symbol size={20} marginTop="2px">
-                add
-              </Symbol>
-            </a>
+            <Trans>Direct messages</Trans>
+            <span class={css({ color: "var(--caps-text-disabled)" })}>
+              {props.conversations().length}
+            </span>
           </Category>
 
-          <Deferred>
-            <VirtualContainer
-              items={props.conversations()}
-              scrollTarget={scrollTargetElement}
-              itemSize={{ height: 48 }}
-            >
-              {(item) => (
-                <div
-                  style={{
-                    ...item.style,
-                    width: "100%",
-                    "padding-block": "3px",
-                  }}
+          <Show
+            when={filtered().length}
+            fallback={
+              <EmptyList>
+                <Show
+                  when={filter()}
+                  fallback={<Trans>No conversations yet.</Trans>}
                 >
-                  <Entry
-                    // @ts-expect-error missing type on Entry
-                    role="listitem"
-                    tabIndex={item.tabIndex}
-                    channel={item.item}
-                    active={item.item.id === props.channelId}
-                    isMobile={isMobile}
-                  />
-                </div>
-              )}
-            </VirtualContainer>
-          </Deferred>
+                  <Trans>No conversations match.</Trans>
+                </Show>
+              </EmptyList>
+            }
+          >
+            <Deferred>
+              <VirtualContainer
+                items={filtered()}
+                scrollTarget={scrollTargetElement}
+                itemSize={{ height: 48 }}
+              >
+                {(item) => (
+                  <div
+                    style={{
+                      ...item.style,
+                      width: "100%",
+                      "padding-block": "2px",
+                    }}
+                  >
+                    <Entry
+                      // @ts-expect-error missing type on Entry
+                      role="listitem"
+                      tabIndex={item.tabIndex}
+                      channel={item.item}
+                      active={item.item.id === props.channelId}
+                      isMobile={isMobile}
+                    />
+                  </div>
+                )}
+              </VirtualContainer>
+            </Deferred>
+          </Show>
         </List>
       </div>
     </SidebarBase>
   );
 };
+
+const FilterField = styled("label", {
+  base: {
+    display: "flex",
+    alignItems: "center",
+    gap: "var(--caps-space-4)",
+    flexShrink: 0,
+    height: "32px",
+    margin: "0 var(--caps-space-4) var(--caps-space-4)",
+    paddingInline: "var(--caps-space-5)",
+    borderRadius: "var(--caps-radius-md)",
+    background: "var(--caps-bg-surface)",
+    boxShadow: "inset 0 0 0 1px var(--caps-line-soft)",
+    color: "var(--caps-text-3)",
+    transition: "box-shadow var(--caps-dur-fast) var(--caps-ease)",
+
+    "&:focus-within": {
+      boxShadow:
+        "inset 0 0 0 1px var(--caps-accent-line), 0 0 0 3px var(--caps-accent-soft)",
+    },
+
+    "& input": {
+      all: "unset",
+      flex: 1,
+      minWidth: 0,
+      fontSize: "var(--caps-text-md)",
+      color: "var(--caps-text)",
+    },
+    "& input::placeholder": { color: "var(--caps-text-3)" },
+  },
+});
+
+const PhoneOnly = styled("div", {
+  base: {
+    display: "none",
+    _phone: { display: "block" },
+  },
+});
+
+const EmptyList = styled("div", {
+  base: {
+    padding: "var(--caps-space-6)",
+    fontSize: "var(--caps-text-md)",
+    color: "var(--caps-text-3)",
+    textAlign: "center",
+  },
+});
 
 export const Header = styled("div", {
   base: {
@@ -237,9 +307,9 @@ const PendingBadge = styled("div", {
     display: "grid",
     placeItems: "center",
     fontWeight: 700,
-    color: "#ffffff",
-    background: "var(--caps-danger)",
-    borderRadius: "999px",
+    color: "var(--caps-on-accent)",
+    background: "var(--caps-accent)",
+    borderRadius: "var(--caps-radius-full)",
   },
 });
 
@@ -249,7 +319,7 @@ const Category = styled("div", {
     alignItems: "center",
     justifyContent: "space-between",
     margin: "0 var(--caps-space-4)",
-    padding: "var(--caps-space-6) var(--caps-space-2) var(--caps-space-2)",
+    padding: "var(--caps-space-7) var(--caps-space-3) var(--caps-space-3)",
 
     color: "var(--caps-text-3)",
     fill: "var(--caps-text-3)",
@@ -385,8 +455,11 @@ function Entry(
                   one="# Member"
                   other="# Members"
                 /> */}
-              {local.channel.recipientIds.size}{" "}
-              {local.channel.recipientIds.size > 1 ? `Members` : "Member"}
+              <Plural
+                value={local.channel.recipientIds.size}
+                one="# member"
+                other="# members"
+              />
             </span>
           </Match>
           <Match when={local.channel.type === "DirectMessage"}>

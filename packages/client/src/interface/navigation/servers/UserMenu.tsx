@@ -35,7 +35,11 @@ import MdSwap from "lucide-solid/icons/refresh-cw";
 import MdDelete from "lucide-solid/icons/trash";
 
 interface Props {
-  anchor: Accessor<HTMLDivElement | undefined>;
+  anchor: Accessor<HTMLElement | undefined>;
+  /**
+   * Where the menu opens relative to the anchor
+   */
+  placement?: "right-start" | "bottom-end";
 }
 
 const TruncatedStatusText = styled("div", {
@@ -61,9 +65,9 @@ export function UserMenu(props: Props) {
   const [ref, setRef] = createSignal<HTMLDivElement>();
 
   const position = useFloating(() => props.anchor(), ref, {
-    placement: "right-start",
+    placement: props.placement ?? "right-start",
     whileElementsMounted: autoUpdate,
-    middleware: [offset(5), shift()],
+    middleware: [offset(6), shift({ padding: 8 })],
   });
 
   function toggle() {
@@ -113,13 +117,14 @@ export function UserMenu(props: Props) {
             ref={setRef}
             style={{
               position: position.strategy,
+              "z-index": "var(--caps-z-popover)",
               top: `${position.y ?? 0}px`,
               left: `${position.x ?? 0}px`,
             }}
-            initial={{ opacity: 0, x: -24 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2, easing: [0.87, 0, 0.13, 1] }}
+            transition={{ duration: 0.14, easing: [0.16, 1, 0.3, 1] }}
           >
             <ContextMenu>
               <ContextMenuItem

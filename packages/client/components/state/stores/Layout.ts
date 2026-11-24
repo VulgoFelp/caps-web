@@ -36,7 +36,20 @@ export interface TypeLayout {
    * Only the contrary is ever stored
    */
   openSections: Record<string, boolean>;
+
+  /**
+   * Panel widths in pixels (sidebar, side panel), resizable by the user
+   */
+  sizes: Record<string, number>;
 }
+
+/**
+ * Resizable panels and their limits
+ */
+export const LAYOUT_SIZES = {
+  SIDEBAR: { key: "sidebar", min: 208, max: 380, default: 264 },
+  SIDE_PANEL: { key: "panel", min: 240, max: 440, default: 280 },
+} as const;
 
 /**
  * Handles layout and navigation of the app.
@@ -65,6 +78,7 @@ export class Layout extends AbstractStore<"layout", TypeLayout> {
       activeInterface: "home",
       activePath: {},
       openSections: {},
+      sizes: {},
     };
   }
 
@@ -96,7 +110,40 @@ export class Layout extends AbstractStore<"layout", TypeLayout> {
       }
     }
 
+    if (typeof input.sizes === "object" && input.sizes) {
+      for (const key of Object.keys(input.sizes)) {
+        if (typeof input.sizes[key] === "number") {
+          layout.sizes[key] = input.sizes[key];
+        }
+      }
+    }
+
     return layout;
+  }
+
+  /**
+   * Get a panel size, clamped to its limits
+   * @param size Panel definition from LAYOUT_SIZES
+   */
+  getSize(size: (typeof LAYOUT_SIZES)[keyof typeof LAYOUT_SIZES]) {
+    const value = this.get().sizes?.[size.key] ?? size.default;
+    return Math.min(size.max, Math.max(size.min, value));
+  }
+
+  /**
+   * Set a panel size (clamped)
+   * @param size Panel definition from LAYOUT_SIZES
+   * @param value Width in pixels
+   */
+  setSize(
+    size: (typeof LAYOUT_SIZES)[keyof typeof LAYOUT_SIZES],
+    value: number,
+  ) {
+    this.set(
+      "sizes",
+      size.key,
+      Math.round(Math.min(size.max, Math.max(size.min, value))),
+    );
   }
 
   /**

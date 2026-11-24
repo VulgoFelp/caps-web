@@ -18,6 +18,7 @@ import { useClient } from "@revolt/client";
 import { Keybind, KeybindAction, createKeybind } from "@revolt/keybinds";
 import { useNavigate, useSmartParams } from "@revolt/routing";
 import { useState } from "@revolt/state";
+
 import { LAYOUT_SECTIONS } from "@revolt/state/stores/Layout";
 import {
   BelowFloatingHeader,
@@ -27,6 +28,7 @@ import {
   main,
 } from "@revolt/ui";
 import { VoiceChannelCallCardMount } from "@revolt/ui/components/features/voice/callCard/VoiceCallCard";
+import { panelRequest, setPanelRequest } from "../../shell/shellState";
 
 import { ChannelHeader } from "../ChannelHeader";
 import { ChannelPageProps } from "../ChannelPage";
@@ -175,6 +177,19 @@ export function TextChannel(props: ChannelPageProps) {
       () => props.channel.id,
       () => setSidebarState({ state: "default" }),
     ),
+  );
+
+  // side panel requests from the command palette
+  createEffect(
+    on(panelRequest, (request) => {
+      if (!request || request.channelId !== props.channel.id) return;
+      setSidebarState(
+        request.state === "search"
+          ? { state: "search", query: request.query ?? "" }
+          : { state: "pins" },
+      );
+      setPanelRequest(undefined);
+    }),
   );
 
   // If this is a server text channel, sync the members

@@ -42,6 +42,7 @@ import { AndroidNag } from "./AndroidNag";
 import AuthPage from "./Auth";
 import Interface from "./Interface";
 import "./index.css";
+import { ConversationsPage } from "./interface/Conversations";
 import { DevelopmentPage } from "./interface/Development";
 import { Discover } from "./interface/Discover";
 import { Friends } from "./interface/Friends";
@@ -162,6 +163,7 @@ const routes = () => (
       <Route path="/invite/:code" component={InviteRedirect} />
       <Route path="/bot/:code" component={BotRedirect} />
       <Route path="/friends" component={Friends} />
+      <Route path="/conversations" component={ConversationsPage} />
       <Route path="/server/:server/*">
         <Route path="/channel/:channel/*" component={ChannelPage} />
         <Route path="/*" component={ServerHome} />

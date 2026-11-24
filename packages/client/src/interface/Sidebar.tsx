@@ -8,21 +8,26 @@ import {
   ChannelContextMenu,
   ServerSidebarContextMenu,
 } from "@revolt/app";
-import { useClient, useUser } from "@revolt/client";
+import { useClient } from "@revolt/client";
 import { useModals } from "@revolt/modal";
 import { useLocation, useParams, useSmartParams } from "@revolt/routing";
 import { useState } from "@revolt/state";
-import { LAYOUT_SECTIONS } from "@revolt/state/stores/Layout";
+import { LAYOUT_SECTIONS, LAYOUT_SIZES } from "@revolt/state/stores/Layout";
+import { ResizeHandle } from "@revolt/ui";
 
-import { HomeSidebar, ServerList, ServerSidebar } from "./navigation";
+import { HomeSidebar, ServerSidebar } from "./navigation";
 
 const MainBar = styled("div", {
   base: {
+    position: "relative",
     display: "flex",
+    flexDirection: "column",
     flexShrink: 0,
+    minHeight: 0,
+    width: "var(--caps-sidebar-width)",
 
     _phone: {
-      "--layout-width-channel-sidebar": "auto",
+      "--caps-sidebar-width": "100vw !important",
       position: "absolute",
       width: "100vw",
       height: "100%",
@@ -31,7 +36,10 @@ const MainBar = styled("div", {
 });
 
 /**
- * Left-most channel navigation sidebar
+ * Unified, contextual sidebar
+ *
+ * Shows the open community's channels, or your conversations everywhere
+ * else. Resizable by dragging its edge and collapsible (Ctrl+B / top bar).
  */
 export const Sidebar = (props: {
   /**
@@ -39,49 +47,44 @@ export const Sidebar = (props: {
    */
   menuGenerator: (t: ServerI | Channel) => JSX.Directives["floating"];
 }) => {
-  const user = useUser();
   const state = useState();
-  const client = useClient();
-  const { openModal } = useModals();
-
   const params = useParams<{ server: string }>();
   const location = useLocation();
 
+  const width = () => state.layout.getSize(LAYOUT_SIZES.SIDEBAR);
+
   return (
-    <MainBar class="main_bar">
-      <ServerList
-        orderedServers={state.ordering.orderedServers(client())}
-        orderedEntries={state.ordering.orderedEntries(client())}
-        setServerOrder={state.ordering.setServerOrder}
-        unreadConversations={state.ordering
-          .orderedConversations(client())
-          .filter(
-            // TODO: muting channels
-            (channel) => channel.unread,
-          )}
-        user={user()!}
-        selectedServer={() => params.server}
-        onCreateOrJoinServer={() =>
-          openModal({
-            type: "create_or_join_server",
-            client: client(),
-          })
-        }
-        menuGenerator={props.menuGenerator}
-      />
-      <Show
-        when={
-          state.layout.getSectionState(LAYOUT_SECTIONS.PRIMARY_SIDEBAR, true) &&
-          !location.pathname.startsWith("/discover")
-        }
+    <Show
+      when={
+        state.layout.getSectionState(LAYOUT_SECTIONS.PRIMARY_SIDEBAR, true) &&
+        !location.pathname.startsWith("/discover")
+      }
+    >
+      <MainBar
+        class="main_bar"
+        style={{ "--caps-sidebar-width": `${width()}px` }}
       >
         <Switch fallback={<Home />}>
           <Match when={params.server}>
             <Server />
           </Match>
         </Switch>
-      </Show>
-    </MainBar>
+        <ResizeHandle
+          edge="right"
+          width={width}
+          min={LAYOUT_SIZES.SIDEBAR.min}
+          max={LAYOUT_SIZES.SIDEBAR.max}
+          label="Redimensionar barra lateral"
+          onResize={(w) => state.layout.setSize(LAYOUT_SIZES.SIDEBAR, w)}
+          onReset={() =>
+            state.layout.setSize(
+              LAYOUT_SIZES.SIDEBAR,
+              LAYOUT_SIZES.SIDEBAR.default,
+            )
+          }
+        />
+      </MainBar>
+    </Show>
   );
 };
 

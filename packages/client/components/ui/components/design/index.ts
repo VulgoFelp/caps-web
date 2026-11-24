@@ -34,6 +34,7 @@ export { Checkbox } from "./Checkbox";
 export { COLOUR_PALETTE, ColourPicker } from "./ColourPicker";
 export { DataTable } from "./DataTable";
 export { type DialogProps, Dialog } from "./Dialog";
+export { EmptyState } from "./EmptyState";
 export { Fab } from "./Fab";
 export { FloatingSelect } from "./FloatingSelect";
 export { IconButton } from "./IconButton";
@@ -48,7 +49,9 @@ export { CircularProgress } from "./LoadingProgress";
 export { LoadingScreen } from "./LoadingScreen";
 export { MenuItem } from "./Menu";
 export { MenuButton } from "./MenuButton";
+export { Popover } from "./Popover";
 export { Radio2 } from "./Radio";
+export { ResizeHandle } from "./ResizeHandle";
 export { Ripple } from "./Ripple";
 export { Slider } from "./Slider";
 export {
