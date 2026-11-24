@@ -98,8 +98,7 @@ export function RoleMention(props: { roleId: string }) {
         <div class={mention()}>
           <RoleIcon
             style={{
-              background:
-                role()!.colour ?? "var(--md-sys-color-outline-variant)",
+              background: role()!.colour ?? "var(--caps-line)",
             }}
           />
           <ColouredText colour={role()!.colour!}>{role()!.name}</ColouredText>
@@ -191,8 +190,8 @@ export const mention = cva({
     fontWeight: 600,
     borderRadius: "var(--borderRadius-lg)",
 
-    color: "var(--md-sys-color-on-primary-container)",
-    background: "var(--md-sys-color-primary-container)",
+    color: "var(--caps-text)",
+    background: "var(--caps-bg-component)",
   },
   variants: {
     isLink: {
@@ -208,8 +207,8 @@ export const mention = cva({
     },
     inEditor: {
       true: {
-        color: "var(--md-sys-color-on-primary)",
-        background: "var(--md-sys-color-primary)",
+        color: "var(--caps-on-accent)",
+        background: "var(--caps-accent)",
 
         "& img": {
           width: "16px",

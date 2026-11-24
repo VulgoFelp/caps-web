@@ -38,8 +38,7 @@ export function UserProfileRolesModal(
                 <RoleName>{role.name}</RoleName>
                 <RoleIcon
                   style={{
-                    background:
-                      role.colour ?? "var(--md-sys-color-outline-variant)",
+                    background: role.colour ?? "var(--caps-line)",
                   }}
                 />
               </Row>
@@ -82,8 +81,7 @@ export function UserProfileRolesModal(
                     <RoleName>{role.name}</RoleName>
                     <RoleIcon
                       style={{
-                        background:
-                          role.colour ?? "var(--md-sys-color-outline-variant)",
+                        background: role.colour ?? "var(--caps-line)",
                       }}
                     />
                   </Row>

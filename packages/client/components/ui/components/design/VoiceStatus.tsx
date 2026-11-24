@@ -27,8 +27,8 @@ const VoiceStatusSymbol = styled("div", {
     fontSize: "8px",
     fontWeight: 600,
 
-    color: "var(--md-sys-color-on-surface)",
-    fill: "var(--md-sys-color-on-surface)",
+    color: "var(--caps-text)",
+    fill: "var(--caps-text)",
   },
 });
 
@@ -39,7 +39,7 @@ function VoiceGraphic(props: Props) {
   return (
     <Switch>
       <Match when={props.status === "voice"}>
-        <circle cx="27" cy="27" r="5" fill="var(--md-sys-color-surface)" />
+        <circle cx="27" cy="27" r="5" fill="var(--caps-bg-panel)" />
         <foreignObject x="22" y="22" width="10" height="10">
           <VoiceStatusSymbol>
             <MdVoiceChat {...iconSize(10)} />
@@ -47,7 +47,7 @@ function VoiceGraphic(props: Props) {
         </foreignObject>
       </Match>
       <Match when={props.status === "video"}>
-        <circle cx="27" cy="27" r="5" fill="var(--md-sys-color-surface)" />
+        <circle cx="27" cy="27" r="5" fill="var(--caps-bg-panel)" />
         <foreignObject x="22" y="22" width="10" height="10">
           <VoiceStatusSymbol>
             <MdVideoChat {...iconSize(10)} />
@@ -55,7 +55,7 @@ function VoiceGraphic(props: Props) {
         </foreignObject>
       </Match>
       <Match when={props.status === "screenshare"}>
-        <circle cx="27" cy="27" r="5" fill="var(--md-sys-color-surface)" />
+        <circle cx="27" cy="27" r="5" fill="var(--caps-bg-panel)" />
         <foreignObject x="22" y="22" width="10" height="10">
           <VoiceStatusSymbol>
             <MdScreenShare {...iconSize(10)} />

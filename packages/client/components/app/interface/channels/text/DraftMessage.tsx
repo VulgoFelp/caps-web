@@ -168,8 +168,8 @@ const SpoilerLabel = styled("div", {
     borderRadius: "var(--borderRadius-lg)",
     border: "none",
 
-    color: "var(--md-sys-color-on-surface)",
-    background: "var(--md-sys-color-surface)",
+    color: "var(--caps-text)",
+    background: "var(--caps-bg-panel)",
 
     textTransform: "uppercase",
   },

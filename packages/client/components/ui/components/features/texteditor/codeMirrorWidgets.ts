@@ -135,8 +135,8 @@ const widgetsTheme = EditorView.theme({
     "font-weight": 600,
     "border-radius": "var(--borderRadius-lg)",
 
-    color: "var(--md-sys-color-on-primary-container)",
-    background: "var(--md-sys-color-primary-container)",
+    color: "var(--caps-text)",
+    background: "var(--caps-bg-component)",
   },
 
   ".cm-mention-widget img": {

@@ -10,8 +10,8 @@ export const ProfileCard = styled("div", {
     width: "100%",
     userSelect: "none",
 
-    color: "var(--md-sys-color-on-surface)",
-    background: "var(--md-sys-color-surface-container-low)",
+    color: "var(--caps-text)",
+    background: "var(--caps-bg-inset)",
 
     padding: "var(--gap-lg)",
     borderRadius: "var(--borderRadius-lg)",

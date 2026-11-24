@@ -41,8 +41,7 @@ export function ProfileRoles(props: { member?: ServerMember }) {
                 <Role>{role.name}</Role>
                 <RoleIcon
                   style={{
-                    background:
-                      role.colour ?? "var(--md-sys-color-outline-variant)",
+                    background: role.colour ?? "var(--caps-line)",
                   }}
                 />
               </Row>

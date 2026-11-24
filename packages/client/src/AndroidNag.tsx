@@ -119,8 +119,8 @@ const Base = styled("div", {
     userSelect: "none",
     overflowY: "auto",
 
-    color: "var(--md-sys-color-on-surface)",
-    background: "var(--md-sys-color-surface)",
+    color: "var(--caps-text)",
+    background: "var(--caps-bg-panel)",
   },
 });
 
@@ -166,7 +166,7 @@ const Copy = styled("div", {
     maxWidth: "42ch",
     paddingInline: "var(--gap-lg)",
     textWrap: "balance",
-    color: "var(--md-sys-color-on-surface-variant)",
+    color: "var(--caps-text-2)",
   },
 });
 
@@ -202,12 +202,12 @@ const DismissLink = styled("button", {
 
     font: "inherit",
     fontSize: "0.8125rem",
-    color: "var(--md-sys-color-on-surface-variant)",
+    color: "var(--caps-text-2)",
     textDecoration: "underline",
     textUnderlineOffset: "2px",
 
     _hover: {
-      color: "var(--md-sys-color-on-surface)",
+      color: "var(--caps-text)",
     },
   },
 });

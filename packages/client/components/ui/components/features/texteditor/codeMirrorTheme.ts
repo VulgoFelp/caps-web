@@ -12,17 +12,17 @@ export const baseTheme = EditorView.theme({
   },
   ".cm-content": {
     fontFamily: "inherit",
-    color: "var(--md-sys-color-on-surface)",
+    color: "var(--caps-text)",
     background: "transparent",
-    caretColor: "var(--md-sys-color-on-surface)",
+    caretColor: "var(--caps-text)",
   },
   ".cm-cursor, .cm-dropCursor": {
-    borderLeftColor: "var(--md-sys-color-on-surface)",
+    borderLeftColor: "var(--caps-text)",
   },
   "&.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection":
     {
-      color: "var(--md-sys-color-on-primary-container)",
-      backgroundColor: "var(--md-sys-color-primary-container)",
+      color: "var(--caps-text)",
+      backgroundColor: "var(--caps-bg-component)",
     },
   ".cm-scroller": {
     fontFamily: "inherit",

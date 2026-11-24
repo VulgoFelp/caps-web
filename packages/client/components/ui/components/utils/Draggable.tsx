@@ -170,7 +170,7 @@ export function Draggable<T>(props: Props<T>) {
             ? {}
             : {
                 outline:
-                  "2px solid color-mix(in srgb, 40% var(--md-sys-color-primary), transparent)",
+                  "2px solid color-mix(in srgb, 40% var(--caps-accent), transparent)",
                 borderRadius: "4px",
                 outlineOffset: "-2px",
               }),
@@ -196,10 +196,10 @@ export function Draggable<T>(props: Props<T>) {
 const dropIndicatorStyles = css({
   "& > [data-is-dnd-shadow-item-internal]": {
     visibility: "visible !important",
-    outline: "2px solid var(--md-sys-color-primary)",
+    outline: "2px solid var(--caps-accent)",
     outlineOffset: "-2px",
     borderRadius: "var(--borderRadius-md)",
-    background: "var(--md-sys-color-surface-container-high)",
+    background: "var(--caps-bg-overlay)",
   },
 
   "& > [data-is-dnd-shadow-item-internal] > *": {

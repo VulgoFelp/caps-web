@@ -42,10 +42,10 @@ export function SingleSelectSegmentedButtonGroup(props: {
 
 const styles = cva({
   base: {
-    border: "1px solid var(--md-sys-color-on-surface)",
+    border: "1px solid var(--caps-text)",
 
     "&:nth-child(1)": {
-      borderLeft: "1px solid var(--md-sys-color-on-surface)",
+      borderLeft: "1px solid var(--caps-text)",
     },
 
     "&:not(:nth-child(1))": {

@@ -204,7 +204,7 @@ const ColourSwatch = styled("button", {
     transition: "border-radius 200ms cubic-bezier(0.2, 0, 0, 1)",
 
     _focusVisible: {
-      outline: "2px solid var(--md-sys-color-on-surface)",
+      outline: "2px solid var(--caps-text)",
       outlineOffset: "2px",
     },
   },
@@ -253,6 +253,6 @@ const ColourIndicator = styled("span", {
 
 const NoColourIndicator = styled(ColourIndicator, {
   base: {
-    border: "2px dashed var(--md-sys-color-on-surface-variant)",
+    border: "2px dashed var(--caps-text-2)",
   },
 });

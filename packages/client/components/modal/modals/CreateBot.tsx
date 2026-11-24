@@ -63,7 +63,7 @@ export function CreateBotModal(
                 target="_blank"
                 rel="noreferrer"
                 style={{
-                  color: "var(--md-sys-color-primary)",
+                  color: "var(--caps-accent-text)",
                 }}
               >
                 <Trans>Community Guidelines</Trans>

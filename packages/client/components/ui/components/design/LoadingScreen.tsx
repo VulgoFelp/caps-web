@@ -4,7 +4,9 @@ import { styled } from "styled-system/jsx";
 
 import { useInstance } from "@revolt/instance";
 import Instance from "@revolt/instance/Instance";
-import { Button, CircularProgress, Symbol, Text } from "@revolt/ui";
+import { Button, Symbol, Text } from "@revolt/ui";
+
+import { CapsMark } from "./CapsMark";
 
 /**
  * Stoat status page URL
@@ -128,8 +130,9 @@ export function LoadingScreen(props: { isStoat?: boolean }) {
 
   return (
     <Base>
-      <Spinner>
-        <CircularProgress />
+      <Spinner role="status" aria-label={t`Loading`}>
+        <CapsMark size={40} class="caps-loader-mark" />
+        <span class="caps-loader-bar" />
       </Spinner>
 
       <Show when={notice()} keyed>
@@ -218,9 +221,35 @@ const Base = styled("div", {
  */
 const Spinner = styled("div", {
   base: {
-    flexShrink: 0,
-    width: "48px",
-    height: "48px",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "var(--caps-space-7)",
+    color: "var(--caps-text)",
+
+    // the Caps Lock light breathes while the client connects
+    "& .caps-loader-mark circle": {
+      animation: "capsLed 1.4s var(--caps-ease) infinite",
+    },
+
+    "& .caps-loader-bar": {
+      position: "relative",
+      width: "96px",
+      height: "2px",
+      overflow: "hidden",
+      borderRadius: "2px",
+      background: "var(--caps-line)",
+    },
+
+    "& .caps-loader-bar::after": {
+      content: '""',
+      position: "absolute",
+      inset: 0,
+      width: "40%",
+      borderRadius: "2px",
+      background: "var(--caps-accent)",
+      animation: "capsLoaderBar 1.1s var(--caps-ease) infinite",
+    },
   },
 });
 
@@ -241,7 +270,7 @@ const Notice = styled("div", {
     maxWidth: "42ch",
     marginInline: "auto",
     paddingInline: "var(--gap-lg)",
-    color: "var(--md-sys-color-on-surface-variant, #777)",
+    color: "var(--caps-text-3, #7d7b73)",
   },
 });
 

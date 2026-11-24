@@ -19,8 +19,8 @@ export const AttachmentContainer = styled(Column, {
   base: {
     padding: "var(--gap-md)",
     borderRadius: "var(--borderRadius-md)",
-    color: "var(--md-sys-color-on-secondary-container)",
-    background: "var(--md-sys-color-secondary-container)",
+    color: "var(--caps-text)",
+    background: "var(--caps-bg-component)",
     alignSelf: "start",
     width: "420px",
     maxWidth: "100%",

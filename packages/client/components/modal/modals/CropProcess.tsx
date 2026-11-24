@@ -153,7 +153,7 @@ export function CropModal(props: DialogProps & Modals & { type: "crop" }) {
         {(e) => (
           <p
             style={{
-              color: "var(--md-sys-color-error)",
+              color: "var(--caps-danger)",
               "font-size": "13px",
               "margin-top": "8px",
               "max-width": cropHandle?.displaySize().w + "px",
@@ -170,7 +170,7 @@ export function CropModal(props: DialogProps & Modals & { type: "crop" }) {
         {(e) => (
           <p
             style={{
-              color: "var(--md-sys-color-error)",
+              color: "var(--caps-danger)",
               "font-size": "13px",
               "margin-top": "8px",
               "max-width": cropHandle?.displaySize().w + "px",

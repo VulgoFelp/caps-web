@@ -21,7 +21,7 @@ import MdPeople from "lucide-solid/icons/users";
 const link = cva({
   base: {
     cursor: "pointer",
-    color: "var(--md-sys-color-primary) !important",
+    color: "var(--caps-accent-text) !important",
   },
 });
 
@@ -39,9 +39,9 @@ const internalLink = cva({
     cursor: "pointer",
     fontWeight: 600,
     borderRadius: "var(--borderRadius-lg)",
-    fill: "var(--md-sys-color-on-primary)",
-    color: "var(--md-sys-color-on-primary)",
-    background: "var(--md-sys-color-primary)",
+    fill: "var(--caps-on-accent)",
+    color: "var(--caps-on-accent)",
+    background: "var(--caps-accent)",
   },
 });
 

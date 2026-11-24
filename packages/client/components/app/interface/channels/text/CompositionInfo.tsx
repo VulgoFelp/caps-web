@@ -201,8 +201,8 @@ const Bar = styled("div", {
     alignItems: "center",
     flexDirection: "row",
 
-    color: "var(--md-sys-color-on-surface)",
-    background: "var(--md-sys-color-surface-container-lowest)",
+    color: "var(--caps-text)",
+    background: "var(--caps-bg-canvas)",
   },
 });
 
@@ -219,7 +219,7 @@ const SlowmodeHolder = cva({
     alignItems: "center",
     marginLeft: "auto",
     gap: "var(--gap-sm)",
-    color: "var(--md-sys-color-outline)",
+    color: "var(--caps-text-3)",
     flexShrink: 0,
   },
 });

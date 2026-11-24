@@ -228,14 +228,14 @@ const calloutStyles = cva({
     },
     mentions: {
       true: {
-        fill: "var(--md-sys-color-on-error)",
-        color: "var(--md-sys-color-on-error)",
-        background: "var(--md-sys-color-error)",
+        fill: "var(--caps-on-accent)",
+        color: "var(--caps-on-accent)",
+        background: "var(--caps-danger)",
       },
       false: {
-        fill: "var(--md-sys-color-on-primary)",
-        color: "var(--md-sys-color-on-primary)",
-        background: "var(--md-sys-color-primary)",
+        fill: "var(--caps-on-accent)",
+        color: "var(--caps-on-accent)",
+        background: "var(--caps-accent)",
       },
     },
   },

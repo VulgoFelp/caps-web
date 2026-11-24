@@ -107,6 +107,6 @@ const Scrutinise = styled("span", {
   base: {
     display: "flex",
     flexDirection: "column",
-    color: "var(--md-sys-color-error)",
+    color: "var(--caps-danger)",
   },
 });

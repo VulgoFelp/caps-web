@@ -8,8 +8,8 @@ import {
   onCleanup,
 } from "solid-js";
 
-import { Trans } from "@lingui/solid/macro";
-import { cva } from "styled-system/css";
+import { Trans, useLingui } from "@lingui/solid/macro";
+import { css, cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 import { decodeTime, ulid } from "ulid";
 
@@ -19,15 +19,16 @@ import { Keybind, KeybindAction, createKeybind } from "@revolt/keybinds";
 import { useNavigate, useSmartParams } from "@revolt/routing";
 import { useState } from "@revolt/state";
 
-import { LAYOUT_SECTIONS } from "@revolt/state/stores/Layout";
+import { LAYOUT_SECTIONS, LAYOUT_SIZES } from "@revolt/state/stores/Layout";
 import {
   BelowFloatingHeader,
   Header,
   NewMessages,
-  Text,
+  ResizeHandle,
   main,
 } from "@revolt/ui";
 import { VoiceChannelCallCardMount } from "@revolt/ui/components/features/voice/callCard/VoiceCallCard";
+import IconX from "lucide-solid/icons/x";
 import { panelRequest, setPanelRequest } from "../../shell/shellState";
 
 import { ChannelHeader } from "../ChannelHeader";
@@ -63,6 +64,8 @@ export function canIHasSidebar(ch: Channel) {
  */
 export function TextChannel(props: ChannelPageProps) {
   const state = useState();
+  const { t } = useLingui();
+  const panelWidth = () => state.layout.getSize(LAYOUT_SIZES.SIDE_PANEL);
   const client = useClient();
 
   // Last unread message id
@@ -265,63 +268,109 @@ export function TextChannel(props: ChannelPageProps) {
             sidebarState().state !== "default"
           }
         >
-          <div
-            ref={sidebarScrollTargetElement}
-            use:scrollable={{
-              direction: "y",
-              showOnHover: true,
-              class: sidebar(),
-            }}
-            style={{
-              width: sidebarState().state !== "default" ? "360px" : "",
-            }}
+          <aside
+            class={panelShell()}
+            style={{ width: `${panelWidth()}px` }}
+            aria-label={
+              sidebarState().state === "search"
+                ? t`Search results`
+                : sidebarState().state === "pins"
+                  ? t`Pinned messages`
+                  : t`Members`
+            }
           >
-            <Switch
-              fallback={
-                <MemberSidebar
-                  channel={props.channel}
-                  scrollTargetElement={sidebarScrollTargetElement}
-                  isLargeServer={isLargeServer(props.channel.server)}
-                />
+            <ResizeHandle
+              edge="left"
+              width={panelWidth}
+              min={LAYOUT_SIZES.SIDE_PANEL.min}
+              max={LAYOUT_SIZES.SIDE_PANEL.max}
+              label={t`Resize panel`}
+              onResize={(w) => state.layout.setSize(LAYOUT_SIZES.SIDE_PANEL, w)}
+              onReset={() =>
+                state.layout.setSize(
+                  LAYOUT_SIZES.SIDE_PANEL,
+                  LAYOUT_SIZES.SIDE_PANEL.default,
+                )
               }
+            />
+            <PanelHead>
+              <span>
+                <Switch fallback={<Trans>Members</Trans>}>
+                  <Match when={sidebarState().state === "search"}>
+                    <Trans>Search results</Trans>
+                  </Match>
+                  <Match when={sidebarState().state === "pins"}>
+                    <Trans>Pinned messages</Trans>
+                  </Match>
+                </Switch>
+              </span>
+              <button
+                type="button"
+                class={panelClose}
+                aria-label={t`Close panel`}
+                onClick={() => {
+                  if (sidebarState().state !== "default") {
+                    setSidebarState({ state: "default" });
+                  } else {
+                    state.layout.setSectionState(
+                      LAYOUT_SECTIONS.MEMBER_SIDEBAR,
+                      false,
+                      true,
+                    );
+                  }
+                }}
+                use:floating={{
+                  tooltip: { placement: "bottom", content: t`Close panel` },
+                }}
+              >
+                <IconX size={16} />
+              </button>
+            </PanelHead>
+            <div
+              ref={sidebarScrollTargetElement}
+              use:scrollable={{
+                direction: "y",
+                showOnHover: true,
+                class: sidebar(),
+              }}
             >
-              <Match when={sidebarState().state === "search"}>
-                <WideSidebarContainer>
-                  <SidebarTitle>
-                    <Text class="label" size="large">
-                      <Trans>Search Results</Trans>
-                    </Text>
-                  </SidebarTitle>
-                  <TextSearchSidebar
+              <Switch
+                fallback={
+                  <MemberSidebar
                     channel={props.channel}
-                    query={{
-                      query: (sidebarState() as { query: string }).query,
-                    }}
+                    scrollTargetElement={sidebarScrollTargetElement}
+                    isLargeServer={isLargeServer(props.channel.server)}
                   />
-                </WideSidebarContainer>
-              </Match>
-              <Match when={sidebarState().state === "pins"}>
-                <WideSidebarContainer>
-                  <SidebarTitle>
-                    <Text class="label" size="large">
-                      <Trans>Pinned Messages</Trans>
-                    </Text>
-                  </SidebarTitle>
-                  <TextSearchSidebar
-                    channel={props.channel}
-                    query={{ pinned: true, sort: "Latest" }}
-                  />
-                </WideSidebarContainer>
-              </Match>
-            </Switch>
+                }
+              >
+                <Match when={sidebarState().state === "search"}>
+                  <WideSidebarContainer>
+                    <TextSearchSidebar
+                      channel={props.channel}
+                      query={{
+                        query: (sidebarState() as { query: string }).query,
+                      }}
+                    />
+                  </WideSidebarContainer>
+                </Match>
+                <Match when={sidebarState().state === "pins"}>
+                  <WideSidebarContainer>
+                    <TextSearchSidebar
+                      channel={props.channel}
+                      query={{ pinned: true, sort: "Latest" }}
+                    />
+                  </WideSidebarContainer>
+                </Match>
+              </Switch>
 
-            <Show when={sidebarState().state !== "default"}>
-              <Keybind
-                keybind={KeybindAction.CLOSE_SIDEBAR}
-                onPressed={() => setSidebarState({ state: "default" })}
-              />
-            </Show>
-          </div>
+              <Show when={sidebarState().state !== "default"}>
+                <Keybind
+                  keybind={KeybindAction.CLOSE_SIDEBAR}
+                  onPressed={() => setSidebarState({ state: "default" })}
+                />
+              </Show>
+            </div>
+          </aside>
         </Show>
       </Content>
     </>
@@ -344,13 +393,62 @@ const Content = styled("div", {
 /**
  * Base styles
  */
+const panelShell = cva({
+  base: {
+    position: "relative",
+    flexShrink: 0,
+    display: "flex",
+    flexDirection: "column",
+    minHeight: 0,
+    background: "var(--caps-bg-panel)",
+    borderLeft: "1px solid var(--caps-line-soft)",
+    animation: "authHintIn 160ms var(--caps-ease-out)",
+
+    _phone: {
+      position: "absolute",
+      inset: 0,
+      width: "100% !important",
+      zIndex: "var(--caps-z-panel)",
+      borderLeft: "none",
+    },
+  },
+});
+
 const sidebar = cva({
   base: {
-    flexShrink: 0,
-    width: "var(--caps-members-width)",
-    background: "var(--caps-bg-sidebar)",
-    borderLeft: "1px solid var(--caps-line-soft)",
+    flex: 1,
+    minHeight: 0,
   },
+});
+
+const PanelHead = styled("div", {
+  base: {
+    display: "flex",
+    alignItems: "center",
+    gap: "var(--caps-space-3)",
+    flexShrink: 0,
+    height: "var(--caps-header-height)",
+    paddingInline: "var(--caps-space-6) var(--caps-space-4)",
+    borderBottom: "1px solid var(--caps-line-soft)",
+    fontSize: "var(--caps-text-base)",
+    fontWeight: 600,
+    color: "var(--caps-text)",
+
+    "& > span": { flex: 1, minWidth: 0 },
+  },
+});
+
+const panelClose = css({
+  all: "unset",
+  display: "grid",
+  placeItems: "center",
+  width: "28px",
+  height: "28px",
+  borderRadius: "var(--caps-radius-sm)",
+  color: "var(--caps-text-3)",
+  cursor: "pointer",
+  "&:hover": { background: "var(--caps-hover)", color: "var(--caps-text)" },
+  "&:focus-visible": { boxShadow: "var(--caps-focus-ring)" },
 });
 
 /**
@@ -358,8 +456,8 @@ const sidebar = cva({
  */
 const WideSidebarContainer = styled("div", {
   base: {
-    width: "360px",
     paddingInline: "var(--caps-space-4)",
+    paddingTop: "var(--caps-space-4)",
   },
 });
 

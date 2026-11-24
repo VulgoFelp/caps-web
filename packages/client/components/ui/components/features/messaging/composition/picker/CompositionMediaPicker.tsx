@@ -244,10 +244,10 @@ const Container = styled("div", {
     padding: "var(--gap-md) 0",
 
     borderRadius: "var(--borderRadius-lg)",
-    color: "var(--md-sys-color-on-surface)",
-    fill: "var(--md-sys-color-on-surface)",
-    boxShadow: "0 0 3px var(--md-sys-color-shadow)",
-    background: "var(--md-sys-color-surface-container)",
+    color: "var(--caps-text)",
+    fill: "var(--caps-text)",
+    boxShadow: "0 0 3px var(--caps-shadow-pop)",
+    background: "var(--caps-bg-surface)",
   },
 });
 

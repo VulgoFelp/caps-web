@@ -57,10 +57,20 @@ msgstr "{0, plural, =0 {Nenhuma sala de voz ativa} one {# sala de voz ativa} oth
 msgid "{0, plural, one {# blocked message} other {# blocked messages}}"
 msgstr "{0, plural, one {# mensagem bloqueada} other {# mensagens bloqueadas}}"
 
+#. placeholder {0}: mutualQuery.data!.groups.length
+#: components/ui/components/floating/UserCard.tsx
+msgid "{0, plural, one {# community or group in common} other {# communities and groups in common}}"
+msgstr "{0, plural, one {# comunidade ou grupo em comum} other {# comunidades e grupos em comum}}"
+
 #. placeholder {0}: props.inVoice
 #: src/interface/home/ActiveCommunities.tsx
 msgid "{0, plural, one {# in voice} other {# in voice}}"
 msgstr "{0, plural, one {# na voz} other {# na voz}}"
+
+#. placeholder {0}: onlineMembers()
+#: src/interface/channels/text/MemberSidebar.tsx
+msgid "{0, plural, one {# member online} other {# members online}}"
+msgstr "{0, plural, one {# membro online} other {# membros online}}"
 
 #. placeholder {0}: local.channel.recipientIds.size
 #. placeholder {0}: props.server.approximateMemberCount
@@ -68,6 +78,11 @@ msgstr "{0, plural, one {# na voz} other {# na voz}}"
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "{0, plural, one {# member} other {# members}}"
 msgstr "{0, plural, one {# membro} other {# membros}}"
+
+#. placeholder {0}: mutualQuery.data!.users.length
+#: components/ui/components/floating/UserCard.tsx
+msgid "{0, plural, one {# mutual friend} other {# mutual friends}}"
+msgstr "{0, plural, one {# amigo em comum} other {# amigos em comum}}"
 
 #. placeholder {0}: mentions()
 #: components/ui/components/features/navigation/UnreadCallout.tsx
@@ -149,8 +164,8 @@ msgstr "{0} tornou {1} o novo dono do grupo"
 
 #. placeholder {0}: onlineMembers()
 #: src/interface/channels/text/MemberSidebar.tsx
-msgid "{0} members online"
-msgstr "{0} membros online"
+#~ msgid "{0} members online"
+#~ msgstr "{0} membros online"
 
 #. placeholder {0}: name(id)
 #. placeholder {1}: to + 1
@@ -989,6 +1004,10 @@ msgstr "Fechar chat"
 msgid "Close conversation with {0}?"
 msgstr "Fechar conversa com {0}?"
 
+#: src/interface/channels/text/TextChannel.tsx
+msgid "Close panel"
+msgstr "Fechar painel"
+
 #: components/modal/modals/JoinServer.tsx
 msgid "Code"
 msgstr "Código"
@@ -1295,7 +1314,6 @@ msgid "Create or join a community"
 msgstr "Criar ou entrar em uma comunidade"
 
 #: components/modal/modals/CreateOrJoinServer.tsx
-#: src/interface/navigation/servers/ServerList.tsx
 msgid "Create or join a server"
 msgstr "Criar ou entrar em um servidor"
 
@@ -1879,8 +1897,8 @@ msgstr "Buscar comunidade"
 #~ msgstr "Descubra uma comunidade baseada em seus hobbies ou interesses."
 
 #: src/interface/navigation/servers/ServerList.tsx
-msgid "Find new servers to join"
-msgstr "Encontrar novos servidores"
+#~ msgid "Find new servers to join"
+#~ msgstr "Encontrar novos servidores"
 
 #~ msgid "Find your com<0/>munity,<1/>connect with the world."
 #~ msgstr "Encontre sua comunidade,<1/>conecte-se com o mundo."
@@ -1895,7 +1913,6 @@ msgstr "Encontrar novos servidores"
 msgid "Focus"
 msgstr "Concentrado"
 
-#: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/shell/CommunitySwitcher.tsx
 msgid "Folder"
 msgstr "Pasta"
@@ -2126,7 +2143,6 @@ msgid "Hoist Role"
 msgstr "Exibir cargo separadamente"
 
 #: src/interface/Home.tsx
-#: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/shell/BottomTabs.tsx
 #: src/interface/shell/CommandPalette.tsx
 #: src/interface/shell/TopBar.tsx
@@ -2170,6 +2186,10 @@ msgstr "Hacking ou cracking ilegais"
 #: components/modal/modals/ReportContent.tsx
 msgid "Impersonation"
 msgstr "Falsa identidade"
+
+#: components/ui/components/floating/UserCard.tsx
+msgid "In common"
+msgstr "Em comum"
 
 #: src/AndroidNag.tsx
 msgid "In the meantime, install Stoat from Google Play for a faster, smoother experience designed for Android."
@@ -2383,6 +2403,10 @@ msgstr "Salas de voz agora"
 msgid "Load file ({0})"
 msgstr "Carregar arquivo ({0})"
 
+#: components/ui/components/design/LoadingScreen.tsx
+msgid "Loading"
+msgstr "Carregando"
+
 #: components/auth/src/AuthPage.tsx
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Log in"
@@ -2508,6 +2532,7 @@ msgstr "Maximizar janela da chamada"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/ServerSettings.tsx
+#: src/interface/channels/text/TextChannel.tsx
 msgid "Members"
 msgstr "Membros"
 
@@ -2657,12 +2682,11 @@ msgid "Mute Server"
 msgstr "Silenciar servidor"
 
 #: src/interface/navigation/servers/ServerList.tsx
-msgid "Muted"
-msgstr "Silenciado"
+#~ msgid "Muted"
+#~ msgstr "Silenciado"
 
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
-#: src/interface/navigation/servers/ServerList.tsx
 msgid "Muted until <0/>"
 msgstr "Silenciado(a) até <0/>"
 
@@ -2816,8 +2840,8 @@ msgid "Off"
 msgstr "Desligado"
 
 #: components/app/interface/channels/text/Message.tsx
-msgid "Official Communication"
-msgstr "Comunicado Oficial"
+#~ msgid "Official Communication"
+#~ msgstr "Comunicado Oficial"
 
 #: src/interface/navigation/channels/ServerSidebar.tsx
 msgid "Official Server"
@@ -2991,13 +3015,14 @@ msgstr "Fixar"
 msgid "Pin message"
 msgstr "Fixar mensagem"
 
+#: src/interface/channels/text/TextChannel.tsx
 #: src/interface/shell/CommandPalette.tsx
 msgid "Pinned messages"
 msgstr "Mensagens fixadas"
 
 #: src/interface/channels/text/TextChannel.tsx
-msgid "Pinned Messages"
-msgstr "Mensagens fixadas"
+#~ msgid "Pinned Messages"
+#~ msgstr "Mensagens fixadas"
 
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 #~ msgid "Platform Moderator"
@@ -3322,6 +3347,10 @@ msgstr "Redefinir Códigos de Recuperação"
 msgid "Reset Token"
 msgstr "Redefinir Token"
 
+#: src/interface/channels/text/TextChannel.tsx
+msgid "Resize panel"
+msgstr "Redimensionar painel"
+
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "Responsibly disclosed security issues"
 msgstr "Problemas de segurança divulgados de forma responsável"
@@ -3465,8 +3494,12 @@ msgid "Search or jump to…"
 msgstr "Buscar ou ir para…"
 
 #: src/interface/channels/text/TextChannel.tsx
-msgid "Search Results"
+msgid "Search results"
 msgstr "Resultados da busca"
+
+#: src/interface/channels/text/TextChannel.tsx
+#~ msgid "Search Results"
+#~ msgstr "Resultados da busca"
 
 #: src/interface/home/RecentConversations.tsx
 msgid "See all"
@@ -3624,7 +3657,6 @@ msgid "Set your status"
 msgstr "Defina seu status"
 
 #: components/modal/modals/ServerInfo.tsx
-#: src/interface/navigation/servers/ServerList.tsx
 #: src/interface/shell/TopBar.tsx
 msgid "Settings"
 msgstr "Configurações"
@@ -4595,8 +4627,8 @@ msgstr "Você não tem permissão para enviar mensagens neste canal."
 
 #. placeholder {0}: homeNotifications()
 #: src/interface/navigation/servers/ServerList.tsx
-msgid "You have {0} pending friend requests."
-msgstr "Você possui {0} pedidos de amizade."
+#~ msgid "You have {0} pending friend requests."
+#~ msgstr "Você possui {0} pedidos de amizade."
 
 #: components/i18n/errors.tsx
 msgid "You have been locked out for entering a wrong password multiple times. Please wait a couple minutes and try again."

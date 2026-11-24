@@ -1,6 +1,6 @@
 import { createMemo, Match, Show, Switch } from "solid-js";
 
-import { Trans, useLingui } from "@lingui/solid/macro";
+import { Plural, useLingui } from "@lingui/solid/macro";
 import { VirtualContainer } from "@minht11/solid-virtual-container";
 import { Channel, ServerMember, User } from "stoat.js";
 import { css } from "styled-system/css";
@@ -183,7 +183,11 @@ export function ServerMemberSidebar(props: Props) {
         <MemberTitle bottomMargin="yes">
           <Row align>
             <UserStatus size="0.7em" status="Online" />
-            <Trans>{onlineMembers()} members online</Trans>
+            <Plural
+              value={onlineMembers()}
+              one="# member online"
+              other="# members online"
+            />
           </Row>
         </MemberTitle>
       </Show>

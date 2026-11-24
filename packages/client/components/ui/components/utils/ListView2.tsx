@@ -286,7 +286,7 @@ const AvatarFrame = styled("div", {
 const Frame = styled("div", {
   base: {
     background:
-      "linear-gradient(90deg, var(--md-sys-color-surface-container-highest) 25%, var(--md-sys-color-surface-container-high) 50%, var(--md-sys-color-surface-container-highest) 75%)",
+      "linear-gradient(90deg, var(--caps-bg-component) 25%, var(--caps-bg-overlay) 50%, var(--caps-bg-component) 75%)",
     backgroundSize: "200% 100%",
     backgroundAttachment: "fixed",
     animation: "skeletonShimmer 1.5s infinite",

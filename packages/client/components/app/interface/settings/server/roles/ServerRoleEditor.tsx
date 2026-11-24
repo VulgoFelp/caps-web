@@ -269,7 +269,7 @@ export const Divider = styled("div", {
   base: {
     height: "1px",
     margin: "var(--gap-sm) 0",
-    background: "var(--md-sys-color-outline-variant)",
+    background: "var(--caps-line)",
   },
 });
 

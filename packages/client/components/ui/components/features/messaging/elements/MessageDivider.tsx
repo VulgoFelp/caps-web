@@ -23,17 +23,17 @@ const Base = styled("div", {
 
       borderRadius: "var(--borderRadius-md)",
 
-      color: "var(--md-sys-color-outline)",
-      background: "var(--md-sys-color-surface-container-lowest)",
+      color: "var(--caps-text-3)",
+      background: "var(--caps-bg-canvas)",
     },
   },
   variants: {
     unread: {
       true: {
-        borderTop: "thin solid var(--md-sys-color-primary)",
+        borderTop: "thin solid var(--caps-accent)",
       },
       false: {
-        borderTop: "thin solid var(--md-sys-color-outline-variant)",
+        borderTop: "thin solid var(--caps-line)",
       },
     },
   },
@@ -49,8 +49,8 @@ const Unread = styled("div", {
   base: {
     fontSize: "0.625rem",
     fontWeight: 600,
-    color: "var(--md-sys-color-on-primary)",
-    background: "var(--md-sys-color-primary)",
+    color: "var(--caps-on-accent)",
+    background: "var(--caps-accent)",
 
     padding: "0 6px",
     marginTop: "-1px",

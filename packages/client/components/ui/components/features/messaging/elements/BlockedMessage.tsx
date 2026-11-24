@@ -23,8 +23,8 @@ const Base = styled("div", {
     padding: "var(--gap-sm) var(--gap-xxl)",
 
     fontSize: "0.8em" /* TODO should be in typography */,
-    color: "var(--md-sys-color-outline)",
-    fill: "var(--md-sys-color-outline)",
+    color: "var(--caps-text-3)",
+    fill: "var(--caps-text-3)",
   },
 });
 

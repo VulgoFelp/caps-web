@@ -74,16 +74,10 @@ function PickLanguage() {
         <Row>
           {lang.display}{" "}
           {lang.verified && (
-            <MdVerifiedFill
-              {...iconSize(18)}
-              fill="var(--md-sys-color-on-surface)"
-            />
+            <MdVerifiedFill {...iconSize(18)} fill="var(--caps-text)" />
           )}{" "}
           {lang.incomplete && (
-            <MdErrorFill
-              {...iconSize(18)}
-              fill="var(--md-sys-color-on-surface)"
-            />
+            <MdErrorFill {...iconSize(18)} fill="var(--caps-text)" />
           )}
         </Row>
       ),

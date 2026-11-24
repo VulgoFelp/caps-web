@@ -61,7 +61,7 @@ const MentionToggle = styled("a", {
   variants: {
     mention: {
       false: {
-        color: "var(--md-sys-color-outline)",
+        color: "var(--caps-text-3)",
       },
     },
   },
@@ -90,8 +90,8 @@ const Base = styled(Row, {
     padding: "var(--gap-md) var(--gap-lg)",
     borderRadius: "var(--borderRadius-lg)",
 
-    background: "var(--md-sys-color-primary-container)",
-    color: "var(--md-sys-color-on-primary-container)",
+    background: "var(--caps-bg-component)",
+    color: "var(--caps-text)",
 
     "& a:hover": {
       filter: "brightness(1.2)",

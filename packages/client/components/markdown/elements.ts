@@ -136,15 +136,15 @@ export const blockquote = styled("blockquote", {
     borderInlineStart: "var(--gap-sm) solid var(--border)",
 
     "&, & > blockquote > blockquote": {
-      color: "var(--md-sys-color-on-secondary-container)",
-      background: "var(--md-sys-color-secondary-container)",
-      "--border": "var(--md-sys-color-secondary)",
+      color: "var(--caps-text)",
+      background: "var(--caps-bg-component)",
+      "--border": "var(--caps-text-2)",
     },
 
     "& > blockquote, & > blockquote > blockquote > blockquote": {
-      color: "var(--md-sys-color-on-tertiary-container)",
-      background: "var(--md-sys-color-tertiary-container)",
-      "--border": "var(--md-sys-color-tertiary)",
+      color: "var(--caps-mention)",
+      background: "var(--caps-mention-soft)",
+      "--border": "var(--caps-mention)",
     },
 
     "& blockquote": {
@@ -164,14 +164,14 @@ export const tableHeader = styled("th", {
   base: {
     fontWeight: 600,
     padding: "var(--gap-sm)",
-    border: "1px solid var(--md-sys-color-outline)",
+    border: "1px solid var(--caps-line-strong)",
   },
 });
 
 export const tableElement = styled("td", {
   base: {
     padding: "var(--gap-sm)",
-    border: "1px solid var(--md-sys-color-outline)",
+    border: "1px solid var(--caps-line-strong)",
   },
 });
 

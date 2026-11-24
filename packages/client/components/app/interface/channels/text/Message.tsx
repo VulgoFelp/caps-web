@@ -270,11 +270,6 @@ export function Message(props: Props) {
                 <Symbol size={16}>link</Symbol>
               </Tooltip>
             </Match>
-            <Match when={props.message.author?.privileged}>
-              <Tooltip content={t`Official Communication`} placement="top">
-                <Symbol size={16}>brightness_alert</Symbol>
-              </Tooltip>
-            </Match>
             <Match when={props.message.author?.bot}>
               <Tooltip content={t`Bot`} placement="top">
                 <Symbol size={16} fill>
@@ -301,7 +296,7 @@ export function Message(props: Props) {
                 content={t`Timed Out until ${props.message.member!.timeout!.toLocaleString()}`}
                 placement="top"
               >
-                <Symbol size={16} color="var(--md-sys-color-error)">
+                <Symbol size={16} color="var(--caps-danger)">
                   timer_off
                 </Symbol>
               </Tooltip>
@@ -428,7 +423,7 @@ export function Message(props: Props) {
  */
 const NewUser = styled("div", {
   base: {
-    fill: "var(--md-sys-color-primary)",
+    fill: "var(--caps-accent-text)",
   },
 });
 

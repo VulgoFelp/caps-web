@@ -140,7 +140,7 @@ const Container = styled("div", {
     width: "100%",
     overflowX: "auto",
     borderRadius: "var(--borderRadius-md)",
-    border: "1px solid var(--md-sys-color-outline-variant)",
+    border: "1px solid var(--caps-line)",
   },
 });
 
@@ -159,13 +159,13 @@ const Header = styled("td", {
 
 const Head = styled("thead", {
   base: {
-    color: "var(--md-sys-color-on-surface-variant)",
+    color: "var(--caps-text-2)",
   },
 });
 
 const TableRow = styled("tr", {
   base: {
-    borderBlock: "1px solid var(--md-sys-color-outline-variant)",
+    borderBlock: "1px solid var(--caps-line)",
   },
 });
 

@@ -226,7 +226,7 @@ const Scrim = styled("div", {
       "max(var(--inset-bottom), env(keyboard-inset-height, 0px))",
     paddingBottom: "var(--sheet-bottom)",
 
-    "--background": "rgba(from var(--md-sys-color-scrim) r g b / 0.4)",
+    "--background": "rgba(from var(--caps-scrim) r g b / 0.4)",
     animationName: "scrimFadeIn",
     animationDuration: "0.1s",
     animationFillMode: "forwards",
@@ -248,9 +248,9 @@ const Sheet = styled("div", {
     padding: "var(--gap-sm) 0 var(--gap-lg) 0",
 
     borderRadius: "var(--borderRadius-lg) var(--borderRadius-lg) 0 0",
-    background: "var(--md-sys-color-surface-container-high)",
-    color: "var(--md-sys-color-on-surface)",
-    fill: "var(--md-sys-color-on-surface)",
+    background: "var(--caps-bg-overlay)",
+    color: "var(--caps-text)",
+    fill: "var(--caps-text)",
     boxShadow: "var(--md-sys-elevation-1)",
 
     userSelect: "none",
@@ -300,7 +300,7 @@ const Grabber = styled("div", {
       width: "32px",
       height: "4px",
       borderRadius: "var(--borderRadius-full)",
-      background: "var(--md-sys-color-outline-variant)",
+      background: "var(--caps-line)",
     },
   },
 });
@@ -312,10 +312,9 @@ const BackRow = styled("a", {
     gap: "var(--gap-md)",
     cursor: "pointer",
     fontWeight: 500,
-    borderBottom: "1px solid var(--md-sys-color-outline-variant)",
+    borderBottom: "1px solid var(--caps-line)",
     "&:active": {
-      background:
-        "color-mix(in srgb, var(--md-sys-color-on-surface) 12%, transparent)",
+      background: "color-mix(in srgb, var(--caps-text) 12%, transparent)",
     },
   },
 });

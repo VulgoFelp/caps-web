@@ -83,7 +83,7 @@ export function ServerRoleOverview(props: { context: Server }) {
             {(entry) => (
               <ItemContainer>
                 <MdDragIndicator
-                  fill="var(--md-sys-color-on-surface)"
+                  fill="var(--caps-text)"
                   {...createDragHandle(
                     entry.dragDisabled,
                     entry.setDragDisabled,
@@ -97,7 +97,7 @@ export function ServerRoleOverview(props: { context: Server }) {
                         background: entry.item.colour || "transparent",
                         border: entry.item.colour
                           ? undefined
-                          : "2px dashed var(--md-sys-color-on-surface-variant)",
+                          : "2px dashed var(--caps-text-2)",
                       }}
                     />
                   }

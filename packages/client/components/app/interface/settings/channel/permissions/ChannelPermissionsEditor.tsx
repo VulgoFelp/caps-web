@@ -589,7 +589,7 @@ const StickyPanel = styled("div", {
     padding: "var(--gap-md)",
     bottom: "var(--gap-lg)",
     borderRadius: "var(--borderRadius-xl)",
-    background: "var(--md-sys-color-surface-container)",
+    background: "var(--caps-bg-surface)",
   },
 });
 
@@ -605,7 +605,7 @@ const ActionRow = styled("div", {
 const PermissionDescription = styled("span", {
   base: {
     ...typography.raw({ class: "label", size: "large" }),
-    color: "var(--md-sys-color-on-surface-variant)",
+    color: "var(--caps-text-2)",
   },
 });
 

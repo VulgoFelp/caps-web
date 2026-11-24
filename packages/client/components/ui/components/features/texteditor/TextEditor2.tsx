@@ -373,16 +373,16 @@ const editor = css({
 
   "& .md-quote": {
     '&, &[class*="md-quote md-quote md-quote"]': {
-      color: "var(--md-sys-color-on-secondary-container)",
-      background: "var(--md-sys-color-secondary-container)",
-      "--border": "var(--md-sys-color-secondary)",
+      color: "var(--caps-text)",
+      background: "var(--caps-bg-component)",
+      "--border": "var(--caps-text-2)",
     },
 
     '&[class="md-quote md-quote"], &[class="md-quote md-quote md-meta"], &[class="md-quote md-quote md-text"], &[class*="md-quote md-quote md-quote md-quote"]':
       {
-        color: "var(--md-sys-color-on-tertiary-container)",
-        background: "var(--md-sys-color-tertiary-container)",
-        "--border": "var(--md-sys-color-tertiary)",
+        color: "var(--caps-mention)",
+        background: "var(--caps-mention-soft)",
+        "--border": "var(--caps-mention)",
       },
   },
 

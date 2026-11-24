@@ -97,8 +97,8 @@ const FormTextEditor = (
 
 const EditorBox = styled("div", {
   base: {
-    background: "var(--md-sys-color-surface-container-highest)",
-    color: "var(--md-sys-color-on-surface-container)",
+    background: "var(--caps-bg-component)",
+    color: "var(--caps-text)",
     borderRadius: "var(--borderRadius-sm)",
     padding: "var(--gap-md)",
   },
@@ -218,7 +218,7 @@ const FormFileInput = (
             {(errorMsg: string) => (
               <span
                 class={css(typography.raw({ class: "label", size: "small" }), {
-                  color: "var(--md-sys-color-error)",
+                  color: "var(--caps-danger)",
                 })}
               >
                 {err(local.control.errors![errorMsg])}

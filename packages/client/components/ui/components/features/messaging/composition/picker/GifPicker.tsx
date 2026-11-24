@@ -194,15 +194,15 @@ const Explainer = styled("div", {
     padding: "var(--gap-l)",
 
     borderRadius: "var(--borderRadius-md)",
-    background: "var(--md-sys-color-surface-container-high)",
-    color: "var(--md-sys-color-on-surface)",
+    background: "var(--caps-bg-overlay)",
+    color: "var(--caps-text)",
   },
 });
 
 const ExplainerBody = styled("span", {
   base: {
     ...typography.raw({ class: "body", size: "small" }),
-    color: "var(--md-sys-color-on-surface-variant)",
+    color: "var(--caps-text-2)",
   },
 });
 
@@ -266,7 +266,7 @@ const Centered = styled("div", {
     gap: "var(--gap-md)",
     padding: "var(--gap-x)",
     textAlign: "center",
-    color: "var(--md-sys-color-on-surface-variant)",
+    color: "var(--caps-text-2)",
   },
 });
 
@@ -282,7 +282,7 @@ const tileInteractive = {
   overflow: "hidden",
   cursor: "pointer",
 
-  backgroundColor: "var(--md-sys-color-surface-container-highest)",
+  backgroundColor: "var(--caps-bg-component)",
 
   transition: "transform 200ms cubic-bezier(0.2, 0, 0, 1)",
 
@@ -296,12 +296,11 @@ const tileInteractive = {
   },
 
   "&:hover::after": {
-    backgroundColor:
-      "color-mix(in srgb, 8% var(--md-sys-color-on-surface), transparent)",
+    backgroundColor: "color-mix(in srgb, 8% var(--caps-text), transparent)",
   },
 
   "&:focus-visible": {
-    outline: "2px solid var(--md-sys-color-primary)",
+    outline: "2px solid var(--caps-accent)",
     outlineOffset: "2px",
   },
 
@@ -310,8 +309,7 @@ const tileInteractive = {
   },
 
   "&:active::after": {
-    backgroundColor:
-      "color-mix(in srgb, 12% var(--md-sys-color-on-surface), transparent)",
+    backgroundColor: "color-mix(in srgb, 12% var(--caps-text), transparent)",
   },
 } as const;
 
@@ -433,7 +431,7 @@ const Category = styled("div", {
     trending: {
       true: {
         background:
-          "linear-gradient(135deg, var(--md-sys-color-primary), var(--md-sys-color-tertiary))",
+          "linear-gradient(135deg, var(--caps-accent), var(--caps-mention))",
       },
       false: {},
     },

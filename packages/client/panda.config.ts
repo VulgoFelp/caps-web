@@ -83,6 +83,14 @@ export default defineConfig({
             transform: "translateY(0) scale(1)",
           },
         },
+        capsLed: {
+          "0%, 100%": { opacity: 1 },
+          "50%": { opacity: 0.25 },
+        },
+        capsLoaderBar: {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(250%)" },
+        },
         authHintIn: {
           "0%": {
             opacity: 0,

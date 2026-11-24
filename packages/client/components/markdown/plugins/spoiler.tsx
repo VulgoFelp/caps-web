@@ -14,13 +14,13 @@ const Spoiler = styled("span", {
   variants: {
     shown: {
       true: {
-        background: "var(--md-sys-color-inverse-on-surface)",
+        background: "var(--caps-bg-panel)",
       },
       false: {
         cursor: "pointer",
         userSelect: "none",
         color: "transparent",
-        background: "var(--md-sys-color-on-secondary-fixed-variant)",
+        background: "var(--caps-bg-component)",
 
         "& *": {
           opacity: 0,

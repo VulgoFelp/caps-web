@@ -111,46 +111,46 @@ const Base = styled("div", {
   variants: {
     type: {
       user_added: {
-        color: "var(--md-sys-color-primary)",
+        color: "var(--caps-accent-text)",
       },
       user_joined: {
-        color: "var(--md-sys-color-primary)",
+        color: "var(--caps-accent-text)",
       },
       channel_ownership_changed: {
-        color: "var(--md-sys-color-primary)",
+        color: "var(--caps-accent-text)",
       },
       user_left: {
-        color: "var(--md-sys-color-error)",
+        color: "var(--caps-danger)",
       },
       user_kicked: {
-        color: "var(--md-sys-color-error)",
+        color: "var(--caps-danger)",
       },
       user_banned: {
-        color: "var(--md-sys-color-error)",
+        color: "var(--caps-danger)",
       },
       text: {
-        color: "var(--md-sys-color-primary)",
+        color: "var(--caps-accent-text)",
       },
       user_remove: {
-        color: "var(--md-sys-color-primary)",
+        color: "var(--caps-accent-text)",
       },
       channel_renamed: {
-        color: "var(--md-sys-color-primary)",
+        color: "var(--caps-accent-text)",
       },
       channel_description_changed: {
-        color: "var(--md-sys-color-primary)",
+        color: "var(--caps-accent-text)",
       },
       channel_icon_changed: {
-        color: "var(--md-sys-color-primary)",
+        color: "var(--caps-accent-text)",
       },
       message_pinned: {
-        color: "var(--md-sys-color-primary)",
+        color: "var(--caps-accent-text)",
       },
       message_unpinned: {
-        color: "var(--md-sys-color-primary)",
+        color: "var(--caps-accent-text)",
       },
       call_started: {
-        color: "var(--md-sys-color-primary)",
+        color: "var(--caps-accent-text)",
       },
     },
   },

@@ -89,8 +89,8 @@ export function EditMessage(props: { message: Message }) {
 
 const EditorBox = styled("div", {
   base: {
-    background: "var(--md-sys-color-surface-container-highest)",
-    color: "var(--md-sys-color-on-surface-container)",
+    background: "var(--caps-bg-component)",
+    color: "var(--caps-text)",
     borderRadius: "var(--borderRadius-sm)",
     padding: "var(--gap-md)",
   },
@@ -100,6 +100,6 @@ const Action = styled("span", {
   base: {
     fontWeight: 600,
     cursor: "pointer",
-    color: "var(--md-sys-color-primary)",
+    color: "var(--caps-accent-text)",
   },
 });

@@ -1,1 +1,1 @@
-export { ServerList } from "./ServerList";
+export { UserMenu } from "./UserMenu";

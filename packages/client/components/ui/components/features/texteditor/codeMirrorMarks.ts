@@ -78,12 +78,12 @@ const markPlugin = ViewPlugin.fromClass(
 
 const markTheme = EditorView.theme({
   ".cm-spoiler-mark": {
-    color: "var(--md-sys-color-outline)",
+    color: "var(--caps-text-3)",
     fontFamily: "var(--fonts-monospace)",
   },
   ".cm-spoiler-text": {
-    color: "var(--md-sys-color-on-surface)",
-    background: "var(--md-sys-color-surface-container-lowest)",
+    color: "var(--caps-text)",
+    background: "var(--caps-bg-canvas)",
   },
   ".cm-timestamp": {
     borderRadius: "var(--borderRadius-md)",

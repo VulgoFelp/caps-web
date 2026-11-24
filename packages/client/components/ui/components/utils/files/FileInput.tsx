@@ -219,7 +219,7 @@ const ImagePreview = styled("div", {
     position: "relative",
     height: "96px",
 
-    backgroundColor: "var(--md-sys-color-surface-dim)",
+    backgroundColor: "var(--caps-bg-canvas)",
 
     "& img": {
       display: "block",

@@ -113,8 +113,8 @@ const Item = styled("div", {
   variants: {
     selected: {
       true: {
-        color: "var(--md-sys-color-on-primary)",
-        background: "var(--md-sys-color-primary)",
+        color: "var(--caps-on-accent)",
+        background: "var(--caps-accent)",
       },
     },
   },

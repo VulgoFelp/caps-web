@@ -133,12 +133,12 @@ const Config: SettingsConfiguration<Channel> = {
           entries: [
             {
               icon: (
-                <Symbol size={20} color="var(--md-sys-color-error)">
+                <Symbol size={20} color="var(--caps-danger)">
                   delete
                 </Symbol>
               ),
               title: (
-                <ColouredText colour="var(--md-sys-color-error)">
+                <ColouredText colour="var(--caps-danger)">
                   <Trans>Delete Channel</Trans>
                 </ColouredText>
               ),

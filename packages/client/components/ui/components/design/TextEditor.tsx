@@ -231,7 +231,7 @@ export function TextEditor(props: Props) {
 
     // anchors.ts
     "& a": {
-      color: "var(--md-sys-color-primary) !important",
+      color: "var(--caps-accent-text) !important",
     },
   });
 
@@ -1016,8 +1016,7 @@ const Entry = styled("div", {
   variants: {
     selected: {
       true: {
-        background:
-          "color-mix(in srgb, var(--md-sys-color-on-surface) 8%, transparent)",
+        background: "color-mix(in srgb, var(--caps-text) 8%, transparent)",
       },
     },
   },
@@ -1042,9 +1041,9 @@ const base = cva({
     padding: "var(--gap-md) 0",
     overflow: "hidden",
     borderRadius: "var(--borderRadius-xs)",
-    background: "var(--md-sys-color-surface-container)",
-    color: "var(--md-sys-color-on-surface)",
-    fill: "var(--md-sys-color-on-surface)",
-    boxShadow: "0 0 3px var(--md-sys-color-shadow)",
+    background: "var(--caps-bg-surface)",
+    color: "var(--caps-text)",
+    fill: "var(--caps-text)",
+    boxShadow: "0 0 3px var(--caps-shadow-pop)",
   },
 });

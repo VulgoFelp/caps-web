@@ -13,13 +13,13 @@ import { useFlowBubble } from "./Flow";
 
 const ErrorContainer = styled("span", {
   base: {
-    color: "var(--md-sys-color-error)",
+    color: "var(--caps-danger)",
     display: "flex",
     alignItems: "center",
     gap: "0.25em",
 
     "& a": {
-      color: "var(--md-sys-color-primary)",
+      color: "var(--caps-accent-text)",
     },
   },
 });
@@ -125,8 +125,8 @@ const HintCard = styled("div", {
     alignItems: "flex-start",
     gap: "12px",
     padding: "12px 14px",
-    color: "var(--md-sys-color-on-surface)",
-    background: "var(--md-sys-color-surface-container-highest)",
+    color: "var(--caps-text)",
+    background: "var(--caps-bg-component)",
     borderRadius: "14px",
     boxShadow: "0 8px 24px rgba(0, 0, 0, 0.25)",
     fontSize: "0.85rem",
@@ -154,7 +154,7 @@ const HintCard = styled("div", {
 
     "& p": {
       margin: 0,
-      color: "var(--md-sys-color-on-surface-variant)",
+      color: "var(--caps-text-2)",
     },
 
     "& a": {

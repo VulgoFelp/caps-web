@@ -74,6 +74,6 @@ const Subtitle = styled("span", {
   base: {
     marginBlockEnd: "var(--gap-md)",
     fontSize: "0.875rem",
-    color: "var(--md-sys-color-on-surface-variant)",
+    color: "var(--caps-text-2)",
   },
 });

@@ -605,7 +605,7 @@ function Entry(
             <Symbol
               color={
                 props.channel.isVoice && inCall()
-                  ? "var(--md-sys-color-primary)"
+                  ? "var(--caps-accent)"
                   : undefined
               }
             >

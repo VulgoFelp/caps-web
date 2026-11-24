@@ -24,10 +24,9 @@ export const FloatingIndicator = styled("div", {
 
     ...typography.raw({ size: "small" }),
 
-    fill: "var(--md-sys-color-on-primary)",
-    color: "var(--md-sys-color-on-primary)",
-    backgroundColor:
-      "color-mix(in srgb, var(--md-sys-color-primary) 55%, transparent)",
+    fill: "var(--caps-on-accent)",
+    color: "var(--caps-on-accent)",
+    backgroundColor: "color-mix(in srgb, var(--caps-accent) 55%, transparent)",
 
     animation: "slideIn 340ms cubic-bezier(0.2, 0.9, 0.5, 1.16) forwards",
   },

@@ -42,7 +42,7 @@ export const Base = styled("div", {
     userSelect: "none",
     alignItems: "center",
     gap: "var(--gap-sm)",
-    color: "var(--md-sys-color-on-surface)",
+    color: "var(--caps-text)",
     "& a:link": {
       textDecoration: "none",
     },
@@ -52,8 +52,8 @@ export const Base = styled("div", {
       flexShrink: 0,
       alignSelf: "flex-end",
       borderStartStartRadius: "4px",
-      borderInlineStart: "2px solid var(--md-sys-color-outline-variant)",
-      borderTop: "2px solid var(--md-sys-color-outline-variant)",
+      borderInlineStart: "2px solid var(--caps-line)",
+      borderTop: "2px solid var(--caps-line)",
     },
   },
   variants: {

@@ -21,10 +21,10 @@ const completionTheme = EditorView.theme({
     padding: "var(--gap-md) 0",
     overflow: "hidden",
     "border-radius": "var(--borderRadius-xs)",
-    background: "var(--md-sys-color-surface-container)",
-    color: "var(--md-sys-color-on-surface)",
-    fill: "var(--md-sys-color-on-surface)",
-    "box-shadow": "0 0 3px var(--md-sys-color-shadow)",
+    background: "var(--caps-bg-surface)",
+    color: "var(--caps-text)",
+    fill: "var(--caps-text)",
+    "box-shadow": "0 0 3px var(--caps-shadow-pop)",
   },
   ".cm-tooltip.cm-tooltip-autocomplete > ul": {
     "min-width": "10em",
@@ -42,8 +42,7 @@ const completionTheme = EditorView.theme({
     padding: "var(--gap-sm) var(--gap-md)",
   },
   '.cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected="true"]': {
-    background:
-      "color-mix(in srgb, var(--md-sys-color-on-surface) 8%, transparent)",
+    background: "color-mix(in srgb, var(--caps-text) 8%, transparent)",
   },
   ".cm-completionMatchedText": {
     "text-decoration": "inherit",
@@ -139,7 +138,7 @@ export function codeMirrorAutoComplete(
             span.classList.add("cm-role-preview");
             span.style.background =
               (completion as never as { colour: string }).colour ||
-              "var(--md-sys-color-surface-container-highest)";
+              "var(--caps-bg-component)";
             return span;
           } else if (completion.type == "channel") {
             const span = document.createElement("span");

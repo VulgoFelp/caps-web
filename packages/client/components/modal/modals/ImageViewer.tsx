@@ -272,7 +272,7 @@ const Card = styled("div", {
     gap: "var(--gap-md)",
     padding: "var(--gap-md)",
     borderRadius: "var(--borderRadius-lg)",
-    background: "var(--md-sys-color-surface)",
-    color: "var(--md-sys-color-on-surface)",
+    background: "var(--caps-bg-panel)",
+    color: "var(--caps-text)",
   },
 });

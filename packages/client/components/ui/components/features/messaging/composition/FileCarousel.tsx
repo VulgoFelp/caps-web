@@ -180,7 +180,7 @@ const PreviewBox = styled("div", {
     borderRadius: "var(--gap-md)",
 
     fill: "white",
-    background: "var(--md-sys-color-surface-variant)",
+    background: "var(--caps-bg-component)",
 
     "& > *": {
       gridArea: "main",
@@ -229,8 +229,8 @@ const SpoilerLabel = styled("button", {
     border: "none",
 
     cursor: "pointer",
-    color: "var(--md-sys-color-on-surface)",
-    background: "var(--md-sys-color-surface)",
+    color: "var(--caps-text)",
+    background: "var(--caps-bg-panel)",
 
     textTransform: "uppercase",
     ...typography.raw({ class: "label", size: "small" }),
@@ -253,7 +253,7 @@ const ActionBox = styled("div", {
 
     padding: "3px",
     borderRadius: "var(--borderRadius-md)",
-    background: "var(--md-sys-color-surface)",
+    background: "var(--caps-bg-panel)",
   },
 });
 
@@ -272,19 +272,18 @@ const ActionIcon = styled("button", {
     border: "none",
 
     cursor: "pointer",
-    color: "var(--md-sys-color-on-surface)",
+    color: "var(--caps-text)",
     background: "transparent",
     transition: "var(--transitions-fast) background",
 
     "&:hover": {
-      background:
-        "color-mix(in srgb, var(--md-sys-color-on-surface) 15%, transparent)",
+      background: "color-mix(in srgb, var(--caps-text) 15%, transparent)",
     },
   },
   variants: {
     danger: {
       true: {
-        color: "var(--md-sys-color-error)",
+        color: "var(--caps-danger)",
       },
     },
   },
@@ -305,8 +304,8 @@ const EmptyEntry = styled("div", {
 
     cursor: "pointer",
     borderRadius: "var(--gap-md)",
-    fill: "var(--md-sys-color-on-surface-variant)",
-    background: "var(--md-sys-color-surface-variant)",
+    fill: "var(--caps-text-2)",
+    background: "var(--caps-bg-component)",
   },
 });
 
@@ -359,7 +358,7 @@ const Divider = styled("div", {
     flexShrink: 0,
     width: "var(--gap-sm)",
     borderRadius: "var(--borderRadius-md)",
-    background: "var(--md-sys-color-outline)",
+    background: "var(--caps-line-strong)",
   },
 });
 
@@ -390,8 +389,8 @@ const Container = styled("div", {
     margin: "var(--gap-md) 0",
     borderRadius: "var(--borderRadius-lg)",
 
-    background: "var(--md-sys-color-primary-container)",
-    color: "var(--md-sys-color-on-primary-container)",
+    background: "var(--caps-bg-component)",
+    color: "var(--caps-text)",
 
     "--preview-size": "100px",
   },

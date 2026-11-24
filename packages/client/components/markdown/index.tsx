@@ -265,7 +265,7 @@ const htmlPipeline = HTML_UNIFIED_PLUGINS.reduce(
     trust: false,
     strict: false,
     output: "html",
-    errorColor: "var(--md-sys-color-error)",
+    errorColor: "var(--caps-danger)",
   })
   .use(rehypeHighlight, {
     languages: all,

@@ -154,8 +154,7 @@ const Entry = styled("div", {
   variants: {
     selected: {
       true: {
-        background:
-          "color-mix(in srgb, var(--md-sys-color-on-surface) 8%, transparent)",
+        background: "color-mix(in srgb, var(--caps-text) 8%, transparent)",
       },
     },
   },
@@ -178,8 +177,8 @@ const Base = styled(Column, {
     "--emoji-size": "1.4em",
     padding: "var(--gap-md) 0",
     borderRadius: "var(--borderRadius-xs)",
-    color: "var(--md-sys-color-on-surface)",
-    background: "var(--md-sys-color-surface-container)",
-    boxShadow: "0 0 3px var(--md-sys-color-shadow)",
+    color: "var(--caps-text)",
+    background: "var(--caps-bg-surface)",
+    boxShadow: "0 0 3px var(--caps-shadow-pop)",
   },
 });

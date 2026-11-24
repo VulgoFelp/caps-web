@@ -136,7 +136,7 @@ const Base = styled("div", {
     padding: "var(--gap-lg)",
     userSelect: "none",
     overflowY: "auto",
-    color: "var(--md-sys-color-on-surface)",
+    color: "var(--caps-text)",
 
     "& svg": {
       // TODO

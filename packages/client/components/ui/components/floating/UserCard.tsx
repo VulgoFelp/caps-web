@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/solid-query";
 import { For, JSX, Show, createMemo, createSignal, onMount } from "solid-js";
 
-import { Trans, useLingui } from "@lingui/solid/macro";
+import { Plural, Trans, useLingui } from "@lingui/solid/macro";
 import { css } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
@@ -31,7 +31,14 @@ const MAX_ROLES = 8;
  */
 export function UserCard(
   props: JSX.Directives["floating"]["userCard"] &
-    object & { onClose: () => void },
+    object & {
+      onClose: () => void;
+      /**
+       * Full profile (modal): larger cover and avatar, complete bio and
+       * roles, mutual friends and communities
+       */
+      full?: boolean;
+    },
 ) {
   const { t } = useLingui();
   const dayjs = useTime();
@@ -53,9 +60,32 @@ export function UserCard(
   }));
 
   function openFull() {
+    if (props.full) {
+      if (props.user.avatar)
+        openModal({ type: "image_viewer", file: props.user.avatar });
+      return;
+    }
     openModal({ type: "user_profile", user: props.user, member: props.member });
     props.onClose();
   }
+
+  const mutualQuery = useQuery(() => ({
+    queryKey: ["mutual", props.user.id],
+    enabled: !!props.full && !props.user.self && !props.user.bot,
+    queryFn: async () => {
+      const clnt = client();
+      const { users, servers } = await props.user.fetchMutual();
+      return {
+        users: users.map((id) => clnt.users.get(id)!).filter(Boolean),
+        groups: [
+          ...servers.map((id) => clnt.servers.get(id)!).filter(Boolean),
+          ...clnt.channels.filter(
+            (c) => c.type === "Group" && c.recipientIds.has(props.user.id),
+          ),
+        ],
+      };
+    },
+  }));
 
   onMount(() => {
     if (isMobile) openFull();
@@ -129,14 +159,18 @@ export function UserCard(
   };
 
   return (
-    <Show when={!isMobile}>
+    <Show when={!isMobile || props.full}>
       <div
-        use:invisibleScrollable={{ class: base }}
+        use:invisibleScrollable={{ class: props.full ? baseFull : base }}
         on:pointerdown={(e) => {
           e.preventDefault();
         }}
       >
-        <Cover style={coverStyle()} hasImage={!!query.data?.animatedBannerURL}>
+        <Cover
+          style={coverStyle()}
+          hasImage={!!query.data?.animatedBannerURL}
+          full={props.full}
+        >
           <CoverActions>
             <ProfileActions
               slot="secondary"
@@ -152,7 +186,7 @@ export function UserCard(
           <AvatarRing>
             <Avatar
               src={props.user.animatedAvatarURL}
-              size={72}
+              size={props.full ? 96 : 72}
               holepunch="bottom-right"
               onClick={openFull}
               interactive
@@ -227,7 +261,7 @@ export function UserCard(
               <SectionLabel>
                 <Trans>Bio</Trans>
               </SectionLabel>
-              <Bio>
+              <Bio full={props.full}>
                 <Markdown content={query.data!.content!} />
               </Bio>
             </Section>
@@ -239,7 +273,7 @@ export function UserCard(
                 <Trans>Roles</Trans>
               </SectionLabel>
               <Chips>
-                <For each={roles().slice(0, MAX_ROLES)}>
+                <For each={props.full ? roles() : roles().slice(0, MAX_ROLES)}>
                   {(role) => (
                     <Chip type="button" onClick={openRoles} title={role.name}>
                       <ChipDot
@@ -251,7 +285,7 @@ export function UserCard(
                     </Chip>
                   )}
                 </For>
-                <Show when={roles().length > MAX_ROLES}>
+                <Show when={!props.full && roles().length > MAX_ROLES}>
                   <Chip type="button" onClick={openRoles}>
                     +{roles().length - MAX_ROLES}
                   </Chip>
@@ -311,27 +345,152 @@ export function UserCard(
             </Facts>
           </Section>
 
-          <FullProfile type="button" onClick={openFull}>
-            <Trans>View full profile</Trans>
-            <svg
-              viewBox="0 0 24 24"
-              width="14"
-              height="14"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <path d="m9 6 6 6-6 6" />
-            </svg>
-          </FullProfile>
+          <Show
+            when={
+              props.full &&
+              (mutualQuery.data?.users.length ||
+                mutualQuery.data?.groups.length)
+            }
+          >
+            <Section>
+              <SectionLabel>
+                <Trans>In common</Trans>
+              </SectionLabel>
+              <Mutuals>
+                <Show when={mutualQuery.data!.users.length}>
+                  <MutualButton
+                    type="button"
+                    onClick={() =>
+                      openModal({
+                        type: "user_profile_mutual_friends",
+                        users: mutualQuery.data!.users,
+                        server: props.member?.server,
+                      })
+                    }
+                  >
+                    <Stack>
+                      <For each={mutualQuery.data!.users.slice(0, 3)}>
+                        {(u) => (
+                          <Avatar
+                            size={20}
+                            src={u.avatarURL}
+                            fallback={u.displayName}
+                          />
+                        )}
+                      </For>
+                    </Stack>
+                    <Plural
+                      value={mutualQuery.data!.users.length}
+                      one="# mutual friend"
+                      other="# mutual friends"
+                    />
+                  </MutualButton>
+                </Show>
+                <Show when={mutualQuery.data!.groups.length}>
+                  <MutualButton
+                    type="button"
+                    onClick={() =>
+                      openModal({
+                        type: "user_profile_mutual_groups",
+                        groups: mutualQuery.data!.groups,
+                      })
+                    }
+                  >
+                    <Stack>
+                      <For each={mutualQuery.data!.groups.slice(0, 3)}>
+                        {(g) => (
+                          <Avatar
+                            size={20}
+                            shape="rounded-square"
+                            src={g.iconURL}
+                            fallback={"name" in g ? g.name : ""}
+                          />
+                        )}
+                      </For>
+                    </Stack>
+                    <Plural
+                      value={mutualQuery.data!.groups.length}
+                      one="# community or group in common"
+                      other="# communities and groups in common"
+                    />
+                  </MutualButton>
+                </Show>
+              </Mutuals>
+            </Section>
+          </Show>
+
+          <Show when={!props.full}>
+            <FullProfile type="button" onClick={openFull}>
+              <Trans>View full profile</Trans>
+              <svg
+                viewBox="0 0 24 24"
+                width="14"
+                height="14"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="m9 6 6 6-6 6" />
+              </svg>
+            </FullProfile>
+          </Show>
         </Body>
       </div>
     </Show>
   );
 }
+
+/**
+ * Full profile (inside a dialog)
+ */
+const baseFull = css({
+  width: "100%",
+  maxHeight: "min(760px, calc(100vh - 64px))",
+  overflowY: "auto",
+  color: "var(--caps-text)",
+});
+
+const Mutuals = styled("div", {
+  base: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "var(--caps-space-2)",
+  },
+});
+
+const MutualButton = styled("button", {
+  base: {
+    all: "unset",
+    boxSizing: "border-box",
+    display: "flex",
+    alignItems: "center",
+    gap: "var(--caps-space-5)",
+    width: "100%",
+    minHeight: "36px",
+    paddingInline: "var(--caps-space-4)",
+    marginInline: "calc(-1 * var(--caps-space-4))",
+    borderRadius: "var(--caps-radius-md)",
+    fontSize: "var(--caps-text-md)",
+    color: "var(--caps-text-2)",
+    cursor: "pointer",
+    "&:hover": { background: "var(--caps-hover)", color: "var(--caps-text)" },
+    "&:focus-visible": { boxShadow: "var(--caps-focus-ring)" },
+  },
+});
+
+const Stack = styled("span", {
+  base: {
+    display: "flex",
+    "& > *:not(:first-child)": { marginInlineStart: "-6px" },
+    "& > *": {
+      boxShadow: "0 0 0 2px var(--caps-bg-overlay)",
+      borderRadius: "999px",
+    },
+  },
+});
 
 /**
  * Popover surface
@@ -360,6 +519,9 @@ const Cover = styled("div", {
     borderBottom: "1px solid var(--caps-line-soft)",
   },
   variants: {
+    full: {
+      true: { height: "140px", borderRadius: "var(--caps-radius-md)" },
+    },
     hasImage: {
       true: {
         // keeps the overlaid actions legible on any banner
@@ -564,6 +726,11 @@ const Bio = styled("div", {
 
     // keep the popover compact; the full profile shows everything
     lineClamp: 4,
+  },
+  variants: {
+    full: {
+      true: { lineClamp: "none" },
+    },
   },
 });
 

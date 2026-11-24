@@ -19,12 +19,12 @@ export function UserSummary(props: {
   const bannerStyle = () =>
     props.bannerUrl
       ? {
-          "background-image": `linear-gradient(color-mix(in srgb, var(--md-sys-color-surface-container-low) 70%, transparent), color-mix(in srgb, var(--md-sys-color-surface-container-low) 70%, transparent)), url("${props.bannerUrl}")`,
+          "background-image": `linear-gradient(color-mix(in srgb, var(--caps-bg-inset) 70%, transparent), color-mix(in srgb, var(--caps-bg-inset) 70%, transparent)), url("${props.bannerUrl}")`,
           color: "black",
         }
       : {
-          background: `var(--md-sys-color-primary-container)`,
-          color: "var(--md-sys-color-on-primary)",
+          background: `var(--caps-bg-component)`,
+          color: "var(--caps-on-accent)",
         };
 
   return (
@@ -100,7 +100,7 @@ const Username = styled("div", {
     display: "flex",
     flexDirection: "column",
 
-    color: "var(--md-sys-color-on-secondary-container)",
+    color: "var(--caps-text)",
 
     // Display Name
     "& :nth-child(1)": {
@@ -140,7 +140,7 @@ const ProfileBadges = styled("div", {
     padding: "var(--gap-md)",
     borderRadius: "var(--borderRadius-md)",
 
-    fill: "var(--md-sys-color-on-secondary)",
-    background: "var(--md-sys-color-secondary)",
+    fill: "var(--caps-bg-panel)",
+    background: "var(--caps-text-2)",
   },
 });

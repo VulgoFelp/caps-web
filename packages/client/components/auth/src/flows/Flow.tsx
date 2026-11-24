@@ -96,19 +96,36 @@ const Bubble = styled("div", {
     alignItems: "center",
     justifyContent: "center",
     gap: "5px",
-    width: "56px",
-    height: "44px",
+    width: "52px",
+    height: "52px",
     marginBottom: "var(--caps-space-8)",
-    background: "var(--caps-accent)",
-    borderRadius: "14px 14px 14px 4px",
-    transition: "background 240ms ease",
-    // rapid clicks on the bubble shouldn't select text around it
+    // a CAPS keycap: graphite face, hairline edge and a little depth
+    background: "var(--caps-bg-surface)",
+    borderRadius: "12px",
+    boxShadow:
+      "inset 0 0 0 1px var(--caps-line), inset 0 -3px 0 var(--caps-line-soft)",
+    transition: "background 240ms ease, box-shadow 240ms ease",
+    // rapid clicks on the key shouldn't select text around it
     userSelect: "none",
+    cursor: "default",
 
-    "& span": {
+    // Caps Lock light
+    "&::after": {
+      content: '""',
+      position: "absolute",
+      top: "8px",
+      right: "8px",
       width: "6px",
       height: "6px",
-      background: "var(--caps-on-accent)",
+      borderRadius: "50%",
+      background: "var(--caps-line-strong)",
+      transition: "background 240ms ease, box-shadow 240ms ease",
+    },
+
+    "& span": {
+      width: "5px",
+      height: "5px",
+      background: "var(--caps-text-2)",
       borderRadius: "50%",
       transition: "background 240ms ease",
       // looping motion for each mood is driven from FlowBubble
@@ -120,12 +137,22 @@ const Bubble = styled("div", {
     "& span:nth-child(2)": { "--dot": "1" },
     "& span:nth-child(3)": { "--dot": "2" },
 
+    '&[data-mood="submitting"]::after': {
+      background: "var(--caps-warning)",
+    },
+
     '&[data-mood="error"]': {
-      background: "var(--md-sys-color-error-container)",
+      background: "var(--caps-danger-soft)",
+      boxShadow:
+        "inset 0 0 0 1px var(--caps-danger), inset 0 -3px 0 var(--caps-danger-soft)",
+    },
+
+    '&[data-mood="error"]::after': {
+      background: "var(--caps-danger)",
     },
 
     '&[data-mood="error"] span': {
-      background: "var(--md-sys-color-on-error-container)",
+      background: "var(--caps-danger)",
     },
 
     "& svg": {
@@ -135,7 +162,7 @@ const Bubble = styled("div", {
       width: "22px",
       height: "22px",
       fill: "none",
-      stroke: "var(--md-sys-color-on-primary-container)",
+      stroke: "var(--caps-accent)",
       strokeWidth: 2.6,
       strokeLinecap: "round",
       strokeLinejoin: "round",
@@ -147,7 +174,13 @@ const Bubble = styled("div", {
     },
 
     '&[data-mood="success"]': {
-      background: "var(--md-sys-color-primary-container)",
+      boxShadow:
+        "inset 0 0 0 1px var(--caps-accent-line), inset 0 -3px 0 var(--caps-accent-soft)",
+    },
+
+    '&[data-mood="success"]::after': {
+      background: "var(--caps-accent)",
+      boxShadow: "0 0 8px var(--caps-accent)",
     },
 
     '&[data-mood="success"] svg': {

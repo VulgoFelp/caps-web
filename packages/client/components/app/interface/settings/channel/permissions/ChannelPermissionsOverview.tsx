@@ -82,7 +82,7 @@ export function ChannelPermissionsOverview(props: { context: Channel }) {
                       background: role.colour ?? "transparent",
                       border: role.colour
                         ? undefined
-                        : "2px dashed var(--md-sys-color-on-surface-variant)",
+                        : "2px dashed var(--caps-text-2)",
                     }}
                   />
                 }
@@ -127,7 +127,7 @@ export function ChannelPermissionsOverview(props: { context: Channel }) {
                       background: role.colour ?? "transparent",
                       border: role.colour
                         ? undefined
-                        : "2px dashed var(--md-sys-color-on-surface-variant)",
+                        : "2px dashed var(--caps-text-2)",
                     }}
                   />
                 }
@@ -157,7 +157,7 @@ const RoleIcon = styled("div", {
 
 const EmptyState = styled("span", {
   base: {
-    color: "var(--md-sys-color-on-surface-variant)",
+    color: "var(--caps-text-2)",
     ...typography.raw({ class: "body", size: "medium" }),
   },
 });

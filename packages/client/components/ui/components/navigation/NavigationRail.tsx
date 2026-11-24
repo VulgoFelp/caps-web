@@ -42,7 +42,7 @@ const rail = cva({
 
 const Icon = cva({
   base: {
-    fill: "var(--md-sys-color-on-surface-variant)",
+    fill: "var(--caps-text-2)",
   },
 });
 
