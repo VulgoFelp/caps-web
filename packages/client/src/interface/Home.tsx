@@ -9,6 +9,7 @@ import { useModals } from "@revolt/modal";
 import { useNavigate } from "@revolt/routing";
 import { Avatar, Button, Header, iconSize } from "@revolt/ui";
 
+import IconDownload from "lucide-solid/icons/download";
 import IconHouse from "lucide-solid/icons/house";
 import IconLink from "lucide-solid/icons/link";
 import IconPlus from "lucide-solid/icons/plus";
@@ -18,10 +19,12 @@ import IconUsers from "lucide-solid/icons/users";
 import { HeaderIcon } from "./common/CommonHeader";
 import { ActiveCommunities } from "./home/ActiveCommunities";
 import { OnlineFriends } from "./home/OnlineFriends";
+import { PlayingNow } from "./home/PlayingNow";
 import { RecentConversations } from "./home/RecentConversations";
 import { Section, Surface } from "./home/Section";
 import { VoiceRooms } from "./home/VoiceRooms";
 import { useNotificationCount } from "./shell/NotificationCenter";
+import { WINDOWS_DOWNLOAD_URL, isWindowsBrowser } from "./shell/shellState";
 
 /**
  * Social home: what's happening with your friends and communities right now
@@ -141,12 +144,23 @@ export function HomePage() {
                 <IconLink size={16} />
                 <Trans>Join with invite</Trans>
               </button>
+              <Show when={isWindowsBrowser}>
+                <a
+                  class={quick}
+                  href={WINDOWS_DOWNLOAD_URL}
+                  download="CAPS-Setup.exe"
+                >
+                  <IconDownload size={16} />
+                  <Trans>Download for Windows</Trans>
+                </a>
+              </Show>
             </QuickActions>
           </Hero>
 
           <Columns>
             <Main>
               <VoiceRooms />
+              <PlayingNow />
               <RecentConversations />
               <ActiveCommunities />
             </Main>

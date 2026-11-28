@@ -18,6 +18,13 @@ const pwaScope = process.env.PWA_SCOPE || base;
 
 export default defineConfig({
   base,
+  // dev only: CAPS staff API and downloads live on the CAPS server
+  server: {
+    proxy: {
+      "/staff-api": { target: "https://caps.felp.club", changeOrigin: true },
+      "/download": { target: "https://caps.felp.club", changeOrigin: true },
+    },
+  },
   plugins: [
     Inspect(),
     devtools(),

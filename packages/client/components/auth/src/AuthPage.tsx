@@ -26,6 +26,7 @@ import { A, useLocation } from "@revolt/routing";
 import { useState } from "@revolt/state";
 import { IconButton, Symbol } from "@revolt/ui";
 
+import IconArrowLeft from "lucide-solid/icons/arrow-left";
 import Wordmark from "../../../public/assets/web/wordmark.svg?component-solid";
 import heroArt from "./caps-hero.svg?url";
 import { BubbleMood, BubbleProvider, FlowBase, FlowBubble } from "./flows/Flow";
@@ -102,7 +103,7 @@ const Brand = styled("div", {
     alignItems: "center",
     gap: "var(--caps-space-4)",
 
-    "& svg": {
+    "& > svg": {
       width: "100%",
       height: "auto",
       fill: "currentColor",
@@ -514,16 +515,17 @@ export function AuthPage(props: { children: JSX.Element }) {
                   state.auth.hasMultiSession()
                 }
               >
-                <IconButton
-                  variant="tonal"
-                  aria-label="Cancel login"
-                  onPress={() => {
+                <button
+                  type="button"
+                  class={backButton}
+                  onClick={() => {
                     state.auth.popNextPath();
                     openModal({ type: "swap_user" });
                   }}
                 >
-                  <Symbol size={24}>arrow_back</Symbol>
-                </IconButton>
+                  <IconArrowLeft size={16} />
+                  <Trans>Back to my accounts</Trans>
+                </button>
               </Show>
               <Wordmark />
             </Brand>
@@ -648,3 +650,22 @@ export function AuthPage(props: { children: JSX.Element }) {
     </div>
   );
 }
+
+const backButton = css({
+  all: "unset",
+  display: "inline-flex",
+  alignItems: "center",
+  gap: "var(--caps-space-3)",
+  flexShrink: 0,
+  height: "32px",
+  paddingInline: "var(--caps-space-4) var(--caps-space-5)",
+  borderRadius: "var(--caps-radius-md)",
+  background: "var(--caps-bg-component)",
+  color: "var(--caps-text)",
+  fontSize: "var(--caps-text-md)",
+  fontWeight: 600,
+  whiteSpace: "nowrap",
+  cursor: "pointer",
+  "&:hover": { background: "var(--caps-bg-component-hover)" },
+  "&:focus-visible": { boxShadow: "var(--caps-focus-ring)" },
+});

@@ -58,7 +58,8 @@ export const Sidebar = (props: {
     <Show
       when={
         state.layout.getSectionState(LAYOUT_SECTIONS.PRIMARY_SIDEBAR, true) &&
-        !location.pathname.startsWith("/discover")
+        !location.pathname.startsWith("/discover") &&
+        !location.pathname.startsWith("/staff")
       }
     >
       <MainBar

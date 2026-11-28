@@ -9,7 +9,7 @@ import { UserContextMenu } from "@revolt/app";
 import { useClient } from "@revolt/client";
 import { useModals } from "@revolt/modal";
 import { useNavigate } from "@revolt/routing";
-import { Avatar, Button, UserStatus } from "@revolt/ui";
+import { Avatar, Button, UserActivityLine, UserStatus } from "@revolt/ui";
 
 import { Section, SectionLink, Surface } from "./Section";
 
@@ -118,7 +118,12 @@ function FriendRow(props: { user: User }) {
       />
       <span class={text}>
         <span class={name}>{props.user.displayName}</span>
-        <span class={sub}>{status()}</span>
+        <Show
+          when={props.user.activity}
+          fallback={<span class={sub}>{status()}</span>}
+        >
+          <UserActivityLine user={props.user} elapsed={false} />
+        </Show>
       </span>
     </button>
   );

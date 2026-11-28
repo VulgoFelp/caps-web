@@ -22,6 +22,8 @@ export const Profile = {
   Owner: ProfileOwner,
 };
 
+export { formatActivityElapsed, UserActivityLine } from "./UserActivity";
+
 export {
   CAPS_BADGE_ADMIN,
   CAPS_BADGE_MOD,

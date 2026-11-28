@@ -12,7 +12,7 @@ import { Markdown } from "@revolt/markdown";
 import { useModals } from "@revolt/modal";
 
 import { Avatar, CapsMark, UserStatus } from "../design";
-import { StaffBadge } from "../features";
+import { StaffBadge, UserActivityLine } from "../features";
 import { ProfileActions } from "../features/profiles/ProfileActions";
 import { ProfileBadges } from "../features/profiles/ProfileBadges";
 
@@ -233,6 +233,8 @@ export function UserCard(
                 </CustomStatus>
               </Show>
             </Presence>
+
+            <UserActivityLine user={props.user} emphasis />
 
             <ProfileBadges user={props.user} bare />
           </Identity>

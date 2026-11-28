@@ -1,4 +1,4 @@
-import { createSignal, onMount } from "solid-js";
+import { For, Show, createSignal, onCleanup, onMount } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 
@@ -13,6 +13,14 @@ declare type DesktopConfig = {
   spellchecker: boolean;
   hardwareAcceleration: boolean;
   discordRpc: boolean;
+  /**
+   * CAPS: share the game being played (opt-in, CAPS Desktop 1.2+)
+   */
+  gameActivity?: boolean;
+  /**
+   * CAPS: games never shared even with gameActivity on
+   */
+  hiddenGames?: string[];
   windowState: {
     isMaximised: boolean;
   };
@@ -86,17 +94,28 @@ export default function Native() {
     spellchecker: () => set({ spellchecker: !config().spellchecker }),
     hardwareAcceleration: () =>
       set({ hardwareAcceleration: !config().hardwareAcceleration }),
+    gameActivity: () => set({ gameActivity: !config().gameActivity }),
   };
 
-  function CheckboxButton<K extends keyof Omit<DesktopConfig, "windowState">>(
-    key: K,
-    icon: string,
-    label: string,
-    description: string,
-  ) {
+  // CAPS: game currently detected by the desktop app (local only)
+  const [detected, setDetected] = createSignal(
+    window.desktopActivity?.current() ?? null,
+  );
+  if (window.desktopActivity) {
+    onCleanup(window.desktopActivity.subscribe(setDetected));
+  }
+  const hiddenGames = () => config().hiddenGames ?? [];
+  const hideGame = (name: string) =>
+    set({ hiddenGames: [...new Set([...hiddenGames(), name])] });
+  const showGame = (name: string) =>
+    set({ hiddenGames: hiddenGames().filter((game) => game !== name) });
+
+  function CheckboxButton<
+    K extends keyof Omit<DesktopConfig, "windowState" | "hiddenGames">,
+  >(key: K, icon: string, label: string, description: string) {
     return (
       <CategoryButton
-        action={<Checkbox checked={config()[key]} />}
+        action={<Checkbox checked={!!config()[key]} />}
         onClick={toggles[key]}
         icon={<Symbol>{icon}</Symbol>}
         description={description}
@@ -154,6 +173,37 @@ export default function Native() {
           t`Use the graphics card to improve performance.`,
         )}
       </CategoryButton.Group>
+
+      <Show when={window.desktopActivity}>
+        <CategoryButton.Group>
+          {CheckboxButton(
+            "gameActivity",
+            "sports_esports",
+            t`Show the game I'm playing`,
+            t`Detects games from a built-in list on this computer and shares only the game name with friends and people in your communities. Off by default.`,
+          )}
+          <Show when={config().gameActivity && detected()}>
+            <CategoryButton
+              icon={<Symbol>visibility_off</Symbol>}
+              description={t`Detected now: ${detected()}`}
+              onClick={() => hideGame(detected()!)}
+            >
+              <Trans>Hide this game</Trans>
+            </CategoryButton>
+          </Show>
+          <For each={hiddenGames()}>
+            {(game) => (
+              <CategoryButton
+                icon={<Symbol>visibility</Symbol>}
+                description={t`Hidden: never shared`}
+                onClick={() => showGame(game)}
+              >
+                <Trans>Show {game} again</Trans>
+              </CategoryButton>
+            )}
+          </For>
+        </CategoryButton.Group>
+      </Show>
 
       <CategoryButton.Group>
         <CategoryButton

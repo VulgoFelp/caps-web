@@ -16,6 +16,7 @@ import { MessageCache } from "@revolt/app/interface/channels/text/MessageCache";
 import { Titlebar } from "@revolt/app/interface/desktop/Titlebar";
 import { useClient, useClientLifecycle } from "@revolt/client";
 import { State } from "@revolt/client/Controller";
+import { DesktopActivityWorker } from "@revolt/client/DesktopActivityWorker";
 import { NotificationsWorker } from "@revolt/client/NotificationsWorker";
 import { useModals } from "@revolt/modal";
 import { Navigate, useBeforeLeave, useLocation } from "@revolt/routing";
@@ -40,7 +41,8 @@ const Interface = (props: { children: JSX.Element }) => {
   const client = useClient();
   const { openModal } = useModals();
   const { isLoggedIn, isSwapping, lifecycle } = useClientLifecycle();
-  const { pathname } = useLocation();
+  const location = useLocation();
+  const { pathname } = location;
   const device = useDevice();
 
   useBeforeLeave((e) => {
@@ -136,10 +138,14 @@ const Interface = (props: { children: JSX.Element }) => {
               <Content
                 ref={setContRef}
                 class="app_body"
-                sidebar={state.layout.getSectionState(
-                  LAYOUT_SECTIONS.PRIMARY_SIDEBAR,
-                  true,
-                )}
+                sidebar={
+                  state.layout.getSectionState(
+                    LAYOUT_SECTIONS.PRIMARY_SIDEBAR,
+                    true,
+                  ) &&
+                  !location.pathname.startsWith("/staff") &&
+                  !location.pathname.startsWith("/discover")
+                }
               >
                 {props.children}
               </Content>
@@ -151,6 +157,7 @@ const Interface = (props: { children: JSX.Element }) => {
         </Switch>
 
         <NotificationsWorker />
+        <DesktopActivityWorker />
       </AppRoot>
     </MessageCache>
   );

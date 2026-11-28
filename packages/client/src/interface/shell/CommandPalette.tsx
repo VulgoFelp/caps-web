@@ -1,11 +1,11 @@
 import {
-  For,
-  JSX,
-  Show,
   createEffect,
   createMemo,
   createSignal,
+  For,
+  JSX,
   on,
+  Show,
 } from "solid-js";
 import { Portal } from "solid-js/web";
 
@@ -22,8 +22,10 @@ import { useState } from "@revolt/state";
 import { LAYOUT_SECTIONS } from "@revolt/state/stores/Layout";
 import { Avatar } from "@revolt/ui";
 
+import { staffRole } from "@revolt/ui/components/features/profiles/StaffBadge";
 import IconAt from "lucide-solid/icons/at-sign";
 import IconBell from "lucide-solid/icons/bell";
+import IconDownload from "lucide-solid/icons/download";
 import IconHash from "lucide-solid/icons/hash";
 import IconHeadphoneOff from "lucide-solid/icons/headphone-off";
 import IconHeadset from "lucide-solid/icons/headset";
@@ -38,16 +40,19 @@ import IconPin from "lucide-solid/icons/pin";
 import IconPlus from "lucide-solid/icons/plus";
 import IconSearch from "lucide-solid/icons/search";
 import IconSettings from "lucide-solid/icons/settings";
+import IconShield from "lucide-solid/icons/shield";
 import IconSun from "lucide-solid/icons/sun";
 import IconUserPlus from "lucide-solid/icons/user-plus";
 import IconUsers from "lucide-solid/icons/users";
 
 import {
+  isWindowsBrowser,
   MOD_KEY,
   paletteOpen,
   setNotificationsOpen,
   setPaletteOpen,
   setPanelRequest,
+  WINDOWS_DOWNLOAD_URL,
 } from "./shellState";
 
 type Item = {
@@ -331,6 +336,32 @@ export function CommandPalette() {
         icon: <IconAt size={16} />,
         run: () => openModal({ type: "custom_status", client: c }),
       },
+      ...(staffRole(user()?.badges)
+        ? [
+            {
+              id: "nav:staff",
+              group: t`Go to`,
+              label: t`Staff panel`,
+              keywords: "equipe moderação admin denúncias banir",
+              icon: <IconShield size={16} />,
+              run: go("/staff"),
+            },
+          ]
+        : []),
+      ...(isWindowsBrowser
+        ? [
+            {
+              id: "action:download",
+              group: t`Actions`,
+              label: t`Download CAPS for Windows`,
+              keywords: "baixar app desktop instalar",
+              icon: <IconDownload size={16} />,
+              run: () => {
+                window.open(WINDOWS_DOWNLOAD_URL, "_blank");
+              },
+            },
+          ]
+        : []),
       {
         id: "action:settings",
         group: t`Actions`,

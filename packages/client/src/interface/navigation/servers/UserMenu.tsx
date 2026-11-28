@@ -27,11 +27,14 @@ import { useModals } from "@revolt/modal";
 import { useState } from "@revolt/state";
 import { Avatar, Column, Row, Text, UserStatus, iconSize } from "@revolt/ui";
 
+import { useNavigate } from "@revolt/routing";
+import { staffRole } from "@revolt/ui/components/features/profiles/StaffBadge";
 import MdNotificationsOff from "lucide-solid/icons/bell-off";
 import MdContactPage from "lucide-solid/icons/contact";
 import MdInfo from "lucide-solid/icons/info";
 import MdEditNote from "lucide-solid/icons/notebook-pen";
 import MdSwap from "lucide-solid/icons/refresh-cw";
+import MdShield from "lucide-solid/icons/shield";
 import MdDelete from "lucide-solid/icons/trash";
 
 interface Props {
@@ -60,6 +63,7 @@ export function UserMenu(props: Props) {
   const client = useClient();
   const user = useUser();
   const state = useState();
+  const navigate = useNavigate();
 
   const [show, setShow] = createSignal(false);
   const [ref, setRef] = createSignal<HTMLDivElement>();
@@ -151,6 +155,18 @@ export function UserMenu(props: Props) {
                   onClick={() => openModal({ type: "swap_user" })}
                 >
                   <Trans>Switch Accounts</Trans>
+                </ContextMenuButton>
+              </Show>
+              <Show when={staffRole(user()?.badges)}>
+                <ContextMenuButton
+                  icon={MdShield}
+                  onClick={() => {
+                    close();
+                    navigate("/staff");
+                    state.appDrawer()?.setShown(true);
+                  }}
+                >
+                  <Trans>Staff panel</Trans>
                 </ContextMenuButton>
               </Show>
 

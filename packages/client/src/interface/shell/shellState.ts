@@ -11,7 +11,12 @@ export { notificationsOpen, paletteOpen, setNotificationsOpen, setPaletteOpen };
 /**
  * Which top level section a path belongs to
  */
-export type ShellSection = "home" | "conversations" | "communities" | "friends";
+export type ShellSection =
+  | "home"
+  | "conversations"
+  | "communities"
+  | "friends"
+  | "staff";
 
 /**
  * Resolve the section for a pathname
@@ -21,6 +26,7 @@ export function sectionFor(pathname: string): ShellSection {
   if (pathname.startsWith("/server/") || pathname.startsWith("/discover"))
     return "communities";
   if (pathname.startsWith("/friends")) return "friends";
+  if (pathname.startsWith("/staff")) return "staff";
   if (pathname.startsWith("/channel/") || pathname.startsWith("/conversations"))
     return "conversations";
   return "home";
@@ -43,3 +49,14 @@ export type PanelRequest = {
 const [panelRequest, setPanelRequest] = createSignal<PanelRequest>();
 
 export { panelRequest, setPanelRequest };
+
+/**
+ * CAPS for Windows installer (served by the CAPS server)
+ */
+export const WINDOWS_DOWNLOAD_URL = "/download/CAPS-Setup.exe";
+
+/**
+ * Offer the desktop app only in a browser on Windows (not inside the app)
+ */
+export const isWindowsBrowser =
+  !window.native && /Windows/i.test(navigator.userAgent);

@@ -11,10 +11,12 @@ import { useState } from "@revolt/state";
 import { LAYOUT_SECTIONS } from "@revolt/state/stores/Layout";
 import { Avatar, CapsMark, UserStatus } from "@revolt/ui";
 
+import { staffRole } from "@revolt/ui/components/features/profiles/StaffBadge";
 import IconBell from "lucide-solid/icons/bell";
 import IconPanel from "lucide-solid/icons/panel-left";
 import IconSearch from "lucide-solid/icons/search";
 import IconSettings from "lucide-solid/icons/settings";
+import IconShield from "lucide-solid/icons/shield";
 
 import { UserMenu } from "../navigation/servers/UserMenu";
 
@@ -114,6 +116,12 @@ export function TopBar() {
         >
           <Trans>Friends</Trans>
         </NavLink>
+        <Show when={staffRole(user()?.badges)}>
+          <NavLink href="/staff" active={section() === "staff"}>
+            <IconShield size={14} />
+            <Trans>Staff</Trans>
+          </NavLink>
+        </Show>
       </Nav>
 
       <Spacer />

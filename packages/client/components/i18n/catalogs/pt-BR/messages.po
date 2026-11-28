@@ -62,6 +62,11 @@ msgstr "{0, plural, one {# mensagem bloqueada} other {# mensagens bloqueadas}}"
 msgid "{0, plural, one {# community or group in common} other {# communities and groups in common}}"
 msgstr "{0, plural, one {# comunidade ou grupo em comum} other {# comunidades e grupos em comum}}"
 
+#. placeholder {0}: props.users.length
+#: src/interface/home/PlayingNow.tsx
+msgid "{0, plural, one {# friend} other {# friends}}"
+msgstr "{0, plural, one {# amigo} other {# amigos}}"
+
 #. placeholder {0}: props.inVoice
 #: src/interface/home/ActiveCommunities.tsx
 msgid "{0, plural, one {# in voice} other {# in voice}}"
@@ -625,6 +630,10 @@ msgstr "Avatar"
 #: src/interface/common/CommonHeader.tsx
 msgid "Back"
 msgstr "Voltar"
+
+#: components/auth/src/AuthPage.tsx
+msgid "Back to my accounts"
+msgstr "Voltar às minhas contas"
 
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 msgid "Badges"
@@ -1550,6 +1559,15 @@ msgstr "Descrição providenciada por {0}"
 msgid "Desktop"
 msgstr "Área de trabalho"
 
+#. placeholder {0}: detected()
+#: components/app/interface/settings/user/Native.tsx
+msgid "Detected now: {0}"
+msgstr "Detectado agora: {0}"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Detects games from a built-in list on this computer and shares only the game name with friends and people in your communities. Off by default."
+msgstr "Detecta jogos de uma lista embutida neste computador e compartilha só o nome do jogo com amigos e pessoas das suas comunidades. Desligado por padrão."
+
 #: components/app/interface/settings/user/bots/MyBots.tsx
 msgid "Developer Documentation"
 msgstr "Documentação para Desenvolvedores"
@@ -1650,9 +1668,17 @@ msgstr "Doar"
 msgid "Done"
 msgstr "Feito"
 
+#: src/interface/shell/CommandPalette.tsx
+msgid "Download CAPS for Windows"
+msgstr "Baixar o CAPS para Windows"
+
 #: components/auth/src/AppUpsell.tsx
 msgid "Download for desktop"
 msgstr "Baixar para desktop"
+
+#: src/interface/Home.tsx
+msgid "Download for Windows"
+msgstr "Baixar para Windows"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Drugs or illegal goods"
@@ -2126,6 +2152,10 @@ msgstr "Ajude a contribuir a um idioma existente ou novo"
 msgid "Here is your new invite code: <0>{0}</0>"
 msgstr "Aqui está seu novo código de convite: <0>{0}</0>"
 
+#: components/app/interface/settings/user/Native.tsx
+msgid "Hidden: never shared"
+msgstr "Oculto: nunca compartilhado"
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 msgid "Hide Others"
 msgstr "Ocultar outros"
@@ -2133,6 +2163,10 @@ msgstr "Ocultar outros"
 #: src/interface/shell/TopBar.tsx
 msgid "Hide sidebar"
 msgstr "Ocultar barra lateral"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Hide this game"
+msgstr "Ocultar este jogo"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "High Contrast"
@@ -3032,6 +3066,15 @@ msgstr "Mensagens fixadas"
 msgid "Play sound"
 msgstr "Reproduzir som"
 
+#. placeholder {0}: activity().name
+#: components/ui/components/features/profiles/UserActivity.tsx
+msgid "Playing <0>{0}</0>"
+msgstr "Jogando <0>{0}</0>"
+
+#: src/interface/home/PlayingNow.tsx
+msgid "Playing now"
+msgstr "Jogando agora"
+
 #: components/modal/modals/MFAFlow.tsx
 msgid "Please confirm this action using the selected method."
 msgstr "Por favor, confirme essa ação usando o método selecionado."
@@ -3688,6 +3731,10 @@ msgid "Share screen"
 msgstr "Compartilhar tela"
 
 #: components/app/interface/settings/user/Native.tsx
+msgid "Show {game} again"
+msgstr "Voltar a mostrar {game}"
+
+#: components/app/interface/settings/user/Native.tsx
 msgid "Show corrections and suggestions as you type."
 msgstr "Mostrar correções e sugestões ao digitar."
 
@@ -3702,6 +3749,10 @@ msgstr "Mostrar botão de enviar mensagem"
 #: src/interface/shell/TopBar.tsx
 msgid "Show sidebar"
 msgstr "Mostrar barra lateral"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Show the game I'm playing"
+msgstr "Mostrar o jogo que estou jogando"
 
 #~ msgid "Sign into Stoat"
 #~ msgstr "Entrar no Stoat"
@@ -3773,6 +3824,15 @@ msgstr "Corretor ortográfico"
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Square"
 msgstr "Quadrado"
+
+#: src/interface/shell/TopBar.tsx
+msgid "Staff"
+msgstr "Equipe"
+
+#: src/interface/navigation/servers/UserMenu.tsx
+#: src/interface/shell/CommandPalette.tsx
+msgid "Staff panel"
+msgstr "Painel da equipe"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 #: src/interface/shell/CallDock.tsx
