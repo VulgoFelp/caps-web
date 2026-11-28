@@ -14,10 +14,12 @@ import { Avatar, CapsMark, UserStatus } from "@revolt/ui";
 import { staffRole } from "@revolt/ui/components/features/profiles/StaffBadge";
 import IconBell from "lucide-solid/icons/bell";
 import IconPanel from "lucide-solid/icons/panel-left";
+import IconRefresh from "lucide-solid/icons/refresh-cw";
 import IconSearch from "lucide-solid/icons/search";
 import IconSettings from "lucide-solid/icons/settings";
 import IconShield from "lucide-solid/icons/shield";
 
+import { pendingUpdate } from "../../serviceWorkerInterface";
 import { UserMenu } from "../navigation/servers/UserMenu";
 
 import { CommunitySwitcher } from "./CommunitySwitcher";
@@ -125,6 +127,23 @@ export function TopBar() {
       </Nav>
 
       <Spacer />
+
+      <Show when={pendingUpdate()}>
+        <button
+          type="button"
+          class={updatePill}
+          onClick={() => pendingUpdate()?.()}
+          use:floating={{
+            tooltip: {
+              placement: "bottom",
+              content: t`A new version of CAPS is ready. Click to reload.`,
+            },
+          }}
+        >
+          <IconRefresh size={14} />
+          <Trans>Update CAPS</Trans>
+        </button>
+      </Show>
 
       <SearchButton
         type="button"
@@ -407,4 +426,27 @@ const Profile = styled("button", {
 
     "&:focus-visible": { boxShadow: "var(--caps-focus-ring)" },
   },
+});
+
+const updatePill = css({
+  all: "unset",
+  display: "inline-flex",
+  alignItems: "center",
+  gap: "var(--caps-space-3)",
+  height: "28px",
+  paddingInline: "var(--caps-space-5)",
+  marginInlineEnd: "var(--caps-space-4)",
+  borderRadius: "var(--caps-radius-full)",
+  background: "var(--caps-accent-soft)",
+  boxShadow: "inset 0 0 0 1px var(--caps-accent-line)",
+  color: "var(--caps-accent-text)",
+  fontSize: "var(--caps-text-sm)",
+  fontWeight: 600,
+  cursor: "pointer",
+  animation: "capsPopIn 200ms var(--caps-ease-out)",
+  "&:hover": {
+    background: "var(--caps-accent)",
+    color: "var(--caps-on-accent)",
+  },
+  "&:focus-visible": { boxShadow: "var(--caps-focus-ring)" },
 });

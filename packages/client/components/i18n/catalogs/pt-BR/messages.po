@@ -383,6 +383,10 @@ msgstr "24 horas"
 #~ msgid "7 days"
 #~ msgstr "7 dias"
 
+#: src/interface/shell/TopBar.tsx
+msgid "A new version of CAPS is ready. Click to reload."
+msgstr "Uma versão nova do CAPS está pronta. Clique para recarregar."
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Able to access channels on this server"
 msgstr "Pode acessar canais neste servidor"
@@ -4311,6 +4315,10 @@ msgstr "Até que eu ligue de volta"
 #: components/app/interface/desktop/Titlebar.tsx
 msgid "Update"
 msgstr "Atualizar"
+
+#: src/interface/shell/TopBar.tsx
+msgid "Update CAPS"
+msgstr "Atualizar o CAPS"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Upload Files"
